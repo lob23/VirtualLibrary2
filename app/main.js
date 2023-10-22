@@ -11,9 +11,7 @@ app.set("view engine", "handlebars");
 app.set("port", 3000|process.env.PORT);
 
 app.get("/", (req, res) => {
-    res.render("home_screen", {
-        accessing_date: new Date()
-    });
+    res.render("login_screen");
 })
 
 app.use((req, res) =>{
