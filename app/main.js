@@ -10,6 +10,8 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("port", 3000|process.env.PORT);
 
+app.use(express.static('public'));
+
 app.get("/", (req, res) => {
     res.render("login_screen");
 })
