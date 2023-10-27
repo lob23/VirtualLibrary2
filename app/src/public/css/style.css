@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    margin: 0 auto;
+    padding: 0;
+    width: 1000px;
+}
+
+html{
+    margin:0;
+    padding:0;
+    max-height:100vh;
+    overflow:hidden;
+  }
+  
+
+.login_screen_background{
+    background-size: cover;
+    background-position-y: 65%;
+    background-position: fixed; 
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.login_background{
+    width: 100%;
+    height: 100vh;
+}
