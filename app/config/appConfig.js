@@ -8,7 +8,7 @@ const config = (app) => {
     app.set("views", path.join("./src", "views"));
     app.set("view engine", "handlebars");
     app.set("port", 3000|process.env.PORT);
-    app.use(express.static(path.join("./src", "public")));
+    app.use(express.static("public"));
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
 };
