@@ -1,6 +1,46 @@
-<h1>Login</h1>
-<form action="/login" method="post">
-    <input type="email" name="userEmail" placeholder="email">
-    <input type="password" name="userPassword" placeholder="password">
-    <input type="submit"> 
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Include the Tailwind CSS library -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .input-line {
+            border-bottom: 1px solid hsl(243, 65%, 37%);
+            margin-bottom: 1rem;
+        }
+    </style> 
+</head>
+<body class="bg-[url('/public/images/bg_login_screen.png')] bg-cover bg-center h-screen flex items-center justify-center">
+    {{!-- SIGN IN FORMAT --}}
+    <div class="p-6 max-w-xs w-full space-y-4 bg-white rounded-xl" style="margin-left: 10cm;"> <!-- Use inline CSS for left margin -->
+        <div class="SignIn text-indigo-800 text-5xl font-bold font-['SVN-Gilroy'] mb-10">Sign In</div>
+        {{!-- FILL IN FORM --}}
+        <form action="/login" method="post">
+            {{!-- Email fill --}}
+            <div class="input-line">
+                <input type="email" name="userEmail" placeholder="Email" class="w-full text-indigo-800 text-opacity-100 text-0.5xl font-normal font-['SVN-Gilroy'] placeholder-opacity-10">
+            </div>
+            {{!-- Password fill --}}
+            <div class="input-line">
+            <input type="password" name="userPassword" placeholder="Password" class="w-full text-indigo-800 text-opacity-100 text-0.5xl font-normal font-['SVN-Gilroy'] placeholder-opacity-10 ">
+            </div>
+            {{!-- forgot password --}}
+            <div class="text-right text-indigo-500 text-0.4xl font-normal font-['SVN-Gilroy'] mb-6 hover:text-indigo-800 cursor-pointer">Forgot password?</div>
+            {{!-- login button --}}
+            <button type="submit" class="Rectangle19 w-full h-12 bg-indigo-800 rounded-xl hover:bg-indigo-500 mb-4">
+                <span class="w-20 text-center text-white text-1xl font-normal font-['SVN-Gilroy']">Sign In</span>
+            </button>
+            {{!-- New member? --}}
+            <div class="text-center text-sm font-normal font-['SVN-Gilroy'] mb-6">
+                <span class="text-sky-950 font-normal font-['Lato']">New member?</span>
+                <span class="text-red-400 font-normal font-['Lato'] hover:text-red-800 cursor-pointer" id="signUpNow">Sign up now</span>
+            </div>
+        </div>
+        </form>
+    </div>
+
+</body>
+</html>
