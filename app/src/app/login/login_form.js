@@ -2,6 +2,7 @@
 
 import {useState} from "react"
 
+
 export default function login_form(){
 
     const [username, setUsername] = useState("");
@@ -31,12 +32,18 @@ export default function login_form(){
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+        
+        <div class=" w-screen h-screen bg-registerbg bg-fixed" >
+           
+        
+            
+        </div>
+            {/* <form onSubmit={handleSubmit}>
                 <input type="text" onChange={(e) => setUsername(e.target.value)} value={username} id="username" placeholder="username"/>
                 <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} id="password" placeholder="password"/>
                 <button className="bg-green-700 p-3 text-white font-bold" type="submit">login</button>
                 <p>abc</p>
-            </form>
+            </form> */}
         </>
     );
 }
