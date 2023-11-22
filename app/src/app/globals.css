@@ -1,6 +1,12 @@
 
 @tailwind components;
 @tailwind utilities;
+*
+{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -23,3 +29,41 @@ form > div {
 input, textarea{
   @apply shadow-md px-6 py-2 border border-slate-300;
 }
+
+
+
+@font-face {
+  font-family: "Gilroy_md";
+  src: url("/font/GILROY MEDIUM.OTF");
+
+}
+@font-face {
+  
+  font-family: "Gilroy_bd";
+  src: url("/font/GILROY BOLD.OTF");
+
+
+}
+@font-face {
+
+  font-family: "Gilroy_sb";
+  src: url("/font/GILROY SEMIBOLD.OTF");
+
+}
+
+input:focus {
+  background-color: transparent;
+  outline:none;
+  padding: 0%;
+  border-bottom: 2px solid #27219A;
+}
+
+input {
+  
+  outline:none;
+  border: none;
+  padding: 0%;
+  background-color: transparent;
+  border-bottom: 2px solid #857fea;
+}
+
