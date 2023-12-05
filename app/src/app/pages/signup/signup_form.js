@@ -11,10 +11,6 @@ export default function signup_form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("username: ", username);
-    console.log("password: ", password);
-    console.log("repeatpassword: ", repeatpassword);
-
     const res = await fetch("api/signup", {
       method: "POST",
       headers: {

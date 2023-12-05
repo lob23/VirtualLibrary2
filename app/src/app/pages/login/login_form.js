@@ -1,5 +1,6 @@
 "use client"; // This is a client component 👈🏽
 
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 
 export default function login_form() {
@@ -9,10 +10,8 @@ export default function login_form() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     console.log("username: ", username);
     console.log("password: ", password);
-
     const res = await fetch("api/login", {
       method: "POST",
       headers: {
@@ -30,47 +29,47 @@ export default function login_form() {
 
   return (
     <>
-      <div class="relative w-screen h-screen bg-registerbg bg-fixed">
-        <div class="absolute  -bottom-20 -right-20  w-[300px] h-[300px]">
+      <div className="relative w-screen h-screen bg-registerbg bg-fixed">
+        <div className="absolute  -bottom-20 -right-20  w-[300px] h-[300px]">
           <img
-            class="object-contain w-full h-full  "
+            className="object-contain w-full h-full  "
             src="/image/reg_cir.png"
           ></img>
         </div>
-        <div class="absolute bottom-[20px] left-[120px]  w-[120px] h-[150px]">
+        <div className="absolute bottom-[20px] left-[120px]  w-[120px] h-[150px]">
           <img
-            class="object-contain w-full h-full "
+            className="object-contain w-full h-full "
             src="/image/reg_cir.png"
           ></img>
         </div>
-        <div class="absolute top-[60px] right-[120px]  w-[80px] h-[80px]">
+        <div className="absolute top-[60px] right-[120px]  w-[80px] h-[80px]">
           <img
-            class="object-contain w-full h-full "
+            className="object-contain w-full h-full "
             src="/image/reg_cir.png"
           ></img>
         </div>
-        <div class="grid grid-flow-col grid-cols-3 grid-rows-none absolute top-0 left-0 right-0 bottom-0  w-2/3 h-3/4 m-auto rounded-[40px] bg-white/70 backdrop-blur-sm">
-          <div class=" col-span-1 flex flex-col px-10 py-20 w-auto h-full bg-white">
+        <div className="grid grid-flow-col grid-cols-3 grid-rows-none absolute top-0 left-0 right-0 bottom-0  w-2/3 h-3/4 m-auto rounded-[40px] bg-white/70 backdrop-blur-sm">
+          <div className=" col-span-1 flex flex-col px-10 py-20 w-auto h-full bg-white">
             <img
-              class="object-scale-down w-full h-1/2 "
+              className="object-scale-down w-full h-1/2 "
               src="/image/reg_img1.png"
             ></img>
-            <h1 class="font-Gilroy_bd text-blue text-sp leading-10">
+            <h1 className="font-Gilroy_bd text-blue text-sp leading-10">
               Welcome to<br></br> Literia{" "}
             </h1>
-            <h3 class="font-Gilroy_sb text-blue text-sm">
+            <h3 className="font-Gilroy_sb text-blue text-sm">
               Hundred of book to choose
             </h3>
           </div>
-          <div class="col-span-2 flex flex-col  justify-center items-center w-auto h-full ">
-            <h1 class="font-Gilroy_bd text-blue text-sp -ml-[280px]">
+          <div className="col-span-2 flex flex-col  justify-center items-center w-auto h-full ">
+            <h1 className="font-Gilroy_bd text-blue text-sp -ml-[280px]">
               Sign In
             </h1>
-            <div class="flex flex-col w-max h-max">
+            <div className="flex flex-col w-max h-max">
               <div>
                 <form
                   onSubmit={handleSubmit}
-                  class="grid grid-cols-none grid-row-4"
+                  className="grid grid-cols-none grid-row-4"
                 >
                   <input
                     type="text"
@@ -78,7 +77,7 @@ export default function login_form() {
                     value={username}
                     id="username"
                     placeholder="Username"
-                    class="row-span-1 w-[380px] h-[38px] my-2   "
+                    className="row-span-1 w-[380px] h-[38px] my-2   "
                   />
                   <input
                     type="password"
@@ -88,7 +87,7 @@ export default function login_form() {
                     placeholder="Password"
                     className="row-span-1 w-[380px] h-[38px] my-2  "
                   />
-                  <p class="items-end ml-auto font-Gilroy_md text-red text-sm">
+                  <p className="items-end ml-auto font-Gilroy_md text-red text-sm">
                     Forgot password?
                   </p>
                   <button

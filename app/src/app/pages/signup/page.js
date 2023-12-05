@@ -1,5 +1,5 @@
 import React from 'react';  // Import React
-import _signupForm from "@/app/signup/signup_form"
+import _signupForm from "@/app/pages/signup/signup_form"
 
 
 export default function signup_screen(){
