@@ -1,6 +1,4 @@
 "use client"; // This is a client component 👈🏽
-
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 
 export default function login_form() {

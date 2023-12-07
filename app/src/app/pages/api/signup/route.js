@@ -1,13 +1,15 @@
 import {NextResponse} from "next/server"
-import {signUp} from "@/app/model/QueryEngine/userQueryEngine"
+import {addUserAccount} from "@/app/model/QueryEngine/AccountQueryEngine"
 
 export async function POST(req) {
     const {username, password} = await req.json();
 
-    console.log("username", username);
-    console.log("password", password);
+    try {
+        await addUserAccount("ABC", username, password)
+        console.log("signup successfully: ")
+    }catch (error){
+        console.log("signup failed: ", error)
+    }
 
-    signUp(username, password)
-
-    return NextResponse.json({msg: ["HI from signup/route.js"]});
+    return NextResponse.json({msg: ["HI from contact/route.js"]});
 }
