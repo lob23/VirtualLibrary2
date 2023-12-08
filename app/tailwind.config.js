@@ -23,7 +23,7 @@ module.exports = {
       colors:
       {
         'yellow':'#F2B547',
-        'cream':'#FFE1BA',
+        'cream':'#FFF1DE',
         'blue':'#27219A',
         'red':'#F06966',
 
