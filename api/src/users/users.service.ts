@@ -38,7 +38,7 @@ export class UsersService {
     return this.userRepository.save(newUser);
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto ): Promise<User | undefined | any> {
+  async update(id: string, updateUserDto: UpdateUserDto ): Promise<User | undefined> {
     await this.userRepository.update(id, updateUserDto);
     return this.findById(id);
   }

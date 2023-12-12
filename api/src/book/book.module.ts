@@ -7,7 +7,7 @@ import { BContent } from './entities/bcontent.entity';
 import { BDetail } from './entities/bdetail.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([BDetail]), TypeOrmModule.forFeature([BContent])],
+  imports: [TypeOrmModule.forFeature([BDetail, BContent])],
   controllers: [BookController],
   providers: [BookService],
 })
