@@ -43,8 +43,8 @@
 
 export default function home_land() {
     return (
-      <div className="flex items-center justify-between w-screen p-5">
-        <div className="flex flex-row items-center space-x-20">
+      <div className="flex items-center justify-between w-full p-5">
+        <div className="flex flex-row items-center">
           <div className="w-[60px] h-[60px]">
             <img
               className="object-contain w-full h-full"
@@ -62,11 +62,11 @@ export default function home_land() {
             Creator
           </h2>
         </div>
-        <div className="flex items-stretch space-x-2"> 
+        <div className="flex items-center w-auto "> 
           <h2 className="font-Gilroy_sb text-blue text-[16px]">
             Sign In
           </h2>
-          <button className="w-auto p-4 bg-yellow rounded-[40px] border-none text-blue text-[16px] font-Gilroy_sb">
+          <button className="w-auto p-4 bg-yellow rounded-[20px] border-none text-blue text-[16px] font-Gilroy_sb">
             Sign Up
           </button>
         </div>
