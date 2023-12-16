@@ -4,7 +4,7 @@ import { UpdateRListDto } from './dto/update-rlist.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RList } from './entities/rlist.entity';
 import { BDetail } from 'src/book/entities/bdetail.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { User } from 'src/users/entities/user.entity';
 import { ObjectId } from 'mongodb';
 
@@ -56,25 +56,23 @@ export class RListService {
 
     if (!bDetail) throw new Error('This book does not exist');
 
-    if (existingUser && bDetail) {
-      const something = new UpdateRListDto(createRListDto);
-      return await this.update(something);
-    } else {
-      // Create Reading list entity
-      const newRList = this.rListRepository.create(createRListDto);
-      return await this.rListRepository.save(newRList);
-    }
+    const result = await this.update(new UpdateRListDto(createRListDto));
+    if (result) return result;
+
+    const newRList = this.rListRepository.create(createRListDto);
+    return await this.rListRepository.save(newRList);
   }
 
   // eslint-disable-next-line prettier/prettier
   async update(updateRListDto: UpdateRListDto): Promise<RList | undefined | any> {
-    await this.rListRepository.update(
+    const update = await this.rListRepository.update(
       {
         RList_userId: updateRListDto.RList_userId,
         RList_bookId: updateRListDto.RList_bookId,
       },
       updateRListDto,
     );
+    if (update.affected == 0) return undefined;
     const result = this.rListRepository.findOne({
       where: {
         RList_userId: updateRListDto.RList_userId,
@@ -84,10 +82,16 @@ export class RListService {
     return result;
   }
 
-  async remove(userId: string, bookId: string): Promise<void> {
-    await this.rListRepository.delete({
+  async remove(userId: string, bookId: string): Promise<DeleteResult> {
+    return await this.rListRepository.delete({
       RList_userId: userId,
       RList_bookId: bookId,
+    });
+  }
+
+  async removeByUserId(userId: string): Promise<DeleteResult> {
+    return await this.rListRepository.delete({
+      RList_userId: userId,
     });
   }
 }

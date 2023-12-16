@@ -1,5 +1,5 @@
 // eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { RListService } from './rlist.service';
 import { CreateRListDto } from './dto/create-rlist.dto';
 import { UpdateRListDto } from './dto/update-rlist.dto';
@@ -28,9 +28,13 @@ export class RListController {
     return this.rListService.update(updateRListDto);
   }
 
-  @Delete(':userId/:bookId')
-  remove(@Param() params: { userId: string; bookId: string }) {
-    const { userId, bookId } = params;
+  @Delete('deleteRList')
+  remove(@Query('userId') userId: string, @Query('bookId') bookId: string) {
     return this.rListService.remove(userId, bookId);
+  }
+
+  @Delete('deleteRListByUserId')
+  removeByUserId(@Query('userId') userId: string) {
+    return this.rListService.removeByUserId(userId);
   }
 }
