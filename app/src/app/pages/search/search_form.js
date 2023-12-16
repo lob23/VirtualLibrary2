@@ -1,6 +1,8 @@
 "use client"; // This is a client component 👈🏽
 
 import { useState } from "react";
+import _footer from "@/app/pages/wrapper/footer"
+
 export default function search_form() {
   const [searchResults, setSearchResults] = useState([]);
 
@@ -50,6 +52,9 @@ export default function search_form() {
                 src="/image/reg_cir.png"
               ></img>
           </div>
+        </div>
+        <div>
+            <_footer/>
         </div>
       </div>
       
