@@ -15,24 +15,25 @@ export class BookController {
     return await this.bookService.create(createBookDto);
   }
 
-  @Get('findAllBDetail')
+  @Get()
   async findAllBDetail() {
     return await this.bookService.findAll();
   }
 
-  @Get('getBDetailById/:id')
+  @Get('getBDetail/:id')
   async getBDetailById(@Param('id') id: string) {
     const result = await this.bookService.findById(id);
     return result;
   }
 
-  @Get('getBContentById/:id')
+  // Get BContent by id of BDetail
+  @Get('getBContent/:id')
   async getBContentById(@Param('id') id: string): Promise<string> {
     const result = await this.bookService.getBContent(id);
     return result;
   }
 
-  @Patch('updateBDetailById/:id')
+  @Patch('updateBDetail/:id')
   async update(
     @Param('id') id: string,
     @Body() updateBDetailDto: UpdateBDetailDto,

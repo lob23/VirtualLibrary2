@@ -8,7 +8,7 @@ import { UpdateRListDto } from './dto/update-rlist.dto';
 export class RListController {
   constructor(private readonly rListService: RListService) {}
 
-  @Post()
+  @Post('createRList')
   async create(@Body() createRListDto: CreateRListDto) {
     return await this.rListService.create(createRListDto);
   }
@@ -18,7 +18,7 @@ export class RListController {
     return await this.rListService.findAll();
   }
 
-  @Get(':id')
+  @Get('getRList/:id')
   async findOne(@Param('id') id: string) {
     return await this.rListService.findByUserId(id);
   }

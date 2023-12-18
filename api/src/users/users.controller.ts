@@ -16,7 +16,7 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Get('getAllUser')
+  @Get()
   async findAll() {
     const result = await this.usersService.findAll();
     console.log(`Number of users: ${result.length}`);
@@ -24,7 +24,7 @@ export class UsersController {
     return result;
   }
 
-  @Get('getUserById/:id')
+  @Get('getUser/:id')
   findOne(@Param('id') id: string) {
     return this.usersService.findById(id);
   }
