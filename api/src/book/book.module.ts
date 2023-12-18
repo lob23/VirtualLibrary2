@@ -5,9 +5,10 @@ import { BookController } from './book.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BContent } from './entities/bcontent.entity';
 import { BDetail } from './entities/bdetail.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([BDetail, BContent])],
+  imports: [TypeOrmModule.forFeature([BDetail, BContent, User])],
   controllers: [BookController],
   providers: [BookService],
 })

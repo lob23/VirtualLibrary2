@@ -23,4 +23,7 @@ export class BDetail {
 
   @Column()
   BDetail_contentId: ObjectId;
+
+  @Column()
+  BDetail_image: string;
 }

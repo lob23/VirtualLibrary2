@@ -2,11 +2,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { ObjectId } from 'mongodb';
-import { BContent } from './entities/bcontent.entity';
 import { BDetail } from './entities/bdetail.entity';
+import { BContent } from './entities/bcontent.entity';
 import { UpdateBDetailDto } from './dto/update-bdetail.dto';
+import { UpdateBContentDto } from './dto/update-bcontent.dto';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class BookService {
@@ -15,23 +17,37 @@ export class BookService {
     private readonly bDetailRepository: Repository<BDetail>,
     @InjectRepository(BContent)
     private readonly bContentRepository: Repository<BContent>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
   async findAll(): Promise<BDetail[]> {
     return this.bDetailRepository.find();
   }
 
-  async findById(id: string): Promise<BDetail | undefined> {
-    return this.bDetailRepository.findOne({ where: { _id: new ObjectId(id) } });
+  async findById(id: string): Promise<BDetail | null> {
+    const result = await this.bDetailRepository.findOne({ where: { _id: new ObjectId(id) } });
+    console.log(result);
+    return result;
+  }
+
+  async getBContent(id: string): Promise<string> {
+    const bDetail = await this.findById(id);
+    if( !bDetail ) return 'This book does not exist!!!';
+    const result = await this.bContentRepository.findOne({ where: { _id: new ObjectId(bDetail.BDetail_contentId) } });
+    return result.BContent_content;
   }
 
   async create(createBookDto: CreateBookDto): Promise<BDetail> {
 
-    // Extract content data from DTO
-    const contentDto = createBookDto.BContent_content;
+    const existingUser = await this.userRepository.findOne({
+      where: { _id: new ObjectId(createBookDto.BDetail_authorID) },
+    });
+
+    if (!existingUser || existingUser.User_authenticationLevel != 2 ) throw new Error('This author does not exist');
 
     // Create a new BContent entity
-    const bContent = this.bContentRepository.create(contentDto);
+    const bContent = this.bContentRepository.create(createBookDto);
 
     // Save BContent entity to the database
     const savedBContent = await this.bContentRepository.save(bContent);
@@ -46,9 +62,20 @@ export class BookService {
     return this.bDetailRepository.save(newBook);
   }
 
-  async update(id: string, updateBDetailDto: UpdateBDetailDto ): Promise<BDetail | undefined> {
+  async update(id: string, updateBDetailDto: UpdateBDetailDto ): Promise<BDetail | null> {
     await this.bDetailRepository.update(id, updateBDetailDto);
     return this.findById(id);
+  }
+
+  async updateBContent(id: string, updateBContentDto: UpdateBContentDto): Promise<UpdateResult> {
+    const bDetail = await this.findById( id );
+    const result = await this.bContentRepository.update( bDetail.BDetail_contentId, updateBContentDto);
+    return result;
+  }
+
+  async updateBDetailImage(id: string, file: Express.Multer.File): Promise<BDetail | null> {
+    await this.bDetailRepository.update( id, { BDetail_image: file.buffer.toString('base64') } );
+    return await this.findById(id);
   }
 
   async remove(id: string): Promise<void> {

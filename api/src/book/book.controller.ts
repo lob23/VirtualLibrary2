@@ -1,37 +1,71 @@
 // eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipeBuilder } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-Book.dto';
 import { UpdateBDetailDto } from './dto/update-bdetail.dto';
+import { UpdateBContentDto } from './dto/update-bcontent.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
 
-  @Post()
-  create(@Body() createBookDto: CreateBookDto) {
-    console.log('Received CreateBookDto:', createBookDto);
-    console.log('Received ContentDto:', createBookDto.BContent_content);
-    return this.bookService.create(createBookDto);
+  @Post('createBook')
+  async createBook(@Body() createBookDto: CreateBookDto) {
+    return await this.bookService.create(createBookDto);
   }
 
-  @Get()
-  findAll() {
-    return this.bookService.findAll();
+  @Get('findAllBDetail')
+  async findAllBDetail() {
+    return await this.bookService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.bookService.findById(id);
+  @Get('getBDetailById/:id')
+  async getBDetailById(@Param('id') id: string) {
+    const result = await this.bookService.findById(id);
+    return result;
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBDetailDto: UpdateBDetailDto) {
-    return this.bookService.update(id, updateBDetailDto);
+  @Get('getBContentById/:id')
+  async getBContentById(@Param('id') id: string): Promise<string> {
+    const result = await this.bookService.getBContent(id);
+    return result;
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.bookService.remove(id);
+  @Patch('updateBDetailById/:id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateBDetailDto: UpdateBDetailDto,
+  ) {
+    return await this.bookService.update(id, updateBDetailDto);
+  }
+
+  // Update by id of BDetail
+  @Patch('updateBContent/:id')
+  async updateBContent(
+    @Param('id') id: string,
+    @Body() updateBContentDto: UpdateBContentDto,
+  ) {
+    return await this.bookService.updateBContent(id, updateBContentDto);
+  }
+
+  // Router for upload user avatar
+  @UseInterceptors(FileInterceptor('file'))
+  @Patch('updateBDetailImage/:id')
+  updateAvatar(
+    @Param('id') id: string,
+    @UploadedFile(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({ fileType: 'png' })
+        .build(),
+    )
+    file: Express.Multer.File,
+  ) {
+    return this.bookService.updateBDetailImage(id, file);
+  }
+
+  @Delete('deleteBookById/:id')
+  async remove(@Param('id') id: string) {
+    return await this.bookService.remove(id);
   }
 }

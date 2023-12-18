@@ -1,4 +1,8 @@
+import { IsNotEmpty, IsString } from 'class-validator';
+
 export class CreateBContentDto {
   BContent_id: string;
-  BContent_content: Record<string, any>;
+  @IsString()
+  @IsNotEmpty()
+  BContent_content: string;
 }

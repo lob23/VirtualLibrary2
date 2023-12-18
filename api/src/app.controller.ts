@@ -10,6 +10,5 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
   // You can add more endpoints or routes here
 }

@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { ObjectId } from 'mongodb';
+// import * as argon from 'argon2';
 
 @Injectable()
 export class UsersService {
@@ -15,11 +16,12 @@ export class UsersService {
   ) {}
 
   async findAll(): Promise<User[]> {
-    return this.userRepository.find();
+    return await this.userRepository.find();
   }
 
-  async findById(id: string): Promise<User | any> {
-    return this.userRepository.findOne({ where: { _id: new ObjectId(id) } });
+  async findById(id: string): Promise<User | null> {
+    const result = await this.userRepository.findOne({ where: { _id: new ObjectId(id) } });
+    return result;
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -35,12 +37,17 @@ export class UsersService {
 
     // If not then create user
     const newUser = this.userRepository.create(createUserDto);
-    return this.userRepository.save(newUser);
+    return await this.userRepository.save(newUser);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto ): Promise<User | undefined> {
     await this.userRepository.update(id, updateUserDto);
-    return this.findById(id);
+    return await this.findById(id);
+  }
+
+  async updateAvatar(id: string, file: Express.Multer.File): Promise<User | undefined> {
+    await this.userRepository.update( id, { User_image: file.buffer.toString('base64') } );
+    return await this.findById(id);
   }
 
   async remove(id: string): Promise<void> {

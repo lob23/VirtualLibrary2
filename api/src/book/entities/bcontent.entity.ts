@@ -1,3 +1,4 @@
+import { IsNotEmpty } from 'class-validator';
 import { Entity, ObjectIdColumn, Column } from 'typeorm';
 import { ObjectId } from 'mongodb';
 
@@ -6,6 +7,7 @@ export class BContent {
   @ObjectIdColumn()
   _id: ObjectId;
 
-  @Column('json') // Store content as JSON/BSON
-  BContent_content: Record<string, any>;
+  @Column()
+  @IsNotEmpty()
+  BContent_content: string;
 }
