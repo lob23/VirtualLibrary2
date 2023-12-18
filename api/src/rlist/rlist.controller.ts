@@ -9,32 +9,35 @@ export class RListController {
   constructor(private readonly rListService: RListService) {}
 
   @Post()
-  create(@Body() createRListDto: CreateRListDto) {
-    return this.rListService.create(createRListDto);
+  async create(@Body() createRListDto: CreateRListDto) {
+    return await this.rListService.create(createRListDto);
   }
 
   @Get()
-  findAll() {
-    return this.rListService.findAll();
+  async findAll() {
+    return await this.rListService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.rListService.findByUserId(id);
+  async findOne(@Param('id') id: string) {
+    return await this.rListService.findByUserId(id);
   }
 
   @Patch()
-  update(@Body() updateRListDto: UpdateRListDto) {
-    return this.rListService.update(updateRListDto);
+  async update(@Body() updateRListDto: UpdateRListDto) {
+    return await this.rListService.update(updateRListDto);
   }
 
   @Delete('deleteRList')
-  remove(@Query('userId') userId: string, @Query('bookId') bookId: string) {
-    return this.rListService.remove(userId, bookId);
+  async remove(
+    @Query('userId') userId: string,
+    @Query('bookId') bookId: string,
+  ) {
+    return await this.rListService.remove(userId, bookId);
   }
 
   @Delete('deleteRListByUserId')
-  removeByUserId(@Query('userId') userId: string) {
-    return this.rListService.removeByUserId(userId);
+  async removeByUserId(@Query('userId') userId: string) {
+    return await this.rListService.removeByUserId(userId);
   }
 }
