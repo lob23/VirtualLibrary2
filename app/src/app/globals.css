@@ -66,10 +66,23 @@ input {
   border-bottom: 2px solid hsl(243, 57%, 79%);
 }
 
-/* button:hover{
-
+.button_yellow:hover{
+  border: #F2B547 solid;
+  border-width: 3px;
+  background-color: #F2B547;
+  text-emphasis-color: #27219A;
+  border-radius: 40px;
 }
 
-button{
+.button_yellow {
+  border: #F2B547 solid;
+  border-width: 3px;
+  background-color: white;
+  border-radius: 40px;
+  text-emphasis-color: #27219A;
+  font-family: Gilroy_sb ;
+  font-size: 20px;
+}
+/*button{
 
 } */

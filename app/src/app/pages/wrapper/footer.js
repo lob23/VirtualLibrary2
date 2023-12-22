@@ -3,7 +3,6 @@ export default function footer() {
   return (
     <>
       <div className="relative w-full h-[480px] px-[70px] bg-blue bg-fixed">
-        \
         <div className="grid grid-cols-3 w-full h-[350px] justify-center">
           <div className="flex flex-col static w-[250px] h-auto px-5 py-12">
             <img
