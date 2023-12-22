@@ -10,7 +10,7 @@ export default function author_home(){
           </img>
         </div>
         <div className="grid grid-cols-3 gap-[60px] relative w-auto h-[100px] ml-[160px] pt-[45px] items-center">
-          <p className="font-Gilroy_sb text-grey text-xl hover:opacity-60">
+          <p className="font-Gilroy_sb text-grey text-xl">
             Home
           </p>
           <p className="font-Gilroy_sb text-grey text-opacity-60 text-xl hover:text-grey">
