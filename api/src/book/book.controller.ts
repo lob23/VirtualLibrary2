@@ -1,5 +1,5 @@
 // eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipeBuilder } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipeBuilder, Query } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-Book.dto';
 import { UpdateBDetailDto } from './dto/update-bdetail.dto';
@@ -48,6 +48,14 @@ export class BookController {
     @Body() updateBContentDto: UpdateBContentDto,
   ) {
     return await this.bookService.updateBContent(id, updateBContentDto);
+  }
+
+  @Patch('updateVerified')
+  async updateVerified(
+    @Query('BDetail_id') BDetail_id: string,
+    @Query('status') status: string,
+  ) {
+    return await this.bookService.updateVerified(BDetail_id, status);
   }
 
   // Router for upload user avatar

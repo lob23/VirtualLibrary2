@@ -19,11 +19,14 @@ export class BDetail {
   BDetail_averageRating: number;
 
   @Column()
-  BDetail_accepted: boolean;
+  BDetail_verified: string;
 
   @Column()
   BDetail_contentId: ObjectId;
 
   @Column()
   BDetail_image: string;
+
+  @Column()
+  BDetail_publishedDay: string;
 }

@@ -78,9 +78,28 @@ export class BookService {
     return await this.findById(id);
   }
 
+  async updateVerified(id: string, status: string): Promise<BDetail | null> {
+
+    const validStatus: string[] = ['accepted', 'rejected', 'editing', 'reading']
+    status = status.toLowerCase();
+    if(!validStatus.includes(status)) throw new Error('This status is not valid status. Current status: ' + status);
+
+    const updateDto: { BDetail_verified: string; BDetail_publishedDay: string | undefined } = { BDetail_verified: status, BDetail_publishedDay: null };
+    if (status === 'accepted') updateDto.BDetail_publishedDay = getCurrentDay();
+
+    await this.bDetailRepository.update(id, updateDto);
+    return await this.findById(id);
+  }
+
   async remove(id: string): Promise<void> {
     const bDetail = await this.findById( id );
     await this.bContentRepository.delete( bDetail.BDetail_contentId );
     await this.bDetailRepository.delete(id);
   }
+}
+
+const getCurrentDay = (): string => {
+  const formatter = new Intl.DateTimeFormat( 'en-US', { timeZone: 'Asia/Bangkok', year: 'numeric', month: '2-digit', day: '2-digit' });
+  const currentDay = formatter.format(new Date());
+  return currentDay;
 }
