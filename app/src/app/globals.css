@@ -69,7 +69,7 @@ input {
 .button_yellow:hover{
   border: #F2B547 solid;
   border-width: 3px;
-  background-color: #F2B547;
+  background-color: white;
   text-emphasis-color: #27219A;
   border-radius: 40px;
 }
@@ -77,7 +77,7 @@ input {
 .button_yellow {
   border: #F2B547 solid;
   border-width: 3px;
-  background-color: white;
+  background-color: #F2B547;
   border-radius: 40px;
   text-emphasis-color: #27219A;
   font-family: Gilroy_sb ;
