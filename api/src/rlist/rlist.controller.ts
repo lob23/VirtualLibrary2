@@ -36,8 +36,8 @@ export class RListController {
     return await this.rListService.remove(userId, bookId);
   }
 
-  @Delete('deleteRListByUserId')
-  async removeByUserId(@Query('userId') userId: string) {
-    return await this.rListService.removeByUserId(userId);
+  @Delete('deleteRListByUserId/:id')
+  async removeByUserId(@Param('id') id: string) {
+    return await this.rListService.removeByUserId(id);
   }
 }

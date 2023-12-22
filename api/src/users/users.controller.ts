@@ -49,7 +49,7 @@ export class UsersController {
     return this.usersService.updateAvatar(id, file);
   }
 
-  @Delete('deleteById/:id')
+  @Delete('deleteUser/:id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }

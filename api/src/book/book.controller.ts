@@ -73,7 +73,7 @@ export class BookController {
     return this.bookService.updateBDetailImage(id, file);
   }
 
-  @Delete('deleteBookById/:id')
+  @Delete('deleteBook/:id')
   async remove(@Param('id') id: string) {
     return await this.bookService.remove(id);
   }
