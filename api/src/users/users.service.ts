@@ -36,11 +36,15 @@ export class UsersService {
     }
 
     // If not then create user
-    const newUser = this.userRepository.create(createUserDto);
+    const newUser = this.userRepository.create({
+      ...createUserDto,
+      User_authenticationLevel: 1,
+    });
     return await this.userRepository.save(newUser);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto ): Promise<User | undefined> {
+    console.log(updateUserDto);
     await this.userRepository.update(id, updateUserDto);
     return await this.findById(id);
   }

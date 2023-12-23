@@ -2,7 +2,7 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateUserDto {
-  User_id: string;
+  // User_id: string;
   User_name: string;
   User_dob: Date;
   User_email: string;
@@ -11,8 +11,8 @@ export class CreateUserDto {
   User_image: string;
   @IsNotEmpty()
   User_verification: number;
-  @IsNotEmpty()
-  User_authenticationLevel: number;
+  // @IsNotEmpty()
+  // User_authenticationLevel: number;
   @IsString()
   @IsNotEmpty()
   User_loginName: string;

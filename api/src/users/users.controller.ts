@@ -30,7 +30,7 @@ export class UsersController {
 
   @Patch('updateUser/:id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(id, updateUserDto);
+    return classToPlain(this.usersService.update(id, updateUserDto));
   }
 
   // Router for upload user avatar
@@ -50,6 +50,6 @@ export class UsersController {
 
   @Delete('deleteUser/:id')
   remove(@Param('id') id: string) {
-    return this.usersService.remove(id);
+    this.usersService.remove(id);
   }
 }
