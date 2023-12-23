@@ -16,7 +16,7 @@ export default function search_form() {
   return (
     <>
       <div className="relative w-screen h-full">
-      <div class="relative w-screen h-1/3 bg-cream">
+      <div class="relative w-screen h-full bg-cream">
         <h1 className="static font-Gilroy_md text-blue text-4xl text-center mx-40 mt-60 mb-30 pb-5">
         Choose your stories
         </h1>
