@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { BookModule } from './book/book.module';
 import { RListModule } from './rlist/rlist.module';
+import { RatingModule } from './rating/rating.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { RListModule } from './rlist/rlist.module';
     UsersModule,
     BookModule,
     RListModule,
+    RatingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
