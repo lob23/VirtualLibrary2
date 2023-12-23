@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { BookModule } from './book/book.module';
 import { RListModule } from './rlist/rlist.module';
 import { RatingModule } from './rating/rating.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { RatingModule } from './rating/rating.module';
     BookModule,
     RListModule,
     RatingModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
