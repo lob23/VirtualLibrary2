@@ -47,7 +47,7 @@ export default function login_form() {
           ></img>
         </div>
         <div className="grid grid-flow-col grid-cols-3 grid-rows-none absolute top-0 left-0 right-0 bottom-0  w-2/3 h-3/4 m-auto rounded-[40px] bg-white/70 backdrop-blur-sm">
-          <div className=" col-span-1 flex flex-col px-10 py-20 w-auto h-full bg-white">
+          <div className="col-span-1 flex flex-col px-10 py-20 w-auto h-full bg-white">
             <img
               className="object-scale-down w-full h-1/2 "
               src="/image/reg_img1.png"

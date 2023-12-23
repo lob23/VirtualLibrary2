@@ -15,8 +15,9 @@ export default function search_form() {
 
   return (
     <>
-      <div class="relative w-screen h-screen bg-cream overflow-y-auto">
-        <h1 className="static font-Gilroy_md text-blue text-4xl text-center mx-40 ml-40 mr-40 mt-60 mb-30 pb-5">
+      <div className="relative w-screen h-full">
+      <div class="relative w-screen h-1/3 bg-cream">
+        <h1 className="static font-Gilroy_md text-blue text-4xl text-center mx-40 mt-60 mb-30 pb-5">
         Choose your stories
         </h1>
         <div class="relative z-40 mx-60 mt-20 flex items-center -bottom-7 h-14 rounded-lg bg-white overflow-hidden shadow-md shadow-blue-500/50">
@@ -61,11 +62,16 @@ export default function search_form() {
               ></img>
             </div>
           </div>
-          <div class="relative w-screen h-[2000px] bg-white"></div>
+
+
+
+          {/* <div class="relative w-screen h-[2000px] bg-white"></div>
           <div>
             <_footer/>
+          </div> */}
       </div>
       </div>
+      
       
     </>
   );
