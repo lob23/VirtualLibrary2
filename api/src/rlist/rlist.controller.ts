@@ -23,9 +23,22 @@ export class RListController {
     return await this.rListService.findByUserId(id);
   }
 
+  @Get('getPage')
+  async getPage(
+    @Query('userId') userId: string,
+    @Query('bookId') bookId: string,
+  ) {
+    const result = await this.rListService.findBoth(userId, bookId);
+    return result.RList_currentPage;
+  }
+
   @Patch()
-  async update(@Body() updateRListDto: UpdateRListDto) {
-    return await this.rListService.update(updateRListDto);
+  async update(
+    @Query('userId') userId: string,
+    @Query('bookId') bookId: string,
+    @Body() updateRListDto: UpdateRListDto,
+  ) {
+    return await this.rListService.update(userId, bookId, updateRListDto);
   }
 
   @Delete('deleteRList')

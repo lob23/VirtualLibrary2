@@ -1,7 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class CreateRListDto {
-  RList_id: string;
+  // RList_id: string;
   @IsNotEmpty()
   RList_userId: string;
   @IsNotEmpty()

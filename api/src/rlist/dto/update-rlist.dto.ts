@@ -2,7 +2,8 @@ import { OmitType, PartialType } from '@nestjs/mapped-types';
 import { CreateRListDto } from './create-rlist.dto';
 
 export class UpdateRListDto extends PartialType(
-  OmitType(CreateRListDto, ['RList_id'] as const),
+  // eslint-disable-next-line prettier/prettier
+  OmitType(CreateRListDto, ['RList_userId', 'RList_bookId'] as const),
 ) {
   constructor(createRListDto: CreateRListDto) {
     super();

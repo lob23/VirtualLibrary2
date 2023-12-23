@@ -41,7 +41,17 @@ export class RListService {
     return result ? result : undefined;
   }
 
-  async create(createRListDto: CreateRListDto): Promise<RList | any> {
+  async findBoth(userId: string, bookId: string): Promise<RList | null> {
+    const result = await this.rListRepository.findOne({
+      where: {
+        RList_userId: userId,
+        RList_bookId: bookId,
+      },
+    });
+    return result;
+  }
+
+  async create(createRListDto: CreateRListDto): Promise<RList | null> {
     // Check whether the user is exist or not
     const existingUser = await this.userRepository.findOne({
       where: { _id: new ObjectId(createRListDto.RList_userId) },
@@ -56,29 +66,30 @@ export class RListService {
 
     if (!bDetail) throw new Error('This book does not exist');
 
-    const result = await this.update(new UpdateRListDto(createRListDto));
+    // const result = await this.update(new UpdateRListDto(createRListDto));
+    const result = await this.update(
+      createRListDto.RList_userId,
+      createRListDto.RList_bookId,
+      { RList_currentPage: createRListDto.RList_currentPage },
+    );
     if (result) return result;
 
-    const newRList = this.rListRepository.create(createRListDto);
+    const newRList = await this.rListRepository.create(createRListDto);
+
     return await this.rListRepository.save(newRList);
   }
 
   // eslint-disable-next-line prettier/prettier
-  async update(updateRListDto: UpdateRListDto): Promise<RList | undefined | any> {
+  async update(userId: string, bookId: string, updateRListDto: UpdateRListDto): Promise<RList | null> {
     const update = await this.rListRepository.update(
       {
-        RList_userId: updateRListDto.RList_userId,
-        RList_bookId: updateRListDto.RList_bookId,
+        RList_userId: userId,
+        RList_bookId: bookId,
       },
       updateRListDto,
     );
-    if (update.affected == 0) return undefined;
-    const result = this.rListRepository.findOne({
-      where: {
-        RList_userId: updateRListDto.RList_userId,
-        RList_bookId: updateRListDto.RList_bookId,
-      },
-    });
+    if (update.affected === 0) return null;
+    const result = this.findBoth(userId, bookId);
     return result;
   }
 
