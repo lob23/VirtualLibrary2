@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
-import { Entity, Column, ObjectIdColumn, PrimaryColumn } from 'typeorm';
 import { ObjectId } from 'mongodb';
+import { Entity, Column, ObjectIdColumn } from 'typeorm';
 
 @Entity()
 export class RList {
