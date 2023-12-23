@@ -8,6 +8,7 @@ import { BookModule } from './book/book.module';
 import { RListModule } from './rlist/rlist.module';
 import { RatingModule } from './rating/rating.module';
 import { CommentModule } from './comment/comment.module';
+import { RequestModule } from './request/request.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CommentModule } from './comment/comment.module';
     RListModule,
     RatingModule,
     CommentModule,
+    RequestModule,
   ],
   controllers: [AppController],
   providers: [AppService],
