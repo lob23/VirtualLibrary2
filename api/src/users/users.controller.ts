@@ -6,6 +6,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { classToPlain } from 'class-transformer';
 
 @Controller('users')
 export class UsersController {
@@ -19,14 +20,12 @@ export class UsersController {
   @Get()
   async findAll() {
     const result = await this.usersService.findAll();
-    console.log(`Number of users: ${result.length}`);
-    console.log(result);
-    return result;
+    return classToPlain(result);
   }
 
   @Get('getUser/:id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findById(id);
+    return classToPlain(this.usersService.findById(id));
   }
 
   @Patch('updateUser/:id')
