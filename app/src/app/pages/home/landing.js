@@ -2,7 +2,7 @@
 export default function landing(){
   return(
     <>
-      <div className="row-span-3 flex flex-row relative w-screen h-[80px] ml-10 mr-5 py-4 items-center">
+      <div className="row-span-3 flex flex-row relative w-screen h-[80px] mx-10 py-4 items-center">
         <div className="absolute w-[60px] h-[60px]">
           <img
             className="object-contain w-full h-full"
@@ -29,6 +29,20 @@ export default function landing(){
             Sign Up
           </button>
         </div>
+      </div>
+
+      <div className="grid grid-flow-col grid-cols-2 w-full h-auto">
+        <div className="relative col-span-1 flex flex-col-3 px-10">
+          <h1 className="font-Gilroy_sb text-blue text-5xl">
+            Welcome to <br/>   Literia
+          </h1>
+        </div>
+        <div className="relative col-span-1 flex flex-col-3 px-10">
+          <img
+            className="object-scale-down w-full h-1/2 "
+            src="/image/logo_landing.png"
+          ></img>
+          </div>
       </div>
     </>
   );

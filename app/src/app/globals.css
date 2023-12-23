@@ -71,6 +71,7 @@ input {
   border-width: 3px;
   background-color: white;
   text-emphasis-color: #27219A;
+  font-family: Gilroy_sb ;
   border-radius: 40px;
 }
 
@@ -83,6 +84,23 @@ input {
   font-family: Gilroy_sb ;
   font-size: 20px;
 }
-/*button{
 
-} */
+.button_white{
+  border: #F2B547 solid;
+  border-width: 3px;
+  background-color: white;
+  text-emphasis-color: #27219A;
+  border-radius: 40px;
+  font-family: Gilroy_sb;
+  font-size: 20px;
+}
+
+.button_white:hover{
+  border: #F2B547 solid;
+  border-width: 3px;
+  background-color: #F2B547;
+  border-radius: 40px;
+  text-emphasis-color: #27219A;
+  font-family: Gilroy_sb;
+  font-size: 20px;
+}
