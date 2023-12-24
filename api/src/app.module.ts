@@ -9,6 +9,7 @@ import { RListModule } from './rlist/rlist.module';
 import { RatingModule } from './rating/rating.module';
 import { CommentModule } from './comment/comment.module';
 import { RequestModule } from './request/request.module';
+import { ReportModule } from './report/report.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { RequestModule } from './request/request.module';
     RatingModule,
     CommentModule,
     RequestModule,
+    ReportModule,
   ],
   controllers: [AppController],
   providers: [AppService],
