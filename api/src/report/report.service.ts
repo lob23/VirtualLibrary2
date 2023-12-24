@@ -1,26 +1,49 @@
+import { User } from 'src/users/entities/user.entity';
+import { Report } from './entities/report.entity';
+import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ObjectId } from 'mongodb';
 import { CreateReportDto } from './dto/create-report.dto';
-import { UpdateReportDto } from './dto/update-report.dto';
 
 @Injectable()
 export class ReportService {
-  create(createReportDto: CreateReportDto) {
-    return 'This action adds a new report';
+  constructor(
+    @InjectRepository(Report)
+    private readonly reportRepository: Repository<Report>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+  ) {}
+
+  // Get functions
+  async getAll(): Promise<Report[] | null> {
+    return await this.reportRepository.find();
   }
 
-  findAll() {
-    return `This action returns all report`;
+  async getReport(id: string): Promise<Report | null> {
+    return await this.reportRepository.findOne({
+      where: { _id: new ObjectId(id) },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} report`;
+  // Create function
+  async createReport(createReportDto: CreateReportDto): Promise<Report | null> {
+    const referenceUser = await this.userRepository.findOne({
+      where: { _id: new ObjectId(createReportDto.Report_userId) },
+    });
+
+    if (!referenceUser)
+      throw new Error(
+        'This user is not valid. Current userId: ' +
+          createReportDto.Report_userId,
+      );
+
+    const newReport = this.reportRepository.create(createReportDto);
+    return await this.reportRepository.save(newReport);
   }
 
-  update(id: number, updateReportDto: UpdateReportDto) {
-    return `This action updates a #${id} report`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} report`;
+  // Delete function
+  async deleteReport(id: string): Promise<void> {
+    await this.reportRepository.delete(id);
   }
 }
