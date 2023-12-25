@@ -36,39 +36,34 @@ export default function search_form() {
                 id="search"
                 placeholder="Enter the story or the author" /> 
                 <button
-                class="relative w-[150px] h-full my-5 bg-blue p-3 border-none shadow-none text-yellow text-xl font-Gilroy_md"
+                class="relative w-[150px] h-full my-5 bg-blue p-3 border-none shadow-none text-yellow text-xl font-Gilroy_md hover:bg-[#19156e]"
                 type="submit">
                 Search
                 </button>
-            </div>
+          </div>
           
-            <div class="z-10">
+          <div class="z-10">
               <div class="absolute top-[200px] -right-[20px]  w-[250px] h-[250px]">
                   <img
                     class="object-contain w-full h-full  "
                     src="/image/reg_cir.png"
                   ></img>
                 </div>
-              <div class="absolute top-[200px] left-[-120px]  w-[300px] h-[300px]">
+              <div class="absolute top-[200px] -left-[120px]  w-[300px] h-[300px]">
                   <img
                     class="object-contain w-full h-full "
                     src="/image/reg_cir.png"
                   ></img>
                 </div>
-              <div class="absolute top-[320px] left-[120px]  w-[150px] h-[150px]">
+              <div class="absolute top-[310px] left-[80px]  w-[150px] h-[150px]">
                   <img
                     class="object-contain w-full h-full "
                     src="/image/reg_cir.png"
                 ></img>
               </div>
-            </div>
           </div>
-
-
-          {/* <div class="relative w-screen h-[2000px] bg-white"></div>
-          <div>
-            <_footer/>
-          </div> */}
+          <div class="relative w-screen h-[50px] bg-white z-30"></div>
+        </div>
       </div>         
     </>
   );

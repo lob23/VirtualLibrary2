@@ -9,7 +9,7 @@ export default function header(){
             src="/image/logo.png">
           </img>
         </div>
-        <div className="grid grid-cols-3 gap-[60px] relative w-auto h-[100px] ml-[160px] pt-[45px] items-center">
+        <div className="grid grid-cols-3 gap-[60px] relative w-auto h-[100px] ml-[140px] pt-[42px] items-center">
           <p className="font-Gilroy_sb text-grey text-xl">
             Home
           </p>
@@ -21,7 +21,7 @@ export default function header(){
           </p>
         </div>
        
-        <div className="grid grid-flow-col grid-cols-2 absolute right-2 gap-[40px] w-[100px] h-[100px] mr-[100px] pt-[45px] items-center">
+        <div className="grid grid-flow-col grid-cols-2 absolute right-2 gap-[40px] w-[100px] h-[100px] mr-[100px] pt-[40px] items-center">
             <div className="relative col-span-1 w-[30px] h-[30px]">
                 <svg width="30" height="30" viewBox="0 0 37 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M13.3754 33.2048V33.3688C13.3754 36.1563 15.507 38.2879 18.2945 38.2879C21.082 38.2879 23.2136 36.1563 23.2136 33.3688V33.2048" stroke="#444444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
