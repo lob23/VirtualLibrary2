@@ -1,0 +1,4 @@
+.quill-container {
+    overflow-y: auto; /* Enable vertical scrolling */
+    /* Other styling as needed */
+  }
