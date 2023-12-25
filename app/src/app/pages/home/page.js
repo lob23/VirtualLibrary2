@@ -2,12 +2,23 @@ import React from "react";
 import _homeLand from "@/app/pages/home/landing"
 import _author_home from "@/app/pages/home/author_home"
 import _header from "@/app/pages/wrapper/header"
+import _footer from "@/app/pages/wrapper/footer"
 
 export default function home_land(){
     return (
-        <div>
-            <_homeLand/>
+        <div className="absolute w-screen h-full overflow-y-auto no-scrollbar">
+            <div className="relative w-full h-full">
+                <_homeLand/>
+            </div>
+            <div className="relative w-full h-auto">
+                 <_footer/>
+            </div>
         </div>
+        
+        // <div>
+        //     <_homeLand/>
+        //     {/* <_footer/> */}
+        // </div>
     );
 }
 
