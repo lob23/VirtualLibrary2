@@ -112,3 +112,21 @@ input {
   font-family: Gilroy_sb;
   font-size: 20px;
 }
+
+.button_red{
+  border: #F06966 solid;
+  border-width: 3px;
+  background-color: #F06966;
+  text-emphasis-color: #FFFFFF;
+  border-radius: 40px;
+  font-family: Gilroy_sb;
+}
+
+.button_red:hover{
+  border: #F06966 solid;
+  border-width: 3px;
+  background-color: transparent;
+  border-radius: 40px;
+  text-emphasis-color: #FFFFFF;
+  font-family: Gilroy_sb;
+}
