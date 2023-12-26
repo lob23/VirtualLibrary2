@@ -1,32 +1,11 @@
 import React from "react"; 
-import _homeLand from "@/app/pages/home/landing"
-import _author_home from "@/app/pages/home/author_home"
-import _header from "@/app/pages/wrapper/header"
-import _footer from "@/app/pages/wrapper/footer"
+import _headerReader from "@/app/pages/home/header_reader" 
+import _headerAuthor from "@/app/pages/home/header_author"
 
-export default function home_land(){
-    return (
-        <div className="absolute w-screen h-full overflow-y-auto no-scrollbar">
-            <div className="relative w-full h-full">
-                <_homeLand/>
-            </div>
-            <div className="relative w-full h-auto">
-                 <_footer/>
-            </div>
+export default function homePage(){
+    return(
+        <div>
+            <_headerAuthor/>
         </div>
-        
-        // <div>
-        //     <_homeLand/>
-        //     {/* <_footer/> */}
-        // </div>
     );
 }
-
-// export default function author_home(){
-//     return(
-//         <div>
-//             <_header/>
-//             <_author_home/>
-//         </div>
-//     );
-// }
