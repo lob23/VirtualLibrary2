@@ -1,18 +1,51 @@
 
 @tailwind components;
 @tailwind utilities;
-*
-{
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+@tailwind base;
+
+@layer base{
+  *{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  :root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+  }
+
+    
+  form > div {
+    @apply flex flex-col gap-2;
+  }
+
+  input, textarea{
+    @apply shadow-md px-6 py-2 border border-slate-300;
+  }
+
+  @font-face {
+    font-family: "Gilroy_md";
+    src: url("/font/GILROY MEDIUM.OTF");
+  
+  }
+  @font-face {
+    
+    font-family: "Gilroy_bd";
+    src: url("/font/GILROY BOLD.OTF");
+  
+  
+  }
+  @font-face {
+  
+    font-family: "Gilroy_sb";
+    src: url("/font/GILROY SEMIBOLD.OTF");
+  
+  }
+
 }
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -22,34 +55,10 @@
   }
 }
 
-form > div {
-  @apply flex flex-col gap-2;
-}
-
-input, textarea{
-  @apply shadow-md px-6 py-2 border border-slate-300;
-}
 
 
 
-@font-face {
-  font-family: "Gilroy_md";
-  src: url("/font/GILROY MEDIUM.OTF");
 
-}
-@font-face {
-  
-  font-family: "Gilroy_bd";
-  src: url("/font/GILROY BOLD.OTF");
-
-
-}
-@font-face {
-
-  font-family: "Gilroy_sb";
-  src: url("/font/GILROY SEMIBOLD.OTF");
-
-}
 
 input:focus {
   background-color: transparent;
@@ -82,7 +91,6 @@ input {
   border-radius: 40px;
   text-emphasis-color: #27219A;
   font-family: Gilroy_sb ;
-  font-size: 20px;
 }
 
 .button_white{
@@ -103,4 +111,22 @@ input {
   text-emphasis-color: #27219A;
   font-family: Gilroy_sb;
   font-size: 20px;
+}
+
+.button_red{
+  border: #F06966 solid;
+  border-width: 3px;
+  background-color: #F06966;
+  text-emphasis-color: #FFFFFF;
+  border-radius: 40px;
+  font-family: Gilroy_sb;
+}
+
+.button_red:hover{
+  border: #F06966 solid;
+  border-width: 3px;
+  background-color: transparent;
+  border-radius: 40px;
+  text-emphasis-color: #FFFFFF;
+  font-family: Gilroy_sb;
 }

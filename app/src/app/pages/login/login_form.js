@@ -59,7 +59,7 @@ export default function login_form() {
               Hundred of book to choose
             </h3>
           </div>
-          <div className="col-span-2 flex flex-col  justify-center items-center w-auto h-full ">
+          <div className="col-span-2 flex flex-col  justify-center items-center w-auto sc-full ">
             <h1 className="font-Gilroy_bd text-blue text-sp -ml-[280px]">
               Sign In
             </h1>
