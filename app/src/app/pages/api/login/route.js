@@ -16,8 +16,14 @@ export async function POST(req) {
                                 }   
                             })
                             .catch(error => console.log("login failed: ", error))
-
-        return NextResponse.redirect(new URL('/pages/home', req.url))
+        if (user != undefined){
+            if (user.User_password == password){
+                return NextResponse.json(user)
+            } else {
+                return NextResponse.json(null)
+            }
+        } else 
+            return NextResponse.json(null)
         // console.log("User: s s ", user )
 
         // if (status != null){

@@ -1,6 +1,7 @@
 "use client"; // This is a client component 👈🏽
 import { useState } from "react";
 import { redirect, useRouter } from "next/navigation";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function login_form() {
   const [username, setUsername] = useState("");
@@ -22,21 +23,28 @@ export default function login_form() {
         password,
       }),
     });
-    if(res.redirected == true){
-      redirect("/pages/home")
-    }
+    const user = await res.json().then(result => { return result})
+    // console.log("Userrr: ", user)
+    // console.log("Userrr: ", user.User_name)
+
+    // console.log("Userrr: ", user.User_email)
+    
+      router.push("/pages/home")
+    
     setNotification("abc");
   };
 
   return (
     <>
       <div className="relative w-screen h-screen bg-registerbg bg-fixed">
+        
         <div className="absolute  -bottom-20 -right-20  w-[300px] h-[300px]">
           <img
             className="object-contain w-full h-full  "
             src="/image/reg_cir.png"
           ></img>
         </div>
+      
         <div className="absolute bottom-[20px] left-[120px]  w-[120px] h-[150px]">
           <img
             className="object-contain w-full h-full "

@@ -23,18 +23,15 @@ export class User {
   @Column({ default: null })
   User_address: string;
 
-  @Exclude()
   @Column({ nullable: false, default: false })
   User_verification: boolean;
 
-  @Exclude()
   @Column({ nullable: false, default: 1 })
   User_authenticationLevel: number;
 
   @Column()
   User_image: string;
 
-  @Exclude()
   @Column({ nullable: false })
   User_password: string;
 }
