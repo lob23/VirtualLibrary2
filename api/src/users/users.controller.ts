@@ -28,6 +28,11 @@ export class UsersController {
     return classToPlain(this.usersService.findById(id));
   }
 
+  @Get('getUserByEmail/:email')
+  getByEmail(@Param('email') email: string) {
+    return classToPlain(this.usersService.getByEmail(email));
+  }
+
   @Patch('updateUser/:id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return classToPlain(this.usersService.update(id, updateUserDto));

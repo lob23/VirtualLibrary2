@@ -36,9 +36,5 @@ export class User {
 
   @Exclude()
   @Column({ nullable: false })
-  User_loginName: string;
-
-  @Exclude()
-  @Column({ nullable: false })
   User_password: string;
 }

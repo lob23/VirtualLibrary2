@@ -24,15 +24,20 @@ export class UsersService {
     return result;
   }
 
+  async getByEmail(email: string): Promise<User | null> {
+    const result = await this.userRepository.findOne({ where: { User_email: email } });
+    return result;
+  }
+
   async create(createUserDto: CreateUserDto): Promise<User> {
 
     // Check whether the login name is exist or not
     const existingUser = await this.userRepository.findOne({
-      where: { User_loginName: createUserDto.User_loginName },
+      where: { User_email: createUserDto.User_email },
     });
 
     if (existingUser) {
-      throw new Error('Login name is already taken');
+      throw new Error('This email is already existed');
     }
 
     // If not then create user
