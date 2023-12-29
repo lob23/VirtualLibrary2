@@ -73,6 +73,27 @@ export class BookController {
     return this.bookService.updateBDetailImage(id, file);
   }
 
+  @Get('retrievePDF/:id')
+  async retrievePDF(@Param('id') id: string) {
+    const result = await this.bookService.retrievePDF(id);
+    return result;
+  }
+
+  // Router for upload user avatar
+  @UseInterceptors(FileInterceptor('file'))
+  @Patch('updatePDF/:id')
+  updatePDF(
+    @Param('id') id: string,
+    @UploadedFile(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({ fileType: 'pdf' })
+        .build(),
+    )
+    file: Express.Multer.File,
+  ) {
+    return this.bookService.updatePDF(id, file);
+  }
+
   @Delete('deleteBook/:id')
   async remove(@Param('id') id: string) {
     return await this.bookService.remove(id);

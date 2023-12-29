@@ -78,6 +78,17 @@ export class BookService {
     return await this.findById(id);
   }
 
+  async updatePDF(id: string, file: Express.Multer.File): Promise<void> {
+    const bDetail = await this.findById( id );
+    await this.bContentRepository.update( bDetail.BDetail_contentId, { BContent_pdf: file.buffer.toString('base64') } );
+  }
+
+  async retrievePDF(id: string) {
+    const bDetail = await this.findById( id );
+    const result = await this.bContentRepository.findOne({ where: { _id: new ObjectId(bDetail.BDetail_contentId)}});
+    return result.BContent_pdf;
+  }
+
   async updateVerified(id: string, status: string): Promise<BDetail | null> {
 
     // const validStatus: string[] = ['accepted', 'rejected', 'editing', 'waiting']

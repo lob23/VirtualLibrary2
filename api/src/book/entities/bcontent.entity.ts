@@ -10,4 +10,7 @@ export class BContent {
   @Column()
   @IsNotEmpty()
   BContent_content: string;
+
+  @Column()
+  BContent_pdf: string;
 }
