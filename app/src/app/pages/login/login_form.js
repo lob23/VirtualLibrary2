@@ -1,10 +1,12 @@
 "use client"; // This is a client component 👈🏽
 import { useState } from "react";
+import { redirect, useRouter } from "next/navigation";
 
 export default function login_form() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [notification, setNotification] = useState("");
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +22,9 @@ export default function login_form() {
         password,
       }),
     });
-    const { msg } = await res.json();
+    if(res.redirected == true){
+      redirect("/pages/home")
+    }
     setNotification("abc");
   };
 
