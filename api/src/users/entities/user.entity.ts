@@ -9,7 +9,10 @@ export class User {
   _id: ObjectId;
 
   @Column()
-  User_name: string;
+  User_firstname: string;
+
+  @Column()
+  User_lastname: string;
 
   @Column({ default: null })
   User_dob?: Date;
