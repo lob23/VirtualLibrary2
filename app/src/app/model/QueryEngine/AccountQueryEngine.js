@@ -6,7 +6,8 @@ export const getUserAccount = async(userEmail, userPassword) => {
     try{
         await connectToMongoDB();
         const user = await User.findOne({email: userEmail, password: userPassword}).select("name");
-        return NextResponse.json(user)
+        console.log("user: ", user)
+        return [NextResponse.json(user), user]
     } catch (error){
         console.log("get user Account failed: ", error)
     }

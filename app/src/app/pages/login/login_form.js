@@ -21,7 +21,6 @@ export default function login_form() {
       }),
     });
     const { msg } = await res.json();
-    console.log("message", msg);
     setNotification("abc");
   };
 
