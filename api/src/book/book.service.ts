@@ -80,9 +80,9 @@ export class BookService {
 
   async updateVerified(id: string, status: string): Promise<BDetail | null> {
 
-    const validStatus: string[] = ['accepted', 'rejected', 'editing', 'reading']
-    status = status.toLowerCase();
-    if(!validStatus.includes(status)) throw new Error('This status is not valid status. Current status: ' + status);
+    // const validStatus: string[] = ['accepted', 'rejected', 'editing', 'waiting']
+    // status = status.toLowerCase();
+    // if(!validStatus.includes(status)) throw new Error('This status is not valid status. Current status: ' + status);
 
     const updateDto: { BDetail_verified: string; BDetail_publishedDay: string | undefined } = { BDetail_verified: status, BDetail_publishedDay: null };
     if (status === 'accepted') updateDto.BDetail_publishedDay = getCurrentDay();

@@ -25,7 +25,7 @@ export class User {
 
   @Exclude()
   @Column({ nullable: false, default: false })
-  User_verification: number;
+  User_verification: boolean;
 
   @Exclude()
   @Column({ nullable: false, default: 1 })
