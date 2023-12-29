@@ -1,6 +1,7 @@
 "use client"; // This is a client component 👈🏽
 import { useState } from "react";
 import { redirect, useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function login_form() {
@@ -28,9 +29,15 @@ export default function login_form() {
     // console.log("Userrr: ", user.User_name)
 
     // console.log("Userrr: ", user.User_email)
-    
+    if (user == null){
+      toast.error("Try Again !", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000
+      });
+
+    } else {
       router.push("/pages/home")
-    
+    }
     setNotification("abc");
   };
 
@@ -44,7 +51,9 @@ export default function login_form() {
             src="/image/reg_cir.png"
           ></img>
         </div>
-      
+        <div>
+          <ToastContainer/>
+        </div>
         <div className="absolute bottom-[20px] left-[120px]  w-[120px] h-[150px]">
           <img
             className="object-contain w-full h-full "
