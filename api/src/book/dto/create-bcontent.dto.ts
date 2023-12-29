@@ -5,4 +5,5 @@ export class CreateBContentDto {
   @IsString()
   @IsNotEmpty()
   BContent_content: string;
+  BContent_pdf: string;
 }
