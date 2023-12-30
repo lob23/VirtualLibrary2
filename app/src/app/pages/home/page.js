@@ -12,17 +12,17 @@ export default function homePage(){
         //     </div>
         // </div>
 
-        <div className='relative w-screen h-full z-0'>
+        <div className='relative w-screen h-full z-0 overflow-x-hidden'>
             <div className='relative w-screen h-auto z-20'>
                 <_headerReader />
             </div>
-            <div className='relative w-screen h-full z-10'>
+            <div className='relative w-screen h-full z-10 overflow-y-hidden'>
                 <_homeReader />
             </div>
-            {/* <div className='relative w-screen h-auto z-5'>
+            <div className='relative w-screen h-auto z-5'>
                 <_footer />
             </div>
-             */}
+            
         </div>
     );
 }

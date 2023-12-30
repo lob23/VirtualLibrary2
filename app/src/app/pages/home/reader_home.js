@@ -59,9 +59,9 @@ export default function ReaderHome() {
     
 
 
-    <div className="relative w-screen h-full">
-      <div className="relative w-full h-full overflow-y-auto no-scrollbar">
-        <div className="grid grid-flow-col grid-cols-2 relative w-screen h-screen bg-white">
+    <div className="relative w-screen h-full overflow-x-hidden">
+      <div className="relative w-full h-full">
+        <div className="grid grid-flow-col grid-cols-2 relative w-screen h-[300px] bg-white">
           <div className="relative col-span-1 flex flex-col flex-col-2 w-full h-auto pl-20 top-1/4 ml-10">
             <h1 className="font-Gilroy_sb text-blue text-7xl w-full h-1/4">
               New & <br/>   Trending
@@ -84,12 +84,12 @@ export default function ReaderHome() {
             </div>
           </div>
         </div>
-        <div className="relative w-screen h-full">
+        <div className="relative w-full h-full">
           <div className="relative w-full h-1/2 mx-[20px]">
             <h2 className="font-Gilroy_sb text-blue text-3xl w-auto h-1/6">
               Your reading list
             </h2>
-            <ul className="relative flex flex-row gap-4 overflow-x-scroll no-scrollbar w-screen h-full py-10">
+            {/* <ul className="relative flex flex-row gap-4 overflow-x-auto w-screen h-full py-5">
               {
                 list.map((item)=>(
                   <li className="relative w-full h-full">
@@ -97,21 +97,20 @@ export default function ReaderHome() {
                   </li>
                 ))
               }
-            </ul>
+            </ul> */}
           </div>
 
         </div>
 
-        <div className="absolute w-screen h-[2000px] bg-yellow"></div>
+        {/* <div className="absolute w-screen h-[2000px] bg-yellow"></div> */}
       </div>
-      
   </div>
 
 
   );
 }
 
-// const response = await fetch('http://localhost:3030/book/retrievePDF/658e8672fe9a28e26ec6be0d'); 
+{/* //const response = await fetch('http://localhost:3030/book/retrievePDF/658e8672fe9a28e26ec6be0d'); 
 
 // // download-pdf.js
 // import { useEffect } from 'react';
@@ -156,4 +155,4 @@ export default function ReaderHome() {
 //   return <div>Downloading PDF...</div>;
 // };
 
-// export default ReaderHome;
+// export default ReaderHome; */}
