@@ -16,8 +16,7 @@ export default function search_form() {
   return (
     <>
     <div class="relative w-screen h-auto bg-cream">
-      <div class="relative w-screen h-auto bg-cream z-0">
-        <h1 className="static font-Gilroy_md text-blue text-4xl text-center mt-40 mb-30 pb-5 z-15">
+        <h1 className="static font-Gilroy_md text-blue text-4xl text-center pt-40 mb-30 pb-5 z-15">
           Choose your stories
         </h1>
         <div class="z-5">
@@ -39,9 +38,8 @@ export default function search_form() {
             </div>
         </div>
 
-        <div class="relative z-40 mx-60 mt-20 flex items-center bottom-16 h-14 rounded-lg bg-white overflow-hidden shadow-md shadow-blue-500/50">
-          <div class="absolute top-0 left-0 right-0 bg-white"></div>
-          <div class="grid place-items-center h-full w-12 text-gray-300 p-2 relative z-10">
+        <div class="relative z-40 mx-60 mt-20 flex items-center -bottom-7 h-14 rounded-lg bg-white overflow-hidden shadow-md shadow-blue-500/50">
+          <div class="grid place-items-center h-full w-10 mx-2 text-gray-300 p-2 relative">
             <svg width="30" height="30" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g id="Group 1937">
                 <path id="Stroke 455" d="M1.99965 35.854L11.0273 26.8263" stroke="#27219A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -51,32 +49,29 @@ export default function search_form() {
           </div>
 
           <input
-            class="h-full w-full text-lg text-gray-700 border-0 focus:border-0 shadow-none py-20 placeholder:text-blue placeholder:text-opacity-50 placeholder:font-Gilroy_md relative z-10"
+            class="h-full w-full text-lg text-gray-700 border-0 focus:border-0 shadow-none py-20 placeholder:text-blue placeholder:text-opacity-50 placeholder:font-Gilroy_md relative"
             type="text"
             id="search"
             placeholder="Enter the story or the author"
           />
           <button
-            class="relative w-[150px] h-full my-5 bg-blue p-3 border-none shadow-none text-yellow text-xl font-Gilroy_md hover:bg-[#19156e] relative z-10"
+            class="relative w-[150px] h-full my-5 bg-[#27219A] p-3 border-none shadow-none text-yellow text-xl font-Gilroy_md hover:bg-[#19156e]"
             type="submit"
           >
             Search
           </button>
         </div>
-      </div>   
     </div>
      
-    <div className="relative w-screen h-auto bg-white z-0">
+    <div className="relative w-screen h-auto bg-white">
       {/* Latest update section on the left  */}
-      <div className="relative w-screen h-auto bg-white z-0">
-        <div className="relative w-screen h-auto bg-white z-0 left-10">
+        <div className="relative w-screen h-auto left-10 pt-10">
           <h1 className="static font-Gilroy_md text-blue text-3xl ">
             Latest Update
           </h1>
-          <div className="relative w-screen h-auto bg-white z-0">
+          <div className="relative w-screen h-auto">
           </div>
         </div>
-      </div>
     </div>
     
     
