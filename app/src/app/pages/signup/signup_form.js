@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {DatePicker} from "antd"
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 
 export default function signup_form() {
   const [username, setUsername] = useState("");
@@ -16,6 +17,8 @@ export default function signup_form() {
   const [userphone, setUserphone] = useState("");
   const [useraddress, setUseraddress] = useState("");
   const [date, setNewDate] = useState(new dayjs(null));
+
+  const router = useRouter()
 
   const accountFragemnt = (
   <>
@@ -115,6 +118,8 @@ export default function signup_form() {
             User_dob: date,
           }),
         });
+
+        if (res) router.push("login")
       } else {
         toast.error("Please full fill the options !", {
         position: toast.POSITION.TOP_CENTER,

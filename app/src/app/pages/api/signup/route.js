@@ -9,13 +9,21 @@ export async function POST(req) {
 
     try {
         const queryString = config.BACKEND_URL + "/users/createUser";
-        axios.post(queryString, user)
+        const res = axios.post(queryString, user)
             .then(response => {
+                
                 console.log('User created successfully:', response.data);
+                if(response.data){
+                    return response.data;
+                } else {
+                    return null
+                }
             })
             .catch(error => {
                 console.error('Error creating user:', error.response ? error.response.data : error.message);
             });
+            
+        return NextResponse.json(res)
 
     }catch (error){
         console.log("signup failed: ", error)
