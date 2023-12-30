@@ -59,7 +59,8 @@ export default function ReaderHome() {
     
 
 
-    <div className="relative w-screen h-full  overflow-y-auto no-scrollbar">
+    <div className="relative w-screen h-full overflow-y-auto no-scrollbar">
+      <div className="relative w-full h-full">
         <div className="grid grid-flow-col grid-cols-2 relative w-screen h-screen bg-white">
           <div className="relative col-span-1 flex flex-col flex-col-2 w-full h-auto pl-20 top-1/4 ml-10">
             <h1 className="font-Gilroy_sb text-blue text-7xl w-full h-1/4">
@@ -109,7 +110,7 @@ export default function ReaderHome() {
   );
 }
 
-// const response = await fetch('http://localhost:3030/book/retrievePDF/658e8672fe9a28e26ec6be0d'); 
+{/* //const response = await fetch('http://localhost:3030/book/retrievePDF/658e8672fe9a28e26ec6be0d'); 
 
 // // download-pdf.js
 // import { useEffect } from 'react';
@@ -154,4 +155,4 @@ export default function ReaderHome() {
 //   return <div>Downloading PDF...</div>;
 // };
 
-// export default ReaderHome;
+// export default ReaderHome; */}
