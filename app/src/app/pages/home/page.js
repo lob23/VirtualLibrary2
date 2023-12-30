@@ -26,10 +26,10 @@ export default function homePage(){
         // </div>
 
         <div className="relative w-full h-full overflow-y-auto no-scrollbar">
-            <div className="relative w-full h-auto overflow-hidden">
+            <div className="relative w-full h-auto z-30">
                 <_headerReader/>
             </div>
-            <div className="relative w-full h-auto overflow-hidden">
+            <div className="relative w-full h-auto overflow-hidden z-0">
                 <_homeReader/>
             </div>
         </div>

@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { fetchData } from "../api/home/route";
-import _footer from "@/app/pages/wrapper/footer"
+import _footer from "@/app/pages/wrapper/footer";
+import _readingComp from "@/app/pages/wrapper/reading"
 
-const list = ['New', 'Money', 'Suit', 'And', 'Tie','New', 'Can', 'Read', 'Your', 'Mind', 'And', 'I', 'Know', 
-'Your', 'Story', 'Fuck', 'Love', 'Shiba']
+// const list = ['New', 'Money', 'Suit', 'And', 'Tie','New', 'Can', 'Read', 'Your', 'Mind', 'And', 'I', 'Know', 
+// 'Your', 'Story', 'Fuck', 'Love', 'Shiba']
+const list = ['New', 'Money', 'Suit']
 
 export default function ReaderHome() {
 
@@ -60,9 +62,8 @@ export default function ReaderHome() {
 
 
     <div className="relative w-full h-full overflow-y-auto overflow-hidden no-scrollbar">
-      
         <div className="grid grid-flow-col grid-cols-2 relative w-full h-[900px] bg-white overflow-x-hidden">
-          <div className="relative col-span-1 w-full h-fit">
+          <div className="relative col-span-1 w-full h-fit top-1/4 bottom-0 ml-10">
             <h1 className="font-Gilroy_sb text-blue text-7xl w-full h-1/4">
               New & <br/>   Trending
             </h1>
@@ -77,7 +78,7 @@ export default function ReaderHome() {
               </img>            
             </div> 
             
-            <div className="absolute w-full h-full left-0 right-0 top-0 bottom-0  overflow-hidden">
+            <div className="absolute w-full h-full left-0 right-0 top-0 bottom-0 overflow-hidden">
               <img className="object-scale-down w-full h-full  overflow-hidden"
                     src="/image/book_reader_home.png">
               </img>
@@ -85,16 +86,16 @@ export default function ReaderHome() {
           </div>
         </div>
         
-        <div className="relative w-full h-full">
-          <div className="relative w-full h-1/2 mx-[20px] overflow-x-hidden">
-            <h2 className="font-Gilroy_sb text-blue text-3xl w-auto h-1/6">
+        <div className="relative w-screen h-full overflow-hidden">
+          <div className="relative w-full h-1/2 overflow-hidden">
+            <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ml-[20px]">
               Your reading list
             </h2>
             <ul className="relative flex flex-row gap-4 overflow-x-auto no-scrollbar w-screen h-full py-5">
               {
                 list.map((item)=>(
                   <li className="relative w-full h-full">
-                    {<_footer/>}
+                    {<_readingComp/>}
                   </li>
                 ))
               }
