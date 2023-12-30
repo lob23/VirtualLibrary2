@@ -1,5 +1,9 @@
 "use client";
+import { redirect, useRouter } from "next/navigation";
+
 export default function landing(){
+  const router = useRouter()
+
   return(
     <>
     <div className="relative w-screen h-full">
@@ -23,11 +27,12 @@ export default function landing(){
         </div>
       
         <div className="row-span-2 flex flex-row gap-[60px] absolute right-2 w-auto h-full mr-[10px] items-center">
-          <p className="font-Gilroy_sb text-blue text-lg hover:text-[#434373] hover:opacity-60 ">
-            Sign In
+          <p className="font-Gilroy_sb text-blue text-lg hover:text-[#434373] hover:opacity-60 " onClick={() => router.push("login")}>
+            Sign In            
           </p>
-          <button className="w-auto px-8 py-1 mr-5 button_yellow text-blue text-lg">
+          <button className="w-auto px-8 py-1 mr-5 button_yellow text-blue text-lg" onClick={() =>router.push("signup")}>
             Sign Up
+            
           </button>
         </div>
       </div>
