@@ -12,7 +12,6 @@ export class CreateUserDto {
   User_phone: string;
   User_address: string;
   User_image: string;
-  @IsNotEmpty()
   User_verification: boolean;
   @IsString()
   @IsNotEmpty()

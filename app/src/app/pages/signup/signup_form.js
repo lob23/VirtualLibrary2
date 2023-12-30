@@ -97,23 +97,32 @@ export default function signup_form() {
 
   const handleSubmit = async (e) => {
     if (isSetAccount == true){
-      e.preventDefault();
+      if(username && password && repeatpassword && userfirstname && userlastname && userphone && useraddress && date){
+        e.preventDefault();
 
-      const res = await fetch("api/account", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
-      const { msg } = await res.json();
-      console.log("message", msg);
+        const res = await fetch("api/signup", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            User_email: username,
+            User_password: password,
+            User_firstname: userfirstname,
+            User_lastname: userlastname,
+            User_phone: userphone,
+            User_address: useraddress ,
+            User_dob: date,
+          }),
+        });
+      } else {
+        toast.error("Please full fill the options !", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000
+        });
+      }
     } else {
       if (password && username && repeatpassword){
-        console.log("AA")
         setAccount(true)
       } else {
         toast.error("Please full fill the options !", {
