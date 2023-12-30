@@ -59,37 +59,38 @@ export default function ReaderHome() {
     
 
 
-    <div className="relative w-screen h-full overflow-x-hidden">
-      <div className="relative w-full h-full">
-        <div className="grid grid-flow-col grid-cols-2 relative w-screen h-[300px] bg-white">
-          <div className="relative col-span-1 flex flex-col flex-col-2 w-full h-auto pl-20 top-1/4 ml-10">
+    <div className="relative w-full h-full overflow-y-auto overflow-hidden no-scrollbar">
+      
+        <div className="grid grid-flow-col grid-cols-2 relative w-full h-[900px] bg-white overflow-x-hidden">
+          <div className="relative col-span-1 w-full h-fit">
             <h1 className="font-Gilroy_sb text-blue text-7xl w-full h-1/4">
               New & <br/>   Trending
             </h1>
-            <p className="font-Gilroy_md text-black text-md w-1/2 mt-3 text-[20px] leading-8">
+            <p className="font-Gilroy_md text-black text-md w-1/2 mt-3 text-[20px] leading-8 overflow-hidden">
             Indulge in the latest and most captivating books, where every page invites you on a journey of imagination, intrigue, and discovery.
             </p>
           </div>
-          <div className="col-span-1 relative w-full h-full">
-            <div className="absolute w-full h-full">
-              <img className="object-cover w-full h-full "
+          <div className="col-span-1 relative w-full h-full overflow-hidden">
+            <div className="absolute w-full h-full  overflow-hidden">
+              <img className="object-cover w-full h-full  overflow-hidden"
                     src="/image/blur.png">
               </img>            
             </div> 
             
-            <div className="absolute w-full h-full left-0 right-0 top-0 bottom-0">
-              <img className="object-scale-down w-full h-full"
+            <div className="absolute w-full h-full left-0 right-0 top-0 bottom-0  overflow-hidden">
+              <img className="object-scale-down w-full h-full  overflow-hidden"
                     src="/image/book_reader_home.png">
               </img>
             </div>
           </div>
         </div>
+        
         <div className="relative w-full h-full">
-          <div className="relative w-full h-1/2 mx-[20px]">
+          <div className="relative w-full h-1/2 mx-[20px] overflow-x-hidden">
             <h2 className="font-Gilroy_sb text-blue text-3xl w-auto h-1/6">
               Your reading list
             </h2>
-            {/* <ul className="relative flex flex-row gap-4 overflow-x-auto w-screen h-full py-5">
+            <ul className="relative flex flex-row gap-4 overflow-x-auto no-scrollbar w-screen h-full py-5">
               {
                 list.map((item)=>(
                   <li className="relative w-full h-full">
@@ -97,13 +98,13 @@ export default function ReaderHome() {
                   </li>
                 ))
               }
-            </ul> */}
+            </ul>
           </div>
 
         </div>
 
-        {/* <div className="absolute w-screen h-[2000px] bg-yellow"></div> */}
-      </div>
+        <div className="absolute w-screen h-[2000px] bg-yellow"></div>
+     
   </div>
 
 

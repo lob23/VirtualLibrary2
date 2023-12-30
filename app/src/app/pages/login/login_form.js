@@ -43,7 +43,7 @@ export default function login_form() {
 
   return (
     <>
-      <div className="relative w-screen h-screen bg-registerbg bg-fixed">
+      <div className="relative w-screen h-screen bg-registerbg bg-fixed overflow-hidden">
         
         <div className="absolute  -bottom-20 -right-20  w-[300px] h-[300px]">
           <img
@@ -66,21 +66,21 @@ export default function login_form() {
             src="/image/reg_cir.png"
           ></img>
         </div>
-        <div className="grid grid-flow-col grid-cols-3 grid-rows-none absolute top-0 left-0 right-0 bottom-0  w-2/3 h-3/4 m-auto rounded-[40px] bg-white/70 backdrop-blur-sm">
+        <div className="grid grid-flow-col grid-cols-3 grid-rows-none absolute top-0 left-0 right-0 bottom-0  w-2/3 h-3/4 m-auto rounded-[40px] bg-white/70 backdrop-blur-sm overflow-hidden">
           <div className="col-span-1 flex flex-col px-10 py-20 w-auto h-full bg-white">
             <img
               className="object-scale-down w-full h-1/2 "
               src="/image/reg_img1.png"
             ></img>
-            <h1 className="font-Gilroy_bd text-blue text-sp leading-10">
+            <h1 className="font-Gilroy_bd text-blue text-[40px] mt-[10px] leading-10">
               Welcome to<br></br> Literia{" "}
             </h1>
-            <h3 className="font-Gilroy_sb text-blue text-sm">
+            <h3 className="font-Gilroy_sb text-blue text-[20px] mt-[10px]">
               Hundred of book to choose
             </h3>
           </div>
           <div className="col-span-2 flex flex-col  justify-center items-center w-auto sc-full ">
-            <h1 className="font-Gilroy_bd text-blue text-sp -ml-[280px]">
+            <h1 className="font-Gilroy_bd text-blue text-[40px] -ml-[260px]">
               Sign In
             </h1>
             <div className="flex flex-col w-max h-max">
@@ -103,17 +103,21 @@ export default function login_form() {
                     value={password}
                     id="password"
                     placeholder="Password"
-                    className="row-span-1 w-[380px] h-[38px] my-2  "
+                    className="row-span-1 w-[380px] h-[38px] my-2 "
                   />
                   <p className="items-end ml-auto font-Gilroy_md text-red text-sm">
                     Forgot password?
                   </p>
-                  <button
-                    className=" w-[380px] h-[60px] my-5 bg-blue p-3 rounded-[12px] border-none text-white text-xl font-Gilroy_bd"
-                    type="submit"
-                  >
-                    Sign In
-                  </button>
+                  <div className="flex flex-row items-center justify-center">
+                   <label className=" w-[380px] h-[60px] my-5 bg-blue p-3 rounded-[12px] border-none text-white text-xl font-Gilroy_bd   items-center justify-center text-center"> 
+                    <button
+                      type="submit"
+                    >
+                      Sign In
+                    </button>
+                    
+                  </label>
+                  </div>
                 </form>
               </div>
             </div>

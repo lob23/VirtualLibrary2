@@ -60,20 +60,7 @@
 
 
 
-input:focus {
-  background-color: transparent;
-  outline:none;
-  padding: 0%;
-  border-bottom: 2px solid #27219A;
-}
 
-input {
-  outline:none;
-  border: none;
-  padding: 0%;
-  background-color: transparent;
-  border-bottom: 2px solid hsl(243, 57%, 79%);
-}
 
 .button_yellow:hover{
   border: #F2B547 solid;
@@ -129,4 +116,26 @@ input {
   border-radius: 40px;
   text-emphasis-color: #FFFFFF;
   font-family: Gilroy_sb;
+}
+
+[type='submit']:focus,select:focus
+{
+  background-color: white;
+}
+
+input:focus {
+  background-color: transparent;
+  outline:none;
+  padding: 0%;
+  border-bottom: 2px solid #27219A;
+  box-shadow: inset 0px 0px 0px 0px red;
+}
+
+input {
+  outline:none;
+  border: none;
+  padding: 0%;
+  background-color: transparent;
+  border-bottom: 2px solid hsl(243, 57%, 79%);
+  box-shadow: inset 0px 0px 0px 0px red;
 }

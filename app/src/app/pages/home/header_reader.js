@@ -2,7 +2,7 @@
 export default function header_reader(){
     return(
     <>
-      <div className="row-span-3 flex flex-row relative w-screen h-[80px] px-10 place-items-center shadow">
+      <div className="row-span-3 flex flex-row relative w-screen h-[80px] px-10 place-items-center shadow overflow-hidden">
         <div className="absolute w-[60px] h-[60px]">
           <img
             className="object-contain w-full h-full"
