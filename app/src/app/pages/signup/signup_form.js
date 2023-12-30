@@ -118,8 +118,15 @@ export default function signup_form() {
             User_dob: date,
           }),
         });
-
-        if (res) router.push("login")
+        const user = await res.json().then(result => { return result})
+        console.log("res", user)
+        if (user) router.push("login")
+        else {
+          toast.error("The account is existed",{
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000
+          });
+        }
       } else {
         toast.error("Please full fill the options !", {
         position: toast.POSITION.TOP_CENTER,
@@ -127,7 +134,7 @@ export default function signup_form() {
         });
       }
     } else {
-      if (password && username && repeatpassword){
+      if (userfirstname && userlastname && userphone && useraddress && date){
         setAccount(true)
       } else {
         toast.error("Please full fill the options !", {
@@ -177,7 +184,7 @@ export default function signup_form() {
           </div>
           <div className="col-span-2 flex flex-col  justify-center items-center w-auto h-full ">
             <h1 className="font-Gilroy_bd text-blue text-[40px] -ml-[250px]">
-              {!isSetAccount ? "Sign up":"Personal Information"}
+              {isSetAccount ? "Sign up":"Personal Information"}
             </h1>
             <div className="flex flex-col w-max h-max">
               <div>
@@ -186,7 +193,7 @@ export default function signup_form() {
                   onReset={handleSubmit}
                   className="grid grid-cols-none grid-row-4"
                 >
-                  {isSetAccount ? personalInformationFragment : accountFragemnt}
+                  {!isSetAccount ? personalInformationFragment : accountFragemnt}
 
                   <p className="items-end ml-auto font-Gilroy_md text-red text-sm">
                     Already have an account? Sign in
