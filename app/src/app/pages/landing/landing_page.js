@@ -6,8 +6,8 @@ export default function landing(){
 
   return(
     <>
-    <div className="relative w-screen h-full">
-      <div className="row-span-3 flex flex-row relative w-screen h-[80px] px-10 place-items-center shadow">
+    <div className="relative w-full h-full">
+      <div className="row-span-3 flex flex-row relative w-full h-[80px] px-10 place-items-center shadow">
         <div className="absolute w-[60px] h-[60px]">
           <img
             className="object-contain w-full h-full"
@@ -38,7 +38,7 @@ export default function landing(){
       </div>
     
       <div className="relative w-full h-full overflow-y-auto no-scrollbar">
-        <div className="grid grid-flow-col grid-cols-2 relative w-screen h-screen">
+        <div className="grid grid-flow-col grid-cols-2 relative w-full h-screen">
           <div className="relative col-span-1 flex flex-col flex-col-3 w-full h-full pl-20 top-1/4 ml-10">
             <h1 className="font-Gilroy_sb text-blue text-7xl w-full">
               Welcome to <br/>   Literia
@@ -59,15 +59,15 @@ export default function landing(){
           </div>
         </div>
 
-        <div className="relative w-screen h-auto">
-          <div className="relative w-screen h-auto text-center">
+        <div className="relative w-full h-auto">
+          <div className="relative w-full h-auto text-center">
             <h1 className="font-Gilroy_sb text-blue text-4xl">
               See your story
             </h1>
           </div>
         </div>
 
-        <div className="grid grid-flow-col grid-cols-3 relative w-screen h-fit mt-10">
+        <div className="grid grid-flow-col grid-cols-3 relative w-full h-fit mt-10">
           <div className="col-span-1 flex flex-col-3 relative w-full h-4/5 left-0 right-0 justify-center">
             <div className="row-span-1 relative w-3/4 h-full">
               <img
@@ -114,7 +114,7 @@ export default function landing(){
           </div>
         </div>
 
-        <div className="relative w-screen h-5/6 bg-blue">
+        <div className="relative w-full h-5/6 bg-blue">
           <div className="absolute w-full h-full">
             <div className="absolute -bottom-14 -right-2 w-[200px] h-[200px] transform rotate-90">
               <img className="object-center  w-full h-full " 
@@ -181,7 +181,7 @@ export default function landing(){
           </div>
         </div>
 
-        <div className="grid grid-flow-col grid-cols-2 relative w-screen h-screen bg-white">
+        <div className="grid grid-flow-col grid-cols-2 relative w-full h-screen bg-white">
           <div className="col-span-1 relative w-full h-full">
             <div className="absolute w-full h-full">
               <img className="object-cover w-full h-full "
@@ -208,7 +208,7 @@ export default function landing(){
             </div>
 
         </div>
-        {/* <div class="absolute w-screen h-[2000px] bg-yellow"></div> */}
+        {/* <div class="absolute w-full h-[2000px] bg-yellow"></div> */}
       </div>
       
     </div>
