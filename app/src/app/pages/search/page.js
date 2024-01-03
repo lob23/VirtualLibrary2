@@ -13,7 +13,7 @@ export default function search_screen(){
             <div className='relative w-screen h-full z-10'>
                 <_searchForm />
             </div>
-            <div className='relative w-screen h-auto z-5'>
+            <div className='relative w-screen h-auto z-50'>
                 <_footer />
             </div>
             

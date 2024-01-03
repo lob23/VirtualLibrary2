@@ -83,7 +83,7 @@
 .button_white{
   border: #F2B547 solid;
   border-width: 3px;
-  background-color: white;
+  background-color: transparent;
   text-emphasis-color: #27219A;
   border-radius: 40px;
   font-family: Gilroy_sb;

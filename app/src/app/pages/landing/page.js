@@ -5,7 +5,7 @@ import _footer from "@/app/pages/wrapper/footer"
 
 export default function home_land(){
     return (
-        <div className="absolute w-screen h-full overflow-y-auto no-scrollbar">
+        <div className="absolute w-full h-full overflow-y-auto no-scrollbar overflow-hidden">
             <div className="relative w-full h-full">
                 <_homeLand/>
             </div>
