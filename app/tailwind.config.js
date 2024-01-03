@@ -45,4 +45,7 @@ module.exports = {
     //   addUtilities(newUtilities);
     // }
   ],
+  corePlugins: {
+    preflight: false
+  }, 
 }
