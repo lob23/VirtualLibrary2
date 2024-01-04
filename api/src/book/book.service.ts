@@ -27,7 +27,6 @@ export class BookService {
 
   async findById(id: string): Promise<BDetail | null> {
     const result = await this.bDetailRepository.findOne({ where: { _id: new ObjectId(id) } });
-    console.log(result);
     return result;
   }
 
@@ -38,6 +37,16 @@ export class BookService {
     return result.BContent_content;
   }
 
+  async getComposingList(id: string): Promise<BDetail[] | null > {
+    const composingList = await this.bDetailRepository.find({
+      where: { 
+        BDetail_authorID: id,
+        BDetail_status: 'editing'
+      }
+    });
+    return composingList;
+  }
+
   async create(createBookDto: CreateBookDto): Promise<BDetail> {
 
     const existingUser = await this.userRepository.findOne({
@@ -45,6 +54,9 @@ export class BookService {
     });
 
     if (!existingUser || existingUser.User_authenticationLevel != 2 ) throw new Error('This author does not exist');
+
+    createBookDto.BDetail_title = createBookDto.BDetail_title.toUpperCase()
+    createBookDto.BDetail_genre = createBookDto.BDetail_genre.toLowerCase()
 
    // Check if any BDetail has the same title (case-insensitive)
   const existingBDetailWithSameTitle = await this.bDetailRepository.findOne({
@@ -68,6 +80,7 @@ export class BookService {
     const newBook = this.bDetailRepository.create({
       ...createBookDto,
       BDetail_contentId: savedBContent._id,
+      BDetail_status: 'editing'
     });
 
     return this.bDetailRepository.save(newBook);

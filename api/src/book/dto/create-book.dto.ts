@@ -9,10 +9,6 @@ export class CreateBookDto {
   BDetail_authorID: string;
   @IsString()
   @IsNotEmpty()
-  @IsEnum(['verified', 'reject', 'editing', 'waiting'])
-  BDetail_status: string;
-  @IsString()
-  @IsNotEmpty()
   @IsEnum(['english', 'vietnamese'])
   BDetail_language: string;
   BDetail_description: string;

@@ -20,6 +20,12 @@ export class BookController {
     return await this.bookService.findAll();
   }
 
+  @Get('getComposingList/:id')
+  async getComposingList(@Param('id') id: string) {
+    const result = await this.bookService.getComposingList(id);
+    return result;
+  }
+
   @Get('getBDetail/:id')
   async getBDetailById(@Param('id') id: string) {
     const result = await this.bookService.findById(id);

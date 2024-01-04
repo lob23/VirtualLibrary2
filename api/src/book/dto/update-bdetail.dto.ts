@@ -9,6 +9,8 @@ export class UpdateBDetailDto extends PartialType(
     'BDetail_publishedDay',
   ] as const),
 ) {
+  BDetail_status: string;
+
   constructor() {
     super();
     delete this.BDetail_averageRating;

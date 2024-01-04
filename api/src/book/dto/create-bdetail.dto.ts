@@ -12,10 +12,6 @@ export class CreateBDetailDto {
   BDetail_averageRating: number;
   @IsString()
   @IsNotEmpty()
-  @IsEnum(['verified', 'reject', 'editing', 'waiting'])
-  BDetail_status: string;
-  @IsString()
-  @IsNotEmpty()
   BDetail_contentId: string;
   BDetail_image: string;
   BDetail_publishedDay: string | null;
