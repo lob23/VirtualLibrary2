@@ -1,43 +1,69 @@
 import {NextResponse} from "next/server"
 import config from '../../../config'
+import axios from "axios"
 
 export async function POST(req) {
 
     const content = await req.json()
 
-    // this code is taken from login form. It should be replaced by the own code which will be implemented later.
-    try {
-        // const [user, status] = await getUserAccount(username, password)
-        const queryString = config.BACKEND_URL + "/users/getUserByEmail/" + username;
+    try{
+        const queryString = config.BACKEND_URL + "/book/createBook/"
 
-        const user = await fetch(queryString)
-                            .then(resposne => { 
-                                if (resposne != undefined){
-                                    return resposne.json()
-                                } else {
-                                    return null
-                                }   
-                            })
-                            .catch(error => console.log("login failed: ", error))
-        if (user != undefined){
-            if (user.User_password == password){
-                return NextResponse.json(user)
-            } else {
-                return NextResponse.json(null)
-            }
-        } else 
-            return NextResponse.json(null)
-        // console.log("User: s s ", user )
+        const res = await axios.post(queryString, content)
+            .then(response => {
+                
+                if(response.data){
+                    return {stat: true, data: response.data};
+                } else {
+                    return null
+                }
+            })
+            .catch(error => {
+                console.error('Error creating book:', error.response ? error.response.data : error.message);
+                return  error.response ? error.response.data : error.message
+            });  
+        return NextResponse.json(res) 
+        
+    } catch(error){
+        console.log(error)
+        return NextResponse.json(error) 
 
-        // if (status != null){
-        //     console.log("login successfully")
-        // }else {
-        //     console.log("login failed")
-        // }
+    }
+}
 
-    }catch (error){
-        console.log("login failed: ", error)
+export async function PUT(req) {
+
+    const {BContent_id, BContent_content} = await req.json()
+    const put_obj = {
+        BContent_id,
+        BContent_content,
     }
 
-    return NextResponse.json({msg: ["HI from contact/route.js"]});
+    try{
+        const queryString = config.BACKEND_URL + "/book/updateBContent/" + BContent_id
+
+        const res = await axios.put(queryString, put_obj)
+            .then(response => {
+                
+                if(response.data){
+                    return {stat: true, data: response.data};
+                } else {
+                    return null
+                }
+            })
+            .catch(error => {
+                console.error('Error update book:', error.response ? error.response.data : error.message);
+                return  error.response ? error.response.data : error.message
+            });  
+        return NextResponse.json(res) 
+        
+    } catch(error){
+        console.log(error)
+        return NextResponse.json(error) 
+
+    }
+}
+
+export async function GET(req){
+
 }

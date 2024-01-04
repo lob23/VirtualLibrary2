@@ -1,11 +1,11 @@
-// This is a client component 👈🏽
-import { redirect, useRouter } from "next/navigation";
+"use client"// This is a client component 👈🏽
+import { useSearchParams, useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useEffect, useState, useRef } from "react";
 import { useQuill } from "react-quilljs";
 import { Button } from "@material-tailwind/react";
-
+import Modal from 'react-modal';
 
 export default function IndexPage() {
   const router = useRouter()
@@ -15,6 +15,10 @@ export default function IndexPage() {
   const containerRef = useRef(null);
   const [notification, setNotification] = useState("");
 
+  const searchParams = useSearchParams()
+ 
+  const id = searchParams.get('id')
+  console.log("id: ", id);
 
   useEffect(() => {
     // console.log(quill, quillRef);
@@ -36,20 +40,22 @@ export default function IndexPage() {
 
   const save = async (e) => {
     e.preventDefault()
-
-    // const res = await fetch("api/composing", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     content,
-    //   }),
-    // });
+    const content_delta = await quill.getContents()
+    const content = await quill.root.innerHTML.toString()
+    console.log("content: ", content)
+    const res = await fetch("api/composing", {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        BContent_id: id,
+        BContent_content: content,
+      }),
+    });
     
-    // const status = await res.json().then(result => {return result})
-    const status = true
-    if (status == true){
+    const status = await res.json().then(result => {return result})
+    if (status.stat == true){
       router.push("/pages/home") // temporary. Later, it will redirect to the list of book that composed and being composed by the author.
     } else {
       toast.error("The system cannot save your progress", {
