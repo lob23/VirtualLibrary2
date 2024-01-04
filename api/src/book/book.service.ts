@@ -46,6 +46,17 @@ export class BookService {
 
     if (!existingUser || existingUser.User_authenticationLevel != 2 ) throw new Error('This author does not exist');
 
+   // Check if any BDetail has the same title (case-insensitive)
+  const existingBDetailWithSameTitle = await this.bDetailRepository.findOne({
+    where: {
+      BDetail_title: createBookDto.BDetail_title,
+    },
+  });
+
+  if (existingBDetailWithSameTitle) {
+    throw new Error('A book with a similar title already exists.');
+  }
+
     // Create a new BContent entity
     const bContent = this.bContentRepository.create(createBookDto);
 

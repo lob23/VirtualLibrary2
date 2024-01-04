@@ -17,6 +17,5 @@ export class CreateBookDto {
   BDetail_language: string;
   BDetail_description: string;
 
-  @IsNotEmpty()
   BContent_content: string;
 }
