@@ -88,7 +88,7 @@ export class BookService {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const newBook = this.bDetailRepository.create({
       ...createBookDto,
-      BDetail_contentId: savedBContent._id,
+      BDetail_contentId: savedBContent._id.toString(),
       BDetail_status: 'editing'
     });
 
