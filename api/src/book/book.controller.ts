@@ -26,6 +26,12 @@ export class BookController {
     return result;
   }
 
+  @Get('getBDetailByAuthorID/:id')
+  async getBDetailByAuthorID(@Param('id') id: string) {
+    const result = await this.bookService.findByAuthorId(id);
+    return result;
+  }
+
   @Get('getBDetail/:id')
   async getBDetailById(@Param('id') id: string) {
     const result = await this.bookService.findById(id);
@@ -36,6 +42,12 @@ export class BookController {
   @Get('getBContent/:id')
   async getBContentById(@Param('id') id: string): Promise<string> {
     const result = await this.bookService.getBContent(id);
+    return result;
+  }
+
+  @Get('getListByStatus/:st')
+  async getListByStatus(@Param('st') st: string) {
+    const result = await this.bookService.getListByStatus(st.toLowerCase());
     return result;
   }
 

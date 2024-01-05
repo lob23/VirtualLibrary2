@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import React, { useEffect, useState, useRef } from "react";
 import { useQuill } from "react-quilljs";
 import { Button } from "@material-tailwind/react";
-import Modal from 'react-modal';
 
 export default function IndexPage() {
   const router = useRouter()

@@ -26,7 +26,7 @@ export default function booksettingForm (){
                 body: JSON.stringify({
                     BDetail_title: bookTitle,
                     BDetail_genre: bookGenre,
-                    BDetail_authorID: '658e859e6168987e9653af10', //example. This should be replace by a way to get the ID of the user.
+                    BDetail_authorID: '`658e859e6168987e9653af10`', //example. This should be replace by a way to get the ID of the user.
                     BDetail_language: bookLanguage,
                 }),
             })
