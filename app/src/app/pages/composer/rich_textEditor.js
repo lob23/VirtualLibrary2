@@ -18,7 +18,9 @@ export default function IndexPage() {
   const searchParams = useSearchParams()
  
   const id = searchParams.get('id')
+  const bDetailID = searchParams.get('bDetailID')
   console.log("id: ", id);
+  console.log("bDetailID", bDetailID)
 
   useEffect(() => {
     // console.log(quill, quillRef);
@@ -49,7 +51,8 @@ export default function IndexPage() {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        BContent_id: id,
+        _id: id,
+        BDetail_contentId: bDetailID,
         BContent_content: content,
       }),
     });

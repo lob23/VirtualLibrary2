@@ -33,16 +33,15 @@ export async function POST(req) {
 
 export async function PUT(req) {
 
-    const {BContent_id, BContent_content} = await req.json()
+    const {_id, BDetail_contentId, BContent_content} = await req.json()
     const put_obj = {
-        BContent_id,
         BContent_content,
     }
 
     try{
-        const queryString = config.BACKEND_URL + "/book/updateBContent/" + BContent_id
+        const queryString = config.BACKEND_URL + "/book/updateBContent/" + _id
 
-        const res = await axios.put(queryString, put_obj)
+        const res = await axios.patch(queryString, put_obj)
             .then(response => {
                 
                 if(response.data){

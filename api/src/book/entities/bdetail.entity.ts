@@ -28,7 +28,7 @@ export class BDetail {
 
   @Column()
   @IsNotEmpty()
-  BDetail_contentId: ObjectId;
+  BDetail_contentId: string;
 
   @Column()
   BDetail_image: string;
