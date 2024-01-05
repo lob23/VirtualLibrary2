@@ -54,7 +54,8 @@ export class BookService {
       }
     });
     return bookList;
-    
+  }
+
   async getListByStatus( status: string ): Promise<BDetail[]> {
     const stList = ['verified, rejected, waiting'];
     if(!stList.includes(status)) throw new Error('This status is not valid. Current status: ' + status)
@@ -148,8 +149,8 @@ export class BookService {
     await this.bContentRepository.delete( bDetail.BDetail_contentId );
     await this.bDetailRepository.delete(id);
   }
-}
 
+}
 const getCurrentDay = (): string => {
   const formatter = new Intl.DateTimeFormat( 'en-US', { timeZone: 'Asia/Bangkok', year: 'numeric', month: '2-digit', day: '2-digit' });
   const currentDay = formatter.format(new Date());
