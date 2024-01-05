@@ -39,6 +39,12 @@ export class BookController {
     return result;
   }
 
+  @Get('getListByStatus/:st')
+  async getListByStatus(@Param('st') st: string) {
+    const result = await this.bookService.getListByStatus(st.toLowerCase());
+    return result;
+  }
+
   @Patch('updateBDetail/:id')
   async update(
     @Param('id') id: string,

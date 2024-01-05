@@ -47,6 +47,15 @@ export class BookService {
     return composingList;
   }
 
+  async getListByStatus( status: string ): Promise<BDetail[]> {
+    const stList = ['verified, rejected, waiting'];
+    if(!stList.includes(status)) throw new Error('This status is not valid. Current status: ' + status)
+    const result = await this.bDetailRepository.find({
+      where: { BDetail_status: status }
+    });
+    return result
+  }
+
   async create(createBookDto: CreateBookDto): Promise<BDetail> {
 
     const existingUser = await this.userRepository.findOne({
