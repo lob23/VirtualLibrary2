@@ -133,7 +133,7 @@ export class BookService {
     return result.BContent_pdf;
   }
 
-  async updateVerified(id: string, status: string): Promise<BDetail | null> {
+  async updateStatus(id: string, status: string): Promise<BDetail | null> {
 
     const BDetail_publishedDay = (status === 'verified') ? getCurrentDay() : null;
 
