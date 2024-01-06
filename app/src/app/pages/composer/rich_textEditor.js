@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import React, { useEffect, useState, useRef } from "react";
 import { useQuill } from "react-quilljs";
 import { Button } from "@material-tailwind/react";
+import { pdfExporter } from "quill-to-pdf";
+
 
 export default function IndexPage() {
   const router = useRouter()
@@ -16,6 +18,7 @@ export default function IndexPage() {
 
   const searchParams = useSearchParams()
  
+  const author = searchParams.get('author')
   const id = searchParams.get('id')
   const bDetailID = searchParams.get('bDetailID')
   console.log("id: ", id);
@@ -58,7 +61,7 @@ export default function IndexPage() {
     
     const status = await res.json().then(result => {return result})
     if (status.stat == true){
-      router.push("/pages/home") // temporary. Later, it will redirect to the list of book that composed and being composed by the author.
+      router.push("/pages/authorbookmanagement/author="+author) // temporary. Later, it will redirect to the list of book that composed and being composed by the author.
     } else {
       toast.error("The system cannot save your progress", {
         position: toast.POSITION.TOP_CENTER,
@@ -67,8 +70,22 @@ export default function IndexPage() {
     }
   }
 
-  const submit = () => {
+  const convertToPDF = async (quill) => {
+    // Note: You can use this function. If there is problem when passing the quill data, just copy the two lines:
+    //const quillDelta = quill.getContents();
+    //const pdfBlob = await pdfExporter.generatePdf(quillDelta);
+    
+    if(quill){
+      const quillDelta = quill.getContents();
+      const pdfBlob = await pdfExporter.generatePdf(quillDelta);
 
+      return pdfBlob
+    }
+  }
+
+
+  const submit = () => {
+    // submit pdf file to database using fetch of UPDATE method.
   }
   
 
