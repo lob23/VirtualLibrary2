@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react"
 import {useSearchParams, useRouter } from "next/navigation";
 import _authorbookpage from './authormanagement'
-import { PencilIcon } from "@heroicons/react/24/solid";
+
+import { useMemo } from 'react';
 import {
-  ArrowDownTrayIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
+
 import {
   Card,
   CardHeader,
@@ -25,6 +27,7 @@ export default function authorBookManagement (){
 
     const searchParams = useSearchParams()
     const [bookcards, setbookscard] = useState([])
+    
 
     const author_id = searchParams.get('author')
     console.log("author_id: ", author_id)
@@ -41,6 +44,7 @@ export default function authorBookManagement (){
                     const bookcard = []
                     book_list.bookList.map((book) => (
                         bookcard.push({
+                            _id: book._id,
                             File_upload: book.BDetail_title,
                             Time: book.BDetail_publishedDay,
                             Status: book.BDetail_status,
@@ -58,6 +62,38 @@ export default function authorBookManagement (){
         getBooks()
     
     }, [author_id])
+
+    const columns = useMemo(() => [
+        {
+            accessorKey: 'File_upload',
+            header: 'Book',
+            size: 150
+        },
+        {
+            accessorKey: 'Time',
+            header: 'Time',
+            size: 150
+        },
+        {
+            accessorKey: 'Status',
+            header: 'Status',
+            size: 150
+        }
+    ],[]);
+
+    const table = useMaterialReactTable({
+        columns: columns,
+        data: bookcards,
+    });
+
+    const handleOpenEditor = async (e) => {
+        e.preventDefault()
+        try {
+            
+        }catch(error){
+
+        }
+    }
 
     
     return (
@@ -86,49 +122,7 @@ export default function authorBookManagement (){
                 </CardHeader>
 
                 <CardBody className="overflow-scroll px-0">
-                    <table className="w-full min-w-max table-auto text-left">
-                        <thead>
-                            <tr>
-                                {
-                                    table_headers.map((header) => (
-                                        <th key={header} className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                                            <Typography variant="small" color="blue-gray" className="font-normal leading-none opacity-70">
-                                                {header}
-                                            </Typography>
-                                            
-                                        </th>
-                                    ))
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                bookcards.map(({File_upload, Time, Status} ) => 
-                                    {
-                                        return (
-                                            <tr key={File_upload}>
-                                                <td className="p-4 border-b border-blue-gray-50">
-                                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                                        {File_upload}
-                                                    </Typography>
-                                                </td>
-                                                <td className="p-4 border-b border-blue-gray-50">
-                                                    <Typography className="font-normal" variant="small" color="blue-gray">
-                                                        {Time}
-                                                    </Typography>
-                                                </td>
-                                                <td className="p-4 border-b border-blue-gray-50">
-                                                    <Typography className="font-normal" variant="small" color={{Status} == "editing" ? "blue": Status == "verified" ? "green" : "blue-gray"}>
-                                                        {Status}
-                                                    </Typography>
-                                                </td>
-                                            </tr>
-                                        )
-                                    }
-                                )
-                            }
-                        </tbody>
-                    </table>
+                    <MaterialReactTable table={table} />
                 </CardBody>
 
             </Card>
