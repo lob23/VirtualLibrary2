@@ -8,7 +8,7 @@ export default function request_form() {
   const [inputValue, setInputValue] = useState("");
 
   const searchParams = useSearchParams()
-  const userId = searchParams.get('userId') || '658ffcb8054734a4453bdb0f'
+  const userId = searchParams.get('uid') || '658ffcb8054734a4453bdb0f'
 
   const router = useRouter();
 
@@ -36,7 +36,7 @@ export default function request_form() {
       const stat = await res.json();
   
       if (stat.stat === true) {
-        router.push('/pages/home');
+        router.push('/pages/home?uid=' + userId);
       } else {
         toast.error("Error: " + stat.message, {
           position: toast.POSITION.TOP_CENTER,

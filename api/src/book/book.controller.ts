@@ -92,7 +92,7 @@ export class BookController {
     @Query('BDetail_id') BDetail_id: string,
     @Query('status') status: string,
   ) {
-    return await this.bookService.updateVerified(BDetail_id, status);
+    return await this.bookService.updateStatus(BDetail_id, status);
   }
 
   // Router for upload user avatar

@@ -6,10 +6,7 @@ import _readingComp from "@/app/pages/wrapper/readingComp"
 import _updateComp from "@/app/pages/wrapper/updateComp";
 import Carousel from "@/app/pages/wrapper/Carousel";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
-
-// const list = ['New', 'Money', 'Suit', 'And', 'Tie','New', 'Can', 'Read', 'Your', 'Mind', 'And', 'I', 'Know', 
-// 'Your', 'Story', 'Fuck', 'Love', 'Shiba']
-const list = ['New', 'Money', 'Suit', 'Shiba', 'Tie','New']
+const list1 = ['New', 'Money', 'Suit', 'Shiba', 'Tie','New']
 
 const slides=[
   // "https://i.ibb.co/ncrXc2V/1.png",
@@ -41,7 +38,6 @@ export default function ReaderHome() {
 
     fetchDataFromApi();
   }, []);
-
   return (
     // <div>
     //   {loading ? (
@@ -71,88 +67,87 @@ export default function ReaderHome() {
     // </div>
     
     
-
-
-  <div className="relative w-full h-fit overflow-y-auto overflow-hidden">
-    <div className="grid grid-flow-col grid-cols-2 relative w-full h-[900px] bg-white overflow-x-hidden">
-      <div className="relative col-span-1 w-full h-fit top-1/4 bottom-0 ml-10">
-        <h1 className="font-Gilroy_sb text-blue text-7xl w-full h-1/4">
-          New & <br/>   Trending
-        </h1>
-        <p className="font-Gilroy_md text-black text-md w-1/2 mt-3 text-[20px] leading-8 overflow-hidden">
-        Indulge in the latest and most captivating books, where every page invites you on a journey of imagination, intrigue, and discovery.
-        </p>
-      </div>
-      <div className="col-span-1 relative w-full h-full overflow-hidden">
-        <div className="absolute w-full h-full  overflow-hidden">
-          <img className="object-cover w-full h-full  overflow-hidden"
-                src="/image/blur.png">
-          </img>            
-        </div> 
-        
-        <div className="absolute w-full h-full left-0 right-0 top-0 bottom-0 overflow-hidden">
-          <img className="object-scale-down w-full h-full  overflow-hidden"
-                src="/image/book_reader_home.png">
-          </img>
+<>
+{books.length > 0 && (
+      <div className="relative w-full h-fit overflow-y-auto overflow-hidden">
+      <div className="grid grid-flow-col grid-cols-2 relative w-full h-[900px] bg-white overflow-x-hidden">
+        <div className="relative col-span-1 w-full h-fit top-1/4 bottom-0 ml-10">
+          <h1 className="font-Gilroy_sb text-blue text-7xl w-full h-1/4">
+            New & <br/>   Trending
+          </h1>
+          <p className="font-Gilroy_md text-black text-md w-1/2 mt-3 text-[20px] leading-8 overflow-hidden">
+          Indulge in the latest and most captivating books, where every page invites you on a journey of imagination, intrigue, and discovery.
+          </p>
+        </div>
+        <div className="col-span-1 relative w-full h-full overflow-hidden">
+          <div className="absolute w-full h-full  overflow-hidden">
+            <img className="object-cover w-full h-full  overflow-hidden"
+                  src="/image/blur.png">
+            </img>            
+          </div> 
+          
+          <div className="absolute w-full h-full left-0 right-0 top-0 bottom-0 overflow-hidden">
+            <img className="object-scale-down w-full h-full  overflow-hidden"
+                  src="/image/book_reader_home.png">
+            </img>
+          </div>
         </div>
       </div>
-    </div>
-      
-    <div className="relative w-full h-full overflow-hidden">
-      <div className="relative w-full h-1/2 overflow-hidden ml-10">
-        <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
-          Your reading list
+        
+      <div className="relative w-full h-full overflow-hidden">
+        <div className="relative w-full h-1/2 overflow-hidden ml-10">
+          <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
+            Your reading list
+          </h2>
+          <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
+            {
+              list1.map((item)=>(
+                <li className="relative w-full h-full">
+                  {<_readingComp/>}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+  
+        
+          <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
+            <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
+              Latest update
+            </h2>
+            <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
+              {
+                books.map((book)=>(
+                  <li className="relative w-full h-full" key={book._id}>
+                    <_updateComp  book={book}/> // Use the _updateComp component
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        
+        
+      </div>
+  
+      <div className=" w-full h-full overflow-hidden">
+        <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ml-10">
+            Author's story
         </h2>
-        <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
-          {
-            list.map((item)=>(
-              <li className="relative w-full h-full">
-                {<_readingComp/>}
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
-        <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
-          Latest update
-        </h2>
-        <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
-          {
-            list.map((item)=>(
-              <li className="relative w-full h-full">
-                {<_updateComp/>}
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+        <div className="w-full h-full">
+          <Carousel autoSlide = {true} autoSlideInterval={5000}>
+            {slides.map((s)=>(
+                <div className=" w-full h-full z-50">
+                    {s}
+                </div>
+            ))}
+          </Carousel>
+        </div>
+      </div>  
     </div>
-
-    <div className=" w-full h-full overflow-hidden">
-      <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ml-10">
-          Author's story
-      </h2>
-      <div className="w-full h-full">
-        <Carousel autoSlide = {true} autoSlideInterval={5000}>
-          {slides.map((s)=>(
-              // <img src={s} />
-              <div className=" w-full h-full z-50">
-                  {s}
-              </div>
-          ))}
-        </Carousel>
-      </div>
-      
-
-    </div>  
-
-
-
-
-    {/* <div className="absolute w-full h-[2000px] bg-yellow"></div>
-     */}
-  </div>
+    )}
+</>
+    
+  
   );
 }
 

@@ -4,6 +4,7 @@ import _reaingComp from "@/app/pages/wrapper/readingComp";
 import _updateComp from "@/app/pages/wrapper/updateComp";
 import Carousel from "@/app/pages/wrapper/Carousel";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
+import _storyComp from "@/app/pages/wrapper/storyComp";
 
 // const slides=[
 //     // "https://i.ibb.co/ncrXc2V/1.png",
@@ -20,8 +21,9 @@ export default function footer(){
         <div>
             {/* <_footer/> */}
             {/* <_reaingComp/> */}
-            {/* <_updateComp/> */}
-            <_authorStoryComp/>
+            <_updateComp/>
+            {/* <_authorStoryComp/> */}
+            {/* <_storyComp/> */}
         </div>
         
     

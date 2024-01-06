@@ -48,13 +48,13 @@ export class UsersService {
     return await this.userRepository.save(newUser);
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto ): Promise<User | undefined> {
+  async update(id: string, updateUserDto: UpdateUserDto ): Promise<User | null> {
     console.log(updateUserDto);
     await this.userRepository.update(id, updateUserDto);
     return await this.findById(id);
   }
 
-  async updateAvatar(id: string, file: Express.Multer.File): Promise<User | undefined> {
+  async updateAvatar(id: string, file: Express.Multer.File): Promise<User | null> {
     await this.userRepository.update( id, { User_image: file.buffer.toString('base64') } );
     return await this.findById(id);
   }
