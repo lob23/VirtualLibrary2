@@ -7,9 +7,7 @@ import _updateComp from "@/app/pages/wrapper/updateComp";
 import Carousel from "@/app/pages/wrapper/Carousel";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
 
-// const list = ['New', 'Money', 'Suit', 'And', 'Tie','New', 'Can', 'Read', 'Your', 'Mind', 'And', 'I', 'Know', 
-// 'Your', 'Story', 'Fuck', 'Love', 'Shiba']
-const list = ['New', 'Money', 'Suit', 'Shiba', 'Tie','New']
+const list1 = ['New', 'Money', 'Suit', 'Shiba', 'Tie','New']
 
 const slides=[
   // "https://i.ibb.co/ncrXc2V/1.png",
@@ -41,7 +39,6 @@ export default function ReaderHome() {
 
     fetchDataFromApi();
   }, []);
-
   return (
     // <div>
     //   {loading ? (
@@ -105,7 +102,7 @@ export default function ReaderHome() {
         </h2>
         <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
           {
-            list.map((item)=>(
+            list1.map((item)=>(
               <li className="relative w-full h-full">
                 {<_readingComp/>}
               </li>
@@ -119,9 +116,9 @@ export default function ReaderHome() {
         </h2>
         <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
           {
-            list.map((item)=>(
-              <li className="relative w-full h-full">
-                {<_updateComp/>}
+            books.map((book)=>(
+              <li className="relative w-full h-full" key={book._id}>
+                <_updateComp  book={book}/>
               </li>
             ))
           }
@@ -136,22 +133,13 @@ export default function ReaderHome() {
       <div className="w-full h-full">
         <Carousel autoSlide = {true} autoSlideInterval={5000}>
           {slides.map((s)=>(
-              // <img src={s} />
               <div className=" w-full h-full z-50">
                   {s}
               </div>
           ))}
         </Carousel>
       </div>
-      
-
     </div>  
-
-
-
-
-    {/* <div className="absolute w-full h-[2000px] bg-yellow"></div>
-     */}
   </div>
   );
 }

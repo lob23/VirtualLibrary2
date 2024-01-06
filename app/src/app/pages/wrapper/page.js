@@ -21,7 +21,7 @@ export default function footer(){
         <div>
             {/* <_footer/> */}
             {/* <_reaingComp/> */}
-            {/* <_updateComp/> */}
+            <_updateComp/>
             {/* <_authorStoryComp/> */}
             {/* <_storyComp/> */}
         </div>
