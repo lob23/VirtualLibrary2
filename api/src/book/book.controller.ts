@@ -15,6 +15,25 @@ export class BookController {
     return await this.bookService.create(createBookDto);
   }
 
+  @Get('dev')
+  async getDev() {
+    const response = await this.findAllBDetail();
+    const result: {
+      _id: string;
+      BDetail_title: string;
+      BDetail_status: string;
+      BDetail_authorID: string;
+    }[] = response.map(
+      ({ _id, BDetail_title, BDetail_status, BDetail_authorID }) => ({
+        _id: _id.toString(),
+        BDetail_title,
+        BDetail_status,
+        BDetail_authorID,
+      }),
+    );
+    return result;
+  }
+
   @Get()
   async findAllBDetail() {
     return await this.bookService.findAll();
@@ -68,8 +87,8 @@ export class BookController {
     return await this.bookService.updateBContent(id, updateBContentDto);
   }
 
-  @Patch('updateVerified')
-  async updateVerified(
+  @Patch('updateStatus')
+  async updateStatus(
     @Query('BDetail_id') BDetail_id: string,
     @Query('status') status: string,
   ) {

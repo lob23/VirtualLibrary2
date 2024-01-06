@@ -133,15 +133,11 @@ export class BookService {
 
   async updateVerified(id: string, status: string): Promise<BDetail | null> {
 
-    // const validStatus: string[] = ['accepted', 'rejected', 'editing', 'waiting']
-    // status = status.toLowerCase();
-    // if(!validStatus.includes(status)) throw new Error('This status is not valid status. Current status: ' + status);
+    const BDetail_publishedDay = (status === 'verified') ? getCurrentDay() : null;
 
-    const updateDto: { BDetail_verified: string; BDetail_publishedDay: string | undefined } = { BDetail_verified: status, BDetail_publishedDay: null };
-    if (status === 'accepted') updateDto.BDetail_publishedDay = getCurrentDay();
-
-    await this.bDetailRepository.update(id, updateDto);
+    await this.bDetailRepository.update(id, { BDetail_status: status, BDetail_publishedDay: BDetail_publishedDay });
     return await this.findById(id);
+    
   }
 
   async remove(id: string): Promise<void> {

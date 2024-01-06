@@ -44,4 +44,11 @@ export class BDetail {
   @Column('text')
   @IsNotEmpty()
   BDetail_description: string;
+
+  constructor() {
+    this.BDetail_averageRating = 0;
+    this.BDetail_image = null;
+    this.BDetail_publishedDay = null;
+    this.BDetail_description = 'Have a good day sir!';
+  }
 }

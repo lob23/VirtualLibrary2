@@ -10,11 +10,4 @@ export class UpdateBDetailDto extends PartialType(
   ] as const),
 ) {
   BDetail_status: string;
-
-  constructor() {
-    super();
-    delete this.BDetail_averageRating;
-    delete this.BDetail_description;
-    delete this.BDetail_image;
-  }
 }

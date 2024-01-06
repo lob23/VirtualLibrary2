@@ -66,3 +66,27 @@ export async function PUT(req) {
 export async function GET(req){
 
 }
+
+async function updateBookCover(id, filePath) {
+    const queryString = config.BACKEND_URL + '/book/updateBDetailImage/' + id;
+    const formData = new FormData();
+  
+    // Assuming 'file' is the field name expected by the server
+    formData.append('file', fs.createReadStream(filePath), {
+      filename: 'BookCover.png', // Change the filename as needed
+      contentType: 'image/png', // Change the content type based on the file type
+    });
+  
+    try {
+      const response = await axios.patch(queryString, formData, {
+        headers: {
+          ...formData.getHeaders(),
+          // Add any additional headers if needed
+        },
+      });
+  
+      console.log('Response:', response.data);
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  }

@@ -1,6 +1,6 @@
 import { Entity, ObjectIdColumn, Column } from 'typeorm';
 import { ObjectId } from 'mongodb';
-import { Exclude, Transform } from 'class-transformer';
+import { Transform } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -37,4 +37,11 @@ export class User {
 
   @Column({ nullable: false })
   User_password: string;
+
+  constructor() {
+    this.User_dob = null;
+    this.User_phone = null;
+    this.User_address = null;
+    this.User_image = null;
+  }
 }
