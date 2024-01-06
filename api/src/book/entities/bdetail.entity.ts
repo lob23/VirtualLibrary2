@@ -34,6 +34,9 @@ export class BDetail {
   BDetail_image: string;
 
   @Column()
+  BDetail_createdDay: string;
+
+  @Column()
   @IsNotEmpty()
   BDetail_publishedDay: string;
 

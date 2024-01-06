@@ -53,8 +53,10 @@ export default function authorBookManagement (){
                         bookcard.push({
                             _id: book._id,
                             File_upload: book.BDetail_title,
-                            Time: book.BDetail_publishedDay,
+                            CreatedTime: book.BDetail_createdDay,
+                            PublishedTime: book.BDetail_publishedDay,
                             Status: book.BDetail_status,
+
                         })
                     ))
                     setbookscard(bookcard)
@@ -77,8 +79,13 @@ export default function authorBookManagement (){
             size: 150
         },
         {
-            accessorKey: 'Time',
-            header: 'Time',
+            accessorKey: 'CreatedTime',
+            header: 'Created Time',
+            size: 150
+        },
+        {
+            accessorKey: 'PublishedTime',
+            header: 'Published Time',
             size: 150
         },
         {

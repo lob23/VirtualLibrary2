@@ -11,7 +11,7 @@ export class CreateBookDto {
   @IsNotEmpty()
   @IsEnum(['english', 'vietnamese'])
   BDetail_language: string;
-  @IsNotEmpty()
+  BDetail_createdDay: string;
   BDetail_publishedDay: string;
   BDetail_description: string;
 

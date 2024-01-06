@@ -20,6 +20,7 @@ export class CreateBDetailDto {
 
   BDetail_image: string;
 
+  BDetail_createdDay: string;
   BDetail_publishedDay: string | null;
 
   @IsString()
