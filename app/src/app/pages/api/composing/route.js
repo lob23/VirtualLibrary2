@@ -8,6 +8,7 @@ export async function POST(req) {
 
     try{
         const queryString = config.BACKEND_URL + "/book/createBook/"
+        console.log(content)
 
         const res = await axios.post(queryString, content)
             .then(response => {

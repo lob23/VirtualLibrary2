@@ -95,10 +95,12 @@ export class BookService {
 
     // Create a new Book entity with the associated BContent entity
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const published_date = new Date()
+
     const newBook = this.bDetailRepository.create({
       ...createBookDto,
       BDetail_contentId: savedBContent._id.toString(),
-      BDetail_status: 'editing'
+      BDetail_status: 'editing',
     });
 
     return this.bDetailRepository.save(newBook);
