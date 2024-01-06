@@ -25,14 +25,18 @@ export default function AuthorHome() {
 
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [html_src, sethtml] = useState("")
 
   useEffect(() => {
     const fetchDataFromApi = async () => {
       try {
         const result = await fetchData();
         console.log( result );
-        setBooks(result);
-        setLoading(false);
+        await setBooks(result);
+        await setLoading(false);
+
+        temp = await _updateComp(books)
+        sethtml(temp)
       } catch (error) {
         // Handle error
         console.error('Error:', error);
@@ -110,9 +114,9 @@ export default function AuthorHome() {
       </h2>
       <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
         {
-          list.map((item)=>(
+          books.map((item)=>(
             <li className="relative w-full h-full">
-              {<_updateComp/>}
+              {_updateComp(item)}
             </li>
           ))
         }
