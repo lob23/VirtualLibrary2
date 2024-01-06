@@ -9,21 +9,20 @@ export default function update_comp(){
             </img>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent group-hover:to-cream rounded-3xl">
             </div>
-            <div className="absolute inset-0 flex flex-col mx-9 text-left translate-y-[20%] group-hover:translate-y-0 transition-all duration-500">
+            <div className="absolute inset-0 flex flex-col mx-5 text-left translate-y-[20%] group-hover:translate-y-0 transition-all duration-500">
                 <div className="relative w-full h-full">
                     <div className="absolute w-full h-1/3 bottom-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <h3 className="font-Gilroy_bd text-xl text-red ">
                             Romance
                         </h3>
-                        <h1 className="text-4xl font-Gilroy_sb text-blue">
+                        <h1 className="text-2xl font-Gilroy_sb text-blue">
                             All This Time
                         </h1>
-                        <h2 className="text-xl font-Gilroy_md text-blue">
+                        <h2 className="text-lg font-Gilroy_md text-blue">
                         Tess Sharpe
                         </h2>
                     </div>
                 </div>
-               
             </div>
         </div>
         </>
