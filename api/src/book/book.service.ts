@@ -114,6 +114,7 @@ export class BookService {
   async updateBContent(id: string, updateBContentDto: UpdateBContentDto): Promise<UpdateResult> {
     const bDetail = await this.findById( id );
     const result = await this.bContentRepository.update( bDetail.BDetail_contentId, updateBContentDto);
+    if( updateBContentDto.BContent_pdf ) this.updateStatus(id, 'waiting');
     return result;
   }
 

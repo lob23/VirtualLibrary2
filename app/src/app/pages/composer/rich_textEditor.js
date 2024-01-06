@@ -69,6 +69,7 @@ export default function IndexPage() {
         _id: id,
         BDetail_contentId: bDetailID,
         BContent_content: content,
+        BContent_pdf: null,
       }),
     });
     
@@ -96,9 +97,49 @@ export default function IndexPage() {
     }
   }
 
+  const blobToBase64 = async (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+  
+      reader.onloadend = () => {
+        const base64String = reader.result.split(',')[1];
+        resolve(base64String);
+      };
+  
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
 
-  const submit = () => {
+  const submit = async (e) => {
     // submit pdf file to database using fetch of UPDATE method.
+    e.preventDefault()
+    const content_delta = await convertToPDF(quill)
+    const content = await quill.root.innerHTML.toString()
+    console.log("content: ", content)
+    const res = await fetch("api/composing", {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: id,
+        BDetail_contentId: bDetailID,
+        BContent_content: content,
+        BContent_pdf: await blobToBase64(content_delta),
+      }),
+    });
+    
+    const status = await res.json().then(result => {return result})
+    if (status.stat == true){
+      // router.push("/pages/authorbookmanagement?uid="+author) // temporary. Later, it will redirect to the list of book that composed and being composed by the author.
+      console.log('Complete, please check.')
+    } else {
+      toast.error("The system cannot save your progress", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000
+      });
+    }
   }
   
 
@@ -115,7 +156,7 @@ export default function IndexPage() {
         <div className='col-span-1'></div>
         <div className='col-span-1'></div>
         <div className='col-span-1'></div>
-        <Button className='col-span-1 text-black bg-green-500'>Submit</Button>
+        <Button className='col-span-1 text-black bg-green-500' onClick={submit}>Submit</Button>
 
       </div>
 
