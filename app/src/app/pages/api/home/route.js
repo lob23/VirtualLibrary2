@@ -10,6 +10,7 @@ export const fetchData = async () => {
           'Content-Type': 'application/json',
           // Add any additional headers if needed
         },
+        
         // You can add more options here, such as credentials, mode, etc.
       });
   
