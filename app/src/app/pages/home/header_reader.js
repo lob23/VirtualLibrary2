@@ -21,7 +21,7 @@ export default function header_reader(){
           </p>
         </div>
       
-        <div className="grid grid-flow-col grid-cols-2 absolute right-2 gap-[40px] w-[100px] h-full mr-[100px] items-center">
+        <div className="grid grid-flow-col grid-cols-2 absolute right-2 gap-[40px] w-[100px] h-full mr-[150px] items-center">
             <div className="relative col-span-1 w-[30px] h-[30px] hover:opacity-50">
                 <svg width="30" height="30" viewBox="0 0 37 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M13.3754 33.2048V33.3688C13.3754 36.1563 15.507 38.2879 18.2945 38.2879C21.082 38.2879 23.2136 36.1563 23.2136 33.3688V33.2048" stroke="#444444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>

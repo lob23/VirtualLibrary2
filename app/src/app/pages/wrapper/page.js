@@ -5,12 +5,15 @@ import _updateComp from "@/app/pages/wrapper/updateComp";
 import Carousel from "@/app/pages/wrapper/Carousel";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
 
-const slides=[
-    "https://i.ibb.co/ncrXc2V/1.png",
-    "https://i.ibb.co/B3s7v4h/2.png",
-    "https://i.ibb.co/XXR8kzF/3.png",
-    "https://i.ibb.co/yg7BSdM/4.png",
-]
+// const slides=[
+//     // "https://i.ibb.co/ncrXc2V/1.png",
+//     // "https://i.ibb.co/B3s7v4h/2.png",
+//     // "https://i.ibb.co/XXR8kzF/3.png",
+//     // "https://i.ibb.co/yg7BSdM/4.png",
+//     <_authorStoryComp/>,
+//     <_authorStoryComp/>,
+//     <_authorStoryComp/>,
+// ]
 
 export default function footer(){
     return (
@@ -22,12 +25,15 @@ export default function footer(){
         </div>
         
     
-    //    <div className="max-w-md max-h-md">
+    //    <div className="relative-w-full h-full">
     //     <Carousel autoSlide = {true} autoSlideInterval={10000}>
     //             {slides.map((s)=>(
-    //                 <img src={s} />
+    //                 // <img src={s} />
+    //                 <div className="relative w-full h-full">
+    //                     {s}
+    //                 </div>
     //             ))}
-    //         </Carousel>
+    //     </Carousel>
     //    </div>
 
 

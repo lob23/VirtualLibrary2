@@ -4,11 +4,22 @@ import { fetchData } from "../api/home/route";
 import _footer from "@/app/pages/wrapper/footer";
 import _readingComp from "@/app/pages/wrapper/readingComp"
 import _updateComp from "@/app/pages/wrapper/updateComp";
+import Carousel from "@/app/pages/wrapper/Carousel";
+import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
 
 // const list = ['New', 'Money', 'Suit', 'And', 'Tie','New', 'Can', 'Read', 'Your', 'Mind', 'And', 'I', 'Know', 
 // 'Your', 'Story', 'Fuck', 'Love', 'Shiba']
 const list = ['New', 'Money', 'Suit', 'Shiba', 'Tie','New']
 
+const slides=[
+  // "https://i.ibb.co/ncrXc2V/1.png",
+  // "https://i.ibb.co/B3s7v4h/2.png",
+  // "https://i.ibb.co/XXR8kzF/3.png",
+  // "https://i.ibb.co/yg7BSdM/4.png",
+  <_authorStoryComp/>,
+  <_authorStoryComp/>,
+  <_authorStoryComp/>,
+]
 export default function ReaderHome() {
 
   const [books, setBooks] = useState([]);
@@ -62,7 +73,7 @@ export default function ReaderHome() {
     
 
 
-  <div className="relative w-full h-full overflow-y-auto overflow-hidden no-scrollbar">
+  <div className="relative w-full h-fit overflow-y-auto overflow-hidden">
     <div className="grid grid-flow-col grid-cols-2 relative w-full h-[900px] bg-white overflow-x-hidden">
       <div className="relative col-span-1 w-full h-fit top-1/4 bottom-0 ml-10">
         <h1 className="font-Gilroy_sb text-blue text-7xl w-full h-1/4">
@@ -92,7 +103,7 @@ export default function ReaderHome() {
         <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
           Your reading list
         </h2>
-        <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5">
+        <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
           {
             list.map((item)=>(
               <li className="relative w-full h-full">
@@ -106,7 +117,7 @@ export default function ReaderHome() {
         <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
           Latest update
         </h2>
-        <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5">
+        <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
           {
             list.map((item)=>(
               <li className="relative w-full h-full">
@@ -118,17 +129,29 @@ export default function ReaderHome() {
       </div>
     </div>
 
-    <div className="relative w-full h-full overflow-hidden">
-    <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
+    <div className=" w-full h-full overflow-hidden">
+      <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ml-10">
           Author's story
-        </h2>
-    </div>
+      </h2>
+      <div className="w-full h-full">
+        <Carousel autoSlide = {true} autoSlideInterval={5000}>
+          {slides.map((s)=>(
+              // <img src={s} />
+              <div className=" w-full h-full z-50">
+                  {s}
+              </div>
+          ))}
+        </Carousel>
+      </div>
+      
+
+    </div>  
 
 
 
 
-    <div className="absolute w-full h-[2000px] bg-yellow"></div>
-    
+    {/* <div className="absolute w-full h-[2000px] bg-yellow"></div>
+     */}
   </div>
   );
 }
