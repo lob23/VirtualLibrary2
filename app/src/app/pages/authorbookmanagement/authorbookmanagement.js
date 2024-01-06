@@ -22,6 +22,13 @@ import {
   Input,
 } from "@material-tailwind/react";
 
+import {
+    Box,
+    ListItemIcon,
+    MenuItem,
+    lighten,
+} from '@mui/material';
+
 export default function authorBookManagement (){
     const table_headers = ["File upload", "Time", "Status"]
 
@@ -77,7 +84,23 @@ export default function authorBookManagement (){
         {
             accessorKey: 'Status',
             header: 'Status',
-            size: 150
+            size: 200,
+            Cell: ({ cell }) => (
+                <Box
+                sx={(theme) => ({
+                    backgroundColor: cell.getValue() == "verified"? theme.palette.success.dark : cell.getValue() == "editing"?theme.palette.warning.light: theme.palette.error.dark,
+                    borderRadius: '0.25rem',
+                    color: '#fff',
+                    width: 50,
+                    p: '0.25rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                })}
+                >
+                    {cell.getValue()}
+                </Box>
+            ),
         }
     ],[]);
 
