@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchData } from "../api/wrapper/route";
 
 
-export default function updateComp({book}){
+export default function updateComp(book){
 //   const [books, setBooks] = useState([]);
 //   const [loading, setLoading] = useState(true);
  
