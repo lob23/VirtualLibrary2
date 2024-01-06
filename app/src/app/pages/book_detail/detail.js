@@ -5,36 +5,29 @@ import { fetchBookById, fetchAuthorById } from "../api/book_detail/route";
 export default function detail() {
   const [loading, setLoading] = useState(true);
   const [books, setBook] = useState([]);
-  const bookId = '65990aa41be251711bb1e186'; 
+  const [author, setAuthor]=useState([])
+  const bookId = '65996c6d8f8412f4f66b60df'; 
   useEffect(() => {
-    const fetchDataID = async (a) => {
-      // const bookId = '65990aa41be251711bb1e186'; 
+    const fetchData = async () => {
       try {
-        const bookData = await fetchBookById(a);
-        
+        // Fetch book details
+        const bookData = await fetchBookById(bookId);
         setBook(bookData);
         console.log('Book details:', bookData);
+
+        // Fetch author details using the author ID from the book details
+        const authorData = await fetchAuthorById(bookData.BDetail_authorID);
+        setAuthor(authorData);
+        console.log('Author details:', authorData);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching book details:', error);
-      }
-    };
-    const fetchDataAuthor = async (b) => {
-      const authorId = '658e859e6168987e9653af10';
-      console.log("check",authorId);
-      try {
-        const author= await fetchAuthorById(authorId);
-        console.log('Author details:', author);
-        
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching book details:', error);
+        console.error('Error fetching details:', error);
       }
     };
 
-     fetchDataID(bookId);
-    //  fetchDataAuthor();
-  }, []);
+    fetchData();
+  }, [bookId]);
+
 
   const displayBookImage = () => {
     if (!loading && books) {
@@ -42,7 +35,12 @@ export default function detail() {
       console.log("check",book.BDetail_title);
       return (
         <div className='w-20 h-10'>
-          <h2>{book.BDetail_title}</h2>
+             <img
+                  src={`data:image/png;base64,${book.BDetail_image}`}
+                  alt={`Book cover for ${book.BDetail_title}`}
+                  className='w-full h-full'
+                />
+              
         </div>
       );
     } else {
@@ -58,7 +56,7 @@ export default function detail() {
            {/* <div className='w-20 h-10'>
              <p className='text-[40px] text-blue'>{book.BDetail_author}</p>
            </div> */}
-           <p className='w-full h-fit  ml-5 font-Gilroy_md text-blue text-[20px]'>{book.BDetail_authorID}</p>
+           <p className='w-full h-fit  ml-5 font-Gilroy_md text-blue text-[20px]'>{author.User_firstname}</p>
             <p className='w-full h-fit  ml-5 font-Gilroy_sb text-blue text-[40px]'>{book.BDetail_title}</p>
             <p className='w-fit h-fit ml-5 mr-5  font-Gilroy_md text-blue text-[12px]'>{book.BDetail_description}</p>
             <div className='w-9/10 h-fit ml-5 mr-5 overflow-hidden'>
