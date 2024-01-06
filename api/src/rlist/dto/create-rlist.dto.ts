@@ -6,8 +6,4 @@ export class CreateRListDto {
   @IsNotEmpty()
   RList_bookId: string;
   RList_currentPage: number;
-
-  constructor() {
-    this.RList_currentPage = 0;
-  }
 }

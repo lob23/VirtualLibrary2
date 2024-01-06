@@ -17,4 +17,8 @@ export class RList {
 
   @Column()
   RList_currentPage: number;
+
+  constructor() {
+    this.RList_currentPage = 0;
+  }
 }

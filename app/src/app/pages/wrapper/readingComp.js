@@ -15,7 +15,7 @@ export default function reading_list_comp(){
                          src="/image/book_sample1.png">
                     </img>
                 </div>
-                <div className="col-span-2 flex flex-col w-full h-full ml-5 py-3">
+                <div className="col-span-2 flex flex-col w-full h-auto ml-5 py-3">
                     <h2 className="font-Gilroy_sb w-auto h-auto text-blue text-2xl mt-5">
                         The girls I've been
                     </h2>

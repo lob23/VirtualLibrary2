@@ -8,8 +8,4 @@ export class CreateCommentDto {
   Comment_nestedId: string | null;
   @IsNotEmpty()
   Comment_content: string;
-
-  constructor() {
-    this.Comment_nestedId = null;
-  }
 }

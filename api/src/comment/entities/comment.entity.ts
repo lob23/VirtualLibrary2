@@ -25,4 +25,8 @@ export class Comment {
   @Column('text')
   @IsNotEmpty()
   Comment_content: string;
+
+  constructor() {
+    this.Comment_nestedId = null;
+  }
 }

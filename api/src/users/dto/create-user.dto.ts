@@ -16,11 +16,4 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   User_password: string;
-
-  constructor() {
-    this.User_dob = null;
-    this.User_phone = null;
-    this.User_address = null;
-    this.User_image = null;
-  }
 }
