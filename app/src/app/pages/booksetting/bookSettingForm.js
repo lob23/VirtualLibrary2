@@ -1,4 +1,4 @@
-import {  useRouter } from "next/navigation";
+import {  useSearchParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +10,9 @@ export default function booksettingForm (){
     const [bookGenre, setBookGenre] = useState("")
     const [bookLanguage, setBookLanguage] = useState("english")
     const [isLoading, setLoading] = useState(false)
+
+    const searchParams = useSearchParams()
+    const uid = searchParams.get('uid')
 
     const router = useRouter()
 
@@ -27,7 +30,7 @@ export default function booksettingForm (){
                 body: JSON.stringify({
                     BDetail_title: bookTitle,
                     BDetail_genre: bookGenre,
-                    BDetail_authorID: '658e859e6168987e9653af10', //example. This should be replace by a way to get the ID of the user.
+                    BDetail_authorID: uid, //example. This should be replace by a way to get the ID of the user.
                     BDetail_language: bookLanguage,
                     BDetail_createdDay: createdDate,
                 }),
@@ -36,7 +39,7 @@ export default function booksettingForm (){
             const stat = await res.json().then(result =>{ return result})
             if (stat.stat == true){
                 setLoading(true)
-                router.push('/pages/composer?id=' + stat.data._id + '&bDetailID=' + stat.data._id)
+                router.push('/pages/composer?uid='+uid+'&id=' + stat.data._id + '&bDetailID=' + stat.data._id)
             } else {
                 toast.error("error: " + stat, {
                     position: toast.POSITION.TOP_CENTER,

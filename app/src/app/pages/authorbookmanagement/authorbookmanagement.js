@@ -36,7 +36,7 @@ export default function authorBookManagement (){
     const [bookcards, setbookscard] = useState([])
     
 
-    const author_id = searchParams.get('author')
+    const author_id = searchParams.get('uid')
     console.log("author_id: ", author_id)
 
     useEffect(() => {
