@@ -31,6 +31,19 @@ export default function IndexPage() {
   });
 
   useEffect(() => {
+
+    const fetchBookContent = async () => {
+      const res = await fetch("api/bookcontent",{
+        
+      })
+    }
+
+    const delta = quill.clipboard.convert(value)
+
+    quill.setContents(delta, 'silent')
+  }, [quill]);
+
+  useEffect(() => {
     if (quill) {
       quill.on('text-change', (delta, oldDelta, source) => {
         console.log('Text change!');

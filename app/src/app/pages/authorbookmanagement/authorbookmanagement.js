@@ -32,6 +32,8 @@ import {
 export default function authorBookManagement (){
     const table_headers = ["File upload", "Time", "Status"]
 
+    const router = useRouter()
+
     const searchParams = useSearchParams()
     const [bookcards, setbookscard] = useState([])
     
@@ -111,19 +113,27 @@ export default function authorBookManagement (){
         }
     ],[]);
 
-    const table = useMaterialReactTable({
-        columns: columns,
-        data: bookcards,
-    });
-
-    const handleOpenEditor = async (e) => {
+    const handleOpenEditor = async (e, i) => {
         e.preventDefault()
         try {
-            
+            router.push("/pages/composer?uid=" + author_id + "&id=" + bookcards[i]._id + "&bDetailID=" + bookcards[i]._id)
         }catch(error){
 
         }
     }
+
+    const table = useMaterialReactTable({
+        columns: columns,
+        data: bookcards,
+        muiTableBodyRowProps: ({ row }) => ({
+            onClick: (event) => {
+              handleOpenEditor(event, row.id)
+            },
+            sx: {
+              cursor: 'pointer', //you might want to change the cursor too when adding an onClick
+            },
+        }),
+    });
 
     
     return (
