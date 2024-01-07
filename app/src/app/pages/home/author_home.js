@@ -20,33 +20,29 @@ export default function AuthorHome() {
   const [html_src, sethtml] = useState("");
   const [html_src1, sethtml1] = useState("")
 
-  useEffect(() => {
-    const fetchDataFromApi = async () => {
+
+  const bookId = '65996c6d8f8412f4f66b60df'; 
+
+ useEffect(() => {
+    const fetchDataBook = async () => {
       try {
-        const result = await fetchData();
-        console.log( "result: ",result );
-        await setBooks(result);
-        await setLoading(false);
+        // Fetch book details
+        const bookData = await fetchData(bookId);
+        setBooks(bookData);
+        console.log('Book details:', bookData);
 
-        temp = await _updateComp(books)
-        sethtml(temp)
-
-        // Fetch book by author
-        const authorBookData = await fetchBookByAuthorId(authorID); 
-        setAuthorBook(authorBookData);
-        console.log("authorBook: " ,authorBookData);
-      
-        // temp1 = await _storyComp(books);
-        // sethtml1(temp1); 
-      } catch (error) {
-        // Handle error
-        console.error('Error:', error);
+        // Fetch author details using the author ID from the book details
+        const authorData = await fetchBookByAuthorId(bookData.BDetail_authorID);
+        setAuthorBook(authorBook);
+        console.log('Author details:', authorBook);
         setLoading(false);
+      } catch (error) {
+        console.error('Error fetching details:', error);
       }
     };
 
-    fetchDataFromApi();
-  }, []);
+    fetchDataBook();
+  }, [bookId]);
 
   return (
 
