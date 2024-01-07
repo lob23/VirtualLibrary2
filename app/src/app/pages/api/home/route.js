@@ -1,5 +1,6 @@
 // api.js
-
+import { NextResponse } from "next/server";
+import axios from "axios";
 export const fetchData = async () => {
     const apiUrl = 'http://localhost:3030/book/getListByStatus/verified'; // replace with your actual API endpoint
   
@@ -28,19 +29,21 @@ export const fetchData = async () => {
 
 export const fetchBookByAuthorId = async (id) => {
   const apiUrl = `http://localhost:3030/book/getBDetailByAuthorID/${id}`; // Dynamic URL with the book ID
-
+  console.log("apiUrl: ", apiUrl);
   try {
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-      
+    const response = await axios.get(apiUrl).then((res) => {
+      console.log("res: ", res.data);
+
+      return res.data;
+    }).catch((error) => {
+      console.log("Fetch book by id error: ",error);
     });
 
-    if (!response.ok) {
+    if (!response) {
       throw new Error('Network response was not ok');
     }
 
-    const data = await response.json();
-    return data;
+    return NextResponse.json(response);
   } catch (error) {
     console.error('Error fetching book data:', error);
     throw error;

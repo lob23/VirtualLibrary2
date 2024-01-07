@@ -17,8 +17,6 @@ export default function AuthorHome() {
   const [books, setBooks] = useState([]);
   const [authorBook, setAuthorBook] = useState([]); 
   const [loading, setLoading] = useState(true);
-  const [html_src, sethtml] = useState("");
-  const [html_src1, sethtml1] = useState("")
 
 
   const bookId = '65996c6d8f8412f4f66b60df'; 
@@ -32,9 +30,10 @@ export default function AuthorHome() {
         console.log('Book details:', bookData);
 
         // Fetch author details using the author ID from the book details
-        const authorData = await fetchBookByAuthorId(bookData.BDetail_authorID);
-        setAuthorBook(authorBook);
-        console.log('Author details:', authorBook);
+        const authorData = await fetchBookByAuthorId(authorID);
+        const author = await authorData.json()
+        setAuthorBook(author);
+        console.log('Author details:', author);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching details:', error);
@@ -94,7 +93,7 @@ export default function AuthorHome() {
           </h2>
           <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-auto h-full py-5 list-none">
             {
-              books.map((item)=>(
+              authorBook.map((item)=>(
                 <li className="relative w-full h-full">
                   {_storyComp(item)}
                 </li>
