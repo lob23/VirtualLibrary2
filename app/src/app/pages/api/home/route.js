@@ -1,7 +1,7 @@
 // api.js
 
 export const fetchData = async () => {
-    const apiUrl = 'http://localhost:3030/book/'; // replace with your actual API endpoint
+    const apiUrl = 'http://localhost:3030/book/getListByStatus/verified'; // replace with your actual API endpoint
   
     try {
       const response = await fetch(apiUrl, {
@@ -25,4 +25,24 @@ export const fetchData = async () => {
       throw error;
     }
   };
-  
+
+export const fetchBookByAuthorId = async (id) => {
+  const apiUrl = `http://localhost:3030/book/getBDetailByAuthorID/${id}`; // Dynamic URL with the book ID
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching book data:', error);
+    throw error;
+  }
+}

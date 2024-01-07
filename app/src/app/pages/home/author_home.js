@@ -1,10 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchData } from "../api/home/route";
+import { fetchData, fetchBookByAuthorId } from "../api/home/route";
 import _footer from "@/app/pages/wrapper/footer";
 import _readingComp from "@/app/pages/wrapper/readingComp"
 import _updateComp from "@/app/pages/wrapper/updateComp";
-import Carousel from "@/app/pages/wrapper/Carousel";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
 import _storyComp from "@/app/pages/wrapper/storyComp";
 
@@ -12,31 +11,33 @@ import _storyComp from "@/app/pages/wrapper/storyComp";
 // 'Your', 'Story', 'Fuck', 'Love', 'Shiba']
 const list = ['New', 'Money', 'Suit', 'Shiba', 'Tie','New']
 
-const slides=[
-  // "https://i.ibb.co/ncrXc2V/1.png",
-  // "https://i.ibb.co/B3s7v4h/2.png",
-  // "https://i.ibb.co/XXR8kzF/3.png",
-  // "https://i.ibb.co/yg7BSdM/4.png",
-  <_authorStoryComp/>,
-  <_authorStoryComp/>,
-  <_authorStoryComp/>,
-]
-export default function AuthorHome() {
 
+export default function AuthorHome() {
+  const authorID = '658e859e6168987e9653af10';
   const [books, setBooks] = useState([]);
+  const [authorBook, setAuthorBook] = useState([]); 
   const [loading, setLoading] = useState(true);
-  const [html_src, sethtml] = useState("")
+  const [html_src, sethtml] = useState("");
+  const [html_src1, sethtml1] = useState("")
 
   useEffect(() => {
     const fetchDataFromApi = async () => {
       try {
         const result = await fetchData();
-        console.log( result );
+        console.log( "result: ",result );
         await setBooks(result);
         await setLoading(false);
 
         temp = await _updateComp(books)
         sethtml(temp)
+
+        // Fetch book by author
+        const authorBookData = await fetchBookByAuthorId(authorID); 
+        setAuthorBook(authorBookData);
+        console.log("authorBook: " ,authorBookData);
+      
+        // temp1 = await _storyComp(books);
+        // sethtml1(temp1); 
       } catch (error) {
         // Handle error
         console.error('Error:', error);
@@ -90,16 +91,16 @@ export default function AuthorHome() {
         </ul>
       </div>
 
-      <div className=" w-full h-1/2 overflow-hidden">
+      <div className=" w-auto h-1/2 overflow-hidden">
         <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
           <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
             Your story
           </h2>
-          <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
+          <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-auto h-full py-5 list-none">
             {
-              list.map((item)=>(
+              books.map((item)=>(
                 <li className="relative w-full h-full">
-                  {<_storyComp/>}
+                  {_storyComp(item)}
                 </li>
               ))
             }
