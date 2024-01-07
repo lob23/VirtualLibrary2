@@ -88,7 +88,7 @@ export default function detail() {
 
 
   return (
-    <div className='w-full h-full flex flex-row justify-center m-0.5'>
+    <div className='w-full h-full flex flex-row justify-center'>
       <div className='mx-auto flex flex-col'>
         <div className='flex flex-wrap'>
           <img

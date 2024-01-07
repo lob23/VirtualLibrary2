@@ -4,11 +4,11 @@ import React, { useState, useEffect } from 'react';
 
 export default function bookdetail(book) {
   console.log("book", book);
-
+  Z
 
   return (
-    <div className='flex flex-row w-full h-full overflow-hidden border-2 border-solid'>
-      <div className='w-1/3 h-full rounded-[20px] overflow-hidden  border-2 border-solid '>
+    <div className='flex flex-row w-full h-full overflow-hidden '>
+      <div className='w-1/3 h-full rounded-[20px] overflow-hidden  '>
         <img
           src={`data:image/png;base64,${book.BDetail_image}`}
           alt={`Book cover for ${book.BDetail_title}`}
