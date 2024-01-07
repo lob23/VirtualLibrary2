@@ -1,3 +1,8 @@
+import {NextResponse} from "next/server"
+import config from '../../../config'
+import axios from "axios"
+
+
 export const fetchBookById = async (id) => {
   const apiUrl = `http://localhost:3030/book/getBDetail/${id}`; // Dynamic URL with the book ID
 
@@ -40,6 +45,87 @@ export const fetchAuthorById = async (id) => {
   }
 };
 
+export const getCommentList = async (BDetail_id) => {
+  const apiURL = `http://localhost:3030/comment/getComment/${BDetail_id}`;
+  // console.log(BDetail_id);
+
+  try {
+    const response = await fetch( apiURL, { method: 'GET', } );
+
+    if (!response.ok) throw new Error('Network response was not ok');
+
+    const data = await response.json();
+    return data;
+  } 
+  catch (error) {
+    console.error('Error fetching book data:', error);
+    throw error;
+  }
+}
+
+export const getNestedComment = async (Comment_id) => {
+  const apiURL = `http://localhost:3030/comment/getNestedComment/${Comment_id}`;
+
+  try {
+    const response = await fetch( apiURL, { method: 'GET', } );
+
+    if (!response.ok) throw new Error('Network response was not ok');
+
+    const data = await response.json();
+    return data;
+  } 
+  catch (error) {
+    console.error('Error fetching book data:', error);
+    throw error;
+  }
+}
+
+export const getUser = async (User_id) => {
+  const apiURL = `http://localhost:3030/users/comment/${User_id}`;
+
+  try {
+    const response = await fetch( apiURL, { method: 'GET', } );
+
+    if (!response.ok) throw new Error('Network response was not ok');
+
+    const data = await response.json();
+    return data;
+  } 
+  catch (error) {
+    console.error('Error fetching book data:', error);
+    throw error;
+  }
+}
+
+export async function POST(req) {
+
+  const content = await req.json()
+
+  try{
+      const queryString = config.BACKEND_URL + "/comment/createComment"
+      console.log(content)
+
+      const res = await axios.post(queryString, content)
+          .then(response => {
+              
+              if(response.data){
+                  return {stat: true, data: response.data};
+              } else {
+                  return null
+              }
+          })
+          .catch(error => {
+              console.error('Error creating comment:', error.response ? error.response.data : error.message);
+              return  error.response ? error.response.data : error.message
+          });  
+      return NextResponse.json(res) 
+      
+  } catch(error){
+      console.log(error)
+      return NextResponse.json(error) 
+
+  }
+}
 
 
 
