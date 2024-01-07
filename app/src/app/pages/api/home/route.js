@@ -49,3 +49,24 @@ export const fetchBookByAuthorId = async (id) => {
     throw error;
   }
 }
+
+export const fetchReadingList = async (id) => {
+  const apiUrl = `http://localhost:3030/rlist/getRList/${id}`; 
+  console.log("apiUrlRList: ", apiUrl);
+  try{
+    const response = await axios.get(apiUrl).then((res)=>{
+      console.log("res rlist: ", res.data);
+      return res.data;
+    }).catch((error)=>{
+      console.log("Fetch rlist error: ", error);
+    });
+
+    if(!response){
+      throw new Error('Network response was not ok');
+    }
+    return NextResponse.json(response)
+  }catch(error){
+    console.error('Error fetching rlist data:', error);
+    throw error; 
+  }
+}

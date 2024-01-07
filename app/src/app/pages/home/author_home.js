@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchData, fetchBookByAuthorId } from "../api/home/route";
+import { fetchData, fetchBookByAuthorId, fetchReadingList } from "../api/home/route";
 import _footer from "@/app/pages/wrapper/footer";
 import _readingComp from "@/app/pages/wrapper/readingComp"
 import _updateComp from "@/app/pages/wrapper/updateComp";
@@ -16,6 +16,7 @@ export default function AuthorHome() {
   const authorID = '658e859e6168987e9653af10';
   const [books, setBooks] = useState([]);
   const [authorBook, setAuthorBook] = useState([]); 
+  const [rlistBook, setRList] = useState([]); 
   const [loading, setLoading] = useState(true);
 
 
@@ -35,6 +36,13 @@ export default function AuthorHome() {
         setAuthorBook(author);
         console.log('Author details:', author);
         setLoading(false);
+
+
+         // Fetch reading list 
+         const rlistData = await fetchReadingList(authorID);
+         const rbook = await rlistData.json()
+         setRList(rbook);
+         console.log('Reading list:', rbook);
       } catch (error) {
         console.error('Error fetching details:', error);
       }
@@ -77,9 +85,9 @@ export default function AuthorHome() {
         </h2>
         <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
           {
-            list.map((item)=>(
+            rlistBook.map((item)=>(
               <li className="relative w-full h-full">
-                {<_readingComp/>}
+                {_readingComp(item)}
               </li>
             ))
           }

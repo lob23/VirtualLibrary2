@@ -1,11 +1,28 @@
 "use client";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { useEffect, useState } from "react";
 
 const Example = () => {
   return <ProgressBar completed={60} />;
 };
 
-export default function reading_list_comp(){
+export default function reading_list_comp(rbook){
+
+    // const [book, setBook] = useState([]); 
+    // useEffect(()=>{
+    //     const fetchRBook = async()=>{
+    //         try{
+    //             const bookData = await fetchBookById(bookId);
+    //             setBook(bookData);
+    //             console.log('Book details:', bookData);
+    //         }catch (error) {
+    //             console.error('Error fetching details:', error);
+    //           }
+    //     };
+
+    //     fetchRBook(); 
+    // }, []); 
+
     return(
         <>
         <div className="relative w-[500px] h-[270px] bg-cream bg-opacity-60 rounded-3xl px-5 py-3 shadow-lg">
@@ -17,7 +34,7 @@ export default function reading_list_comp(){
                 </div>
                 <div className="col-span-2 flex flex-col w-full h-auto ml-5 py-10">
                     <h2 className="font-Gilroy_sb w-auto h-auto text-blue text-3xl mt-5">
-                        The girls I've been
+                        {rbook.BDetail_title}
                     </h2>
                     <h4 className="font-Gilroy_sb w-auto h-auto text-blue text-2xl mt-2">
                         Tess Sharpe
