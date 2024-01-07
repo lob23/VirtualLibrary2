@@ -1,10 +1,61 @@
-import {NextResponse} from "next/server"
+import { NextResponse } from "next/server";
+import axios from "axios";
+export const fetchData = async () => {
+    const apiUrl = 'http://localhost:3030/book/getListByStatus/verified'; // replace with your actual API endpoint
 
-export async function POST(req) {
-    const {username, password} = await req.json();
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // Add any additional headers if needed
+            },
 
-    console.log("username", username);
-    console.log("password", password);
+            // You can add more options here, such as credentials, mode, etc.
+        });
 
-    return NextResponse.json({msg: ["HI from contact/route.js"]});
-}
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+};
+export const fetchAuthorById = async (id) => {
+    const apiUrl = `http://localhost:3030/users/getUser/${id}`;
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching book data:', error);
+        throw error;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+

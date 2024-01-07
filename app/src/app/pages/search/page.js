@@ -16,8 +16,11 @@ export default function search_screen() {
 
 
     return (
-        <div className='relative w-screen h-full z-0'>
-            {booklist()}
+        <div className='w-screen h-full overflow-x-hidden '>
+            <div className="w-full overflow-x-hidden">
+                {booklist()}
+            </div>
+
 
 
         </div>
