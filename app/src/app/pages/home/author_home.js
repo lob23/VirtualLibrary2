@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { fetchAuthorById } from "../api/search/route";
 import { fetchData, fetchBookByAuthorId, fetchReadingList } from "../api/home/route";
 import _footer from "@/app/pages/wrapper/footer";
 import _readingComp from "@/app/pages/wrapper/readingComp"
@@ -7,10 +8,8 @@ import _updateComp from "@/app/pages/wrapper/updateComp";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
 import _storyComp from "@/app/pages/wrapper/storyComp";
 
-// const list = ['New', 'Money', 'Suit', 'And', 'Tie','New', 'Can', 'Read', 'Your', 'Mind', 'And', 'I', 'Know', 
-// 'Your', 'Story', 'Fuck', 'Love', 'Shiba']
 const list = ['New', 'Money', 'Suit', 'Shiba', 'Tie','New']
-
+const bookId = '65996c6d8f8412f4f66b60df';
 
 export default function AuthorHome() {
   const authorID = '658e859e6168987e9653af10';
@@ -18,24 +17,40 @@ export default function AuthorHome() {
   const [authorBook, setAuthorBook] = useState([]); 
   const [rlistBook, setRList] = useState([]); 
   const [loading, setLoading] = useState(true);
+  const [authorList, setAuthorList] = useState([]);
 
-
-  const bookId = '65996c6d8f8412f4f66b60df'; 
-
- useEffect(() => {
+  useEffect(() => {
     const fetchDataBook = async () => {
       try {
         // Fetch book details
-        const bookData = await fetchData(bookId);
+        const bookData = await fetchData();
         setBooks(bookData);
         console.log('Book details:', bookData);
+
+
+        if(bookData.length > 0){
+          const authorPromises = bookData.map(async(book) => {
+            if('BDetail_authorID' in book){
+              return fetchAuthorById(book.BDetail_authorID);
+            } else{
+              console.error('Home BDetail_authorID is undefined in a book');
+              return null;
+            }
+          });
+
+          const authorData = await Promise.all(authorPromises);
+          setAuthorList(authorData);
+          console.log('Author details:', authorData);
+        } else{
+          console.error('No books found in the array');
+        }
+
 
         // Fetch author details using the author ID from the book details
         const authorData = await fetchBookByAuthorId(authorID);
         const author = await authorData.json()
         setAuthorBook(author);
         console.log('Author details:', author);
-        setLoading(false);
 
 
          // Fetch reading list 
@@ -43,13 +58,14 @@ export default function AuthorHome() {
          const rbook = await rlistData.json()
          setRList(rbook);
          console.log('Reading list:', rbook);
+         setLoading(false);
       } catch (error) {
         console.error('Error fetching details:', error);
       }
     };
 
     fetchDataBook();
-  }, [bookId]);
+  }, []);
 
   return (
 
@@ -118,11 +134,11 @@ export default function AuthorHome() {
       </h2>
       <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
         {
-          books.map((item)=>(
+          books.map((item, index)=>{
             <li className="relative w-full h-full">
-              {_updateComp(item)}
+              {_updateComp(item, authorList[index])}
             </li>
-          ))
+          })
         }
       </ul>
     </div>

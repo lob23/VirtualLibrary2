@@ -19,17 +19,27 @@ const slides=[
   <_authorStoryComp/>,
 ]
 export default function ReaderHome() {
-
+  const authorID = '658e859e6168987e9653af10';
   const [books, setBooks] = useState([]);
+  const [rlistBook, setRList] = useState([]); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDataFromApi = async () => {
       try {
+
+        //book in latest update 
         const result = await fetchData();
         console.log( result );
         setBooks(result);
         setLoading(false);
+
+        // Fetch reading list
+        const rlistData = await fetchReadingList(authorID);
+        const rbook = await rlistData.json()
+        setRList(rbook);
+        console.log('Reading list:', rbook);
+
       } catch (error) {
         // Handle error
         console.error('Error:', error);
@@ -102,9 +112,9 @@ export default function ReaderHome() {
           </h2>
           <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
             {
-              list1.map((item)=>(
+              rlistBook.map((item)=>(
                 <li className="relative w-full h-full">
-                  {<_readingComp/>}
+                  {_readingComp(item)}
                 </li>
               ))
             }

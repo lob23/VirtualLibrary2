@@ -38,7 +38,6 @@ export default function booklist() {
                     // Map through each book in the array
                     const authorsPromises = bookDataArray.map(async (book) => {
                         if ('BDetail_authorID' in book) {
-
                             return fetchAuthorById(book.BDetail_authorID);
                         } else {
                             console.error('BDetail_authorID is undefined in a book');

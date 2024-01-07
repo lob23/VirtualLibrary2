@@ -1,7 +1,7 @@
 export default function story_comp(book){ 
     const defaultImage = "/image/book_sample1.png"; 
     const status = mapColor(book.BDetail_status); 
-    const str = "relative w-[500px] h-[170px] bg-white bg-opacity-60 rounded-3xl shadow-lg shadow-opacity-60" + status[1]
+    const str = "relative w-[500px] h-[170px] bg-white bg-opacity-60 rounded-3xl shadow-md shadow-opacity-60 " + status[1]
     return(
         <>
         {
@@ -17,8 +17,8 @@ export default function story_comp(book){
                     <h2 className="font-Gilroy_sb w-2/3 h-auto text-blue text-2xl leading-none">
                         {book.BDetail_title}
                     </h2>
-                    {/* <h4 className={`font-Gilroy_sb w-2/3 h-auto text-lg mt-2 ${status[2]}`}> */}
-                    <h4 className="font-Gilroy_sb w-2/3 h-auto text-lg mt-2 text-yellow">
+                    <h4 className={`font-Gilroy_sb w-2/3 h-auto text-lg mt-2 ${status[2]}`}>
+                    {/* <h4 className="font-Gilroy_sb w-2/3 h-auto text-lg mt-2 text-yellow"> */}
                         {status[0]}
                     </h4>
                 </div>
