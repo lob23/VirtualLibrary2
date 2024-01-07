@@ -12,37 +12,54 @@ export default function IndexPage() {
   const router = useRouter()
 
   const { quill, quillRef } = useQuill();
+
   const [buttonPosition, setButtonPosition] = useState(0);
   const containerRef = useRef(null);
   const [notification, setNotification] = useState("");
 
   const searchParams = useSearchParams()
  
-  const author = searchParams.get('uid')
-  const id = searchParams.get('id')
-  const bDetailID = searchParams.get('bDetailID')
+  const author = searchParams.get('uid') //user id
+  const id = searchParams.get('id') // this is book detail's id.
+  const bDetailID = searchParams.get('bDetailID') //ignore this
   console.log("id: ", id);
   console.log("bDetailID", bDetailID)
 
-  useEffect(() => {
-    // console.log(quill, quillRef);
-    console.log("!");
-    if (quill) quill.setText("Composing your story");
-  });
 
+  // the following code responsible for fetching the content of the book, if any.
+  // if the book has no content, the editor renders the default text "Composing your story"
   useEffect(() => {
 
     const fetchBookContent = async () => {
-      const res = await fetch("api/bookcontent",{
-        
+      const res = await fetch("api/bookcontent?bid=" + id,{
+        method: "GET",
       })
+
+      const result = await res.json()
+
+      if (result.stat){
+
+        if (result.bookContent != undefined){
+          if(quill){
+
+            console.log("value: ", result.bookContent)
+            
+            const delta = quill.clipboard.dangerouslyPasteHTML(result.bookContent);
+            console.log("Delta: ", delta)
+
+            //await quill.setContents(result.bookContent, 'silent');
+        }
     }
-
-    const delta = quill.clipboard.convert(value)
-
-    quill.setContents(delta, 'silent')
+      } else{
+        console.log("Fetching book error: ", result.error);
+        if (quill) quill.setText("Composing your story");
+      }
+    }
+    
+    fetchBookContent();
   }, [quill]);
 
+  // This code is used for test only.
   useEffect(() => {
     if (quill) {
       quill.on('text-change', (delta, oldDelta, source) => {
@@ -55,6 +72,7 @@ export default function IndexPage() {
     }
   }, [quill]);
 
+  // Save the composing book. This allows the author to temporarily  save the progress and continue the composition later.
   const save = async (e) => {
     e.preventDefault()
     const content_delta = await quill.getContents()
@@ -111,6 +129,7 @@ export default function IndexPage() {
     });
   }
 
+  // submit for verification.
   const submit = async (e) => {
     // submit pdf file to database using fetch of UPDATE method.
     e.preventDefault()
