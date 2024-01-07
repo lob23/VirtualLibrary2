@@ -8,7 +8,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('book')
 export class BookController {
-  constructor(private readonly bookService: BookService) { }
+  constructor(private readonly bookService: BookService) {}
 
   @Post('createBook')
   async createBook(@Body() createBookDto: CreateBookDto) {

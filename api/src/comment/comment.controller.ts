@@ -14,8 +14,9 @@ export class CommentController {
   }
 
   @Get('getComment/:id')
-  getComment(@Param('id') bookId: string) {
-    return this.commentService.getCommentOfBook(bookId);
+  async getComment(@Param('id') bookId: string) {
+    const result = await this.commentService.getCommentOfBook(bookId);
+    return result;
   }
 
   @Get('getNestedComment/:id')
