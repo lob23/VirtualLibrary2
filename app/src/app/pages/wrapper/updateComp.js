@@ -8,9 +8,8 @@ export default function updateComp(book, author){
     console.log("check book home: ", book);
     const defaultImage = "/image/book_sample1.png";   
     if (!book || !author) {
-
         return null;
-      }
+    }
     return(
         <>
             <div className="group relative w-[275px] h-[375px] cursor-pointer overflow-hidden hover:shadow-cream/30 transition-shadow"> 
@@ -22,16 +21,18 @@ export default function updateComp(book, author){
                 <div className="relative w-full h-full">
                     <div className="absolute w-full h-1/3 bottom-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <h3 className="font-Gilroy_bd text-xl text-red ">
-                            {book.BDetail_genre}
+                            {/* {book.BDetail_genre} */}
+                            Genre
                         </h3>
                         <h1 className="text-2xl font-Gilroy_sb text-blue leading-tight w-2/3">
-                            {book.BDetail_title}
+                            {/* {book.BDetail_title} */}
+                            Title
                         </h1>
-                        {/* {author && (
+                        {author && (
                             <h2 className="text-lg font-Gilroy_md text-blue">
                                 {author.User_firstname}
                             </h2>
-                        )} */}
+                        )}
                         
                     </div>
                 </div>
@@ -40,15 +41,3 @@ export default function updateComp(book, author){
         </>
     ); 
 }
-
-const fetchAuthor = async (id) => {
-    let author = "a"; 
-    try{
-        const authorData = await fetchAuthorById(id);
-        author = authorData.User_firstname;
-        // setAuthorData(authorData);
-    }catch(error){
-        console.error('Error fetching details:', error);
-    }
-    return author; 
-};  

@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchAuthorById } from "../api/search/route";
-import { fetchData, fetchBookByAuthorId, fetchReadingList } from "../api/home/route";
+import { fetchData, fetchBookByAuthorId, fetchReadingList, fetchAuthorById } from "../api/home/route";
 import _footer from "@/app/pages/wrapper/footer";
 import _readingComp from "@/app/pages/wrapper/readingComp"
 import _updateComp from "@/app/pages/wrapper/updateComp";
@@ -47,10 +46,10 @@ export default function AuthorHome() {
 
 
         // Fetch author details using the author ID from the book details
-        const authorData = await fetchBookByAuthorId(authorID);
-        const author = await authorData.json()
-        setAuthorBook(author);
-        console.log('Author details:', author);
+        const authorDataList = await fetchBookByAuthorId(authorID);
+        const authorBookList = await authorDataList.json()
+        setAuthorBook(authorBookList);
+        console.log('Author details:', authorBookList);
 
 
          // Fetch reading list 
@@ -134,11 +133,11 @@ export default function AuthorHome() {
       </h2>
       <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
         {
-          books.map((item, index)=>{
-            <li className="relative w-full h-full">
-              {_updateComp(item, authorList[index])}
+          books.map((book, index) => (
+            <li key={index} className=" w-full h-full">
+              {_updateComp(book, authorList[index])}
             </li>
-          })
+          ))
         }
       </ul>
     </div>
