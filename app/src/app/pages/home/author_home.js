@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchData, fetchBookByAuthorId } from "../api/home/route";
+import { fetchData, fetchBookByAuthorId, fetchReadingList } from "../api/home/route";
 import _footer from "@/app/pages/wrapper/footer";
 import _readingComp from "@/app/pages/wrapper/readingComp"
 import _updateComp from "@/app/pages/wrapper/updateComp";
@@ -16,9 +16,8 @@ export default function AuthorHome() {
   const authorID = '658e859e6168987e9653af10';
   const [books, setBooks] = useState([]);
   const [authorBook, setAuthorBook] = useState([]); 
+  const [rlistBook, setRList] = useState([]); 
   const [loading, setLoading] = useState(true);
-  const [html_src, sethtml] = useState("");
-  const [html_src1, sethtml1] = useState("")
 
 
   const bookId = '65996c6d8f8412f4f66b60df'; 
@@ -32,10 +31,18 @@ export default function AuthorHome() {
         console.log('Book details:', bookData);
 
         // Fetch author details using the author ID from the book details
-        const authorData = await fetchBookByAuthorId(bookData.BDetail_authorID);
-        setAuthorBook(authorBook);
-        console.log('Author details:', authorBook);
+        const authorData = await fetchBookByAuthorId(authorID);
+        const author = await authorData.json()
+        setAuthorBook(author);
+        console.log('Author details:', author);
         setLoading(false);
+
+
+         // Fetch reading list 
+         const rlistData = await fetchReadingList(authorID);
+         const rbook = await rlistData.json()
+         setRList(rbook);
+         console.log('Reading list:', rbook);
       } catch (error) {
         console.error('Error fetching details:', error);
       }
@@ -78,9 +85,9 @@ export default function AuthorHome() {
         </h2>
         <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
           {
-            list.map((item)=>(
+            rlistBook.map((item)=>(
               <li className="relative w-full h-full">
-                {<_readingComp/>}
+                {_readingComp(item)}
               </li>
             ))
           }
@@ -94,7 +101,7 @@ export default function AuthorHome() {
           </h2>
           <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-auto h-full py-5 list-none">
             {
-              books.map((item)=>(
+              authorBook.map((item)=>(
                 <li className="relative w-full h-full">
                   {_storyComp(item)}
                 </li>
