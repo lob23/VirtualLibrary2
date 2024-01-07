@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import {useSearchParams, useRouter } from "next/navigation";
 import _authorbookpage from './authormanagement'
+import { Audio } from 'react-loader-spinner'
 
 import { useMemo } from 'react';
 import {
@@ -36,6 +37,7 @@ export default function authorBookManagement (){
 
     const searchParams = useSearchParams()
     const [bookcards, setbookscard] = useState([])
+    const [loading, setLoading] = useState(true)
     
 
     const author_id = searchParams.get('uid')
@@ -61,7 +63,8 @@ export default function authorBookManagement (){
 
                         })
                     ))
-                    setbookscard(bookcard)
+                    await setbookscard(bookcard)
+                    setLoading(false)
                 } else {
                     console.log(book_list.error)
                 }
@@ -137,35 +140,50 @@ export default function authorBookManagement (){
 
     
     return (
-        <div className="w-full h-full place-items-center">
-            <img
-                className="object-contain"
-                src="/image/logo.png">
-            </img>
-            <Card className='h-4/5 w-full'>
-                <CardHeader floated={false} shadow={false} className="rounded-none">
-                    <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
+        <>
+        {      
+            loading == false ?  
+                <div className="w-full h-full place-items-center">
+                    <img
+                        className="object-contain"
+                        src="/image/logo.png">
+                    </img>
+                    <Card className='h-4/5 w-full'>
+                        <CardHeader floated={false} shadow={false} className="rounded-none">
+                            <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
 
-                        <div>
-                            <Typography variant="h5" color="blue-gray">
-                                Your Story List
-                            </Typography>
-                        </div>
-                        <div className="flex w-full shrink-0 gap-2 md:w-max">
-                            <button className="flex items-center gap-3" >
-                                New Book
-                            </button>
-                        </div>
-                        
-                    </div>
+                                <div>
+                                    <Typography variant="h5" color="blue-gray">
+                                        Your Story List
+                                    </Typography>
+                                </div>
+                                <div className="flex w-full shrink-0 gap-2 md:w-max">
+                                    <button className="flex items-center gap-3" >
+                                        New Book
+                                    </button>
+                                </div>
+                                
+                            </div>
 
-                </CardHeader>
+                        </CardHeader>
 
-                <CardBody className="overflow-scroll px-0">
-                    <MaterialReactTable table={table} />
-                </CardBody>
+                        <CardBody className="overflow-scroll px-0">
+                            <MaterialReactTable table={table} />
+                        </CardBody>
 
-            </Card>
-        </div>
+                    </Card>
+                </div>
+            :
+                <div className='flex items-center justify-center h-screen'>
+                    <Audio
+                    height="80"
+                    width="80"
+                    radius="9"
+                    color="green"
+                    ariaLabel="loading"
+                    />
+                </div>
+        }
+        </>
     );
 }

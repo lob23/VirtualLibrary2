@@ -6,6 +6,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useQuill } from "react-quilljs";
 import { Button } from "@material-tailwind/react";
 import { pdfExporter } from "quill-to-pdf";
+import { Audio } from "react-loader-spinner";
 
 
 export default function IndexPage() {
@@ -15,7 +16,7 @@ export default function IndexPage() {
 
   const [buttonPosition, setButtonPosition] = useState(0);
   const containerRef = useRef(null);
-  const [notification, setNotification] = useState("");
+  const [isLoading, setLoading] = useState(true);
 
   const searchParams = useSearchParams()
  
@@ -44,15 +45,21 @@ export default function IndexPage() {
 
             console.log("value: ", result.bookContent)
             
-            const delta = quill.clipboard.dangerouslyPasteHTML(result.bookContent);
+            const delta = await quill.clipboard.dangerouslyPasteHTML(result.bookContent);
             console.log("Delta: ", delta)
+
+
 
             //await quill.setContents(result.bookContent, 'silent');
         }
+        setLoading(false)
     }
       } else{
         console.log("Fetching book error: ", result.error);
-        if (quill) quill.setText("Composing your story");
+        if (quill) {
+          await quill.setText("Composing your story");
+        }
+        setLoading(false)
       }
     }
     
@@ -164,24 +171,39 @@ export default function IndexPage() {
 
   return (
     <>
+          {
+          isLoading == true?
+            <div className='flex items-center justify-center h-screen'>
+              <Audio
+              height="80"
+              width="80"
+              radius="9"
+              color="green"
+              ariaLabel="loading"
+              />
+            </div>
+          :
+          <div>
+              <div className='w-full h-1/5 grid grid-cols-5 grid-rows-2 place-items-center'>
+              <img
+                  className="object-contain row-span-1 col-span-5"
+                  src="/image/logo.png">
+              </img>
+              
+              <Button className='col-span-1 text-white bg-black' onClick={save}>Save and Back</Button>
+              <div className='col-span-1'></div>
+              <div className='col-span-1'></div>
+              <div className='col-span-1'></div>
+              <Button className='col-span-1 text-black bg-green-500' onClick={submit}>Submit</Button>
 
-      <div className='w-full h-1/5 grid grid-cols-5 grid-rows-2 place-items-center'>
-        <img
-            className="object-contain row-span-1 col-span-5"
-            src="/image/logo.png">
-        </img>
-        
-        <Button className='col-span-1 text-white bg-black' onClick={save}>Save and Back</Button>
-        <div className='col-span-1'></div>
-        <div className='col-span-1'></div>
-        <div className='col-span-1'></div>
-        <Button className='col-span-1 text-black bg-green-500' onClick={submit}>Submit</Button>
+            </div>
 
-      </div>
-
-      <div className = 'w-full h-4/5'>
-        <div ref = {quillRef}/>
-      </div>
+            <div className = 'w-full h-4/5'>
+              <div ref = {quillRef}/>
+            </div>
+          </div>
+        }
+      
      
     </>
   );
