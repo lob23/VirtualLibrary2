@@ -10,7 +10,7 @@ export async function GET(req){
         const bookID = req.nextUrl.searchParams.get('bid')
 
         
-        const queryStringBook = config.BACKEND_URL + "/book/getBContent/" + bookID
+        const queryStringBook = config.BACKEND_URL + "/book/retrievePDF/" + bookID
         const books =  await axios.get(queryStringBook)
                                          .then(response => {
                                             if (response.data){
