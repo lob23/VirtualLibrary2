@@ -107,10 +107,10 @@ export default function AuthorHome() {
         <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
           Your reading list
         </h2>
-        <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
+        <ul className="relative flex flex-row gap-x-4 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
           {
             rlistBook.map((item)=>(
-              <li className="relative w-full h-full" >
+              <li className="w-full h-full mr-10">
                 {_readingComp(item)}
               </li>
             ))
@@ -123,7 +123,7 @@ export default function AuthorHome() {
           <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
             Your story
           </h2>
-          <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-auto h-full py-5 list-none">
+          <ul className="relative flex flex-row gap-x-4 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
             {
               authorBook.map((item)=>(
                 <li className="relative w-full h-full" onClick={(i) => {
@@ -143,7 +143,7 @@ export default function AuthorHome() {
       <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
         Latest update
       </h2>
-      <ul className="relative flex flex-row gap-x-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
+      <ul className="relative flex flex-row gap-x-4 overflow-x-auto no-scrollbar w-full h-full list-none mt-10">
         {
           books.map((book, index) => (
             <li key={index} className="w-full h-full mr-10" onClick={() => {handleReadingListClick(book.BDetail_authorID, book._id)}}>
@@ -153,14 +153,6 @@ export default function AuthorHome() {
         }
       </ul>
     </div>
-
-     
-
-
-
-
-    {/* <div className="absolute w-full h-[2000px] bg-yellow"></div>
-     */}
   </div>
   );
 }
