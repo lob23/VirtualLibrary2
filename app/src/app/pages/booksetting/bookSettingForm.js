@@ -30,7 +30,7 @@ export default function booksettingForm (){
                 body: JSON.stringify({
                     BDetail_title: bookTitle,
                     BDetail_genre: bookGenre,
-                    BDetail_authorID: uid, //example. This should be replace by a way to get the ID of the user.
+                    BDetail_authorID: uid, 
                     BDetail_language: bookLanguage,
                     BDetail_createdDay: createdDate,
                 }),
@@ -54,24 +54,6 @@ export default function booksettingForm (){
         }
 
     }
-
-    // import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-
-    // export class CreateBookDto {
-    // @IsNotEmpty()
-    // BDetail_title: string;
-    // @IsNotEmpty()
-    // BDetail_genre: string;
-    // @IsNotEmpty()
-    // BDetail_authorID: string;
-    // @IsString()
-    // @IsNotEmpty()
-    // @IsEnum(['english', 'vietnamese'])
-    // BDetail_language: string;
-    // BDetail_description: string;
-
-    // BContent_content: string;
-
 
     return (
         <>

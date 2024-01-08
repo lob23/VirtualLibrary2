@@ -1,12 +1,20 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { fetchBookById, fetchAuthorById } from "../api/book_detail/route";
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function detail() {
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [loading, setLoading] = useState(true);
   const [books, setBook] = useState([]);
-  const [author, setAuthor] = useState([])
-  const bookId = '65996c6d8f8412f4f66b60df';
+  const [author, setAuthor] = useState([]);
+
+  const uid = searchParams.get('uid');
+  const bookId = searchParams.get('bid');
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -14,7 +22,7 @@ export default function detail() {
         const bookData = await fetchBookById(bookId);
         setBook(bookData);
         console.log('Book details:', bookData);
-
+  
         // Fetch author details using the author ID from the book details
         const authorData = await fetchAuthorById(bookData.BDetail_authorID);
         setAuthor(authorData);
@@ -105,9 +113,6 @@ export default function detail() {
           <button className='font-Gilroy_sb w-full h-[50px] mt-10 rounded-[100px] bg-blue text-white outline-none border-none'>Read now
           </button>
         </div>
-
-
-
 
       </div>
       <div className='w-1/2 mx-auto '>

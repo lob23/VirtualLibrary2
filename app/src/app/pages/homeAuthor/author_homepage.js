@@ -6,17 +6,26 @@ import _readingComp from "@/app/pages/wrapper/readingComp"
 import _updateComp from "@/app/pages/wrapper/updateComp";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
 import _storyComp from "@/app/pages/wrapper/storyComp";
-
-const list = ['New', 'Money', 'Suit', 'Shiba', 'Tie','New']
-const bookId = '65996c6d8f8412f4f66b60df';
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function AuthorHome() {
-  const authorID = '658e859e6168987e9653af10';
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  //'658e859e6168987e9653af10'
+  const authorID = searchParams.get('uid');
   const [books, setBooks] = useState([]);
   const [authorBook, setAuthorBook] = useState([]); 
   const [rlistBook, setRList] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [authorList, setAuthorList] = useState([]);
+
+  const handleAuthorStoryClick =  (_uid, _bid) => {
+    router.push("/pages/authorbookmanagement?uid=" + _uid + "&bid=" + _bid);
+  }
+
+  const handleReadingListClick = (_uid, _bid) => {
+    router.push("/pages/book_detail?uid=" + _uid + "&bid=" + _bid);
+  }
 
   useEffect(() => {
     const fetchDataBook = async () => {
@@ -101,7 +110,7 @@ export default function AuthorHome() {
         <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
           {
             rlistBook.map((item)=>(
-              <li className="relative w-full h-full">
+              <li className="relative w-full h-full" >
                 {_readingComp(item)}
               </li>
             ))
@@ -117,7 +126,10 @@ export default function AuthorHome() {
           <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-auto h-full py-5 list-none">
             {
               authorBook.map((item)=>(
-                <li className="relative w-full h-full">
+                <li className="relative w-full h-full" onClick={(i) => {
+                  console.log("item: ", item)
+                  handleAuthorStoryClick(item.BDetail_authorID, item.BDetail_title.trim())
+                }}>
                   {_storyComp(item)}
                 </li>
               ))
@@ -134,7 +146,7 @@ export default function AuthorHome() {
       <ul className="relative flex flex-row gap-x-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
         {
           books.map((book, index) => (
-            <li key={index} className="w-full h-full mr-10">
+            <li key={index} className="w-full h-full mr-10" onClick={() => {handleReadingListClick(book.BDetail_authorID, book._id)}}>
               {_updateComp(book, authorList[index])}
             </li>
           ))
