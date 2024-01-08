@@ -51,8 +51,8 @@ export default function _readingpage() {
             });
             const result = await res.json();
             if (result.stat == true){
-                console.log("book content: ",result.bookContent)
-                setBase64String("data:application/pdf;base64," + result.bookContent);
+                console.log("book content: ",result.bookContent.BContent_pdf)
+                setBase64String("data:application/pdf;base64," + result.bookContent.BContent_pdf);
             } else{
                 console.log("error", result.error)
             }

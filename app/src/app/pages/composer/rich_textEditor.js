@@ -1,4 +1,5 @@
 "use client"// This is a client component 👈🏽
+ 
 import { useSearchParams, useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -40,17 +41,20 @@ export default function IndexPage() {
 
       if (result.stat){
 
-        if (result.bookContent != undefined){
-          if(quill){
+        if (result.bookContent){
+          if(result.bookContent.BContent_content){
+            if(quill){
 
-            console.log("value: ", result.bookContent)
-            
-            const delta = await quill.clipboard.dangerouslyPasteHTML(result.bookContent);
-            console.log("Delta: ", delta)
-
-
-
-            //await quill.setContents(result.bookContent, 'silent');
+              console.log("value: ", result.bookContent.BContent_content)
+              
+              const delta = await quill.clipboard.dangerouslyPasteHTML(result.bookContent.BContent_content);
+              console.log("Delta: ", delta)
+              //await quill.setContents(result.bookContent, 'silent');
+            }
+        } else {
+          if (quill) {
+              await quill.setText("Composing your story");
+          }
         }
         setLoading(false)
     }
@@ -115,7 +119,7 @@ export default function IndexPage() {
     //const pdfBlob = await pdfExporter.generatePdf(quillDelta);
 
     if(quill){
-      const quillDelta = quill.getContents();
+      const quillDelta = await quill.getContents();
       const pdfBlob = await pdfExporter.generatePdf(quillDelta);
 
       return pdfBlob
