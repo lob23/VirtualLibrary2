@@ -7,14 +7,14 @@ import _updateComp from "@/app/pages/wrapper/updateComp";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
 import _storyComp from "@/app/pages/wrapper/storyComp";
 
-const list = ['New', 'Money', 'Suit', 'Shiba', 'Tie','New']
+const list = ['New', 'Money', 'Suit', 'Shiba', 'Tie', 'New']
 const bookId = '65996c6d8f8412f4f66b60df';
 
 export default function AuthorHome() {
   const authorID = '658e859e6168987e9653af10';
   const [books, setBooks] = useState([]);
-  const [authorBook, setAuthorBook] = useState([]); 
-  const [rlistBook, setRList] = useState([]); 
+  const [authorBook, setAuthorBook] = useState([]);
+  const [rlistBook, setRList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [authorList, setAuthorList] = useState([]);
 
@@ -27,11 +27,11 @@ export default function AuthorHome() {
         console.log('Book details:', bookData);
 
 
-        if(bookData.length > 0){
-          const authorPromises = bookData.map(async(book) => {
-            if('BDetail_authorID' in book){
+        if (bookData.length > 0) {
+          const authorPromises = bookData.map(async (book) => {
+            if ('BDetail_authorID' in book) {
               return fetchAuthorById(book.BDetail_authorID);
-            } else{
+            } else {
               console.error('Home BDetail_authorID is undefined in a book');
               return null;
             }
@@ -40,7 +40,7 @@ export default function AuthorHome() {
           const authorData = await Promise.all(authorPromises);
           setAuthorList(authorData);
           console.log('Author details:', authorData);
-        } else{
+        } else {
           console.error('No books found in the array');
         }
 
@@ -52,12 +52,12 @@ export default function AuthorHome() {
         console.log('Author details:', authorBookList);
 
 
-         // Fetch reading list 
-         const rlistData = await fetchReadingList(authorID);
-         const rbook = await rlistData.json()
-         setRList(rbook);
-         console.log('Reading list:', rbook);
-         setLoading(false);
+        // Fetch reading list 
+        const rlistData = await fetchReadingList(authorID);
+        const rbook = await rlistData.json()
+        setRList(rbook);
+        console.log('Reading list:', rbook);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching details:', error);
       }
@@ -68,88 +68,88 @@ export default function AuthorHome() {
 
   return (
 
-  <div className="relative w-full h-fit overflow-y-auto overflow-hidden">
-    <div className="grid grid-flow-col grid-cols-2 relative w-full h-[900px] bg-white overflow-x-hidden">
-      <div className="relative col-span-1 w-full h-fit top-1/4 bottom-0 ml-10">
-        <h1 className="font-Gilroy_sb text-blue text-7xl w-full h-1/4">
-          New & <br/>   Trending
-        </h1>
-        <p className="font-Gilroy_md text-black text-md w-1/2 mt-3 text-[20px] leading-8 overflow-hidden">
-        Indulge in the latest and most captivating books, where every page invites you on a journey of imagination, intrigue, and discovery.
-        </p>
-      </div>
-      <div className="col-span-1 relative w-full h-full overflow-hidden">
-        <div className="absolute w-full h-full  overflow-hidden">
-          <img className="object-cover w-full h-full  overflow-hidden"
-                src="/image/blur.png">
-          </img>            
-        </div> 
-        
-        <div className="absolute w-full h-full left-0 right-0 top-0 bottom-0 overflow-hidden">
-          <img className="object-scale-down w-full h-full  overflow-hidden"
-                src="/image/book_reader_home.png">
-          </img>
+    <div className="relative w-full h-fit overflow-y-auto overflow-hidden">
+      <div className="grid grid-flow-col grid-cols-2 relative w-full h-[900px] bg-white overflow-x-hidden">
+        <div className="relative col-span-1 w-full h-fit top-1/4 bottom-0 ml-10">
+          <h1 className="font-Gilroy_sb text-blue text-7xl w-full h-1/4">
+            New & <br />   Trending
+          </h1>
+          <p className="font-Gilroy_md text-black text-md w-1/2 mt-3 text-[20px] leading-8 overflow-hidden">
+            Indulge in the latest and most captivating books, where every page invites you on a journey of imagination, intrigue, and discovery.
+          </p>
+        </div>
+        <div className="col-span-1 relative w-full h-full overflow-hidden">
+          <div className="absolute w-full h-full  overflow-hidden">
+            <img className="object-cover w-full h-full  overflow-hidden"
+              src="/image/blur.png">
+            </img>
+          </div>
+
+          <div className="absolute w-full h-full left-0 right-0 top-0 bottom-0 overflow-hidden">
+            <img className="object-scale-down w-full h-full  overflow-hidden"
+              src="/image/book_reader_home.png">
+            </img>
+          </div>
         </div>
       </div>
-    </div>
-      
-    <div className="relative w-full h-full overflow-hidden">
-      <div className="relative w-full h-1/2 overflow-hidden ml-10">
+
+      <div className="relative w-full h-full overflow-hidden">
+        <div className="relative w-full h-1/2 overflow-hidden ml-10">
+          <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
+            Your reading list
+          </h2>
+          <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
+            {
+              rlistBook.map((item) => (
+                <li className="relative w-full h-full">
+                  {_readingComp(item)}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div className=" w-auto h-1/2 overflow-hidden">
+          <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
+            <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
+              Your story
+            </h2>
+            <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-auto h-full py-5 list-none">
+              {
+                authorBook.map((item) => (
+                  <li className="relative w-full h-full">
+                    {_storyComp(item)}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
         <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
-          Your reading list
+          Latest update
         </h2>
         <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
           {
-            rlistBook.map((item)=>(
-              <li className="relative w-full h-full">
-                {_readingComp(item)}
+            books.map((book, index) => (
+              <li key={index} className=" w-full h-full">
+                {_updateComp(book, authorList[index])}
               </li>
             ))
           }
         </ul>
       </div>
 
-      <div className=" w-auto h-1/2 overflow-hidden">
-        <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
-          <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
-            Your story
-          </h2>
-          <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-auto h-full py-5 list-none">
-            {
-              authorBook.map((item)=>(
-                <li className="relative w-full h-full">
-                  {_storyComp(item)}
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div> 
-    </div>
-
-    <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
-      <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
-        Latest update
-      </h2>
-      <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
-        {
-          books.map((book, index) => (
-            <li key={index} className=" w-full h-full">
-              {_updateComp(book, authorList[index])}
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-
-     
 
 
 
 
-    {/* <div className="absolute w-full h-[2000px] bg-yellow"></div>
+
+      {/* <div className="absolute w-full h-[2000px] bg-yellow"></div>
      */}
-  </div>
+    </div>
   );
 }
 
