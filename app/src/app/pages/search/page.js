@@ -7,7 +7,7 @@ import _footer from "@/app/pages/wrapper/footer"
 
 import booklist from './book_list';
 
-import { fetchData } from "../api/home/route";
+import { fetchData } from "../api/home_author/route";
 
 
 

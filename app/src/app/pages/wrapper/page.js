@@ -5,6 +5,7 @@ import _updateComp from "@/app/pages/wrapper/updateComp";
 import Carousel from "@/app/pages/wrapper/Carousel";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
 import _storyComp from "@/app/pages/wrapper/storyComp";
+import _dropdown from "@/app/pages/wrapper/Dropdown"
 
 // const slides=[
 //     // "https://i.ibb.co/ncrXc2V/1.png",
@@ -16,14 +17,18 @@ import _storyComp from "@/app/pages/wrapper/storyComp";
 //     <_authorStoryComp/>,
 // ]
 
-export default function footer(){
+export default function wrapper(){
     return (
         <div>
             {/* <_footer/> */}
             {/* <_reaingComp/> */}
-            <_updateComp/>
+            {/* <_updateComp/> */}
             {/* <_authorStoryComp/> */}
             {/* <_storyComp/> */}
+            <div className="relative w-screen h-screen bg-white">
+                <_dropdown/>
+            </div>
+           
         </div>
         
     

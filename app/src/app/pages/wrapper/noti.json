@@ -1,22 +1,27 @@
 [
     {
-        "content":"Your book All to well has been approved",
+        "content":"All too well",
         "date":"Wed 20/12/2023",
         "time":"12:00 PM"
     },
     {
-        "content":"Your book Pride and prejudice has been approved",
+        "content":"Pride and prejudice",
         "date":"Tue 19/12/2023",
         "time":"10:00 PM"
     },
     {
-        "content":"Your book The last wife has been approved",
+        "content":"The last wife",
         "date":"Mon 18/12/2023",
         "time":"5:00 PM"
     },
     {
-        "content":"Your book Wind rises has been approved",
+        "content":"Wind rises",
         "date":"Sun 17/12/2023",
         "time":"4:00 PM"
+    },
+    {
+        "content":"Eat, pray, and love",
+        "date":"Sat 16/12/2023",
+        "time":"3:00 PM"
     }
 ]
