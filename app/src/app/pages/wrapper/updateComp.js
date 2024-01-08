@@ -1,12 +1,15 @@
-"use client";
-import { useEffect, useState } from "react";
 import { fetchData } from "../api/wrapper/route";
 import { fetchAuthorById } from "../api/book_detail/route";
+import login_form from "../login/login_form";
 
 
-export default function updateComp(book){
-
-    const defaultImage = "/image/book_sample1.png";
+export default function updateComp(book, author){
+    console.log("check author home: ", author);
+    console.log("check book home: ", book);
+    const defaultImage = "/image/book_sample1.png";   
+    if (!book || !author) {
+        return null;
+    }
     return(
         <>
             <div className="group relative w-[275px] h-[375px] cursor-pointer overflow-hidden hover:shadow-cream/30 transition-shadow"> 
@@ -18,20 +21,23 @@ export default function updateComp(book){
                 <div className="relative w-full h-full">
                     <div className="absolute w-full h-1/3 bottom-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <h3 className="font-Gilroy_bd text-xl text-red ">
-                            {book.BDetail_genre}
+                            {/* {book.BDetail_genre} */}
+                            Genre
                         </h3>
                         <h1 className="text-2xl font-Gilroy_sb text-blue leading-tight w-2/3">
-                            {book.BDetail_title}
+                            {/* {book.BDetail_title} */}
+                            Title
                         </h1>
-                        <h2 className="text-lg font-Gilroy_md text-blue">
-                            {book.BDetail_authorID}
-                        </h2>
+                        {author && (
+                            <h2 className="text-lg font-Gilroy_md text-blue">
+                                {author.User_firstname}
+                            </h2>
+                        )}
+                        
                     </div>
                 </div>
             </div>
             </div>
-           
-        
         </>
     ); 
 }

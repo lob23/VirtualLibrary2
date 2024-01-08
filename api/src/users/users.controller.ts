@@ -32,6 +32,13 @@ export class UsersController {
     return this.usersService.getByEmail(email);
   }
 
+  @Get('comment/:id')
+  async getDev(@Param('id') id: string) {
+    const response = await this.findOne(id);
+    const result = { _id: response._id, User_lastname: response.User_lastname };
+    return result;
+  }
+
   @Patch('updateUser/:id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
