@@ -1,10 +1,10 @@
 import React from "react"; 
-import _headerReader from "@/app/pages/home/header_reader" 
-import _headerAuthor from "@/app/pages/home/header_author"
-import _homeReader from "@/app/pages/home/reader_home"
-import _homeAuthor from "@/app/pages/home/author_home"
+import _headerReader from "@/app/pages/homeReader/header_reader" 
+import _headerAuthor from "@/app/pages/homeAuthor/header_author"
+import _homeReader from "@/app/pages/homeReader/reader_home"
+import _homeAuthor from "@/app/pages/homeAuthor/author_homepage"
 import _footer from "@/app/pages/wrapper/footer"
-import _dropdown from "@/app/pages/home/Dropdown"
+import _dropdown from "@/app/pages/wrapper/Dropdown"
 
 export default function homePage(){
     return(

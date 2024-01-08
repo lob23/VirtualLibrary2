@@ -32,7 +32,7 @@ export class NotificationService {
       where: { Notification_receiverId: userId },
     });
     const result = notifyList.sort(
-      (a, b) => a.Notification_time.getTime() - b.Notification_time.getTime(),
+      (a, b) => b.Notification_time.getTime() - a.Notification_time.getTime(),
     );
     return result;
   }

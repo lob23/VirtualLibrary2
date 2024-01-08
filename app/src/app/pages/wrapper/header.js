@@ -2,7 +2,7 @@
 export default function header(){
     return(
     <>
-      <div className="row-span-3 flex flex-row relative w-screen h-[80px] ml-10 mr-5 py-4 items-center bg-transparent">
+      <div className="row-span-3 flex flex-row relative w-screen h-[80px] pl-10 py-2 items-center bg-transparent">
         <div className="absolute w-[60px] h-[60px]">
           <img
             className="object-contain w-full h-full"
@@ -21,15 +21,9 @@ export default function header(){
           </p>
         </div>
        
-        <div className="grid grid-flow-col grid-cols-2 absolute right-2 gap-[40px] w-[100px] h-[100px] mr-[100px] pt-[40px] items-center">
-            <div className="relative col-span-1 w-[30px] h-[30px]">
-                <svg width="30" height="30" viewBox="0 0 37 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13.3754 33.2048V33.3688C13.3754 36.1563 15.507 38.2879 18.2945 38.2879C21.082 38.2879 23.2136 36.1563 23.2136 33.3688V33.2048" stroke="#444444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M29.7724 18.6115V13.6923C29.7724 7.2975 24.6893 2.21442 18.2945 2.21442C11.8997 2.21442 6.81657 7.2975 6.81657 13.6923V18.6115C6.81657 24.0225 1.89746 25.3342 1.89746 28.4497C1.89746 31.2372 8.2923 33.3688 18.2945 33.3688C28.2967 33.3688 34.6915 31.2372 34.6915 28.4497C34.6915 25.3342 29.7724 24.0225 29.7724 18.6115V18.6115Z" stroke="#444444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
+        <div className="grid grid-flow-col grid-cols-2 absolute right-2 gap-[40px] w-[100px] h-[100px] mr-[50px] pt-[40px] items-center">
 
-            <div className="relative col-span-1 w-[30px] h-[30px]">
+            <div className="relative col-span-1 w-[30px] h-[30px] hover:opacity-50">
                 <svg width="30" height="30" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M18.3456 24.3071V24.3071C15.0012 24.3071 12.2896 21.5955 12.2896 18.251V15.223C12.2896 11.8785 15.0012 9.16687 18.3456 9.16687C21.6901 9.16687 24.4017 11.8785 24.4017 15.223V18.251C24.4017 21.5955 21.6901 24.3071 18.3456 24.3071V24.3071Z" stroke="#444444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M27.5392 32.0504C25.8722 30.0912 23.3907 28.8497 20.6171 28.8497H16.075C13.2786 28.8497 10.7774 30.1124 9.11047 32.1003" stroke="#444444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>

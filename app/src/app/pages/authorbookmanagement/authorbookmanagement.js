@@ -41,7 +41,8 @@ export default function authorBookManagement (){
     
 
     const author_id = searchParams.get('uid')
-    console.log("author_id: ", author_id)
+    // console.log("author_id: ", author_id)
+    const bookDetailID = searchParams.get('bid')
 
     useEffect(() => {
         const getBooks = async () => {
@@ -136,8 +137,12 @@ export default function authorBookManagement (){
               cursor: 'pointer', //you might want to change the cursor too when adding an onClick
             },
         }),
+        
     });
 
+    useEffect(() => {
+        table.setGlobalFilter(bookDetailID)
+    },[bookDetailID])
     
     return (
         <>
@@ -162,7 +167,6 @@ export default function authorBookManagement (){
                                         New Book
                                     </button>
                                 </div>
-                                
                             </div>
 
                         </CardHeader>

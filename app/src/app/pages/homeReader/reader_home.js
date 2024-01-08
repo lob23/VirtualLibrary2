@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchData } from "../api/home/route";
+import { fetchData } from "../api/home_author/route";
 
 import _footer from "@/app/pages/wrapper/footer";
 import _readingComp from "@/app/pages/wrapper/readingComp"

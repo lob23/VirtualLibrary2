@@ -1,8 +1,17 @@
 "use client";
-export default function header_author(){
+import React , {useState} from "react";
+import _dropDown from "@/app/pages/wrapper/Dropdown"
+const header_author = ()=>{
+  const [notiClick, setNotiClick] = useState(false);
+  const [isDivVisible, setDivVisible] = useState(true);
+  const handleNotiClick = () => {
+    setDivVisible(!isDivVisible); 
+    setNotiClick(!notiClick);
+  }
+  const svgOpacity = isDivVisible ? "opacity-100" : "opacity-50 ";
     return(
     <>
-      <div className="row-span-3 flex flex-row relative w-screen h-[80px] px-10 place-items-center shadow">
+      <div className="row-span-3 flex flex-row relative w-screen h-[80px] pl-10 py-2 place-items-center shadow-md bg-transparent">
         <div className="absolute w-[60px] h-[60px]">
           <img
             className="object-contain w-full h-full"
@@ -21,13 +30,19 @@ export default function header_author(){
           </p>
         </div>
       
-        <div className="grid grid-flow-col grid-cols-2 absolute right-2 gap-[40px] w-[100px] h-[100px] mr-[100px] items-center">
-            <div className="relative col-span-1 w-[30px] h-[30px] hover:opacity-50">
-                <svg width="30" height="30" viewBox="0 0 37 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13.3754 33.2048V33.3688C13.3754 36.1563 15.507 38.2879 18.2945 38.2879C21.082 38.2879 23.2136 36.1563 23.2136 33.3688V33.2048" stroke="#444444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M29.7724 18.6115V13.6923C29.7724 7.2975 24.6893 2.21442 18.2945 2.21442C11.8997 2.21442 6.81657 7.2975 6.81657 13.6923V18.6115C6.81657 24.0225 1.89746 25.3342 1.89746 28.4497C1.89746 31.2372 8.2923 33.3688 18.2945 33.3688C28.2967 33.3688 34.6915 31.2372 34.6915 28.4497C34.6915 25.3342 29.7724 24.0225 29.7724 18.6115V18.6115Z" stroke="#444444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+        <div className="grid grid-flow-col grid-cols-2 absolute right-2 gap-[40px] w-[100px] h-[100px] mr-[100px] items-center"
+             onClick={handleNotiClick}>
+            <div className={`relative col-span-1 w-[30px] h-[30px] hover:opacity-50 ${svgOpacity}`} >
+              <svg width="30" height="30" viewBox="0 0 37 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13.3754 33.2048V33.3688C13.3754 36.1563 15.507 38.2879 18.2945 38.2879C21.082 38.2879 23.2136 36.1563 23.2136 33.3688V33.2048" stroke="#444444" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <path fillRule="evenodd" clipRule="evenodd" d="M29.7724 18.6115V13.6923C29.7724 7.2975 24.6893 2.21442 18.2945 2.21442C11.8997 2.21442 6.81657 7.2975 6.81657 13.6923V18.6115C6.81657 24.0225 1.89746 25.3342 1.89746 28.4497C1.89746 31.2372 8.2923 33.3688 18.2945 33.3688C28.2967 33.3688 34.6915 31.2372 34.6915 28.4497C34.6915 25.3342 29.7724 24.0225 29.7724 18.6115V18.6115Z" stroke="#444444" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </div>
+            {notiClick &&(
+              <div className="absolute w-fit h-fit top-[100px] right-[100px]">
+                <_dropDown/>
+              </div>
+            )}
 
             <div className="relative col-span-1 w-[30px] h-[30px] hover:opacity-50">
                 <svg width="30" height="30" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,3 +56,5 @@ export default function header_author(){
     </>
     );
 }
+
+export default header_author;

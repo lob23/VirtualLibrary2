@@ -10,7 +10,7 @@ import latestUpdate from "./latest_update";
 
 
 
-import { fetchData } from "../api/home/route";
+import { fetchData } from "../api/home_author/route";
 
 
 
@@ -19,17 +19,17 @@ export default function search_screen() {
 
 
     return (
-        <div className='flex flex-col w-full h-full overflow-hidden overflow-y-auto '>
+        <div className='flex flex-col w-full h-full overflow-hidden overflow-y-auto z-0'>
             <div className="w-full h-fit z-30 bg-cream">
                 {_header()}
             </div>
-            <div className="w-full h-fit overflow-hidden">
+            <div className="w-full h-fit overflow-hidden z-30">
                 {_searchForm()}
             </div>
-            <div className=" w-full h-fit overflow-hidden">
+            <div className=" w-full h-fit overflow-hidden z-20">
                 {latestUpdate()}
             </div>
-            <div className="w-9/10 gap-y-5  overflow-x-hidden px-10 mt-10">
+            <div className="w-9/10 gap-y-5  overflow-x-hidden px-10 mt-10 z-20">
                 {booklist()}
             </div>
             <div className="w-full h-fit">
