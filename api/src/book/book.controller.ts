@@ -5,6 +5,7 @@ import { CreateBookDto } from './dto/create-Book.dto';
 import { UpdateBDetailDto } from './dto/update-bdetail.dto';
 import { UpdateBContentDto } from './dto/update-bcontent.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { BContent } from './entities/bcontent.entity';
 
 @Controller('book')
 export class BookController {
@@ -59,7 +60,7 @@ export class BookController {
 
   // Get BContent by id of BDetail
   @Get('getBContent/:id')
-  async getBContentById(@Param('id') id: string): Promise<string> {
+  async getBContentById(@Param('id') id: string): Promise<BContent | null> {
     const result = await this.bookService.getBContent(id);
     return result;
   }

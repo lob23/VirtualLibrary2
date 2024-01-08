@@ -30,11 +30,14 @@ export class BookService {
     return result;
   }
 
-  async getBContent(id: string): Promise<string> {
+  async getBContent(id: string): Promise<BContent | null> {
     const bDetail = await this.findById(id);
-    if( !bDetail ) return 'This book does not exist!!!';
+    if( !bDetail ) 
+    {
+      throw new Error ("the book's content does not existed.")
+    }
     const result = await this.bContentRepository.findOne({ where: { _id: new ObjectId(bDetail.BDetail_contentId) } });
-    return result.BContent_content;
+    return result;
   }
 
   async getComposingList(id: string): Promise<BDetail[] | null > {

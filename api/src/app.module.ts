@@ -10,6 +10,7 @@ import { RatingModule } from './rating/rating.module';
 import { CommentModule } from './comment/comment.module';
 import { RequestModule } from './request/request.module';
 import { ReportModule } from './report/report.module';
+import { NotificationModule } from './notification/notification.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ReportModule } from './report/report.module';
     CommentModule,
     RequestModule,
     ReportModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
