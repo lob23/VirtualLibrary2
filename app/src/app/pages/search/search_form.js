@@ -34,8 +34,8 @@ export default function search_form() {
             </div>
           </div>
         </div>
-        <div className=" absolute transform translate-y-[270px] translate-x-1/2 flex flex-row w-1/2  h-[60px] rounded-[12px]  overflow-hidden bg-white items-center drop-shadow-xl ">
-          <div className="ml-4">
+        <div className=" transform absolute translate-y-[270px] align-top translate-x-1/2 flex flex-row w-1/2  h-[60px] rounded-[12px]  overflow-hidden bg-white items-center drop-shadow-xl ">
+          <div className="mx-4">
             <svg width="30" height="30" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g id="Group 1937">
                 <path id="Stroke 455" d="M1.99965 35.854L11.0273 26.8263" stroke="#27219A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
@@ -45,13 +45,13 @@ export default function search_form() {
           </div>
 
           <input
-            className="h-full w-4/5 text-lg text-gray-700 border-0 focus:border-0 shadow-none  placeholder-blue/40 placeholder:pl-4 font-Gilroy_md bg-white"
+            className="h-full w-4/5 text-lg text-gray-700 border-0 focus:border-0 shadow-none  placeholder-blue/40 font-Gilroy_md bg-white"
             type="text"
             id="search"
             placeholder="Enter the story or the author"
           />
           <button
-            className="w-1/5 h-full bg-blue p-3 border-none shadow-none text-yellow text-xl font-Gilroy_md hover:bg-[#19156e]"
+            className="w-1/5 h-full bg-blue p-3 border-none shadow-none text-yellow text-xl font-Gilroy_md active:bg-[#19156e] hover:bg-[#19156e] focus:bg-[#19156e]"
             type="submit"
           >
             Search
