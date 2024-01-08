@@ -54,7 +54,7 @@ export default function latestUpdate() {
 
     return (
 
-        <div className="relative w-full h-fit overflow-y-auto overflow-hidden drop-shadow-xl ">
+        <div className="relative w-full h-fit overflow-y-auto overflow-hidden ">
 
             <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
                 <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
