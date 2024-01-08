@@ -57,6 +57,9 @@ export default function booksettingForm (){
 
     return (
         <>
+            <div>
+                <ToastContainer/>
+            </div>
             {!isLoading? 
 
                 <form className='w-3/5 max-w-md grid grid-cols-none grid-rows-3' onSubmit={handleSubmit}>

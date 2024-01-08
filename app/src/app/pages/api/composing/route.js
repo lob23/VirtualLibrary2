@@ -92,3 +92,34 @@ async function updateBookCover(id, filePath) {
       console.error('Error:', error.message);
     }
   }
+
+export async function UPDATE(req){
+    try{
+        const bid = req.nextURL.req.nextUrl.searchParams.get('bid');
+        const bookDetail = await req.json();
+        const queryString = config.BACKEND_URL + "/book/updateBDetail/" + bid;
+
+        const res = await axios.patch(queryString, bookDetail).then((response) => {
+            if (response.data){
+                return [true, response.data];
+            } else {
+                return [false, null];
+            }
+        })
+
+        if (res[0] == true){
+            return NextResponse.json({
+                stat: true,
+                book: res[1]
+            });
+        } else {
+            return NextResponse.json({
+                stat: false,
+                book:null
+            });
+        }
+
+    }catch(error){
+        throw new Error(error);
+    }
+} 

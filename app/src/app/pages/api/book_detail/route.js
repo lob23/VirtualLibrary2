@@ -3,6 +3,25 @@ import config from '../../../config'
 import axios from "axios"
 
 
+export async function GET(req){
+  try{
+    const bid = req.nextUrl.searchParams.get('bid');
+    const queryString = config.BACKEND_URL + "/book/getBDetail/" + bid;
+
+    const res = await axios.get(queryString).then((response) => {
+      if(response.data){
+        return [true, response.data];
+      } else {
+        return [false, response.error];
+      }
+    })
+
+    return NextResponse.json({stat: res[0], data: res[1]});
+  }catch(error){
+    return NextResponse.json({stat: false, data: error});
+  }
+}
+
 export const fetchBookById = async (id) => {
   const apiUrl = `http://localhost:3030/book/getBDetail/${id}`; // Dynamic URL with the book ID
 
