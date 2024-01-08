@@ -62,9 +62,9 @@ export default function booklist() {
     }, []);
 
     return (
-        <div className='w-full h-full flex flex-col overflow-x-auto'>
-            <p className="w-fit h-fit font-Gilroy_sb font-[60px] ">Library</p>
-            <ul className="grid grid-cols-2 gap-0 grid-flow list-none overflow-x-hidden ">
+        <div className='w-full h-full flex flex-col overflow-hidden overflow-y-auto'>
+            <p className="w-fit h-fit font-Gilroy_sb text-3xl text-blue ">Library</p>
+            <ul className="grid grid-cols-2 gap-x-0 gap-y-4 grid-flow list-none overflow-x-hidden mt-10 px-10 ">
                 {books.map((book, index) => (
                     <li key={index} className="w-full h-full overflow-hidden">
                         {/* Pass both book and author to the bookdetail component */}
