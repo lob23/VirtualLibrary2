@@ -103,6 +103,7 @@ export class BookController {
     @Param('id') id: string,
     @UploadedFile(
       new ParseFilePipeBuilder()
+      
         .addFileTypeValidator({ fileType: 'png' })
         .build(),
     )

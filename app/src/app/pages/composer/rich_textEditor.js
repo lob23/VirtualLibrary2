@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import React, { useEffect, useState, useRef } from "react";
 import { useQuill } from "react-quilljs";
 import { Button } from "@material-tailwind/react";
-import { pdfExporter } from "quill-to-pdf";
 import { Audio } from "react-loader-spinner";
 
 
@@ -83,12 +82,7 @@ export default function IndexPage() {
     }
   }, [quill]);
 
-  // Save the composing book. This allows the author to temporarily  save the progress and continue the composition later.
-  const save = async (e) => {
-    e.preventDefault()
-    const content_delta = await quill.getContents()
-    const content = await quill.root.innerHTML.toString()
-    console.log("content: ", content)
+  const saveContent = async (content) => {
     const res = await fetch("api/composing", {
       method: "PUT",
       headers: {
@@ -99,12 +93,23 @@ export default function IndexPage() {
         BDetail_contentId: bDetailID,
         BContent_content: content,
         BContent_pdf: null,
+        BDetail_image: null
       }),
     });
+    return res;
+  }
+
+  // Save the composing book. This allows the author to temporarily  save the progress and continue the composition later.
+  const save = async (e) => {
+    e.preventDefault()
+
+    const content = await quill.root.innerHTML.toString()
+    console.log("content: ", content)
+    const res = await saveContent(content)
     
     const status = await res.json().then(result => {return result})
     if (status.stat == true){
-      router.push("/pages/authorbookmanagement?uid="+author) // temporary. Later, it will redirect to the list of book that composed and being composed by the author.
+      router.push("/pages/authorbookmanagement?uid=" + author) 
     } else {
       toast.error("The system cannot save your progress", {
         position: toast.POSITION.TOP_CENTER,
@@ -113,61 +118,23 @@ export default function IndexPage() {
     }
   }
 
-  const convertToPDF = async (quill) => {
-    // Note: You can use this function. If there is problem when passing the quill data, just copy the two lines:
-    //const quillDelta = quill.getContents();
-    //const pdfBlob = await pdfExporter.generatePdf(quillDelta);
-
-    if(quill){
-      const quillDelta = await quill.getContents();
-      const pdfBlob = await pdfExporter.generatePdf(quillDelta);
-
-      return pdfBlob
-    }
-  }
-
-  const blobToBase64 = async (blob) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-  
-      reader.onloadend = () => {
-        const base64String = reader.result.split(',')[1];
-        resolve(base64String);
-      };
-  
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  }
-
   // submit for verification.
   const submit = async (e) => {
     // submit pdf file to database using fetch of UPDATE method.
     e.preventDefault()
-    const content_delta = await convertToPDF(quill)
     const content = await quill.root.innerHTML.toString()
+
     console.log("content: ", content)
-    const res = await fetch("api/composing", {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: id,
-        BDetail_contentId: bDetailID,
-        BContent_content: content,
-        BContent_pdf: await blobToBase64(content_delta),
-      }),
-    });
-    
-    const status = await res.json().then(result => {return result})
-    if (status.stat == true){
-      // router.push("/pages/authorbookmanagement?uid="+author) // temporary. Later, it will redirect to the list of book that composed and being composed by the author.
-      console.log('Complete, please check.')
+
+    const save = await saveContent(content);
+    const stat_save = await save.json().then(result => {return result});
+
+    if(stat_save.stat == true){
+      router.push("/pages/bookSubmission?uid=" + author + "&bid=" + bDetailID); 
     } else {
-      toast.error("The system cannot save your progress", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000
+      toast.error("Error", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000
       });
     }
   }
@@ -175,6 +142,9 @@ export default function IndexPage() {
 
   return (
     <>
+      <div>
+        <ToastContainer />
+      </div>
           {
           isLoading == true?
             <div className='flex items-center justify-center h-screen'>

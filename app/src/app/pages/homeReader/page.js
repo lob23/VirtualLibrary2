@@ -20,5 +20,17 @@ export default function homePage(){
             </div>
         </div>
 
+        // <div className="relative w-full h-full overflow-y-auto no-scrollbar overflow-hidden">
+        //     <div className="relative w-full h-auto z-30">
+        //         <_headerAuthor/>
+        //     </div>
+        //     <div className="relative w-full h-full overflow-hidden z-10">
+        //         <_homeAuthor/>
+        //     </div>
+        //     <div className="relative w-full h-auto overflow-hidden z-0 mt-5">
+        //         <_footer/>
+        //     </div>
+        // </div>
+
     );
 }
