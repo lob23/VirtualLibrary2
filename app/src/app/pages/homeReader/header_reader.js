@@ -1,15 +1,20 @@
 "use client";
 import React, {useState} from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 export default function header_reader(){
   const [notiClick, setNotiClick] = useState(false);
   const [createClick, setCreateClick] = useState(false);
+  
   const router = useRouter(); 
+  const searchParams = useSearchParams();
+
+  const uid = searchParams.get('uid');
+
   const handleNotiClick = () => { 
     setNotiClick(!notiClick);
   }
   const handleCreatorClick = () => {
-    router.push("/pages/request");
+    router.push("/pages/request?uid=" + uid);
   }
   const handleLibraryClick = () =>{
     router.push("/pages/search");    

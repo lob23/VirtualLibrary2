@@ -23,8 +23,8 @@ export default function AuthorHome() {
     router.push("/pages/authorbookmanagement?uid=" + _uid + "&bid=" + _bid);
   }
 
-  const handleReadingListClick = (_uid, _bid) => {
-    router.push("/pages/book_detail?uid=" + _uid + "&bid=" + _bid);
+  const handleReadingListClick = (_bid) => {
+    router.push("/pages/book_detail?uid=" + authorID + "&bid=" + _bid);
   }
 
   useEffect(() => {
@@ -110,8 +110,8 @@ export default function AuthorHome() {
         <ul className="relative flex flex-row gap-x-4 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
           {
             rlistBook.map((item)=>(
-              <li className="w-full h-full mr-10">
-                {_readingComp(item)}
+              <li className="w-full h-full mr-10" >
+                {_readingComp(authorID, item)}
               </li>
             ))
           }
@@ -147,7 +147,7 @@ export default function AuthorHome() {
         {
           books.map((book, index) => (
             <li key={index} className="w-full h-full mr-10" 
-            onClick={() => {handleReadingListClick(book.BDetail_authorID, book._id)}}>
+            onClick={() => {handleReadingListClick(book._id)}}>
               {_updateComp(book, authorList[index])}
             </li>
           ))

@@ -7,7 +7,7 @@ export default function commentSection() {
 
     const searchParams = useSearchParams();
     const uid = searchParams.get('uid');
-    const BDetail_id = searchParams.get('id') || "65996c6d8f8412f4f66b60df";
+    const BDetail_id = searchParams.get('bid');
 
     const [commentList, setList] = useState();
     const [content, setContent] = useState("");
@@ -48,6 +48,10 @@ export default function commentSection() {
         };
     
         prepare();
+
+        const interval = setInterval( prepare, 10000 );
+
+        return () => clearInterval(interval);
       }, [up]);
 
     return (

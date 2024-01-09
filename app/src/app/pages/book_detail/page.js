@@ -2,8 +2,16 @@
 import React from "react";
 import _detail from '@/app/pages/book_detail/detail'
 import _commentSection from "@/app/pages/book_detail/comment_section"
+import { useRouter } from "next/navigation";
 
 export default function book_detail_screen() {
+
+    const router = useRouter();
+
+    const handleBackClick = () => {
+        router.back();
+    }
+
     return (
         <>
             <div className="w-screen h-screen overflow-hidden ">
@@ -18,13 +26,12 @@ export default function book_detail_screen() {
 
                 <div className="flex flex-row w-full h-full">
                     <div className="w-3/4 h-full">
-                        <div className="flex flex-wrap w-[100px] h-[60px] px-10 items-center">
+                        <div className="flex flex-wrap w-[100px] h-[60px] px-10 items-center" onClick={handleBackClick}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5 mr-2 text-blue cursor-pointer transform -rotate-90"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
-                            // onClick={() => handleBackClick()} // Replace 
                             >
                                 <path
                                     fillRule="evenodd"
