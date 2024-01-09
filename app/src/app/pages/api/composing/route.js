@@ -33,7 +33,7 @@ export async function POST(req) {
 }
 
 export async function PUT(req) {
-    const {_id, BDetail_contentId, BContent_content, BContent_pdf} = await req.json()
+    const {_id, BContent_content, BContent_pdf} = await req.json()
     const put_obj = {
         BContent_content,
         ...(BContent_pdf !== null && { BContent_pdf }),
