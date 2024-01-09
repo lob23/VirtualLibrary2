@@ -6,7 +6,6 @@ import Carousel from "@/app/pages/wrapper/Carousel";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
 import _storyComp from "@/app/pages/wrapper/storyComp";
 import _dropdown from "@/app/pages/wrapper/Dropdown";
-import _header from "@/app/pages/wrapper/header";
 import _createOption from "@/app/pages/wrapper/createOption";
 
 // const slides=[

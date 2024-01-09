@@ -1,6 +1,6 @@
 import React from "react"; 
 import _homeLand from "@/app/pages/landing/landing_page"
-import _header from "@/app/pages/wrapper/header"
+import _header from "@/app/pages/search/header_search"
 import _footer from "@/app/pages/wrapper/footer"
 
 export default function home_land(){
