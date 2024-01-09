@@ -11,27 +11,27 @@ export default function footer() {
                 src="/image/logo_white.png"
                 alt="Logo_footer"
               ></img>
-              <h1 className="font-Gilroy_sb text-white text-5xl text-sp ml-[70px]">
+              <h1 className="font-Gilroy_sb text-white text-3xl ml-[70px]">
                 Literia
               </h1>
-              <p className="font-Gilroy_md w-2/3 h-fit text-white text-1xl test-sp my-5 leading-5">
+              <p className="font-Gilroy_md w-2/3 h-fit text-white text-sm test-sp mt-5 leading-5">
                 Explore a universe of literature and knowledge in the palm of your
                 hand with our library app – where stories and information await,
                 ready to inspire and educate.
               </p>
             </div>
             <div className="w-1/3 h-full flex flex-col mt-5">
-              <h1 className="font-Gilroy_sb text-white text-4xl w-full h-[40px]">
+              <h1 className="font-Gilroy_sb text-white text-2xl w-full h-fit">
                 About
               </h1>
-              <div className="flex gap-y-5 flex-col w-auto h-fit mt-5">
-                <h2 className="font-Gilroy_md text-white text-2xl">Careers</h2>
-                <h2 className="font-Gilroy_md text-white text-2xl">Privacy</h2>
-                <h2 className="font-Gilroy_md text-white text-2xl">Help</h2>
+              <div className="flex gap-y-5 flex-col w-fit h-fit mt-5">
+                <h2 className="font-Gilroy_md text-white text-base">Careers</h2>
+                <h2 className="font-Gilroy_md text-white text-base">Privacy</h2>
+                <h2 className="font-Gilroy_md text-white text-base">Help</h2>
               </div>
             </div>
             <div className="w-1/3 h-full flex flex-col mt-5">
-            <h1 className="font-Gilroy_sb text-white text-4xl w-full h-[40px]">
+            <h1 className="font-Gilroy_sb text-white text-2xl w-full h-[40px]">
               Contact us
             </h1>
             <div className="flex flex-row gap-x-10 w-full h-[50px] mt-5">
@@ -112,10 +112,10 @@ export default function footer() {
             </div>
 
             <div className="col-span-2 flex gap-y-3 flex-col w-auto h-auto">
-              <h2 className="font-Gilroy_md text-white text-xl">
+              <h2 className="font-Gilroy_md text-white text-lg">
                 Email: Literia@literia.com
               </h2>
-              <h2 className="font-Gilroy_md text-white text-xl">
+              <h2 className="font-Gilroy_md text-white text-lg">
                 Phone: +09 999 999 999
               </h2>
             </div>
@@ -139,7 +139,7 @@ export default function footer() {
             </svg>
           </div>
           <div className="w-auto h-auto mt-3">
-            <p className="font-Gilroy_sb text-white text-sp">
+            <p className="font-Gilroy_sb text-white text-sm">
               Access number: 200
             </p>
           </div>
