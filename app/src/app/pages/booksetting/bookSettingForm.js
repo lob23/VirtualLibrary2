@@ -39,7 +39,7 @@ export default function booksettingForm() {
             const stat = await res.json().then(result => { return result })
             if (stat.stat == true) {
                 setLoading(true)
-                router.push('/pages/composer?uid=' + uid + '&id=' + stat.data._id + '&bDetailID=' + stat.data._id)
+                router.push('/pages/composer?uid=' + uid + '&bid=' + stat.data._id)
             } else {
                 toast.error("error: " + stat, {
                     position: toast.POSITION.TOP_CENTER,

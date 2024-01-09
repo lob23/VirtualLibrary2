@@ -120,7 +120,7 @@ export default function authorBookManagement (){
     const handleOpenEditor = async (e, i) => {
         e.preventDefault()
         try {
-            router.push("/pages/composer?uid=" + author_id + "&id=" + bookcards[i]._id + "&bDetailID=" + bookcards[i]._id)
+            router.push("/pages/composer?uid=" + author_id + "&bid=" + bookcards[i]._id)
         }catch(error){
 
         }

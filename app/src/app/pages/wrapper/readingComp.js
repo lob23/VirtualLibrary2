@@ -1,12 +1,13 @@
 "use client";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 
 const Example = () => {
   return <ProgressBar completed={60} />;
 };
 
-export default function reading_list_comp(rbook){
+export default function reading_list_comp(uid, rbook){
 
     // const [book, setBook] = useState([]); 
     // useEffect(()=>{
@@ -22,6 +23,12 @@ export default function reading_list_comp(rbook){
 
     //     fetchRBook(); 
     // }, []); 
+
+    const router = useRouter();
+
+    const handleContinue = () => {
+        router.push("/pages/reading?uid=" + uid + "&bid=" + rbook._id);
+    }
 
     return(
         <>
@@ -50,7 +57,7 @@ export default function reading_list_comp(rbook){
                             60/100
                         </p>
                     </div>
-                    <div className="relative w-full h-full">
+                    <div className="relative w-full h-full" onClick={handleContinue}>
                         <button className="absolute font_Gilroy_sb right-10 bottom-1 w-auto px-8 py-1 button_white text-blue text-2xl">
                             Continue
                         </button>

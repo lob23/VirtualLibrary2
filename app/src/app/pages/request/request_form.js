@@ -8,7 +8,7 @@ export default function request_form() {
   const [inputValue, setInputValue] = useState("");
 
   const searchParams = useSearchParams()
-  const userId = searchParams.get('uid') || '658ffcb8054734a4453bdb0f'
+  const userId = searchParams.get('uid')
 
   const router = useRouter();
 
@@ -36,15 +36,15 @@ export default function request_form() {
       const stat = await res.json();
   
       if (stat.stat === true) {
-        router.push('/pages/home?uid=' + userId);
+        router.push('/pages/homeReader?uid=' + userId);
       } else {
-        toast.error("Error: " + stat.message, {
+        toast.error("Error: You are currently an author." + stat.message, {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
         });
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error: You are currently an author.", error);
       toast.error("An error occurred. Please try again later.", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,

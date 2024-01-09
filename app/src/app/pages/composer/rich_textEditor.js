@@ -20,11 +20,10 @@ export default function IndexPage() {
 
   const searchParams = useSearchParams()
  
-  const author = searchParams.get('uid') //user id
-  const id = searchParams.get('id') // this is book detail's id.
-  const bDetailID = searchParams.get('bDetailID') //ignore this
-  console.log("id: ", id);
-  console.log("bDetailID", bDetailID)
+  const uid = searchParams.get('uid') //user id
+  const bid = searchParams.get('bid') // this is book detail's id.
+  // const bDetailID = searchParams.get('bDetailID') //ignore this
+  console.log("bid: ", bid);
 
 
   // the following code responsible for fetching the content of the book, if any.
@@ -32,7 +31,7 @@ export default function IndexPage() {
   useEffect(() => {
 
     const fetchBookContent = async () => {
-      const res = await fetch("api/bookcontent?bid=" + id,{
+      const res = await fetch("api/bookcontent?bid=" + bid,{
         method: "GET",
       })
 
@@ -89,8 +88,7 @@ export default function IndexPage() {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        _id: id,
-        BDetail_contentId: bDetailID,
+        _id: bid,
         BContent_content: content,
         BContent_pdf: null,
         BDetail_image: null
@@ -109,7 +107,7 @@ export default function IndexPage() {
     
     const status = await res.json().then(result => {return result})
     if (status.stat == true){
-      router.push("/pages/authorbookmanagement?uid=" + author) 
+      router.push("/pages/authorbookmanagement?uid=" + uid) 
     } else {
       toast.error("The system cannot save your progress", {
         position: toast.POSITION.TOP_CENTER,
@@ -130,7 +128,7 @@ export default function IndexPage() {
     const stat_save = await save.json().then(result => {return result});
 
     if(stat_save.stat == true){
-      router.push("/pages/bookSubmission?uid=" + author + "&bid=" + bDetailID); 
+      router.push("/pages/bookSubmission?uid=" + uid + "&bid=" + bid); 
     } else {
       toast.error("Error", {
           position: toast.POSITION.TOP_CENTER,

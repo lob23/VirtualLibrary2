@@ -48,13 +48,19 @@ export default function Dropdown() {
                     </div>
                 </div>
                 <ul className="relative flex flex-col overflow-y-auto no-scrollbar w-full h-auto list-none">
-                    {
-                        notifyList && notifyList.map((item) => (
+                {
+                    notifyList && notifyList.length > 0 ? 
+                    (
+                        notifyList.map((item) => (
                             <li className="relative w-full h-full" key={item.id}>
                                 {_dropDrownComp(item)}
                             </li>
                         ))
-                    }
+                    ) : 
+                    (
+                        <li className="relative w-full h-full">You have no notification</li>
+                    )
+                }
                 </ul>
             </div>
         </>

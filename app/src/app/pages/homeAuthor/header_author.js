@@ -1,13 +1,18 @@
 "use client";
-import React , {useState} from "react";
+import React , { useState } from "react";
 import _dropDown from "@/app/pages/wrapper/Dropdown"
 import _createOption from "@/app/pages/wrapper/createOption"
-import { useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 const header_author = () => {
   const [notiClick, setNotiClick] = useState(false);
   const [createClick, setCreateClick] = useState(false);
+  
   const router = useRouter(); 
+  const searchParams = useSearchParams();
+
+  const uid = searchParams.get('uid');
+
   const handleNotiClick = () => { 
     setNotiClick(!notiClick);
   }
@@ -15,7 +20,7 @@ const header_author = () => {
     setCreateClick(!createClick);
   }
   const handleLibraryClick = () =>{
-    router.push("/pages/search");    
+    router.push("/pages/search?uid=" + uid);    
   }
 
     return(
