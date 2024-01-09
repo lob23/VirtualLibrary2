@@ -42,11 +42,11 @@ export default function detail() {
       const book = books;
       console.log("check", book.BDetail_title);
       return (
-        <div className='w-fit h-fit'>
+        <div className='w-[200px] h-[335px]'>
           <img
             src={`data:image/png;base64,${book.BDetail_image}`}
             alt={`Book cover for ${book.BDetail_title}`}
-            className='w-fit h-fit'
+            className='object-cover w-full h-full'
           />
 
         </div>
