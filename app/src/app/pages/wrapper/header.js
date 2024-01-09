@@ -2,7 +2,7 @@
 export default function header(){
     return(
     <>
-      <div className="row-span-3 flex flex-row relative w-screen h-[80px] pl-10 py-2 items-center bg-transparent">
+      <div className="row-span-3 flex flex-row relative w-screen h-[80px] pl-10 py-2 items-center bg-transparent cursor-pointer">
         <div className="absolute w-[60px] h-[60px]">
           <img
             className="object-contain w-full h-full"
@@ -10,10 +10,12 @@ export default function header(){
           </img>
         </div>
         <div className="grid grid-cols-3 gap-[60px] relative w-auto h-[100px] ml-[140px] pt-[42px] items-center">
-          <p className="font-Gilroy_sb text-grey text-xl">
+          <p className="font-Gilroy_sb text-grey text-opacity-60 text-xl hover:text-grey"
+             title="Home page">
             Home
           </p>
-          <p className="font-Gilroy_sb text-grey text-opacity-60 text-xl hover:text-grey">
+          <p className="font-Gilroy_sb text-grey text-opacity-60 text-xl hover:text-grey"
+             title="Search page">
             Library
           </p>
           <p className="font-Gilroy_sb text-grey text-opacity-60 text-xl hover:text-grey">

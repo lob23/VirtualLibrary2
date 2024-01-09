@@ -1,5 +1,20 @@
 "use client";
+import React, {useState} from "react";
+import { useRouter } from "next/navigation";
 export default function header_reader(){
+  const [notiClick, setNotiClick] = useState(false);
+  const [createClick, setCreateClick] = useState(false);
+  const router = useRouter(); 
+  const handleNotiClick = () => { 
+    setNotiClick(!notiClick);
+  }
+  const handleCreatorClick = () => {
+    router.push("/pages/request");
+  }
+  const handleLibraryClick = () =>{
+    router.push("/pages/search");    
+  }
+
     return(
     <>
       <div className="row-span-3 flex flex-row relative w-screen h-[80px] px-10 place-items-center shadow">
@@ -9,14 +24,17 @@ export default function header_reader(){
             src="/image/logo.png">
           </img>
         </div>
-        <div className="grid grid-cols-3 gap-[60px] relative w-auto h-full ml-[100px] items-center">
+        <div className="grid grid-cols-3 gap-[60px] relative w-auto h-full ml-[100px] items-center cursor-pointer">
           <p className="font-Gilroy_sb text-grey text-lg">
             Home
           </p>
-          <p className="font-Gilroy_sb text-grey text-opacity-60 text-lg hover:text-grey">
+          <p className="font-Gilroy_sb text-grey text-opacity-60 text-lg hover:text-grey"
+             onClick={handleLibraryClick}
+             title="Search page">
             Library
           </p>
-          <p className="font-Gilroy_sb text-grey text-opacity-60 text-lg hover:text-grey">
+          <p className="font-Gilroy_sb text-grey text-opacity-60 text-lg hover:text-grey"
+             onClick={handleCreatorClick}>
             Creator
           </p>
         </div>

@@ -40,7 +40,7 @@ export default function Dropdown() {
     return (
         <>
             <div className="relative w-[400px] h-[400px] bg-white rounded-2xl overflow-y-auto flex flex-col shadow-lg">
-                <div className=" w-full h-[110px] border-b-2 border-solid border-black border-opacity-30 border-t-0 border-x-0">
+                <div className=" w-full h-[80px] border-b-2 border-solid border-black border-opacity-30 border-t-0 border-x-0">
                     <div className=" w-full h-full top-0 bottom-0 flex items-center">
                         <h2 className="font-Gilroy_md text-blue text-3xl ml-7">
                             Notification

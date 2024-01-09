@@ -1,45 +1,68 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchData } from "../api/home_author/route";
-
+import { fetchData, fetchReadingList } from "../api/home_author/route";
+import { fetchAuthorById } from "../api/book_detail/route";
 import _footer from "@/app/pages/wrapper/footer";
 import _readingComp from "@/app/pages/wrapper/readingComp"
 import _updateComp from "@/app/pages/wrapper/updateComp";
 import Carousel from "@/app/pages/wrapper/Carousel";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
-const list1 = ['New', 'Money', 'Suit', 'Shiba', 'Tie','New']
+import { useSearchParams, useRouter } from "next/navigation";
 
 const slides=[
-  // "https://i.ibb.co/ncrXc2V/1.png",
-  // "https://i.ibb.co/B3s7v4h/2.png",
-  // "https://i.ibb.co/XXR8kzF/3.png",
-  // "https://i.ibb.co/yg7BSdM/4.png",
   <_authorStoryComp/>,
   <_authorStoryComp/>,
   <_authorStoryComp/>,
 ]
+
 export default function ReaderHome() {
-  const authorID = '658e859e6168987e9653af10';
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const authorID = searchParams.get('uid');
   const [books, setBooks] = useState([]);
   const [rlistBook, setRList] = useState([]); 
   const [loading, setLoading] = useState(true);
+  const [authorList, setAuthorList] = useState([]);
+
+  const handleReadingListClick = (_uid, _bid) => {
+    router.push("/pages/book_detail?uid=" + _uid + "&bid=" + _bid);
+  }
 
   useEffect(() => {
     const fetchDataFromApi = async () => {
       try {
 
         //book in latest update 
-        const result = await fetchData();
-        console.log( result );
-        setBooks(result);
-        setLoading(false);
+        const bookData = await fetchData();
+        setBooks(bookData);
+        console.log("Book reader home: ", bookData)
+
+        // Fetch author list 
+        if(bookData.length > 0){
+          const authorPromises = bookData.map(async(book) => {
+            if('BDetail_authorID' in book){
+              return fetchAuthorById(book.BDetail_authorID);
+            } else{
+              console.error('Home BDetail_authorID is undefined in a book');
+              return null;
+            }
+          });
+
+          const authorData = await Promise.all(authorPromises);
+          setAuthorList(authorData);
+          console.log('Author details:', authorData);
+        }else{
+          console.error('No books found in the array');
+        }
+
+
 
         // Fetch reading list
         const rlistData = await fetchReadingList(authorID);
         const rbook = await rlistData.json()
         setRList(rbook);
-        console.log('Reading list:', rbook);
-
+        console.log('Reading list home reader:', rbook);
+        setLoading(false); 
       } catch (error) {
         // Handle error
         console.error('Error:', error);
@@ -50,36 +73,7 @@ export default function ReaderHome() {
     fetchDataFromApi();
   }, []);
   return (
-    // <div>
-    //   {loading ? (
-    //     // Loading state
-    //     <p>Loading...</p>
-    //   ) : (
-    //     // Display books
-    //     <ul>
-    //       {books.map((book) => (
-    //         <li key={book._id} style={{ color: 'black' }}>
-    //           <h3>{book.BDetail_title}</h3>
-    //           <p style={{ color: 'black' }}>Genre: {book.BDetail_genre}</p>
-    //           <p style={{ color: 'black' }}>Author: {book.BDetail_authorID}</p>
-    //           <p style={{ color: 'black' }}>Average Rating: {book.BDetail_averageRating}</p>
-    //           {book.BDetail_image && (
-    //             <img
-    //               src={`data:image/png;base64,${book.BDetail_image}`}
-    //               alt={`Book cover for ${book.BDetail_title}`}
-    //               style={{ maxWidth: '100%', maxHeight: '200px' }}
-    //             />
-    //           )}
-    //           {/* Add more details as needed */}
-    //         </li>
-    //       ))}
-    //     </ul>
-    //   )}
-    // </div>
-    
-    
 <>
-{books.length > 0 && (
       <div className="relative w-full h-fit overflow-y-auto overflow-hidden">
       <div className="grid grid-flow-col grid-cols-2 relative w-full h-[900px] bg-white overflow-x-hidden">
         <div className="relative col-span-1 w-full h-fit top-1/4 bottom-0 ml-10">
@@ -113,7 +107,7 @@ export default function ReaderHome() {
           <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
             {
               rlistBook.map((item)=>(
-                <li className="relative w-full h-full">
+                <li className="w-full h-full mr-10">
                   {_readingComp(item)}
                 </li>
               ))
@@ -128,9 +122,10 @@ export default function ReaderHome() {
             </h2>
             <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
               {
-                books.map((item)=>(
-                  <li className="relative w-full h-full">
-                    {_updateComp(item)}
+                books.map((book, index)=>(
+                  <li className="w-full h-full mr-10"
+                      onClick={()=> handleReadingListClick(book.BDetail_authorID, book._id)}>
+                    {_updateComp(book, authorList[index])}
                   </li>
                 ))
               }
@@ -155,7 +150,6 @@ export default function ReaderHome() {
         </div>
       </div>  
     </div>
-    )}
 </>
     
   
