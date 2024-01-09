@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect,useCallback} from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,6 +6,12 @@ import { Audio } from 'react-loader-spinner'
 import { pdfExporter } from "quill-to-pdf";
 import { useQuill } from "react-quilljs";
 import Quill from 'quill';
+import axios from 'axios';
+import config from '@/app/config';
+import FormData from 'form-data';
+import fs from 'fs';
+
+
 
 function htmlToDelta(html) {
     const div = document.createElement('div');
@@ -21,6 +27,7 @@ function htmlToDelta(html) {
   }
 
 export default function submission(){
+    
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -32,7 +39,7 @@ export default function submission(){
     const [bookGenre, setBookGenre] = useState("");
     const [bookLanguage, setBookLanguage] = useState("");
     const [bookDescription, setBookDescription] = useState("");
-    const [bookCover, setBookCover] = useState("");
+    const [bookCover, setBookCover] = useState(null);
     const [isLoading, setLoading] = useState(true)
 
     const getBContent = async() => {
@@ -83,33 +90,53 @@ export default function submission(){
         // submit pdf file to database using fetch of UPDATE method.
         e.preventDefault()
         try{
-            const bContent = await getBContent()
-            const content_delta = await convertToPDF(quill, bContent)
-            console.log("content: ", bContent)
-            console.log(content_delta)
-            const res = await fetch("api/composing", {
-            method: "PUT",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-                _id: bid,
-                BDetail_contentId: bid,
-                BContent_content: bContent,
-                BContent_pdf: await blobToBase64(content_delta)
-            }),
-            });
-            
-            const status = await res.json().then(result => {return result})
-            if (status.stat == true){
-            // router.push("/pages/authorbookmanagement?uid="+author) // temporary. Later, it will redirect to the list of book that composed and being composed by the author.
-                console.log('Complete, please check.')
-                router.push("/pages/authorbookmanagement?uid=" + uid)
+            if (bookTitle && bookCover && bookDescription && bookLanguage && bookGenre ){
+                const bContent = await getBContent()
+                const content_delta = await convertToPDF(quill, bContent)
+
+                const res = await fetch("api/composing", {
+                    method: "PUT",
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        _id: bid,
+                        BDetail_contentId: bid,
+                        BContent_content: bContent,
+                        BContent_pdf: await blobToBase64(content_delta),
+                    }),
+                });
+
+                console.log("BOOK COVER: ", bookCover)
+
+                const formData = new FormData();
+                formData.append('file',  bookCover, {
+                    filename: 'BookCover.png',
+                    contentType: 'image/png'
+                });
+
+                const imgRes = await axios.patch(config.BACKEND_URL + `/book/updateBDetailImage/${bid}`,formData, {
+                    maxContentLength: 10000000,
+                    maxBodyLength: 10000000
+                });
+                
+                const status = await res.json().then(result => {return result})
+                if (status.stat == true){
+                // router.push("/pages/authorbookmanagement?uid="+author) // temporary. Later, it will redirect to the list of book that composed and being composed by the author.
+                    console.log('Complete, please check.')
+                    console.log("stat: ", status.stat)
+                    router.push("/pages/authorbookmanagement?uid=" + uid)
+                } else {
+                    toast.error("The system cannot save your progress", {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 3000
+                    });
+                }
             } else {
-                toast.error("The system cannot save your progress", {
+                toast.error("Please full fill the information.", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 3000
-                });
+                })
             }
         } catch(error){
             toast.error("Error: " + error, {
@@ -118,6 +145,15 @@ export default function submission(){
             });
         }
       }
+
+    const onImageUploadChange = (event) => {
+        console.log("hehe")
+        if (event.target.files && event.target.files[0]) {
+            console.log("hihi")
+
+            setBookCover(event.target.files[0]);
+          }
+    }
       
 
     useEffect(() => {
@@ -147,16 +183,21 @@ export default function submission(){
         </div>
         {!isLoading? 
 
-            <form className='w-3/5 max-w-md grid grid-cols-none grid-rows-10' onSubmit={submit}>
-                <input className='row-span-1' type='text' value={bookTitle} placeholder="Book Title" onChange={(e) => {setBookTitle(e.target.value)}}/>
-                <input className='row-span-1' type='text' value={bookGenre} placeholder="Book Genre" onChange={(e) => {setBookGenre(e.target.value)}}/>
-                <select defaultValue={bookLanguage} onChange={(e) => {setBookLanguage(e.target.value)}} className="row-span-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="english">English</option>
-                        <option value="vietnamese">Vietnamese</option>
-                </select>
-                <input className='row-span-1' type='text' value={bookDescription} placeholder="Book Description" onChange={(e) => {setBookDescription(e.target.value)}}/>
-                <button type='submit'>Submit</button>
-            </form>
+        <form className='w-3/5 max-w-md grid grid-cols-none grid-rows-10' onSubmit={submit}>
+            <input className='row-span-1' type='text' value={bookTitle} placeholder="Book Title" onChange={(e) => {setBookTitle(e.target.value)}}/>
+            
+            <input className='row-span-1' type='text' value={bookGenre} placeholder="Book Genre" onChange={(e) => {setBookGenre(e.target.value)}}/>
+            
+            <select defaultValue={bookLanguage} onChange={(e) => {setBookLanguage(e.target.value)}} className="row-span-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="english">English</option>
+                    <option value="vietnamese">Vietnamese</option>
+            </select>
+
+            <input className='row-span-1' type='text' value={bookDescription} placeholder="Book Description" onChange={(e) => {setBookDescription(e.target.value)}}/>
+            
+            <input className='row-span-1' type='file' value={undefined} placeholder='Book Cover' onChange={(e) => {onImageUploadChange(e)}}/>
+            <button type='submit'>Submit</button>
+        </form>
 
         : 
 

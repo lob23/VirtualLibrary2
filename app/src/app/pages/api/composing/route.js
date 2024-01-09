@@ -33,7 +33,6 @@ export async function POST(req) {
 }
 
 export async function PUT(req) {
-
     const {_id, BDetail_contentId, BContent_content, BContent_pdf} = await req.json()
     const put_obj = {
         BContent_content,
@@ -42,6 +41,7 @@ export async function PUT(req) {
 
     try{
         const queryString = config.BACKEND_URL + "/book/updateBContent/" + _id
+
 
         const res = await axios.patch(queryString, put_obj)
             .then(response => {
@@ -69,7 +69,7 @@ export async function GET(req){
 
 }
 
-async function updateBookCover(id, filePath) {
+export async function updateBookCover(id, filePath) {
     const queryString = config.BACKEND_URL + '/book/updateBDetailImage/' + id;
     const formData = new FormData();
   

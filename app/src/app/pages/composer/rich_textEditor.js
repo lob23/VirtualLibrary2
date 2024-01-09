@@ -93,6 +93,7 @@ export default function IndexPage() {
         BDetail_contentId: bDetailID,
         BContent_content: content,
         BContent_pdf: null,
+        BDetail_image: null
       }),
     });
     return res;
