@@ -2,39 +2,39 @@
 export default function footer() {
   return (
     <>
-      <div className="relative w-full h-[480px] px-[70px] bg-blue bg-fixed overflow-hidden">
-        <div className="grid grid-cols-3 w-full h-[350px] justify-center">
-          <div className="flex flex-col static w-[250px] h-auto px-5 py-12">
-            <img
-              className="absolute w-[60px] h-[60px]"
-              src="/image/logo_white.png"
-              alt="Logo_footer"
-            ></img>
-            <h1 className="font-Gilroy_sb text-white text-5xl text-sp ml-[70px] py-[16px]">
-              Literia
-            </h1>
-            <p className="font-Gilroy_md w-auto h-[100px] text-white text-1xl test-sp leading-5 py-[40px]">
-              Explore a universe of literature and knowledge in the palm of your
-              hand with our library app – where stories and information await,
-              ready to inspire and educate.
-            </p>
-          </div>
-
-          <div className="flex flex-col static w-[250px] h-[400px] px-5 py-[73px]">
-            <h1 className="font-Gilroy_sb text-white text-4xl w-full h-[40px]">
-              About
-            </h1>
-            <div className="col-span-3 flex gap-y-3 flex-col w-auto h-[200px] py-[30px]">
-              <h2 className="font-Gilroy_md text-white text-2xl">Careers</h2>
-              <h2 className="font-Gilroy_md text-white text-2xl">Privacy</h2>
-              <h2 className="font-Gilroy_md text-white text-2xl">Help</h2>
+      <div className="relative w-full h-[300px] px-[70px] bg-blue bg-fixed overflow-hidden">
+        <div className="flex flex-col w-full h-2/3">
+          <div className="flex flex-row">
+            <div className="w-1/3 h-full flex flex-col mt-5">
+              <img
+                className="absolute w-[60px] h-[60px]"
+                src="/image/logo_white.png"
+                alt="Logo_footer"
+              ></img>
+              <h1 className="font-Gilroy_sb text-white text-5xl text-sp ml-[70px]">
+                Literia
+              </h1>
+              <p className="font-Gilroy_md w-2/3 h-fit text-white text-1xl test-sp my-5 leading-5">
+                Explore a universe of literature and knowledge in the palm of your
+                hand with our library app – where stories and information await,
+                ready to inspire and educate.
+              </p>
             </div>
-          </div>
-          <div className="flex flex-col static w-[250px] h-auto px-5 py-[73px]">
+            <div className="w-1/3 h-full flex flex-col mt-5">
+              <h1 className="font-Gilroy_sb text-white text-4xl w-full h-[40px]">
+                About
+              </h1>
+              <div className="flex gap-y-5 flex-col w-auto h-fit mt-5">
+                <h2 className="font-Gilroy_md text-white text-2xl">Careers</h2>
+                <h2 className="font-Gilroy_md text-white text-2xl">Privacy</h2>
+                <h2 className="font-Gilroy_md text-white text-2xl">Help</h2>
+              </div>
+            </div>
+            <div className="w-1/3 h-full flex flex-col mt-5">
             <h1 className="font-Gilroy_sb text-white text-4xl w-full h-[40px]">
               Contact us
             </h1>
-            <div className="row-span-3 flex flex-row gap-x-10 w-full h-[50px] py-5">
+            <div className="flex flex-row gap-x-10 w-full h-[50px] mt-5">
               <span className="object-cover w-auto h-auto bg-transparent border-none">
                 <svg
                   width="40"
@@ -111,7 +111,7 @@ export default function footer() {
               </span>
             </div>
 
-            <div className="col-span-2 flex gap-y-3 flex-col w-auto h-auto py-[10px]">
+            <div className="col-span-2 flex gap-y-3 flex-col w-auto h-auto">
               <h2 className="font-Gilroy_md text-white text-xl">
                 Email: Literia@literia.com
               </h2>
@@ -119,27 +119,32 @@ export default function footer() {
                 Phone: +09 999 999 999
               </h2>
             </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col w-full h-full">
+            <div className=" w-full h-auto transform scale-100 md:scale-25">
+            <svg
+              width="90%"
+              height="3"
+              viewBox="0 0 1798 3"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0.311157 1.28174L1797.9 1.28158"
+                stroke="white"
+                stroke-width="2"
+              />
+            </svg>
+          </div>
+          <div className="w-auto h-auto mt-3">
+            <p className="font-Gilroy_sb text-white text-sp">
+              Access number: 200
+            </p>
           </div>
         </div>
-        <div className="absolute w-full h-auto transform scale-100 md:scale-25">
-          <svg
-            width="80%"
-            height="3"
-            viewBox="0 0 1798 3"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.311157 1.28174L1797.9 1.28158"
-              stroke="white"
-              stroke-width="2"
-            />
-          </svg>
-        </div>
-        <div className="relative w-auto h-auto py-[40px]">
-          <p className="font-Gilroy_sb text-white text-sp">
-            Access number: 200
-          </p>
+
         </div>
       </div>
     </>

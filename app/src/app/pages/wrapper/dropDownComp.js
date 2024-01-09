@@ -1,9 +1,9 @@
 export default function dropDrownComp(notification){
     console.log("Notification: ", notification);
     return(
-        <div className="relative w-[400px] h-[90px] bg-white border-b-2 border-solid border-black border-opacity-30 border-t-0 border-x-0">
-            <div className="absolute flex flex-col w-9/10 h-3/4 top-2 bottom-2 my-auto ml-7 justify-between">
-                <h3 className="font-Gilroy_md text-lg text-blue flex flex-row">
+        <div className="relative w-[400px] h-[80px] bg-white border-b-2 border-solid border-black border-opacity-30 border-t-0 border-x-0">
+            <div className="absolute flex flex-col w-9/10 h-3/4 top-1 bottom-1 my-auto ml-7 justify-center">
+                <h3 className="font-Gilroy_md text-lg text-blue">
                     {notification.Notification_message}
                 </h3>
                 <p className="font-Gilroy_md text-md text-blue">

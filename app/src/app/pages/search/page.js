@@ -17,9 +17,6 @@ import { fetchData } from "../api/home_author/route";
 
 
 export default function search_screen() {
-
-
-
     return (
         <div className='flex flex-col w-full h-full overflow-hidden overflow-y-auto z-0'>
             <div className="w-full h-fit z-30 bg-cream">

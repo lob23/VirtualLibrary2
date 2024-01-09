@@ -19,11 +19,11 @@ export default function updateComp(book, author){
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent group-hover:to-cream rounded-3xl"/>
             <div className="absolute inset-0 flex flex-col mx-5 text-left translate-y-[20%] group-hover:translate-y-0 transition-all duration-500">
                 <div className="relative w-full h-full">
-                    <div className="absolute w-full h-1/3 bottom-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute w-full h-2/5 bottom-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <h3 className="font-Gilroy_bd text-xl text-black ">
                             {book.BDetail_genre}
                         </h3>
-                        <h1 className="text-2xl font-Gilroy_sb text-blue leading-tight w-2/3">
+                        <h1 className="text-2xl font-Gilroy_sb text-blue leading-tight w-fit">
                             {book.BDetail_title}
                         </h1>
                         {author && (
