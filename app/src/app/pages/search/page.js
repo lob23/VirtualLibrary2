@@ -2,16 +2,10 @@
 import React, { useEffect, useState } from "react";
 
 import _searchForm from "@/app/pages/search/search_form"
-import _header from "@/app/pages/wrapper/header"
+import _header from "@/app/pages/search/header_search"
 import _footer from "@/app/pages/wrapper/footer"
-
 import booklist from './book_list';
 import latestUpdate from "./latest_update";
-
-
-
-
-
 import { fetchData } from "../api/home_author/route";
 
 

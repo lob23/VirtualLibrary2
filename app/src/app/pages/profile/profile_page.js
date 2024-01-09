@@ -2,15 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { fetchProfile } from "../api/profile/route";
+import { useSearchParams } from "next/navigation";
 
 export default function profilePage(){
     const id = '658e859e6168987e9653af10'; 
+    const searchParams = useSearchParams(); 
+
     const [profile, setProfile] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const uid = searchParams.get('uid');
     useEffect(() => {
         const fetchDataFromApi = async () => {
           try {
-            const profileData = await fetchProfile(id); 
+            const profileData = await fetchProfile(uid); 
             setProfile(profileData);
             console.log("Profile: ", profileData); 
             setLoading(false);
@@ -20,7 +25,7 @@ export default function profilePage(){
         };
         fetchDataFromApi();
       
-    }, [id]); 
+    }, [uid]); 
 
     return(
         <>
