@@ -183,21 +183,116 @@ export default function submission(){
         </div>
         {!isLoading? 
 
-        <form className='w-3/5 max-w-md grid grid-cols-none grid-rows-10' onSubmit={submit}>
-            <input className='row-span-1' type='text' value={bookTitle} placeholder="Book Title" onChange={(e) => {setBookTitle(e.target.value)}}/>
+        // <form className='w-3/5 max-w-md grid grid-cols-none grid-rows-10' onSubmit={submit}>
+        //     <input className='row-span-1' type='text' value={bookTitle} placeholder="Book Title" onChange={(e) => {setBookTitle(e.target.value)}}/>
             
-            <input className='row-span-1' type='text' value={bookGenre} placeholder="Book Genre" onChange={(e) => {setBookGenre(e.target.value)}}/>
             
-            <select defaultValue={bookLanguage} onChange={(e) => {setBookLanguage(e.target.value)}} className="row-span-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="english">English</option>
-                    <option value="vietnamese">Vietnamese</option>
-            </select>
+        //     <input className='row-span-1' type='text' value={bookGenre} placeholder="Book Genre" onChange={(e) => {setBookGenre(e.target.value)}}/>
+            
+        //     <select defaultValue={bookLanguage} onChange={(e) => {setBookLanguage(e.target.value)}} className="row-span-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        //             <option value="english">English</option>
+        //             <option value="vietnamese">Vietnamese</option>
+        //     </select>
 
-            <input className='row-span-1' type='text' value={bookDescription} placeholder="Book Description" onChange={(e) => {setBookDescription(e.target.value)}}/>
+        //     <input className='row-span-1' type='text' value={bookDescription} placeholder="Book Description" onChange={(e) => {setBookDescription(e.target.value)}}/>
             
-            <input className='row-span-1' type='file' value={undefined} placeholder='Book Cover' onChange={(e) => {onImageUploadChange(e)}}/>
-            <button type='submit'>Submit</button>
-        </form>
+        //     <input className='row-span-1' type='file' value={undefined} placeholder='Book Cover' onChange={(e) => {onImageUploadChange(e)}}
+        //     lang='en'/>
+        //     <button type='submit'>Submit</button>
+        // </form>
+
+        <div className='relative w-screen h-screen bg-registerbg bg-fixed overflow-hidden'>
+            <div className="absolute  -bottom-20 -right-20  w-[300px] h-[300px]">
+          <img
+            className="object-contain w-full h-full  "
+            src="/image/reg_cir.png"
+          ></img>
+        </div>
+        <div>
+          <ToastContainer/>
+        </div>
+        <div className="absolute bottom-[20px] left-[120px]  w-[120px] h-[150px]">
+          <img
+            className="object-contain w-full h-full "
+            src="/image/reg_cir.png"
+          ></img>
+        </div>
+        <div className="absolute top-[60px] right-[120px]  w-[80px] h-[80px]">
+          <img
+            className="object-contain w-full h-full "
+            src="/image/reg_cir.png"
+          ></img>
+        </div>
+            <div className='absolute bg-white w-2/3 h-2/3 flex flex-col justify-center items-center rounded-2xl px-10 py-8 top-0 right-0 left-0 bottom-0 m-auto'>
+                <h2 className='font-Gilroy_sb text-3xl text-blue self-start'>
+                    Upload your story
+                </h2>
+                <h3 className='font-Gilroy_sb text-xl text-blue mt-5 self-start'>
+                    Add detail 
+                </h3>
+                <div className='flex flex-row w-full h-1/3 gap-x-10 items-center mt-5'>
+                    <div className='flex flex-col w-1/2 h-full gap-y-5 justify-center'>
+                        <div className='flex flex-col w-full h-full'>
+                            <p className='font-Gilroy_sb text-blue text-base'>
+                                Title
+                            </p>
+                            <input className='w-full border-blue mt-3'
+                            type='text'
+                            value={bookTitle}
+                            placeholder="Book Title" onChange={(e) => {setBookTitle(e.target.value)}}>
+                            </input> 
+                        </div>
+                        <div className='flex flex-col w-full h-full'>
+                            <p className='font-Gilroy_sb text-blue text-base'>
+                                Genre
+                            </p>
+                            <input className='w-full border-blue mt-3'
+                            type='text'
+                            value={bookGenre}
+                            placeholder='Book Genre' onChange={(e) => {setBookGenre(e.target.value)}}>
+                            </input>
+                        </div>
+                    </div>
+                    <div className='flex flex-col w-1/2 h-full gap-y-5 justify-center'>
+                        <div className='flex flex-col w-full h-full'>
+                            <p className='font-Gilroy_sb text-blue text-base'>
+                                Language 
+                            </p>
+                            <select defaultValue={bookLanguage} onChange={(e) => {setBookLanguage(e.target.value)}} className="w-full mt-3 h-5"
+                            placeholder={bookLanguage}>
+                                <option value="english">English</option>
+                                <option value="vietnamese">Vietnamese</option>
+                            </select>
+                        </div>
+                        <div className='flex flex-col w-full h-full'>
+                            <p className='font-Gilroy_sb text-blue text-base'>
+                                Image
+                            </p>
+                            <input className='w-full mt-3' type='file' value={undefined} placeholder='Book Cover' onChange={(e) => {onImageUploadChange(e)}}
+                            lang='en'/>
+                        </div>
+                    </div>
+                </div>
+                <div className='flex flex-col w-full h-1/3 gap-x-5'>
+                    <p className='font-Gilroy_sb text-base text-blue'>
+                        Description
+                    </p>
+                    <div className='relative w-full h-4/5 mt-3 border-b-2 border-solid border-blue border-opacity-40'>
+                        <input className='w-full h-fit absolute outline-none border-none focus:border-0 focus:outline-0'  
+                        type='text' 
+                        value={bookDescription} 
+                        onChange={(e)=>setBookDescription(e.target.value)}>
+                        </input>
+                    </div> 
+                </div>
+                <div className='flex flex-row w-full h-[50px] mt-5 justify-end'>
+                    <button className='w-fit h-fit rounded-full bg-blue px-5 py-2 text-white text-base self-end'>
+                        Submit
+                    </button>
+                </div>
+            </div>
+
+        </div>
 
         : 
 

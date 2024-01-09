@@ -60,7 +60,6 @@ export default function booksettingForm() {
             <div>
                 <ToastContainer/>
             </div>
-            {!isLoading? 
             {!isLoading ?
                 <div className="w-auto h-full flex flex-col">
                     <p className="font-Gilroy_sb text-blue text-3xl">Upload your story</p>

@@ -106,7 +106,7 @@ export default function authorRequestList(){
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                     Verify the request {req._id}
                     </Typography>
-                    <button onClick={}>Verif</button>
+                    {/* <button onClick={}>Verif</button> */}
                 </Box>
                 </Modal>
             </div>
