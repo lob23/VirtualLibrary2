@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
+import config from '../../../config'
+
 export const fetchData = async () => {
     const apiUrl = 'http://localhost:3030/book/getListByStatus/verified'; // replace with your actual API endpoint
 

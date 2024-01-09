@@ -66,6 +66,15 @@ export class RListService {
 
     if (!bDetail) throw new Error('This book does not exist');
 
+    const rlistDetail = await this.rListRepository.findOne({
+      where: {
+        RList_userId: createRListDto.RList_userId,
+        RList_bookId: createRListDto.RList_bookId
+      },
+    });
+
+    if (rlistDetail) return null;
+
     // const result = await this.update(new UpdateRListDto(createRListDto));
     const result = await this.update(
       createRListDto.RList_userId,

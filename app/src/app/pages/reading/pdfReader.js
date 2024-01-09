@@ -11,12 +11,14 @@ import { Viewer } from '@react-pdf-viewer/core';
 // Plugins
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 // Import styles
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { Audio } from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const base64toBlob = (data) => {
     const pdfContentType = 'application/pdf';
@@ -36,13 +38,33 @@ const base64toBlob = (data) => {
 };
 
 export default function _readingpage() {
+
     const searchParams = useSearchParams();
+    const router = useRouter();
+
     // `base64String` is the given base 64 data
     const [_url, seturl] = useState("");
-    const [base64String, setBase64String] = useState("")
+    const [base64String, setBase64String] = useState("");
+    const [currentpage, setCurrentPage] = useState(1);
+    const [initPage, setinitPage] = useState(1)
+    const [isLoading, setLoading] = useState(true)
 
     const uid = searchParams.get("uid");
     const bDetailID = searchParams.get("bid");
+
+    const createRlist = async() => {
+        const res = await fetch("api/readingBook", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+                RList_userId: uid,
+                RList_bookId: bDetailID,
+                RList_currentPage: 1
+            })
+        })
+    }
 
     useEffect(() => {
         const fetchingBookContents = async () => {
@@ -50,38 +72,95 @@ export default function _readingpage() {
                 method: "GET",
             });
             const result = await res.json();
-            if (result.stat == true) {
+            if (result.stat == true && result.bookContent.BContent_pdf) {
                 console.log("book content: ", result.bookContent.BContent_pdf)
                 setBase64String("data:application/pdf;base64," + result.bookContent.BContent_pdf);
+
             } else {
                 console.log("error", result.error)
             }
         }
         fetchingBookContents()
-    }, [])
+    }, []);
+
     useEffect(() => {
-        const blob = base64toBlob(base64String);
-        const turl = URL.createObjectURL(blob);
-        seturl(turl)
-    }, [base64String]);
+            if (base64String){
+                const blob = base64toBlob(base64String);
+                const turl = URL.createObjectURL(blob);
+                seturl(turl)
+            }
+    }, [base64String])
+
+
+    useEffect(() => {
+        const fetchCurrentPage = async () => {
+            const res = await fetch("api/readingBook?uid=" + uid + "&bid=" + bDetailID, {
+                method: "GET",
+            }).then((response) => {return response})
+
+            const res_data = await res.json()
+
+            if (res_data.stat == true){
+                if (res_data.data){
+                    setCurrentPage(res_data.data);
+                    setinitPage(res_data.data);
+                } else {
+                }
+                setLoading(false)
+            } else {
+                console.log("ERROR", res_data.data)
+                setLoading(false)
+            }
+        }
+        createRlist()
+        fetchCurrentPage()
+    })
 
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
+    
+    const onBackClick = async() => {
+        const res = await fetch("api/readingBook", {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+                RList_userId: uid,
+                RList_bookId: bDetailID,
+                RList_currentPage: currentpage
+            })
+        })
+
+        const res_data = await res.json();
+        console.log("data", res_data.data)
+        if (res_data.stat == true || initPage == currentpage){
+            router.push("/pages/book_detail?uid=" + uid+ "&bid=" + bDetailID)
+        } else {
+            toast.error("ERROR: " + res_data.data, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 3000
+            })
+        }
+    } 
 
     return (
         <>
-            {base64String ?
+
+            {base64String && !isLoading ?
                 <div className='h-screen w-screen flex flex-col items-center overflow-y-hidden'>
+                    <ToastContainer />
                     <div className='h-fit'>
                         <img
                             className="object-contain"
                             src="/image/logo.png">
                         </img>
+                        <button onClick={onBackClick}>Back to View Book Detail</button>
                     </div>
                     <div className='h-4/5 w-4/5'>
                         <Viewer fileUrl={_url} plugins={[
                             // Register plugins
-                            defaultLayoutPluginInstance
-                        ]} />
+                            defaultLayoutPluginInstance,
+                        ]} initialPage={initPage} onPageChange={(e) => {setCurrentPage(e.currentPage)}} />
                     </div>
                 </div>
                 :
@@ -95,7 +174,7 @@ export default function _readingpage() {
                     />
                 </div>
             }
-
+        
         </>
 
     )
