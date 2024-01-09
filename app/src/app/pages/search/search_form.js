@@ -9,6 +9,7 @@ import {
   MaterialReactTable,
   useMaterialReactTable,
 } from 'material-react-table';
+import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 
 
 
@@ -46,43 +47,49 @@ export default function search_form() {
         book &&
         book.BDetail_title &&
         book.BDetail_title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setSearchResults(filteredResults);
-  }, [searchQuery, books]);
+  useEffect(() => {
+          // Filter books based on the search query
+          const filteredResults = books.filter(
+            (book) =>
+              book &&
+              book.BDetail_title &&
+              book.BDetail_title.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          setSearchResults(filteredResults);
+        }, [searchQuery, books]);
 
 
 
 
 
 
-  return (
-    <>
-      <div className=" flex flex-col w-full h-auto items-center ">
-        <div class="relative w-screen h-[300px] bg-cream ">
-          <h1 className="static font-Gilroy_md text-blue text-4xl text-center pt-40 mb-30 pb-5 z-15">
-            Choose your stories
-          </h1>
-          <div class="z-5">
-            <div className="absolute -bottom-20 -right-20 w-[200px] h-[200px] transform rotate-90">
-              <img className="object-center  w-full h-full "
-                src="/image/reg_cir.png">
-              </img>
-            </div>
+    return (
+      <>
+        <div className=" flex flex-col w-full h-auto items-center ">
+          <div class="relative w-screen h-[300px] bg-cream ">
+            <h1 className="static font-Gilroy_md text-blue text-4xl text-center pt-40 mb-30 pb-5 z-15">
+              Choose your stories
+            </h1>
+            <div class="z-5">
+              <div className="absolute -bottom-20 -right-20 w-[200px] h-[200px] transform rotate-90">
+                <img className="object-center  w-full h-full "
+                  src="/image/reg_cir.png">
+                </img>
+              </div>
 
-            <div className="absolute -bottom-25 -left-40 w-[300px] h-[300px] transform -rotate-90">
-              <img className="object-center w-full h-full "
-                src="/image/reg_cir.png">
-              </img>
-            </div>
+              <div className="absolute -bottom-25 -left-40 w-[300px] h-[300px] transform -rotate-90">
+                <img className="object-center w-full h-full "
+                  src="/image/reg_cir.png">
+                </img>
+              </div>
 
-            <div className="absolute -bottom-20 left-10 w-40 h-40 transform -rotate-120">
-              <img className="object-center w-full h-full"
-                src="/image/reg_cir.png" />
+              <div className="absolute -bottom-20 left-10 w-40 h-40 transform -rotate-120">
+                <img className="object-center w-full h-full"
+                  src="/image/reg_cir.png" />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col w-full h-full transform absolute translate-y-[270px] items-center ">
-          <div className=" flex flex-row w-1/2  h-[60px] rounded-[12px]  overflow-hidden bg-white items-center drop-shadow-xl ">
+          <div className=" transform absolute translate-y-[270px] align-top translate-x-1/2 flex flex-row w-1/2  h-[60px] rounded-[12px]  overflow-hidden bg-white items-center drop-shadow-xl ">
             <div className="mx-4">
               <svg width="30" height="30" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Group 1937">
@@ -100,33 +107,35 @@ export default function search_form() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-
-          </div>
-          {searchQuery && (
+            <button
+              className="w-1/5 h-full bg-blue p-3 border-none shadow-none text-yellow text-xl font-Gilroy_md active:bg-[#19156e] hover:bg-[#19156e] focus:bg-[#19156e]"
+              type="button"
+              onClick={handleSearch}
+            >
+              Search
+            </button>
             <div>
               {searchResults.map((result) => (
+
                 <div key={result._id}>
                   <p>{result.BDetail_title}</p>
                 </div>
               ))}
             </div>
-          )}
+          </div>
+
 
 
         </div>
 
 
 
-      </div>
 
 
 
 
-
-
-
-    </>
-  );
-}
+      </>
+    );
+  }
 
 
