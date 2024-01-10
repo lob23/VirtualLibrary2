@@ -55,12 +55,23 @@ export default function request_form() {
   return (
     <>
       <div className="w-screen h-screen grid grid-flow-col grid-cols-3">
-        <div className='relative col-span-1 bg-cream'>
-          <div className='absolute pt-10 pl-10 w-[60px] h-[60px]'>
+        <div className='relative col-span-1 flex flex-col bg-cream '>
+          <div className='w-[60px] h-[60px] ml-[40px] mt-[40px]'>
             <img className='object-cover w-full h-full'
                  src='/image/logo.png'>
             </img>
           </div>
+          <div className='w-full h-full flex flex-col justify-center items-center'>
+            <div className='w-2/3 h-fit mx-10'>
+              <img className='object-cover w-full h-full'
+                    src="/image/reg_img1.png">
+              </img>
+            </div>
+            <p className='font-Gilroy_sb text-xl text-blue mt-[40px]'>
+              Become the author of your own stories
+            </p>
+          </div>
+          
         </div>
         
         <div className='relative col-span-2 bg-white flex flex-col'>
@@ -70,14 +81,17 @@ export default function request_form() {
               Author Submit form 
             </p>
             
-            <input type='text'
-            value={inputValue}
-            onChange={handleInputChange}
-            className='w-full h-1/2 border-l-rose-950 mt-10'/>
+            <div className='relative w-full h-4/5 mt-3 border-b-1 border-solid border-blue border-opacity-40'>
+                <input className='w-full h-fit absolute outline-none border-none focus:border-0 focus:outline-0'  
+                type='text' 
+                value={inputValue}
+                onChange={handleInputChange}>
+                </input>
+            </div> 
             
             <button
             onClick={handleSubmit} 
-            className='w-full h-auto button_yellow px-8 py-2 mt-10'>
+            className='w-full h-auto button_yellow px-8 py-2 mt-10 text-blue text-xl'>
               Submit
             </button>
 

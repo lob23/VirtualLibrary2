@@ -163,7 +163,7 @@ export default function authorBookManagement (){
                                     </Typography>
                                 </div>
                                 <div className="flex w-full shrink-0 gap-2 md:w-max">
-                                    <button className="flex items-center gap-3" >
+                                    <button className="flex items-center gap-3" onClick={() => {router.push("/pages/booksetting?uid=" + author_id)}}>
                                         New Book
                                     </button>
                                 </div>

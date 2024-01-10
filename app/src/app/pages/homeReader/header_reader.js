@@ -1,6 +1,7 @@
 "use client";
 import React, {useState} from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+
 export default function header_reader(){
   const [notiClick, setNotiClick] = useState(false);
   const [createClick, setCreateClick] = useState(false);
@@ -17,7 +18,7 @@ export default function header_reader(){
     router.push("/pages/request?uid=" + uid);
   }
   const handleLibraryClick = () =>{
-    router.push("/pages/search");    
+    router.push("/pages/search?uid=" + uid);    
   }
 
     return(

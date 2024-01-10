@@ -8,6 +8,7 @@ import _updateComp from "@/app/pages/wrapper/updateComp";
 import Carousel from "@/app/pages/wrapper/Carousel";
 import _authorStoryComp from "@/app/pages/wrapper/authorStoryComp";
 import { useSearchParams, useRouter } from "next/navigation";
+import {Circles} from "react-loader-spinner";
 
 const slides=[
   <_authorStoryComp/>,
@@ -16,9 +17,11 @@ const slides=[
 ]
 
 export default function ReaderHome() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const uid = searchParams.get('uid');
+
   const [books, setBooks] = useState([]);
   const [rlistBook, setRList] = useState([]); 
   const [loading, setLoading] = useState(true);
@@ -28,13 +31,16 @@ export default function ReaderHome() {
     router.push("/pages/book_detail?uid=" + uid + "&bid=" + _bid);
   }
 
+  const handleOngoingReadingClick = (_bid) => {
+    router.push("/pages/reading?uid=" + uid + "&bid=" + _bid)
+  }
+
   useEffect(() => {
     const fetchDataFromApi = async () => {
       try {
 
         //book in latest update 
         const bookData = await fetchData();
-        setBooks(bookData);
         console.log("Book reader home: ", bookData)
 
         // Fetch author list 
@@ -50,17 +56,19 @@ export default function ReaderHome() {
 
           const authorData = await Promise.all(authorPromises);
           setAuthorList(authorData);
+          
           console.log('Author details:', authorData);
         }else{
           console.error('No books found in the array');
         }
 
-
-
         // Fetch reading list
         const rlistData = await fetchReadingList(uid);
-        const rbook = await rlistData.json()
+        const rbook = await rlistData.json();
+
+        setBooks(bookData);
         setRList(rbook);
+
         console.log('Reading list home reader:', rbook);
         setLoading(false); 
       } catch (error) {
@@ -73,84 +81,95 @@ export default function ReaderHome() {
     fetchDataFromApi();
   }, []);
   return (
-<>
-      <div className="relative w-full h-fit overflow-y-auto overflow-hidden">
-      <div className="grid grid-flow-col grid-cols-2 relative w-full h-[900px] bg-white overflow-x-hidden">
-        <div className="relative col-span-1 w-full h-fit top-1/4 bottom-0 ml-10">
-          <h1 className="font-Gilroy_sb text-blue text-7xl w-full h-1/4">
-            New & <br/>   Trending
-          </h1>
-          <p className="font-Gilroy_md text-black text-md w-1/2 mt-3 text-[20px] leading-8 overflow-hidden">
-          Indulge in the latest and most captivating books, where every page invites you on a journey of imagination, intrigue, and discovery.
-          </p>
-        </div>
-        <div className="col-span-1 relative w-full h-full overflow-hidden">
-          <div className="absolute w-full h-full  overflow-hidden">
-            <img className="object-cover w-full h-full  overflow-hidden"
-                  src="/image/blur.png">
-            </img>            
-          </div> 
-          
-          <div className="absolute w-full h-full left-0 right-0 top-0 bottom-0 overflow-hidden">
-            <img className="object-scale-down w-full h-full  overflow-hidden"
-                  src="/image/book_reader_home.png">
-            </img>
-          </div>
+    <>
+    <div className="grid grid-flow-col grid-cols-2 relative w-full h-[900px] bg-white overflow-x-hidden">
+      <div className="relative col-span-1 w-full h-fit top-1/4 bottom-0 ml-10">
+        <h1 className="font-Gilroy_sb text-blue text-7xl w-full h-1/4">
+          New & <br/>   Trending
+        </h1>
+        <p className="font-Gilroy_md text-black text-md w-1/2 mt-3 text-[20px] leading-8 overflow-hidden">
+        Indulge in the latest and most captivating books, where every page invites you on a journey of imagination, intrigue, and discovery.
+        </p>
+      </div>
+      <div className="col-span-1 relative w-full h-full overflow-hidden">
+        <div className="absolute w-full h-full  overflow-hidden">
+          <img className="object-cover w-full h-full  overflow-hidden"
+                src="/image/blur.png">
+          </img>            
+        </div> 
+        
+        <div className="absolute w-full h-full left-0 right-0 top-0 bottom-0 overflow-hidden">
+          <img className="object-scale-down w-full h-full  overflow-hidden"
+                src="/image/book_reader_home.png">
+          </img>
         </div>
       </div>
-        
-      <div className="relative w-full h-full overflow-hidden">
-        <div className="relative w-full h-1/2 overflow-hidden ml-10">
-          <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
-            Your reading list
-          </h2>
-          <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
-            {
-              rlistBook.map((item)=>(
-                <li className="w-full h-full mr-10">
-                  {_readingComp(uid, item)}
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-  
-        
-          <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
-            <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
-              Latest update
-            </h2>
-            <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
-              {
-                books.map((book, index)=>(
-                  <li className="w-full h-full mr-10"
-                      onClick={()=> handleReadingListClick(book._id)}>
-                    {_updateComp(book, authorList[index])}
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        
-        
-      </div>
-  
-      <div className=" w-full h-full overflow-hidden">
-        <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ml-10">
-            Author's story
-        </h2>
-        <div className="w-full h-full">
-          <Carousel autoSlide = {true} autoSlideInterval={5000}>
-            {slides.map((s)=>(
-                <div className=" w-full h-full z-50">
-                    {s}
-                </div>
-            ))}
-          </Carousel>
-        </div>
-      </div>  
     </div>
-</>
+    {loading?
+        <div className="flex flex-wrap w-full h-full justify-center items-center mb-20">
+          <Circles
+          height="40"
+          width="40"
+          radius="9"
+          color="blue"
+          ariaLabel="loading"
+          />
+        </div>
+        :
+          <div className="relative w-full h-fit overflow-y-auto overflow-hidden">            
+          <div className="relative w-full h-full overflow-hidden">
+            <div className="relative w-full h-1/2 overflow-hidden ml-10">
+              <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
+                Your reading list
+              </h2>
+              <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
+                {
+                  rlistBook.map((item)=>(
+                    <li className="w-full h-full mr-10" onClick={() => handleOngoingReadingClick(item._id)}>
+                      {_readingComp(uid, item)}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+      
+            
+              <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
+                <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
+                  Latest update
+                </h2>
+                <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
+                  {
+                    books.map((book, index)=>(
+                      <li className="w-full h-full mr-10"
+                          onClick={()=> handleReadingListClick(book._id)}>
+                        {_updateComp(book, authorList[index])}
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            
+            
+          </div>
+      
+          <div className=" w-full h-full overflow-hidden">
+            <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ml-10">
+                Author's story
+            </h2>
+            <div className="w-full h-full">
+              <Carousel autoSlide = {true} autoSlideInterval={5000}>
+                {slides.map((s)=>(
+                    <div className=" w-full h-full z-50">
+                        {s}
+                    </div>
+                ))}
+              </Carousel>
+            </div>
+          </div>  
+        </div>
+  }
+    </>
     
   
   );

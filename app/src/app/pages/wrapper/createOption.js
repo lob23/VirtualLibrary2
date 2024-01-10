@@ -1,12 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
-export default function createOption(){
+export default function createOption(uid){
     const router = useRouter(); 
     const handleOptionComposeClick = () => {
-        router.push("/pages/composer");
+        router.push("/pages/booksetting?uid=" + uid);
     }
     const handleYourListClick = () => {
-        router.push("/pages/authorbookmanagement"); 
+        router.push("/pages/authorbookmanagement?uid=" + uid); 
     }
     return(
         <>

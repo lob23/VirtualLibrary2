@@ -9,6 +9,7 @@ import Quill from 'quill';
 import axios from 'axios';
 import config from '@/app/config';
 import FormData from 'form-data';
+import Checkbox from '@mui/material/Checkbox';
 import fs from 'fs';
 
 
@@ -40,7 +41,9 @@ export default function submission(){
     const [bookLanguage, setBookLanguage] = useState("");
     const [bookDescription, setBookDescription] = useState("");
     const [bookCover, setBookCover] = useState(null);
-    const [isLoading, setLoading] = useState(true)
+    const [isLoading, setLoading] = useState(true);
+    const [privacyVerified, setPrivacyVerified] = useState(false);
+    const [copyrightVerified, setCopyrightVerified] = useState(false);
 
     const getBContent = async() => {
         const res = await fetch("api/bookcontent?bid=" + bid,{
@@ -285,6 +288,10 @@ export default function submission(){
                         </input>
                     </div> 
                 </div>
+                <FormGroup>
+                    <FormControlLabel required label="I confirm that I wrote this book myself and take full legal responsibility. The content is entirely original and not copied from anywhere else." />
+                    <FormControlLabel required control={<Checkbox />} label="I grant Literia the right to use my article and share the copyright" />
+                </FormGroup>
                 <div className='flex flex-row w-full h-[50px] mt-5 justify-end'>
                     <button className='w-fit h-fit rounded-full bg-blue px-5 py-2 text-white text-base self-end'>
                         Submit
