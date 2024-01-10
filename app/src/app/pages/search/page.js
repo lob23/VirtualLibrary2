@@ -19,7 +19,7 @@ export default function search_screen() {
             <div className="w-full h-fit overflow-hidden z-30">
                 {_searchForm()}
             </div>
-            {/* <div className=" w-full h-fit overflow-hidden z-20">
+            <div className=" w-full h-fit overflow-hidden z-20">
                 {latestUpdate()}
             </div>
             <div className="w-9/10 gap-y-5  overflow-x-hidden px-10 mt-10 z-20">
@@ -27,7 +27,7 @@ export default function search_screen() {
             </div>
             <div className="w-full h-fit">
                 {_footer()}
-            </div> */}
+            </div>
 
 
 
