@@ -86,14 +86,23 @@ export default function _readingPage() {
             {base64String ?
                 <div className='h-screen w-screen flex flex-col items-center overflow-y-hidden'>
                     <ToastContainer />
-                    <div className='h-fit'>
+                    <div className='h-fit my-2 flex flex-row'>
                         <img
                             className="object-contain"
                             src="/image/logo.png">
                         </img>
-                        <button onClick={onBackClick}>Back to View Book Detail</button>
-                        <button className="bg-green text-white px-3 py-1 rounded-md" onClick={handleAccept}>Accept</button>
-                        <button className="bg-red text-white px-3 py-1 rounded-md" onClick={handleReject}>Reject</button>
+                        <div className='flex flex-col w-[200px] h-fit ml-10'>
+                            <button className='h-fit w-full font-Gilroy_sb py-2 px-4 bg-blue outline-none text-white text-md rounded-2xl border-none cursor-pointer hover:bg-opacity-30' 
+                                    onClick={onBackClick}>
+                                Back to View Book Detail
+                            </button>
+                            <div className='flex flex-row mt-2 gap-x-2'>
+                            <button className="w-[100px] bg-green text-white px-3 py-2 text-md rounded-2xl self-end outline-none border-none cursor-pointer hover:bg-opacity-50" onClick={handleAccept}>Accept</button>
+                            <button className="w-[100px] bg-red text-white px-3 py-2 text-md rounded-2xl self-end outline-none border-none cursor-pointer hover:bg-opacity-50" onClick={handleReject}>Reject</button>
+                            </div>
+                            
+                        </div>
+                        
                     </div>
                     <div className='h-4/5 w-4/5'>
                         <Viewer fileUrl={_url} plugins={[
