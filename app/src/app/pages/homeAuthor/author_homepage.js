@@ -27,6 +27,10 @@ export default function AuthorHome() {
     router.push("/pages/book_detail?uid=" + authorID + "&bid=" + _bid);
   }
 
+  const handleonGoingRead = (_bid) => {
+    router.push("/pages/reading?uid=" + authorID + "&bid=" + _bid)
+  }
+
   useEffect(() => {
     const fetchDataBook = async () => {
       try {
@@ -110,7 +114,7 @@ export default function AuthorHome() {
         <ul className="relative flex flex-row gap-x-4 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
           {
             rlistBook.map((item)=>(
-              <li className="w-full h-full mr-10" >
+              <li className="w-full h-full mr-10" onClick={() => {handleonGoingRead(item._id)}}>
                 {_readingComp(authorID, item)}
               </li>
             ))

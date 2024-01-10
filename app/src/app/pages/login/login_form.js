@@ -36,7 +36,13 @@ export default function login_form() {
       });
 
     } else {
-      router.push("/pages/home")
+      if (user){
+        if (user.User_authenticationLevel == 1)
+          router.push("/pages/homeReader?uid=" + user._id);
+        else if (user.User_authenticationLevel == 2)
+          router.push("/pages/homeAuthor?uid=" + user._id);
+        else router.push("/pages/homeLiberian?uid=" + user._id);
+      }
     }
     setNotification("abc");
   };

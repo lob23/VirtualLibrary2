@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useMemo } from "react";
 import { fetchData, fetchAuthorById } from "../api/search/route";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Link } from "react-scroll"
 import _footer from "@/app/pages/wrapper/footer"
 
@@ -14,18 +15,29 @@ import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 
 
 export default function search_form() {
+  const searchParams = useSearchParams();
+  const router = useRouter()
+
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
 
+  const uid = searchParams.get('uid');
+
   const [searchQuery, setSearchQuery] = useState("");
+
+  const refBDtail = (_bid) => {
+    console.log("RefBDTAIL")
+    router.push("/pages/book_detail?uid=" + uid + "&bid=" + _bid);
+  }
+
   useEffect(() => {
     const fetchDataFromApi = async () => {
       try {
 
         //book in latest update 
         const result = await fetchData();
-        console.log(result);
+        const usr = await fetchAuthorById(uid);
         setBooks(result);
         setLoading(false);
 
@@ -50,11 +62,6 @@ export default function search_form() {
     );
     setSearchResults(filteredResults);
   }, [searchQuery, books]);
-
-
-
-
-
 
   return (
     <>
@@ -82,7 +89,7 @@ export default function search_form() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-1/2 h-full transform absolute translate-y-[270px] items-center  ">
+        <div className="flex flex-col w-1/2 h-auto transform absolute translate-y-[270px] items-center  ">
           <div className=" flex flex-row w-full  h-[60px] rounded-[12px]  overflow-hidden bg-white items-center drop-shadow-xl ">
             <div className="mx-4">
               <svg width="30" height="30" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,17 +108,18 @@ export default function search_form() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-
-
           </div>
 
 
           {searchQuery && (
-            <div className="bg-white w-full h-fit rounded-md drop-shadow-lg">
+            <div className="bg-white w-full h-fit rounded-md drop-shadow-lg z-50">
               {searchResults.map((result) => (
                 <div key={result._id}>
-                  <Link key={result._id} className="cursor-pointer">
+                  <Link key={result._id} onClick={() => {refBDtail(result._id)}} className="cursor-pointer">
                     <p className="font-Gilroy_md text-blue/70 text-[12px] py-4 px-5 hover:text-blue">
+                <div key={result._id} className="z-50">
+                  <Link key={result._id} className="cursor-pointer">
+                    <p className="font-Gilroy_md text-blue/70 text-[12px] py-4 px-5 hover:text-blue z-50">
                       {result.BDetail_title}
                     </p>
                   </Link>
@@ -136,6 +144,5 @@ export default function search_form() {
     </>
   );
 }
-
 
 

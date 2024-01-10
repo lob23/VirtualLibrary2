@@ -1,17 +1,44 @@
 "use client";
+import {useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { fetchAuthorById } from "../api/search/route";
+
 export default function header(){
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const [user, setUser] = useState(null)
+
+    const uid = searchParams.get("uid")
+
+    useEffect(() => {
+      const fetchUser = async () => {
+        const usr = await fetchAuthorById(uid);
+        setUser(usr);
+      }
+      fetchUser();
+    })
+
+    const backToHome = () => {
+      console.log("user", user)
+      if (user.User_authenticationLevel == 1)
+        router.push("/pages/homeReader?uid=" + user._id);
+      else (user.User_authenticationLevel == 2)
+        router.push("/pages/homeAuthor?uid=" + user._id);
+    }
+
     return(
     <>
       <div className="row-span-3 flex flex-row relative w-screen h-[80px] pl-10 py-2 items-center bg-transparent cursor-pointer">
         <div className="absolute w-[50px] h-[50px]">
           <img
             className="object-contain w-full h-full"
-            src="/image/logo.png">
+            src="/image/logo.png"
+            onClick={()=>backToHome()}>
           </img>
         </div>
         <div className="grid grid-cols-3 gap-[60px] relative w-auto h-[100px] ml-[140px] pt-[42px] items-center">
           <p className="font-Gilroy_sb text-grey text-opacity-60 text-lg hover:text-grey"
-             title="Home page">
+             title="Home page" onClick={() => {backToHome()}}>
             Home
           </p>
           <p className="font-Gilroy_sb text-grey text-lg hover:text-grey"
@@ -32,8 +59,6 @@ export default function header(){
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M1.69153 18.251C1.69153 9.05331 9.14809 1.59674 18.3458 1.59674C27.5435 1.59674 35 9.05331 35 18.251C35 27.4487 27.5435 34.9053 18.3458 34.9053C9.14809 34.9053 1.69153 27.4487 1.69153 18.251V18.251Z" stroke="#444444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-
-
         </div>
       </div>
     </>

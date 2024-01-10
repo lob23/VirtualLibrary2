@@ -16,9 +16,11 @@ const slides=[
 ]
 
 export default function ReaderHome() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const uid = searchParams.get('uid');
+
   const [books, setBooks] = useState([]);
   const [rlistBook, setRList] = useState([]); 
   const [loading, setLoading] = useState(true);
@@ -26,6 +28,10 @@ export default function ReaderHome() {
 
   const handleReadingListClick = (_bid) => {
     router.push("/pages/book_detail?uid=" + uid + "&bid=" + _bid);
+  }
+
+  const handleOngoingReadingClick = (_bid) => {
+    router.push("/pages/reading?uid=" + uid + "&bid=" + _bid)
   }
 
   useEffect(() => {
@@ -107,7 +113,7 @@ export default function ReaderHome() {
           <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
             {
               rlistBook.map((item)=>(
-                <li className="w-full h-full mr-10">
+                <li className="w-full h-full mr-10" onClick={() => handleOngoingReadingClick(item._id)}>
                   {_readingComp(uid, item)}
                 </li>
               ))
