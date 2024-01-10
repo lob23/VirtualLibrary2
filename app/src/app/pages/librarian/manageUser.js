@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getList} from '@/app/pages/api/librarian/manageUser/route'
+import { getList } from '@/app/pages/api/librarian/manageUser/route'
 
 export default function manageUser() {
 
@@ -31,35 +31,63 @@ export default function manageUser() {
 
     return (
         <>
-    <div className="relative w-[800px] h-[400px] bg-white rounded-2xl overflow-y-auto flex flex-col shadow-lg">
-        <div className="w-full h-[80px] border-b-2 border-solid border-black border-opacity-30 border-t-0 border-x-0">
-            <div className="w-full h-full top-0 bottom-0 flex items-center">
-                <h2 className="font-Gilroy_md text-blue text-3xl ml-7">
-                    Request
+            <div className="relative w-screen h-screen bg-white overflow-hidden flex flex-wrap items-center justify-center">
+                <h2 className="absolute font-Gilroy_sb text-3xl text-blue top-6 left-[120px]">
+                    Manage User
                 </h2>
-            </div>
-        </div>
-        <ul className="relative flex flex-col overflow-y-auto no-scrollbar w-full h-auto list-none">
-            {UList && UList.length > 0 ? (
-                UList.map((item) => (
-                    <li className="relative w-full h-full flex items-center justify-between" key={item.id}>
-                        <div>
-                            {item._id}
+                <div className="flex flex-col w-4/5 h-fit rounded-2xl  overflow-hidden border-b-1 border-blue border-solid border-opacity-60 mx-auto mt-5">
+                    <div className="flex flex-row w-full h-[40px] bg-red bg-opacity-50 items-center justify-center ">
+                        <div className="w-1/4 text-center">
+                            <p className="font-Gilroy_sb text-lg text-blue">
+                                User ID
+                            </p>
                         </div>
-                        <div>
-                            {item.User_firstname} {item.User_lastname}
+                        <div className="w-1/4 text-center">
+                            <p className="font-Gilroy_sb text-lg text-blue">
+                                User Name
+                            </p>
                         </div>
-                        <div>
-                            ...Another attribute
+                        <div className="w-1/4 text-center">
+                            <p className="font-Gilroy_sb text-lg text-blue">
+                                User Email
+                            </p>
                         </div>
-                    </li>
-                ))
-            ) : (
-                <li className="relative w-full h-full">You have no user</li>
-            )}
-        </ul>
-    </div>
-</>
+                        <div className="w-1/4 text-center">
+                            <p className="font-Gilroy_sb text-lg text-blue">
+                                User Type
+                            </p>
+                        </div>
+                    </div>
+
+                    {UList && UList.length > 0 ? (
+                        UList.map((item) => (
+                            item.User_authenticationLevel !== 3 && (
+                                <li className=" w-auto h-fit flex flex-row items-center  style-none justify-center text-center " key={item.id}>
+                                    <div className="w-1/4 h-auto border-black border-solid border-opacity-50 border-y-0 border-l-0 border-r-1 py-4">
+                                        {item._id}
+                                    </div>
+                                    <div className="w-1/4 h-auto border-black border-solid border-opacity-50 border-y-0 border-l-0 border-r-1 py-4" >
+                                        {item.User_firstname} {item.User_lastname}
+                                    </div>
+                                    <div className="w-1/4 h-auto border-black border-solid border-opacity-50 border-y-0 border-l-0 border-r-1 py-4">
+                                        {item.User_email}
+                                    </div>
+                                    <div className="w-1/4 h-auto py-4">
+                                        {item.User_authenticationLevel === 2 ? "Author" : item.User_authenticationLevel === 1 ? "Reader" : ""}
+                                    </div>
+                                </li>
+                            )
+                        ))
+                    ) : (
+                        <div className="relative w-full h-full flex items-center justify-center ">
+                            <h2 className="font-Gilroy_sb text-3xl text-blue">
+                                You have no users currently
+                            </h2>
+                        </div>
+                    )}
+                </div>
+            </div >
+        </>
 
     );
 }

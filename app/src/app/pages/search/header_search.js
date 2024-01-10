@@ -45,9 +45,6 @@ export default function header(){
              title="Search page">
             Library
           </p>
-          <p className="font-Gilroy_sb text-grey text-opacity-60 text-lg hover:text-grey">
-            Creator
-          </p>
         </div>
        
         <div className="grid grid-flow-col grid-cols-2 absolute right-2 gap-[40px] w-[100px] h-[100px] mr-[50px] pt-[40px] items-center">
