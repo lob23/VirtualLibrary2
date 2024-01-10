@@ -1,14 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
 
-
 import _updateComp from "@/app/pages/wrapper/updateComp"
 import { fetchData, fetchAuthorById } from "../api/search/route";
-
-
-
+import {Circles} from "react-loader-spinner";
+import { useRouter, useSearchParams} from "next/navigation";
 
 export default function latestUpdate() {
+
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const uid = searchParams.get('uid');
 
     const [books, setBooks] = useState([]);
 
@@ -21,8 +24,6 @@ export default function latestUpdate() {
                 // Fetch book details
                 const bookData = await fetchData();
                 setBooks(bookData);
-                console.log('Book details:', bookData);
-
 
                 if (bookData.length > 0) {
                     const authorPromises = bookData.map(async (book) => {
@@ -53,32 +54,39 @@ export default function latestUpdate() {
     }, []);
 
     return (
+        <>
+        {loading?
+                <div className="flex flex-wrap w-full h-full justify-center items-center mt-10">
+                    <Circles
+                    height="40"
+                    width="40"
+                    radius="9"
+                    color="blue"
+                    ariaLabel="loading"
+                    />
+                </div>
+            :
+                <div className="relative w-full h-fit overflow-y-auto overflow-hidden ">
 
-        <div className="relative w-full h-fit overflow-y-auto overflow-hidden ">
-
-            <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
-                <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
-                    Latest update
-                </h2>
-                <ul className="relative flex flex-row gap-x-4 overflow-x-auto no-scrollbar w-full h-full list-none mt-10 ">
-                    {
-                        books.map((item, index) => (
-                            <li className="w-full h-full mr-10">
-                                {_updateComp(item, authorList[index])}
-                            </li>
-                        ))
-                    }
-                </ul>
-            </div>
-
-
-
-
-
-
-            {/* <div className="absolute w-full h-[2000px] bg-yellow"></div>
-     */}
-        </div>
+                    <div className="relative w-full h-1/2 overflow-hidden ml-10 mt-10">
+                        <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ">
+                            Latest update
+                        </h2>
+                        <ul className="relative flex flex-row gap-x-4 overflow-x-auto no-scrollbar w-full h-full list-none mt-10 ">
+                            {
+                                books.map((item, index) => (
+                                    <li className="w-full h-full mr-10" onClick={() => {router.push("/pages/book_detail?uid=" + uid + "&bid=" + item._id)}} >
+                                        {_updateComp(item, authorList[index])}
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                {/* <div className="absolute w-full h-[2000px] bg-yellow"></div>
+                */}
+                </div>
+        }
+    </>
     );
 }
 
