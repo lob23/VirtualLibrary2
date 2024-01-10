@@ -52,7 +52,7 @@ export default function _readingpage() {
     const uid = searchParams.get("uid");
     const bDetailID = searchParams.get("bid");
 
-    const createRlist = async() => {
+    const createRlist = async () => {
         const res = await fetch("api/readingBook", {
             method: "POST",
             headers: {
@@ -84,11 +84,11 @@ export default function _readingpage() {
     }, []);
 
     useEffect(() => {
-            if (base64String){
-                const blob = base64toBlob(base64String);
-                const turl = URL.createObjectURL(blob);
-                seturl(turl)
-            }
+        if (base64String) {
+            const blob = base64toBlob(base64String);
+            const turl = URL.createObjectURL(blob);
+            seturl(turl)
+        }
     }, [base64String])
 
 
@@ -96,12 +96,12 @@ export default function _readingpage() {
         const fetchCurrentPage = async () => {
             const res = await fetch("api/readingBook?uid=" + uid + "&bid=" + bDetailID, {
                 method: "GET",
-            }).then((response) => {return response})
+            }).then((response) => { return response })
 
             const res_data = await res.json()
 
-            if (res_data.stat == true){
-                if (res_data.data){
+            if (res_data.stat == true) {
+                if (res_data.data) {
                     setinitPage(res_data.data);
                 } else {
                 }
@@ -116,8 +116,8 @@ export default function _readingpage() {
     })
 
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
-    
-    const onBackClick = async() => {
+
+    const onBackClick = async () => {
         const res = await fetch("api/readingBook", {
             method: "PUT",
             headers: {
@@ -131,15 +131,15 @@ export default function _readingpage() {
         })
 
         const res_data = await res.json();
-        if (res_data.stat == true || initPage == currentpage){
-            router.push("/pages/book_detail?uid=" + uid+ "&bid=" + bDetailID)
+        if (res_data.stat == true || initPage == currentpage) {
+            router.push("/pages/book_detail?uid=" + uid + "&bid=" + bDetailID)
         } else {
             toast.error("ERROR: " + res_data.data, {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 3000
             })
         }
-    } 
+    }
 
     const setPageChange = async (e) => {
         await setCurrentPage(e.currentPage)
@@ -151,15 +151,19 @@ export default function _readingpage() {
         <>
 
             {base64String && !isLoading ?
-                <div className='h-screen w-screen flex flex-col items-center overflow-y-hidden'>
+
+                <div className='h-screen w-screen flex flex-col items-center overflow-y-hidden justify-center'>
                     <ToastContainer />
-                    <div className='h-fit'>
+
+                    <div className='h-fit w-full flex flex-wrap justify-center'>
                         <img
                             className="object-contain"
                             src="/image/logo.png">
                         </img>
-                        <button onClick={onBackClick}>Back to View Book Detail</button>
+
                     </div>
+                    <button onClick={onBackClick} className='h-fit w-fit mr-10 font-Gilroy_sb py-2 bg-blue outline-none text-white rounded-full self-end '>Back to View Book Detail</button>
+
                     <div className='h-4/5 w-4/5'>
                         <Viewer fileUrl={_url} plugins={[
                             // Register plugins
@@ -178,7 +182,7 @@ export default function _readingpage() {
                     />
                 </div>
             }
-        
+
         </>
 
     )

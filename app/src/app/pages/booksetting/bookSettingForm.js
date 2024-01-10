@@ -30,7 +30,7 @@ export default function booksettingForm() {
                 body: JSON.stringify({
                     BDetail_title: bookTitle,
                     BDetail_genre: bookGenre,
-                    BDetail_authorID: uid, 
+                    BDetail_authorID: uid,
                     BDetail_language: bookLanguage,
                     BDetail_createdDay: createdDate,
                 }),
@@ -58,7 +58,7 @@ export default function booksettingForm() {
     return (
         <>
             <div>
-                <ToastContainer/>
+                <ToastContainer />
             </div>
             {!isLoading ?
                 <div className="w-auto h-full flex flex-col">
@@ -80,7 +80,7 @@ export default function booksettingForm() {
                             </div>
 
                         </form>
-                        <button type='submit' className="h-[40px] w-1/5 outliner-none bg-blue text-white border-0 rounded-[100px] font-Gilroy_sb text-[20px]">Submit</button>
+                        <button type='submit' className="h-[40px] w-1/5 outliner-none bg-blue text-white border-0 rounded-[100px] font-Gilroy_sb text-[20px]" onClick={handleSubmit}>Submit</button>
 
 
 
