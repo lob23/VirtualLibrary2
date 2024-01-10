@@ -152,36 +152,6 @@ export default function login_form() {
       </>
     );
   }
+}
 
 
-  {/* <div className="col-span-2 flex flex-col  justify-center items-center w-auto h-full ">
-  <h1 className="font-Gilroy_bd text-blue text-[40px] -ml-[250px]">
-    {isSetAccount ? "Sign up" : "Personal Information"}
-  </h1>
-  <div className="flex flex-col w-max h-max">
-    <div>
-      <form
-        onSubmit={handleSubmit}
-        onReset={handleSubmit}
-        className="grid grid-cols-none grid-row-4"
-      >
-        {!isSetAccount ? personalInformationFragment : accountFragemnt}
-
-        <p className="items-end ml-auto font-Gilroy_md text-red text-sm">
-          Already have an account? Sign in
-        </p>
-        <label className=" w-[380px] h-[60px] my-5 bg-blue p-3 rounded-[12px] border-none text-white text-xl font-Gilroy_bd text-center"
-        >
-          <button
-
-            type='reset'
-          >
-            Sign Up
-          </button>
-
-        </label>
-
-      </form>
-    </div>
-  </div>
-</div> */}
