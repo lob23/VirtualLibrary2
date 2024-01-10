@@ -17,7 +17,7 @@ export default function header_reader(){
     router.push("/pages/request?uid=" + uid);
   }
   const handleLibraryClick = () =>{
-    router.push("/pages/search");    
+    router.push("/pages/search?uid=" + uid);    
   }
 
     return(

@@ -6,11 +6,12 @@ import _header from "@/app/pages/search/header_search"
 import _footer from "@/app/pages/wrapper/footer"
 import booklist from './book_list';
 import latestUpdate from "./latest_update";
-import { fetchData } from "../api/home_author/route";
+import { fetchAuthorById } from "../api/book_detail/route";
 
 
 
 export default function search_screen() {
+
     return (
         <div className='flex flex-col w-full h-full overflow-hidden overflow-y-auto z-0'>
             <div className="w-full h-fit z-30 bg-cream">

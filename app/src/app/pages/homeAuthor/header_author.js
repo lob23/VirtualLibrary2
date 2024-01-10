@@ -47,7 +47,7 @@ const header_author = () => {
           </p>
           {createClick &&(
               <div className="absolute w-fit h-fit top-[50px] left-[250px]">
-                <_createOption/>
+                {_createOption(uid)}
               </div>
           )}
         </div>

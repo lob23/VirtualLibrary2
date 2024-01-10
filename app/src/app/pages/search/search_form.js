@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useMemo } from "react";
 import { fetchData, fetchAuthorById } from "../api/search/route";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Link } from "react-scroll"
 import _footer from "@/app/pages/wrapper/footer"
 
@@ -14,18 +15,29 @@ import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 
 
 export default function search_form() {
+  const searchParams = useSearchParams();
+  const router = useRouter()
+
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
 
+  const uid = searchParams.get('uid');
+
   const [searchQuery, setSearchQuery] = useState("");
+
+  const refBDtail = (_bid) => {
+    console.log("RefBDTAIL")
+    router.push("/pages/book_detail?uid=" + uid + "&bid=" + _bid);
+  }
+
   useEffect(() => {
     const fetchDataFromApi = async () => {
       try {
 
         //book in latest update 
         const result = await fetchData();
-        console.log(result);
+        const usr = await fetchAuthorById(uid);
         setBooks(result);
         setLoading(false);
 
@@ -50,11 +62,6 @@ export default function search_form() {
     );
     setSearchResults(filteredResults);
   }, [searchQuery, books]);
-
-
-
-
-
 
   return (
     <>
@@ -101,8 +108,6 @@ export default function search_form() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-
-
           </div>
 
 
@@ -110,7 +115,7 @@ export default function search_form() {
             <div className="bg-white w-full h-fit rounded-md drop-shadow-lg">
               {searchResults.map((result) => (
                 <div key={result._id}>
-                  <Link key={result._id} className="cursor-pointer">
+                  <Link key={result._id} onClick={() => {refBDtail(result._id)}} className="cursor-pointer">
                     <p className="font-Gilroy_md text-blue/70 text-[12px] py-4 px-5 hover:text-blue">
                       {result.BDetail_title}
                     </p>
@@ -136,6 +141,5 @@ export default function search_form() {
     </>
   );
 }
-
 
 
