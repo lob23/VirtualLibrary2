@@ -1,13 +1,15 @@
-"use client"
+"use client";
+import _librarianHomepage from "./librarian_homepage"
 
 export default function homeliberian() {
 
     return (
         <>
             <div>
-                <button>verify author request</button>
+                <_librarianHomepage/>
+                {/* <button>verify author request</button>
                 <button>verify book request</button>
-                <button>user management</button>
+                <button>user management</button> */}
             </div>
         </>
     );
