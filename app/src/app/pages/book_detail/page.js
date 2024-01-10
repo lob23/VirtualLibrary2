@@ -3,6 +3,7 @@ import React from "react";
 import _detail from '@/app/pages/book_detail/detail'
 import _commentSection from "@/app/pages/book_detail/comment_section"
 import { useRouter, useSearchParams } from "next/navigation";
+import { fetchAuthorById } from "../api/book_detail/route";
 
 export default function book_detail_screen() {
 
@@ -11,8 +12,15 @@ export default function book_detail_screen() {
 
     const uid = searchParams.get('uid');
 
-    const handleBackClick = () => {
-        router.push("/pages/homeReader?uid=" + uid);
+    const handleBackClick = async () => {
+        const user = await fetchAuthorById(uid)
+        if (user.User_authenticationLevel == 1){
+            router.push("/pages/homeReader?uid=" + uid);
+        } else if (user.User_authenticationLevel == 2){
+            router.push("/pages/homeAuthor?uid=" + uid);     
+        } else {
+            router.push("/pages/homeLiberian?uid=" + uid);     
+        }
     }
 
     return (
