@@ -70,10 +70,10 @@ export default function manageRequest() {
             {RQList && RQList.length > 0 ? (
                 RQList.map((item) => (
                     <li className="relative w-full h-full flex items-center justify-between" key={item.id}>
-                        <div>
+                        <div className="text-black">
                             {item.Request_userId}
                         </div>
-                        <div>
+                        <div className="text-blue">
                             {item.Request_motivation}
                         </div>
                         <div className="flex space-x-2">

@@ -66,17 +66,17 @@ export default function commentSection() {
                     <p>No comments available.</p>)
                 }
             </div>
-            <div className='flex flex-wrap w-full h-1/4 bg-yellow overflow-x-hidden justify-center '>
-                <div className='flex flex-row w-4/5 h-[35px]  rounded-[100px] overflow-hidden mt-5'>
+            <div className='flex flex-wrap w-full h-1/4 bg-yellow overflow-x-hidden justify-center'>
+                <div className='flex flex-row w-4/5 h-[35px] rounded-lg overflow-hidden mt-5'>
                     <input 
                         type='text'
                         onChange={(e) => setContent(e.target.value)}
                         value={content}
                         id='content'
-                        className='w-3/4 h-[35px] bg-white '
+                        className='w-3/4 h-[35px] bg-white focus:bg-white'
                         placeholder='Type your comment'>
                     </input>
-                    <button className='w-1/4 h-full font-Gilroy_sb bg-blue text-white' onClick={handleSubmit}>
+                    <button className='w-1/4 h-full font-Gilroy_sb bg-blue text-white cursor-pointer' onClick={handleSubmit}>
                         Send
                     </button>
 

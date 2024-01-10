@@ -1,31 +1,22 @@
 import React from "react"; 
 import _homeLand from "@/app/pages/landing/landing_page"
-import _header from "@/app/pages/search/header_search"
+import _header from "@/app/pages/landing/header_landing"
 import _footer from "@/app/pages/wrapper/footer"
 
-export default function home_land(){
+export default function landing(){
     return (
         <div className="absolute w-full h-full overflow-y-auto no-scrollbar overflow-hidden">
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-auto z-30">
+                <_header/>
+            </div>
+            <div className="relative w-full h-full overflow-hidden z-10">
                 <_homeLand/>
             </div>
-            <div className="relative w-full h-auto">
-                 <_footer/>
+            <div className="relative w-full h-auto overflow-hidden z-0 mt-5">
+                <_footer/>
             </div>
         </div>
         
-        // <div>
-        //     <_homeLand/>
-        //     {/* <_footer/> */}
-        // </div>
+        
     );
 }
-
-// export default function author_home(){
-//     return(
-//         <div>
-//             <_header/>
-//             <_author_home/>
-//         </div>
-//     );
-// }

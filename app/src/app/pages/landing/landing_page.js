@@ -1,42 +1,15 @@
 "use client";
 import { redirect, useRouter } from "next/navigation";
 
-export default function landing(){
+export default function landing_page(){
   const router = useRouter()
+  const handleJoinInClick = () => {
+    router.push("/pages/login");
+  }
 
   return(
     <>
     <div className="relative w-full h-full">
-      <div className="row-span-3 flex flex-row relative w-full h-[80px] px-10 place-items-center shadow">
-        <div className="absolute w-[60px] h-[60px]">
-          <img
-            className="object-contain w-full h-full"
-            src="/image/logo.png">
-          </img>
-        </div>
-        <div className="grid grid-cols-3 gap-[60px] relative w-auto h-full ml-[100px] items-center">
-          <p className="font-Gilroy_sb text-grey text-lg">
-            Home
-          </p>
-          <p className="font-Gilroy_sb text-grey text-opacity-60 text-lg hover:text-grey">
-            Library
-          </p>
-          <p className="font-Gilroy_sb text-grey text-opacity-60 text-lg hover:text-grey">
-            Creator
-          </p>
-        </div>
-      
-        <div className="row-span-2 flex flex-row gap-[60px] absolute right-2 w-auto h-full mr-[10px] items-center">
-          <p className="font-Gilroy_sb text-blue text-lg hover:text-[#434373] hover:opacity-60 " onClick={() => router.push("login")}>
-            Sign In            
-          </p>
-          <button className="w-auto px-8 py-1 mr-5 button_yellow text-blue text-lg" onClick={() =>router.push("signup")}>
-            Sign Up
-            
-          </button>
-        </div>
-      </div>
-    
       <div className="relative w-full h-full overflow-y-auto no-scrollbar">
         <div className="grid grid-flow-col grid-cols-2 relative w-full h-screen">
           <div className="relative col-span-1 flex flex-col flex-col-3 w-full h-full pl-20 top-1/4 ml-10">
@@ -46,7 +19,8 @@ export default function landing(){
             <p className="font-Gilroy_sb text-blue text-md mt-3">
             The world's most-loved social <br/>storytelling platform
             </p>
-            <button className="w-1/4 mt-5 px-6 py-1 button_white text-blue">
+            <button className="w-1/4 mt-5 px-6 py-1 button_white text-xl text-blue"
+                    onClick={handleJoinInClick}>
               Join In
             </button>
           </div>

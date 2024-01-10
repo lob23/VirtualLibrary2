@@ -24,6 +24,7 @@ export default function reading_list_comp(uid, rbook){
     //     fetchRBook(); 
     // }, []); 
 
+    const defaultImage = "/image/book.png";
     const router = useRouter();
 
     const handleContinue = () => {
