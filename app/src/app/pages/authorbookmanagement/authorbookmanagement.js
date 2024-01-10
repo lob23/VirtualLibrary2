@@ -42,6 +42,10 @@ export default function authorBookManagement() {
     const author_id = searchParams.get('uid')
     // console.log("author_id: ", author_id)
     const bookDetailID = searchParams.get('bid')
+    
+    const handleHomeAuthorClick = () => {
+        router.push("/pages/homeAuthor?uid=" + author_id)
+    }
 
     useEffect(() => {
         const getBooks = async () => {
@@ -147,10 +151,11 @@ export default function authorBookManagement() {
         <>
             {
                 loading == false ?
-                    <div className="w-full h-full place-items-center">
+                    <div className="w-full h-full place-items-center cursor-pointer">
                         <img
                             className="object-contain"
-                            src="/image/logo.png">
+                            src="/image/logo.png"
+                            onClick={handleHomeAuthorClick}>
                         </img>
                         <Card className='h-4/5 w-full'>
                             <CardHeader floated={false} shadow={false} className="rounded-none">

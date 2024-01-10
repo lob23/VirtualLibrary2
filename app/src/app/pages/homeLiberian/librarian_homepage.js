@@ -1,16 +1,21 @@
 "use client"; 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 export default function librarian_homepage(){
+
+    const searchParams = useSearchParams();
     const router = useRouter(); 
+
+    const uid = searchParams.get('uid');
+
     const handleAuthorRequestClick = () =>(
-        router.push("/pages/librarian/manageRequest")
+        router.push("/pages/librarian/manageRequest?uid=" + uid)
     )
     const handleBookRequest = () => {
-        router.push("/pages/librarian/manageBook")
+        router.push("/pages/librarian/manageBook?uid=" + uid)
     }
     const handleUserManageRequest = () => {
-        router.push("/pages/librarian/manageUser")
+        router.push("/pages/librarian/manageUser?uid=" + uid)
     }
     return(
         <>

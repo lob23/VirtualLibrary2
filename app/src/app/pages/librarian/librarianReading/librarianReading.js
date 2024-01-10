@@ -72,12 +72,12 @@ export default function _readingPage() {
 
     const handleAccept = () => {
         updateStatus(bid, 'verified');
-        router.push('/pages/librarian?uid=' + uid);
+        router.push('/pages/librarian/manageBook?uid=' + uid);
     }
 
     const handleReject = () => {
         updateStatus(bid, 'rejected');
-        router.push('/pages/librarian?uid=' + uid);
+        router.push('/pages/librarian/manageBook?uid=' + uid);
     }
 
     return (
