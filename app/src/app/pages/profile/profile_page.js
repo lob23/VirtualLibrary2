@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { fetchProfile } from "../api/profile/route";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function profilePage(){
     const id = '658e859e6168987e9653af10'; 
     const searchParams = useSearchParams(); 
+    const router = useRouter()
 
     const [profile, setProfile] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -48,7 +49,7 @@ export default function profilePage(){
                     src="/image/reg_cir.png"
                 ></img>
             </div>
-            <div className="absolute flex flex-wrap top-10 left-10 first-letter:w-[100px] h-[60px] items-center self-start">
+            <div className="absolute flex flex-wrap top-10 left-10 first-letter:w-[100px] h-[60px] items-center self-start" onClick={(e) => router.back()}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 mr-2 text-blue cursor-pointer transform -rotate-90"
