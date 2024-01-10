@@ -109,10 +109,6 @@
   font-family: Gilroy_sb;
 }
 
-[type='submit']:focus,select:focus
-{
-  background-color: white;
-}
 
 input:focus {
   background-color: transparent;
