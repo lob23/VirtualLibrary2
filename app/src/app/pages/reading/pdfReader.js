@@ -164,8 +164,6 @@ export default function _readingpage() {
                     </div>
                     <button onClick={onBackClick} className='h-fit w-fit mr-10 font-Gilroy_sb py-2 bg-blue outline-none text-white rounded-full self-end '>Back to View Book Detail</button>
 
-
-
                     <div className='h-4/5 w-4/5'>
                         <Viewer fileUrl={_url} plugins={[
                             // Register plugins
