@@ -3,13 +3,19 @@
 import React, { useEffect, useState } from "react";
 import bookdetail from './book_list_item';
 import { fetchData, fetchAuthorById } from "../api/search/route";
-
-
+import { useRouter, useNavigation, useSearchParams } from "next/navigation";
+import { Audio,Circles } from "react-loader-spinner";
 
 export default function booklist() {
+
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
     const [loading, setLoading] = useState(true);
     const [books, setBook] = useState([]);
     const [author, setAuthor] = useState([])
+
+    const uid = searchParams.get('uid');
     // useEffect(() => {
     //     const fetchBookData = async () => {
     //         try {
@@ -62,16 +68,23 @@ export default function booklist() {
     }, []);
 
     return (
-        <div className='w-full h-full flex flex-col overflow-hidden overflow-y-auto'>
-            <p className="w-fit h-fit font-Gilroy_sb text-3xl text-blue ">Library</p>
-            <ul className="grid grid-cols-2 gap-x-0 gap-y-4 grid-flow list-none overflow-x-hidden mt-10 px-10 ">
-                {books.map((book, index) => (
-                    <li key={index} className="w-full h-full overflow-hidden">
-                        {/* Pass both book and author to the bookdetail component */}
-                        {bookdetail(book, author[index])}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+        <>
+            {loading?
+                <div className="flex flex-wrap w-full h-full justify-center items-center">
+
+                </div>
+                :
+                    <div className='w-full h-full flex flex-col overflow-hidden overflow-y-auto'>
+                        <p className="w-fit h-fit font-Gilroy_sb text-3xl text-blue ">Library</p>
+                        <ul className="grid grid-cols-2 gap-x-0 gap-y-4 grid-flow list-none overflow-x-hidden mt-10 px-10 ">
+                            {books.map((book, index) => (
+                                <li key={index} className="w-full h-full overflow-hidden" onClick={() => {router.push("/pages/book_detail?uid=" + uid + "&bid=" + book._id)}}>
+                                    {/* Pass both book and author to the bookdetail component */}
+                                    {bookdetail(book, author[index])}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+            }
+    </>);
 }
