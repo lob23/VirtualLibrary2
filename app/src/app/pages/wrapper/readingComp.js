@@ -47,17 +47,17 @@ export default function reading_list_comp(uid, rbook){
                     <h4 className="font-Gilroy_sb w-auto h-auto text-blue text-xl mt-2">
                         Tess Sharpe
                     </h4>
-                    <div className="w-4/5 h-3 bg-cream rounded-full overflow-hidden mt-2">
+                    {/* <div className="w-4/5 h-3 bg-cream rounded-full overflow-hidden mt-2">
                         <div className="h-full bg-yellow" style={{ width: '50%' }}></div>
-                    </div>
-                    <div className="w-4/5 h-auto flex flex-row item-stretch">
+                    </div> */}
+                    {/* <div className="w-4/5 h-auto flex flex-row item-stretch">
                         <p className="font_Gilroy_md w-full h-full text-yellow text-md mt-2 text-left">
                             60%
                         </p>
                         <p className="font_Gilroy_md w-full h-full text-yellow text-md mt-2 text-right">
                             60/100
                         </p>
-                    </div>
+                    </div> */}
                     <div className="relative w-full h-full" onClick={handleContinue}>
                         <button className="absolute font_Gilroy_sb right-10 bottom-1 w-auto px-8 py-1 button_white text-blue text-2xl">
                             Continue

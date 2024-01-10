@@ -128,7 +128,7 @@ export default function AuthorHome() {
                 <ul className="relative flex flex-row gap-x-4 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
                   {
                     rlistBook.map((item)=>(
-                      <li className="w-full h-full mr-10" onClick={() => {handleonGoingRead(item._id)}}>
+                      <li className="w-full h-full mr-[50px]" onClick={() => {handleonGoingRead(item._id)}}>
                         {_readingComp(authorID, item)}
                       </li>
                     ))
@@ -164,7 +164,7 @@ export default function AuthorHome() {
               <ul className="relative flex flex-row gap-x-4 overflow-x-auto no-scrollbar w-full h-full list-none mt-10">
                 {
                   books.map((book, index) => (
-                    <li key={index} className="w-full h-full mr-10" 
+                    <li key={index} className="w-full h-full mr-[50px]" 
                     onClick={() => {handleReadingListClick(book._id)}}>
                       {_updateComp(book, authorList[index])}
                     </li>
