@@ -69,19 +69,20 @@ export class RListService {
     const rlistDetail = await this.rListRepository.findOne({
       where: {
         RList_userId: createRListDto.RList_userId,
-        RList_bookId: createRListDto.RList_bookId
+        RList_bookId: createRListDto.RList_bookId,
       },
     });
 
     if (rlistDetail) return null;
 
     // const result = await this.update(new UpdateRListDto(createRListDto));
-    const result = await this.update(
-      createRListDto.RList_userId,
-      createRListDto.RList_bookId,
-      { RList_currentPage: createRListDto.RList_currentPage },
-    );
-    if (result) return result;
+    // const result = await this.update(
+    //   createRListDto.RList_userId,
+    //   createRListDto.RList_bookId,
+    //   { RList_currentPage: createRListDto.RList_currentPage },
+    // );
+    // console.log(result);
+    // if (result) return result;
 
     const newRList = await this.rListRepository.create(createRListDto);
 

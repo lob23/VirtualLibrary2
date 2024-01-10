@@ -2,14 +2,17 @@
 import React from "react";
 import _detail from '@/app/pages/book_detail/detail'
 import _commentSection from "@/app/pages/book_detail/comment_section"
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function book_detail_screen() {
 
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const uid = searchParams.get('uid');
 
     const handleBackClick = () => {
-        router.back();
+        router.push("/pages/homeReader?uid=" + uid);
     }
 
     return (

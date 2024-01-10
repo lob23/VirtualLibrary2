@@ -94,6 +94,9 @@ export default function detail() {
     }
   };
 
+  const handleReading = () => {
+    router.push("/pages/reading?uid=" + uid + "&bid=" + bookId)
+  }
 
   return (
     <div className='w-full h-full flex flex-row justify-center'>
@@ -110,7 +113,7 @@ export default function detail() {
 
         </div>
         <div>
-          <button className='font-Gilroy_sb w-full h-[50px] mt-10 rounded-[100px] bg-blue text-white outline-none border-none'>Read now
+          <button className='font-Gilroy_sb w-full h-[50px] mt-10 rounded-[100px] bg-blue text-white outline-none border-none' onClick={() => handleReading()}>Read now
           </button>
         </div>
 

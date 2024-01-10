@@ -46,7 +46,7 @@ export default function _readingpage() {
     const [_url, seturl] = useState("");
     const [base64String, setBase64String] = useState("");
     const [currentpage, setCurrentPage] = useState(0);
-    const [initPage, setinitPage] = useState(1)
+    const [initPage, setinitPage] = useState(0)
     const [isLoading, setLoading] = useState(true)
 
     const uid = searchParams.get("uid");
