@@ -61,32 +61,33 @@ export default function booksettingForm() {
                 <ToastContainer />
             </div>
             {!isLoading ?
-                <div className="w-auto h-full flex flex-col">
-                    <p className="font-Gilroy_sb text-blue text-3xl">Upload your story</p>
-                    <p className="font-Gilroy_sb text-blue text-xl my-5 ">Add detail</p>
-                    <div className="w-4/5 h-fit">
-                        <form className="grid grid-flow-row grid-cols-2">
-                            <input className='row-span-1 m-5 font-Gilroy_md ' type='text' value={bookTitle} placeholder="Book Title" onChange={(e) => { setBookTitle(e.target.value) }} />
-                            <input className='row-span-1 m-5 font-Gilroy_md ' type='text' value={bookGenre} placeholder="Book Genre" onChange={(e) => { setBookGenre(e.target.value) }} />
+                <div className="w-screen h-screen flex flex-wrap justify-center items-center bg-registerbg">
+                    <div className="w-2/4 h-2/4 flex flex-col bg-white rounded-2xl">
+                        <p className="font-Gilroy_sb text-blue text-3xl  ml-10 mt-10">Upload your story</p>
+                        <p className="font-Gilroy_sb text-blue text-xl  ml-10 mt-10">Add detail</p>
+                        <div className="w-4/5 h-fit ml-10">
+                            <form className="grid grid-flow-row grid-cols-2">
+                                <input className='row-span-1 m-5 font-Gilroy_md ' type='text' value={bookTitle} placeholder="Book Title" onChange={(e) => { setBookTitle(e.target.value) }} />
+                                <input className='row-span-1 m-5 font-Gilroy_md ' type='text' value={bookGenre} placeholder="Book Genre" onChange={(e) => { setBookGenre(e.target.value) }} />
 
-                            <select onChange={(e) => { setBookLanguage(e.target.value) }} className="row-span-1 border border-solid border-b-2 border-t-0 border-x-0 border-blue text-gray-300 text-sm bg-white font-Gilroy_md focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-5">
-                                <option value="english">English</option>
-                                <option value="vietnamese">Vietnamese</option>
-                            </select>
-
-                            <div className="flex flex-row my-5 ml-5">
-                                <input className='w-4/5 font-Gilroy_md' type='text' value={bookGenre} placeholder="Upload cover" onChange={(e) => { setBookGenre(e.target.value) }} />
-                                <button type='submit' className="h-[40px] w-1/5 outliner-none bg-blue text-white border-0 font-Gilroy_md ">Upload</button>
-                            </div>
-
-                        </form>
-                        <button type='submit' className="h-[40px] w-1/5 outliner-none bg-blue text-white border-0 rounded-[100px] font-Gilroy_sb text-[20px]" onClick={handleSubmit}>Submit</button>
+                                <select onChange={(e) => { setBookLanguage(e.target.value) }} className="row-span-1 border border-solid border-b-2 border-t-0 border-x-0 border-blue text-gray-500 text-sm bg-white font-Gilroy_md focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-5">
+                                    <option value="english">English</option>
+                                    <option value="vietnamese">Vietnamese</option>
+                                </select>
 
 
 
-                    </div>
+                            </form>
+                            <button type='submit' className="h-[40px] w-1/5 outliner-none bg-blue text-white border-0 rounded-[100px] font-Gilroy_sb text-[20px] self-end" onClick={handleSubmit}>Submit</button>
 
-                </div >
+
+
+                        </div>
+
+                    </div >
+
+                </div>
+
 
 
 
