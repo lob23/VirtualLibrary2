@@ -12,39 +12,47 @@ export default function login_form() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("username: ", username);
-    console.log("password: ", password);
-    const res = await fetch("api/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
-    const user = await res.json().then(result => { return result})
-    // console.log("Userrr: ", user)
-    // console.log("Userrr: ", user.User_name)
 
-    // console.log("Userrr: ", user.User_email)
-    if (user == null){
-      toast.error("Try Again !", {
+    if (username == "" || password == "") {
+      toast.error("Please enter username and password !", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000
       });
-
     } else {
-      if (user){
-        if (user.User_authenticationLevel == 1)
-          router.push("/pages/homeReader?uid=" + user._id);
-        else if (user.User_authenticationLevel == 2)
-          router.push("/pages/homeAuthor?uid=" + user._id);
-        else router.push("/pages/homeLiberian?uid=" + user._id);
+      console.log("username: ", username);
+      console.log("password: ", password);
+      const res = await fetch("api/login", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+      const user = await res.json().then(result => { return result})
+      // console.log("Userrr: ", user)
+      // console.log("Userrr: ", user.User_name)
+
+      // console.log("Userrr: ", user.User_email)
+      if (user == null){
+        toast.error("Invalid Email or Password !", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000
+        });
+
+      } else {
+        if (user){
+          if (user.User_authenticationLevel == 1)
+            router.push("/pages/homeReader?uid=" + user._id);
+          else if (user.User_authenticationLevel == 2)
+            router.push("/pages/homeAuthor?uid=" + user._id);
+          else router.push("/pages/homeLiberian?uid=" + user._id);
+        }
       }
+      setNotification("abc");
     }
-    setNotification("abc");
   };
 
   return (
@@ -85,15 +93,14 @@ export default function login_form() {
               Hundred of book to choose
             </h3>
           </div>
-          <div className="col-span-2 flex flex-col  justify-center items-center w-auto sc-full ">
-            <h1 className="font-Gilroy_bd text-blue text-[40px] -ml-[260px]">
+          <div className="col-span-2 flex flex-col  justify-center items-center ">
+            <h1 className="w-full h-fit font-Gilroy_bd text-blue text-[40px]">
               Sign In
             </h1>
-            <div className="flex flex-col w-max h-max">
-              <div>
+            <div className="flex flex-col w-full h-full">
                 <form
                   onSubmit={handleSubmit}
-                  className="grid grid-cols-none grid-row-4"
+                  className="flex flex-col w-full h-full"
                 >
                   <input
                     type="text"
@@ -101,7 +108,7 @@ export default function login_form() {
                     value={username}
                     id="username"
                     placeholder="Username"
-                    className="row-span-1 w-[380px] h-[38px] my-2   "
+                    className=" w-full h-[38px]  "
                   />
                   <input
                     type="password"
@@ -109,24 +116,25 @@ export default function login_form() {
                     value={password}
                     id="password"
                     placeholder="Password"
-                    className="row-span-1 w-[380px] h-[38px] my-2 "
+                    className=" w-full h-[38px] "
                   />
-                  <p className="items-end ml-auto font-Gilroy_md text-red text-sm">
+                  <p className="ml-auto font-Gilroy_md text-red text-sm">
                     Forgot password?
                   </p>
-                  <div className="flex flex-row items-center justify-center">
-                   <label className=" w-[380px] h-[60px] my-5 bg-blue p-3 rounded-[12px] border-none text-white text-xl font-Gilroy_bd   items-center justify-center text-center"> 
+                  <div className="w-full h-[40px] flex flex-wrap items-center justify-center text-center">
+                   
                     <button
                       type="submit"
+                      className="w-full h-full  bg-blue p-4 rounded-[12px] border-none text-white text-xl font-Gilroy_bd text-center"
                     >
                       Sign In
                     </button>
                     
-                  </label>
+               
                   
                   </div>
                 </form>
-              </div>
+              
             </div>
           </div>
         </div>
