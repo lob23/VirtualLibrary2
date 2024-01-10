@@ -38,26 +38,9 @@ export default function _readingPage() {
     // `base64String` is the given base 64 data
     const [_url, setURL] = useState("");
     const [base64String, setBase64String] = useState("");
-    const [currentPage, setCurrentPage] = useState(0);
-    const [initPage, setInitPage] = useState(1)
-    const [isLoading, setLoading] = useState(true)
 
     const uid = searchParams.get("uid");
     const bid = searchParams.get("bid");
-
-    const createRList = async() => {
-        const res = await fetch("/pages/api/readingBook", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-                RList_userId: uid,
-                RList_bookId: bid,
-                RList_currentPage: 0
-            })
-        })
-    }
 
     useEffect(() => {
         const fetchingBookContents = async () => {
@@ -81,57 +64,11 @@ export default function _readingPage() {
             }
     }, [base64String])
 
-
-    useEffect(() => {
-        const fetchCurrentPage = async () => {
-            const res = await fetch("/pages/api/readingBook?uid=" + uid + "&bid=" + bid, {
-                method: "GET",
-            }).then((response) => {return response})
-
-            const res_data = await res.json()
-
-            if (res_data.stat == true)
-            {
-                if (res_data.data) setInitPage(res_data.data);
-                setLoading(false)
-            } 
-            else {
-                console.log("ERROR", res_data.data)
-                setLoading(false)
-            }
-        }
-        createRList()
-        fetchCurrentPage()
-    })
-
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
     
     const onBackClick = async() => {
-        const res = await fetch("/pages/api/readingBook", {
-            method: "PUT",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-                RList_userId: uid,
-                RList_bookId: bid,
-                RList_currentPage: currentPage
-            })
-        })
-
-        const res_data = await res.json();
-        if( res_data.stat == true || initPage == currentPage ) router.back();
-        else toast.error("ERROR: " + res_data.data, {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 3000
-            })
+        router.back()
     } 
-
-    const setPageChange = async (e) => {
-        await setCurrentPage(e.currentPage)
-        console.log("page change", e.currentPage)
-
-    }
 
     const handleAccept = () => {
         updateStatus(bid, 'verified');
@@ -146,7 +83,7 @@ export default function _readingPage() {
     return (
         <>
 
-            {base64String && !isLoading ?
+            {base64String ?
                 <div className='h-screen w-screen flex flex-col items-center overflow-y-hidden'>
                     <ToastContainer />
                     <div className='h-fit'>
@@ -162,7 +99,7 @@ export default function _readingPage() {
                         <Viewer fileUrl={_url} plugins={[
                             // Register plugins
                             defaultLayoutPluginInstance,
-                        ]} initialPage={initPage} onPageChange={async (e) => await setPageChange(e)} />
+                        ]} initialPage={0} />
                     </div>
                 </div>
                 :
