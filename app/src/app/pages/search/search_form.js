@@ -82,7 +82,7 @@ export default function search_form() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-1/2 h-full transform absolute translate-y-[270px] items-center  ">
+        <div className="flex flex-col w-1/2 h-auto transform absolute translate-y-[270px] items-center  ">
           <div className=" flex flex-row w-full  h-[60px] rounded-[12px]  overflow-hidden bg-white items-center drop-shadow-xl ">
             <div className="mx-4">
               <svg width="30" height="30" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,11 +107,11 @@ export default function search_form() {
 
 
           {searchQuery && (
-            <div className="bg-white w-full h-fit rounded-md drop-shadow-lg">
+            <div className="bg-white w-full h-fit rounded-md drop-shadow-lg z-50">
               {searchResults.map((result) => (
-                <div key={result._id}>
+                <div key={result._id} className="z-50">
                   <Link key={result._id} className="cursor-pointer">
-                    <p className="font-Gilroy_md text-blue/70 text-[12px] py-4 px-5 hover:text-blue">
+                    <p className="font-Gilroy_md text-blue/70 text-[12px] py-4 px-5 hover:text-blue z-50">
                       {result.BDetail_title}
                     </p>
                   </Link>
