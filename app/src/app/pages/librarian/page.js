@@ -6,7 +6,7 @@ import _manageUser from './manageUser'
 export default function pdfReaderPage() {
     return (
         <>
-            <_manageUser />
+            <_manageRequest />
         </>
     )
 }

@@ -69,6 +69,7 @@ export async function GET(req){
 export async function PUT(req){
     try{
         const obj = await req.json();
+        console.log("OBJ: ", obj)
 
         const queryString = config.BACKEND_URL + "/rlist?userId=" + obj.RList_userId + "&bookId=" + obj.RList_bookId;
 
@@ -76,7 +77,7 @@ export async function PUT(req){
             if (response.data){
                 return [true, response.data];
             } else{
-                return [false, "nall"]
+                return [false, null]
             }
         }).catch((error) => {
             return [false, error]

@@ -45,7 +45,7 @@ export default function _readingpage() {
     // `base64String` is the given base 64 data
     const [_url, seturl] = useState("");
     const [base64String, setBase64String] = useState("");
-    const [currentpage, setCurrentPage] = useState(1);
+    const [currentpage, setCurrentPage] = useState(0);
     const [initPage, setinitPage] = useState(1)
     const [isLoading, setLoading] = useState(true)
 
@@ -61,7 +61,7 @@ export default function _readingpage() {
             body: JSON.stringify({
                 RList_userId: uid,
                 RList_bookId: bDetailID,
-                RList_currentPage: 1
+                RList_currentPage: 0
             })
         })
     }
@@ -102,7 +102,6 @@ export default function _readingpage() {
 
             if (res_data.stat == true){
                 if (res_data.data){
-                    setCurrentPage(res_data.data);
                     setinitPage(res_data.data);
                 } else {
                 }
@@ -132,7 +131,6 @@ export default function _readingpage() {
         })
 
         const res_data = await res.json();
-        console.log("data", res_data.data)
         if (res_data.stat == true || initPage == currentpage){
             router.push("/pages/book_detail?uid=" + uid+ "&bid=" + bDetailID)
         } else {
@@ -142,6 +140,12 @@ export default function _readingpage() {
             })
         }
     } 
+
+    const setPageChange = async (e) => {
+        await setCurrentPage(e.currentPage)
+        console.log("page change", e.currentPage)
+
+    }
 
     return (
         <>
@@ -160,7 +164,7 @@ export default function _readingpage() {
                         <Viewer fileUrl={_url} plugins={[
                             // Register plugins
                             defaultLayoutPluginInstance,
-                        ]} initialPage={initPage} onPageChange={(e) => {setCurrentPage(e.currentPage)}} />
+                        ]} initialPage={initPage} onPageChange={async (e) => await setPageChange(e)} />
                     </div>
                 </div>
                 :
