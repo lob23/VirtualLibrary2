@@ -1,0 +1,13 @@
+{
+	"name": "virtual-library",
+	"version": "1.0.0",
+	"scripts": {
+		"backend": "cd ./api && npm run start:dev",
+		"frontend": "cd ./app && npm run start",
+		"start": "concurrently -p \"[{name}]\" -n \"BACKEND,FRONTEND\" -c \"bgBlue.bold,bgGreen.bold\" \"npm run backend\" \"npm run frontend\"",
+		"sync": "cd ./app && npm install && cd ../api && npm install && cd .. && npm install"
+	},
+	"devDependencies": {
+		"concurrently": "^8.2.2"
+	}
+}
