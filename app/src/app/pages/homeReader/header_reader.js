@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function header_reader(){
+export default function Header_reader(){
   const [notiClick, setNotiClick] = useState(false);
   const [createClick, setCreateClick] = useState(false);
   

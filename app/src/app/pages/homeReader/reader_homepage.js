@@ -11,9 +11,9 @@ import { useSearchParams, useRouter } from "next/navigation";
 import {Circles} from "react-loader-spinner";
 
 const slides=[
-  <_authorStoryComp/>,
-  <_authorStoryComp/>,
-  <_authorStoryComp/>,
+  <_authorStoryComp key={0}/>,
+  <_authorStoryComp key={1}/>,
+  <_authorStoryComp key={2}/>,
 ]
 
 export default function ReaderHome() {
@@ -125,7 +125,7 @@ export default function ReaderHome() {
               <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
                 {
                   rlistBook.map((item)=>(
-                    <li className="w-full h-full mr-10" onClick={() => handleOngoingReadingClick(item._id)}>
+                    <li key={item._id} className="w-full h-full mr-10" onClick={() => handleOngoingReadingClick(item._id)}>
                       {_readingComp(uid, item)}
                     </li>
                   ))
@@ -141,7 +141,7 @@ export default function ReaderHome() {
                 <ul className="relative flex flex-row gap-10 overflow-x-auto no-scrollbar w-full h-full py-5 list-none">
                   {
                     books.map((book, index)=>(
-                      <li className="w-full h-full mr-10"
+                      <li key={book._id} className="w-full h-full mr-10"
                           onClick={()=> handleReadingListClick(book._id)}>
                         {_updateComp(book, authorList[index])}
                       </li>
@@ -155,12 +155,12 @@ export default function ReaderHome() {
       
           <div className=" w-full h-full overflow-hidden">
             <h2 className="font-Gilroy_sb text-blue text-3xl w-[500px] h-1/6 ml-10">
-                Author's story
+                Author&apos;s story
             </h2>
             <div className="w-full h-full">
               <Carousel autoSlide = {true} autoSlideInterval={5000}>
                 {slides.map((s)=>(
-                    <div className=" w-full h-full z-50">
+                    <div key={s.key} className=" w-full h-full z-50">
                         {s}
                     </div>
                 ))}

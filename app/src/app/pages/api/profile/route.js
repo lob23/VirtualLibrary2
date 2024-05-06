@@ -2,7 +2,7 @@ import axios from "axios";
 import { NextResponse } from "next/server";
 
 export const fetchProfile = async (id) => {
-    const apiUrl = `http://localhost:3030/users/getUser/${id}`;
+    const apiUrl = config.BACKEND_URL + `/users/getUser/${id}`;
     try {
         const response = await fetch(apiUrl, {
             method: 'GET',

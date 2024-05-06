@@ -1,11 +1,13 @@
 import {NextResponse} from "next/server"
 import config from '../../../config'
 import axios from "axios"
+export const dynamic = 'force-dynamic'; // <- add this to force dynamic render
 
 
 export async function GET(req){
+  const bid = req.nextUrl.searchParams.get('bid');
+
   try{
-    const bid = req.nextUrl.searchParams.get('bid');
     const queryString = config.BACKEND_URL + "/book/getBDetail/" + bid;
 
     const res = await axios.get(queryString).then((response) => {

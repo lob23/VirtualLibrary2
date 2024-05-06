@@ -5,7 +5,7 @@ import _commentSection from "@/app/pages/book_detail/comment_section"
 import { useRouter, useSearchParams } from "next/navigation";
 import { fetchAuthorById } from "../api/book_detail/route";
 
-export default function book_detail_screen() {
+export default function Book_detail_screen() {
 
     const router = useRouter();
     const searchParams = useSearchParams();

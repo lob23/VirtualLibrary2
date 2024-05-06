@@ -4,7 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getList } from '@/app/pages/api/librarian/manageUser/route'
 
-export default function manageUser() {
+export default function ManageUser() {
 
     const searchParams = useSearchParams();
     const router = useRouter();

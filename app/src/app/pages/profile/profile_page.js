@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchProfile } from "../api/profile/route";
 import { useSearchParams, useRouter } from "next/navigation";
 
-export default function profilePage(){
+export default function ProfilePage(){
     const id = '658e859e6168987e9653af10'; 
     const searchParams = useSearchParams(); 
     const router = useRouter()

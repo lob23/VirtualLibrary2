@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchBookById, fetchAuthorById } from "@/app/pages/api/book_detail/route";
 import { useSearchParams, useRouter } from 'next/navigation';
 
-export default function librarianBDetail() {
+export default function LibrarianBDetail() {
 
   const router = useRouter();
   const searchParams = useSearchParams();

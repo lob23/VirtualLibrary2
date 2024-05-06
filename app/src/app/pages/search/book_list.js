@@ -6,7 +6,7 @@ import { fetchData, fetchAuthorById } from "../api/search/route";
 import { useRouter, useNavigation, useSearchParams } from "next/navigation";
 import { Audio,Circles } from "react-loader-spinner";
 
-export default function booklist() {
+export default function Booklist() {
 
     const router = useRouter();
     const searchParams = useSearchParams();

@@ -6,7 +6,7 @@ import { fetchData, fetchAuthorById } from "../api/search/route";
 import {Circles} from "react-loader-spinner";
 import { useRouter, useSearchParams} from "next/navigation";
 
-export default function latestUpdate() {
+export default function LatestUpdate() {
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -75,7 +75,7 @@ export default function latestUpdate() {
                         <ul className="relative flex flex-row gap-x-4 overflow-x-auto no-scrollbar w-full h-full list-none mt-10 ">
                             {
                                 books.map((item, index) => (
-                                    <li className="w-full h-full mr-10" onClick={() => {router.push("/pages/book_detail?uid=" + uid + "&bid=" + item._id)}} >
+                                    <li key={item._id} className="w-full h-full mr-10" onClick={() => {router.push("/pages/book_detail?uid=" + uid + "&bid=" + item._id)}} >
                                         {_updateComp(item, authorList[index])}
                                     </li>
                                 ))

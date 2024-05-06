@@ -1,7 +1,7 @@
 "use client"; 
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-export default function librarian_homepage(){
+export default function Librarian_homepage(){
 
     const searchParams = useSearchParams();
     const router = useRouter(); 

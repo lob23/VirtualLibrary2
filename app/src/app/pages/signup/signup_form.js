@@ -7,7 +7,7 @@ import { DatePicker } from "antd"
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 
-export default function signup_form() {
+export default function Signup_form() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatpassword, repeatPassword] = useState("");

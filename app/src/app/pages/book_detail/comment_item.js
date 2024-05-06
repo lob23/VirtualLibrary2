@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getUser } from '@/app/pages/api/book_detail/route'
 
-export default function commentItem(comment) {
+export default function CommentItem(comment) {
 
   const [userName, setUser] = useState("");
 

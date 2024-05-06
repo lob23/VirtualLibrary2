@@ -1,34 +1,35 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Audio } from 'react-loader-spinner'
-import { pdfExporter } from "quill-to-pdf";
-import { useQuill } from "react-quilljs";
-import Quill from 'quill';
 import axios from 'axios';
 import config from '@/app/config';
 import FormData from 'form-data';
 import Checkbox from '@mui/material/Checkbox';
-import fs from 'fs';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
+// import { pdfExporter } from "quill-to-pdf";
+// import { useQuill } from "react-quilljs";
+// import Quill from 'quill';
 
-function htmlToDelta(html) {
-    const div = document.createElement('div');
-    div.setAttribute('id', 'htmlToDelta');
-    div.innerHTML = `<div id="quillEditor" style="display:none">${html}</div>`;
-    document.body.appendChild(div);
-    const quill = new Quill('#quillEditor', {
-        theme: 'snow',
-    });
-    const delta = quill.getContents();
-    document.getElementById('htmlToDelta').remove();
-    return delta;
-}
 
-export default function submission() {
+// function HtmlToDelta(html) {
+//     const div = document.createElement('div');
+//     div.setAttribute('id', 'htmlToDelta');
+//     div.innerHTML = `<div id="quillEditor" style="display:none">${html}</div>`;
+//     document.body.appendChild(div);
+//     const quill = new Quill('#quillEditor', {
+//         theme: 'snow',
+//     });
+//     const delta = quill.getContents();
+//     document.getElementById('htmlToDelta').remove();
+//     return delta;
+// }
+
+
+export default function SubmissionForm({renderFunction}) {
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -45,6 +46,15 @@ export default function submission() {
     const [isLoading, setLoading] = useState(true);
     const [privacyVerified, setPrivacyVerified] = useState(false);
     const [copyrightVerified, setCopyrightVerified] = useState(false);
+    const [htmlToDelta, setHtmlToDelta] = useState(null);
+
+    useEffect(() => {
+        const initTerminal = async () => {
+            const deltaFunction = await import('@/app/pages/bookSubmission/htmlToDelta');
+            setHtmlToDelta(deltaFunction);
+        }
+        initTerminal()
+    }, [])
 
     const getBContent = async () => {
         const res = await fetch("api/bookcontent?bid=" + bid, {
@@ -65,10 +75,13 @@ export default function submission() {
         }
     }
 
+
+
     const convertToPDF = async (quill, bContent) => {
         // Note: You can use this function. If there is problem when passing the quill data, just copy the two lines:
 
-        const delta = await htmlToDelta(bContent)
+        //const delta = await htmlToDelta(bContent)
+        
 
         const pdfBlob = await pdfExporter.generatePdf(delta);
 

@@ -1,13 +1,13 @@
 "use client";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams,useRouter } from "next/navigation";
 
 const Example = () => {
   return <ProgressBar completed={60} />;
 };
 
-export default function reading_list_comp(uid, rbook){
+export default function Reading_list_comp(uid, rbook){
 
     // const [book, setBook] = useState([]); 
     // useEffect(()=>{

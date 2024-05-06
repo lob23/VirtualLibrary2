@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import { toast } from "react-toastify";
 import { useSearchParams, useRouter } from "next/navigation";
 
-export default function request_form() {
+export default function Request_form() {
 
   const [inputValue, setInputValue] = useState("");
 

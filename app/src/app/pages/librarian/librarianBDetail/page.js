@@ -3,7 +3,7 @@ import React from "react";
 import _detail from './librarianBDetail'
 import { useRouter } from "next/navigation";
 
-export default function screen() {
+export default function Screen() {
 
     const router = useRouter();
 

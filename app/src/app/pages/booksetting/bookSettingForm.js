@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Audio } from 'react-loader-spinner'
 
 
-export default function booksettingForm() {
+export default function BooksettingForm() {
     const [bookTitle, setBookTitle] = useState("")
     const [bookGenre, setBookGenre] = useState("")
     const [bookLanguage, setBookLanguage] = useState("english")

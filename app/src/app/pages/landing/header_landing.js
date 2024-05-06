@@ -5,7 +5,7 @@ import _createOption from "@/app/pages/wrapper/createOption"
 import { useSearchParams, useRouter } from "next/navigation";
 import landing from "./page";
 
-const header_landing = () => {
+const Header_landing = () => {
   const [notiClick, setNotiClick] = useState(false);
   const [createClick, setCreateClick] = useState(false);
   
@@ -76,4 +76,4 @@ const header_landing = () => {
     );
 }
 
-export default header_landing;
+export default Header_landing;

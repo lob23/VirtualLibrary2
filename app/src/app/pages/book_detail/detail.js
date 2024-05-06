@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchBookById, fetchAuthorById } from "../api/book_detail/route";
 import { useSearchParams, useRouter } from 'next/navigation';
 
-export default function detail() {
+export default function Detail() {
 
   const router = useRouter();
   const searchParams = useSearchParams();

@@ -1,7 +1,7 @@
 // api.js
 
 export const fetchData = async () => {
-    const apiUrl = 'http://localhost:3030/book/'; // replace with your actual API endpoint
+    const apiUrl = config.BACKEND_URL + '/book/'; // replace with your actual API endpoint
   
     try {
       const response = await fetch(apiUrl, {

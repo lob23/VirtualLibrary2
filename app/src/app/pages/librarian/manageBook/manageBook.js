@@ -4,7 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getList } from '@/app/pages/api/librarian/manageBook/route'
 
-export default function manageBook() {
+export default function ManageBook() {
 
     const searchParams = useSearchParams();
     const router = useRouter();

@@ -42,7 +42,7 @@ export default function Carousel({
             <div className="absolute bottom-2 right-0 left-0">
                 <div className="flex items-center justify-center gap-2">
                     {slides.map((_, i) => (
-                        <div className={`transition-all w-3 h-3 bg-blue rounded-full ${curr === i ? "p-1" : "bg-opacity-50"}`}/>
+                        <div key={i} className={`transition-all w-3 h-3 bg-blue rounded-full ${curr === i ? "p-1" : "bg-opacity-50"}`}/>
                     ))}
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
 import config from '../../../config'
-
+export const dynamic = 'force-dynamic'; // <- add this to force dynamic render
 
 export async function POST(req){
     try {
@@ -36,9 +36,10 @@ export async function POST(req){
 }
 
 export async function GET(req){
+    const uid = req.nextUrl.searchParams.get('uid')
+    const bid = req.nextUrl.searchParams.get('bid')
     try{
-        const uid = req.nextUrl.searchParams.get('uid')
-        const bid = req.nextUrl.searchParams.get('bid')
+
 
         const queryString = config.BACKEND_URL + "/rlist/getPage?userId=" + uid + "&bookId=" + bid;
         

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getCommentList } from '@/app/pages/api/book_detail/route';
 import { useSearchParams, useRouter } from "next/navigation";
 
-export default function commentSection() {
+export default function CommentSection() {
 
   const searchParams = useSearchParams();
   const uid = searchParams.get('uid');

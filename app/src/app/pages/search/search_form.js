@@ -15,7 +15,7 @@ import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 
 
 
-export default function search_form() {
+export default function Search_form() {
 
   const searchParams = useSearchParams();
   const router = useRouter()

@@ -4,7 +4,7 @@ import _dropDown from "@/app/pages/wrapper/Dropdown"
 import _createOption from "@/app/pages/wrapper/createOption"
 import { useSearchParams, useRouter } from "next/navigation";
 
-const header_author = () => {
+const Header_author = () => {
   const [notiClick, setNotiClick] = useState(false);
   const [createClick, setCreateClick] = useState(false);
   
@@ -85,4 +85,4 @@ const header_author = () => {
     );
 }
 
-export default header_author;
+export default Header_author;

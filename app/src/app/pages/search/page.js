@@ -11,7 +11,7 @@ import { Audio } from "react-loader-spinner";
 
 
 
-export default function search_screen() {
+export default function Search_screen() {
     const [isSearchRendered, setSearchRendered] = useState(false)
 
 

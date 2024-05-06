@@ -1,7 +1,7 @@
 "use client";
 import { redirect, useRouter } from "next/navigation";
 
-export default function landing_page(){
+export default function Landing_page(){
   const router = useRouter()
   const handleJoinInClick = () => {
     router.push("/pages/login");
@@ -17,7 +17,7 @@ export default function landing_page(){
               Welcome to <br/>   Literia
             </h1>
             <p className="font-Gilroy_sb text-blue text-md mt-3">
-            The world's most-loved social <br/>storytelling platform
+            The world&apos;s most-loved social <br/>storytelling platform
             </p>
             <button className="w-1/4 mt-5 px-6 py-1 button_white text-xl text-blue"
                     onClick={handleJoinInClick}>
@@ -67,7 +67,7 @@ export default function landing_page(){
                 Read
               </h1>
               <p className="font-Gilroy_sb text-center w-full mt-5 text-blue text-lg ">
-              Dive into a good book today and let the power of words transport you to places you've never been.
+              Dive into a good book today and let the power of words transport you to places you&apos;ve never been.
               </p>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function landing_page(){
               </div>
               <div className="relative w-auto h-1/4 right-0 left-0 mx-auto">
                 <h1 className="font-Gilroy_sb text-white text-[50px]">
-                  Literia's Creator
+                  Literia&apos;s Creator
                 </h1>
               </div>
               <div className="relative w-3/4 h-1/5 right-0 left-0 mx-auto">
@@ -174,7 +174,7 @@ export default function landing_page(){
                 Newest book from <br/> your favorite author
               </h2>
               <p className="h-1/2 font-Gilrow_sv text-black text-lg text-left mt-5 top-0 bottom-0">
-              Stories have the incredible ability to transport you to distant lands, introduce you to fascinating characters, and ignite your emotions. Whether it's a classic novel, a captivating short story, or an engaging podcast, there's a story waiting to captivate your heart and mind. Dive in today and let the magic of storytelling transform your world.                
+              Stories have the incredible ability to transport you to distant lands, introduce you to fascinating characters, and ignite your emotions. Whether it&apos;s a classic novel, a captivating short story, or an engaging podcast, there&apos;s a story waiting to captivate your heart and mind. Dive in today and let the magic of storytelling transform your world.                
               </p>
               <button className="px-8 py-1 w-fit h-auto button_yellow text-blue text-lg left-0">
                 Join Now

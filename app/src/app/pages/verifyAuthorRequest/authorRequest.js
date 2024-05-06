@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, useEffect } from "react"
 import {useSearchParams, useRouter } from "next/navigation";
 import { Audio } from 'react-loader-spinner'
@@ -33,7 +34,7 @@ import {
 } from '@mui/material';
 
 
-export default function authorRequestList(){
+export default function AuthorRequestList(){
     const table_headers = ["File upload", "Time", "Status"]
 
     const router = useRouter()

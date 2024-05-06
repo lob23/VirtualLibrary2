@@ -3,7 +3,7 @@ import {useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { fetchAuthorById } from "../api/search/route";
 
-export default function header(){
+export default function Header(){
     const router = useRouter();
     const searchParams = useSearchParams();
     const [user, setUser] = useState(null)

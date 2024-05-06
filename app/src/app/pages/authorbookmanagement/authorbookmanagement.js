@@ -29,7 +29,7 @@ import {
     lighten,
 } from '@mui/material';
 
-export default function authorBookManagement() {
+export default function AuthorBookManagement() {
     const table_headers = ["File upload", "Time", "Status"]
 
     const router = useRouter()

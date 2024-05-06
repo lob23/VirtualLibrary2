@@ -1,4 +1,3 @@
-"use client";
 
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry';
 
