@@ -1,1 +1,11 @@
+# dependencies
 node_modules
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# vscode setting folder
+.vscode/
