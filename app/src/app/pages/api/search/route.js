@@ -28,7 +28,7 @@ export const fetchData = async () => {
     }
 };
 export const fetchAuthorById = async (id) => {
-    const apiUrl = `http://localhost:3030/users/getUser/${id}`;
+    const apiUrl = config.BACKEND_URL + `/users/getUser/${id}`;
 
     try {
         const response = await fetch(apiUrl, {

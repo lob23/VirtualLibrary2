@@ -22,7 +22,7 @@ export default function Search_screen() {
                         <div className="w-full h-fit z-30 bg-cream">
                             {_header()}
                         </div>
-                        <div className="w-full h-fit overflow-hidden z-30" onChange={()=> {setSearchRendered(true)}}>
+                        <div className="w-full h-fit overflow-hidden z-30" >
                             {_searchForm()}
                         </div>
                         <div className=" w-full h-fit overflow-hidden z-20">

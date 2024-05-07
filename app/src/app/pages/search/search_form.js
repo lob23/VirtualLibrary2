@@ -1,55 +1,22 @@
-"use client"; // This is a client component
-
 import { useEffect, useState, useMemo } from "react";
 import { fetchData, fetchAuthorById } from "../api/search/route";
 import { Link } from "react-scroll"
 import _footer from "@/app/pages/wrapper/footer"
 import { useSearchParams, useRouter } from "next/navigation";
-import { Audio } from 'react-loader-spinner'
-
-import {
-  MaterialReactTable,
-  useMaterialReactTable,
-} from 'material-react-table';
-import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 
 
 
 export default function Search_form() {
 
-  const searchParams = useSearchParams();
-  const router = useRouter()
-
   const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const uid = searchParams.get('uid');
 
-  const refBDtail = (_bid) => {
-    console.log("RefBDTAIL")
-    router.push("/pages/book_detail?uid=" + uid + "&bid=" + _bid);
-  }
-
-  useEffect(() => {
-    const fetchDataFromApi = async () => {
-      try {
-
-        //book in latest update 
-        const result = await fetchData();
-        console.log(result);
-        setBooks(result);
-        setLoading(false);
-      } catch (error) {
-        // Handle error
-        console.error('Error:', error);
-        setLoading(false);
-      }
-    };
-
-    fetchDataFromApi();
-  }, []);
   useEffect(() => {
     // Filter books based on the search query
     const filteredResults = books.filter(
@@ -59,7 +26,30 @@ export default function Search_form() {
         book.BDetail_title.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setSearchResults(filteredResults);
-  }, [searchQuery, books]);
+  }, [searchQuery]);
+
+
+  useEffect(() => {
+    const fetchDataFromApi = async () => {
+      try {
+
+        //book in latest update 
+        const result = await fetchData();
+        console.log(result);
+        setBooks(result);
+      } catch (error) {
+        // Handle error
+        console.error('Error:', error);
+      }
+    };
+
+    fetchDataFromApi();
+  }, []);
+
+  const refBDtail = (_bid) => {
+    console.log("RefBDTAIL")
+    router.push("/pages/book_detail?uid=" + uid + "&bid=" + _bid);
+  }
 
   return (
     <>

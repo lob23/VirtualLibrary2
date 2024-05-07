@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import bookdetail from './book_list_item';
 import { fetchData, fetchAuthorById } from "../api/search/route";
