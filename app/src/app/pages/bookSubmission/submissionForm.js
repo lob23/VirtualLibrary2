@@ -1,3 +1,6 @@
+"use client"
+import dynamic from "next/dynamic";
+
 import React, { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ToastContainer, toast } from "react-toastify";
@@ -9,8 +12,8 @@ import FormData from 'form-data';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { useQuill } from "react-quilljs";
 
-// import { pdfExporter } from "quill-to-pdf";
 // import { useQuill } from "react-quilljs";
 // import Quill from 'quill';
 
@@ -46,15 +49,6 @@ export default function SubmissionForm({renderFunction}) {
     const [isLoading, setLoading] = useState(true);
     const [privacyVerified, setPrivacyVerified] = useState(false);
     const [copyrightVerified, setCopyrightVerified] = useState(false);
-    const [htmlToDelta, setHtmlToDelta] = useState(null);
-
-    useEffect(() => {
-        const initTerminal = async () => {
-            const deltaFunction = await import('@/app/pages/bookSubmission/htmlToDelta');
-            setHtmlToDelta(deltaFunction);
-        }
-        initTerminal()
-    }, [])
 
     const getBContent = async () => {
         const res = await fetch("api/bookcontent?bid=" + bid, {
@@ -75,17 +69,15 @@ export default function SubmissionForm({renderFunction}) {
         }
     }
 
-
-
     const convertToPDF = async (quill, bContent) => {
-        // Note: You can use this function. If there is problem when passing the quill data, just copy the two lines:
-
-        //const delta = await htmlToDelta(bContent)
-        
-
-        const pdfBlob = await pdfExporter.generatePdf(delta);
-
-        return pdfBlob;
+        const { default: htmlToDelta } = await import ('@/app/pages/bookSubmission/htmlToDelta');
+        const delta = await htmlToDelta(bContent);
+        if (typeof window !== 'undefined') {
+            const pdfBlob = await import('quill-to-pdf').then(({pdfExporter}) => pdfExporter.generatePdf(delta));
+            console.log("bf");
+            return pdfBlob;
+        }
+        return null;
     }
 
     const blobToBase64 = async (blob) => {
@@ -108,55 +100,57 @@ export default function SubmissionForm({renderFunction}) {
         e.preventDefault()
         try {
             if (bookTitle && bookCover && bookDescription && bookLanguage && bookGenre) {
-                const bContent = await getBContent()
-                const content_delta = await convertToPDF(quill, bContent)
+                const bContent = await getBContent();
+                const content_delta = await convertToPDF(quill, bContent);
+                if(content_delta != null){
+                    const blobData = await blobToBase64(content_delta);
 
-                const res = await fetch("api/composing", {
-                    method: "PUT",
-                    headers: {
-                        "Content-type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        _id: bid,
-                        BDetail_contentId: bid,
-                        BContent_content: bContent,
-                        BContent_pdf: await blobToBase64(content_delta),
-                    }),
-                });
-
-                console.log("BOOK COVER: ", bookCover)
-
-                const formData = new FormData();
-                formData.append('file', bookCover, {
-                    filename: 'BookCover.png',
-                    contentType: 'image/png'
-                });
-
-                const imgRes = await axios.patch(config.BACKEND_URL + `/book/updateBDetailImage/${bid}`, formData, {
-                    maxContentLength: 10000000,
-                    maxBodyLength: 10000000
-                });
-
-                const status = await res.json().then(result => { return result })
-                if (status.stat == true) {
-
-                    if (!privacyVerified)
-                        toast.warning("Please verify the privacy.", {
-                            position: toast.POSITION.TOP_CENTER,
-                            autoClose: 3000
-                        });
-                    else if (!copyrightVerified)
-                        toast.warning("Please verify the copy right.", {
-                            position: toast.POSITION.TOP_CENTER,
-                            autoClose: 3000
-                        });
-                    else router.push("/pages/authorbookmanagement?uid=" + uid);
-
-                } else {
-                    toast.error("The system cannot save your progress", {
-                        position: toast.POSITION.TOP_CENTER,
-                        autoClose: 3000
+                    const res = await fetch("api/composing", {
+                        method: "PUT",
+                        headers: {
+                            "Content-type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            _id: bid,
+                            BDetail_contentId: bid,
+                            BContent_content: bContent,
+                            BContent_pdf: blobData,
+                        }),
                     });
+
+
+                    const formData = new FormData();
+                    formData.append('file', bookCover, {
+                        filename: 'BookCover.png',
+                        contentType: 'image/png'
+                    });
+
+                    const imgRes = await axios.patch(config.BACKEND_URL + `/book/updateBDetailImage/${bid}`, formData, {
+                        maxContentLength: 10000000,
+                        maxBodyLength: 10000000
+                    });
+
+                    const status = await res.json().then(result => { return result })
+                    if (status.stat == true) {
+
+                        if (!privacyVerified)
+                            toast.warning("Please verify the privacy.", {
+                                position: toast.POSITION.TOP_CENTER,
+                                autoClose: 3000
+                            });
+                        else if (!copyrightVerified)
+                            toast.warning("Please verify the copy right.", {
+                                position: toast.POSITION.TOP_CENTER,
+                                autoClose: 3000
+                            });
+                        else router.push("/pages/authorbookmanagement?uid=" + uid);
+
+                    } else {
+                        toast.error("The system cannot save your progress", {
+                            position: toast.POSITION.TOP_CENTER,
+                            autoClose: 3000
+                        });
+                    }
                 }
             } else {
                 toast.error("Please full fill the information.", {
@@ -164,8 +158,9 @@ export default function SubmissionForm({renderFunction}) {
                     autoClose: 3000
                 })
             }
+        
         } catch (error) {
-            toast.error("Error: Please ensure your image is .png", {
+            toast.error("Please ensure you image is in png format", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 3000
             });

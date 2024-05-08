@@ -1,3 +1,5 @@
+"use client"
+
 import { useSearchParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -41,7 +43,7 @@ export default function BooksettingForm() {
                 setLoading(true)
                 router.push('/pages/composer?uid=' + uid + '&bid=' + stat.data._id)
             } else {
-                toast.error("error: " + stat, {
+                toast.error("error: " + stat.message, {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 3000
                 })

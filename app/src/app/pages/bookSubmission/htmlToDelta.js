@@ -1,9 +1,6 @@
-import { pdfExporter } from "quill-to-pdf";
-import { useQuill } from "react-quilljs";
 import Quill from 'quill';
 
-
-export default function HtmlToDelta(html) {
+export default function htmlToDelta(html) {
     const div = document.createElement('div');
     div.setAttribute('id', 'htmlToDelta');
     div.innerHTML = `<div id="quillEditor" style="display:none">${html}</div>`;

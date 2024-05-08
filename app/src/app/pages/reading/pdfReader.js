@@ -69,6 +69,9 @@ export default function _readingpage() {
         const fetchingBookContents = async () => {
             const res = await fetch("api/bookcontent?bid=" + bDetailID, {
                 method: "GET",
+                body: JSON.stringify({
+                    bid: bDetailID
+                })
             });
             const result = await res.json();
             if (result.stat == true && result.bookContent.BContent_pdf) {

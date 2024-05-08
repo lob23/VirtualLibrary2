@@ -21,7 +21,7 @@ export async function POST(req) {
             })
             .catch(error => {
                 console.error('Error creating book:', error.response ? error.response.data : error.message);
-                return  error.response ? error.response.data : error.message
+                return  error;
             });  
         return NextResponse.json(res) 
         
