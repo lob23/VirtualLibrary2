@@ -114,7 +114,7 @@ export default function Login_form() {
                         onChange={(e) => setUsername(e.target.value)}
                         value={username}
                         id="username"
-                        placeholder="Username"
+                        placeholder="Email"
                         className="row-span-1 w-[380px] h-[38px] my-2   "
                       />
                       <input
