@@ -55,6 +55,10 @@ export default function Login_form() {
     };
   }
 
+  const routingToSignup = () =>{
+    router.push( "/pages/signup" );
+  }
+
   return (
     <>
       <div className="relative w-screen h-screen bg-registerbg bg-fixed overflow-hidden">
@@ -123,6 +127,9 @@ export default function Login_form() {
                       />
                       <p className="items-end ml-auto font-Gilroy_md text-red text-sm">
                         Forgot password?
+                      </p>
+                      <p onClick={() => {routingToSignup()}} className="items-end ml-auto font-Gilroy_md text-red text-sm">
+                        You don't have an account? Sign up now
                       </p>
                       <div className="flex flex-row items-center justify-center">
 

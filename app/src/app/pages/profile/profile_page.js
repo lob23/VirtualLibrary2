@@ -26,7 +26,7 @@ export default function ProfilePage(){
         };
         fetchDataFromApi();
       
-    }, [uid]); 
+    }, []); 
 
     return(
         <>

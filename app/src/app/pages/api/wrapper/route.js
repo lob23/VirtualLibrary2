@@ -1,5 +1,7 @@
 // api.js
 
+import config from '../../../config'
+
 export const fetchData = async () => {
     const apiUrl = config.BACKEND_URL + '/book/'; // replace with your actual API endpoint
   

@@ -70,13 +70,13 @@ export default function _readingPage() {
         router.back()
     } 
 
-    const handleAccept = () => {
-        updateStatus(bid, 'verified');
+    const handleAccept = async () => {
+        await updateStatus(bid, 'verified');
         router.push('/pages/librarian/manageBook?uid=' + uid);
     }
 
-    const handleReject = () => {
-        updateStatus(bid, 'rejected');
+    const handleReject = async () => {
+        await updateStatus(bid, 'rejected');
         router.push('/pages/librarian/manageBook?uid=' + uid);
     }
 

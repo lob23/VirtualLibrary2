@@ -120,7 +120,7 @@ export default function Signup_form() {
         });
         const user = await res.json().then(result => { return result })
         console.log("res", user)
-        if (user) router.push("login")
+        if (user) router.push("/pages/login")
         else {
           toast.error("The account is existed", {
             position: toast.POSITION.TOP_CENTER,
@@ -144,6 +144,10 @@ export default function Signup_form() {
       }
     }
   };
+
+  const routingToLogin = () => {
+    router.push( "/pages/login" );
+  }
 
   return (
     <>
@@ -198,7 +202,7 @@ export default function Signup_form() {
                     >
                       {!isSetAccount ? personalInformationFragment : accountFragemnt}
 
-                      <p className="items-end ml-auto font-Gilroy_md text-red text-sm">
+                      <p onClick = {(e) => {routingToLogin()}}className="items-end ml-auto font-Gilroy_md text-red text-sm">
                         Already have an account? Sign in
                       </p>
 

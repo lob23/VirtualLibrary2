@@ -1,5 +1,7 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
+import config from '../../../config'
+
 
 export const fetchProfile = async (id) => {
     const apiUrl = config.BACKEND_URL + `/users/getUser/${id}`;
