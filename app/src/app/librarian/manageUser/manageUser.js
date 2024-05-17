@@ -62,7 +62,7 @@ export default function ManageUser() {
 
                     {UList && UList.length > 0 ? (
                         UList.map((item) => (
-                            item.User_authenticationLevel !== 3 && (
+                            item.User_authorizationLevel !== 3 && (
                                 <li className=" w-auto h-fit flex flex-row items-center  style-none justify-center text-center " key={item.id}>
                                     <div className="w-1/4 h-auto border-black border-solid border-opacity-50 border-y-0 border-l-0 border-r-1 py-4">
                                         {item._id}
@@ -74,7 +74,7 @@ export default function ManageUser() {
                                         {item.User_email}
                                     </div>
                                     <div className="w-1/4 h-auto py-4">
-                                        {item.User_authenticationLevel === 2 ? "Author" : item.User_authenticationLevel === 1 ? "Reader" : ""}
+                                        {item.User_authorizationLevel === 2 ? "Author" : item.User_authorizationLevel === 1 ? "Reader" : ""}
                                     </div>
                                 </li>
                             )

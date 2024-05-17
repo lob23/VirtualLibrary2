@@ -74,7 +74,7 @@ export class BookService {
       where: { _id: new ObjectId(createBookDto.BDetail_authorID) },
     });
 
-    if (!existingUser || existingUser.User_authenticationLevel != 2 ) throw new Error('This author does not exist');
+    if (!existingUser || existingUser.User_authorizationLevel != 2 ) throw new Error('This author does not exist');
 
     createBookDto.BDetail_title = createBookDto.BDetail_title.toUpperCase()
     createBookDto.BDetail_genre = createBookDto.BDetail_genre.toLowerCase()

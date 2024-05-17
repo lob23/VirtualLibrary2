@@ -1,0 +1,1 @@
+export const JWT_SECRET = 'ho viet bao long dep trai';

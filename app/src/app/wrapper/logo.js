@@ -28,8 +28,8 @@ export default function _icon() {
     
     const handleClick = () => {
         console.log("Click me");
-        if( user.User_authenticationLevel == 1 ) router.push("/homeReader?uid=" + uid );
-        if( user.User_authenticationLevel == 2 ) router.push("/homeAuthor?uid=" + uid );        
+        if( user.User_authorizationLevel == 1 ) router.push("/homeReader?uid=" + uid );
+        if( user.User_authorizationLevel == 2 ) router.push("/homeAuthor?uid=" + uid );        
     }
 
     return (

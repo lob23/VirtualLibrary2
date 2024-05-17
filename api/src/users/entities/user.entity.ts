@@ -30,7 +30,7 @@ export class User {
   User_verification: boolean;
 
   @Column({ nullable: false, default: 1 })
-  User_authenticationLevel: number;
+  User_authorizationLevel: number;
 
   @Column()
   User_image: string;

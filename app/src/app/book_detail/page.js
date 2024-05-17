@@ -14,9 +14,9 @@ export default function Book_detail_screen() {
 
     const handleBackClick = async () => {
         const user = await fetchAuthorById(uid)
-        if (user.User_authenticationLevel == 1){
+        if (user.User_authorizationLevel == 1){
             router.push("/homeReader?uid=" + uid);
-        } else if (user.User_authenticationLevel == 2){
+        } else if (user.User_authorizationLevel == 2){
             router.push("/homeAuthor?uid=" + uid);     
         } else {
             router.push("/homeLiberian?uid=" + uid);     
