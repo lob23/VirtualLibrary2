@@ -9,3 +9,6 @@ node_modules
 
 # vscode setting folder
 .vscode/
+
+# data folder
+data/
