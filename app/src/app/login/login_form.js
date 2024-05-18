@@ -44,9 +44,9 @@ export default function Login_form() {
 
       } else {
         if (user) {
-          if (user.User_authenticationLevel == 1)
+          if (user.User_authorizationLevel == 1)
             router.push("/homeReader?uid=" + user._id);
-          else if (user.User_authenticationLevel == 2)
+          else if (user.User_authorizationLevel == 2)
             router.push("/homeAuthor?uid=" + user._id);
           else router.push("/homeLiberian?uid=" + user._id);
         }

@@ -20,9 +20,9 @@ export default function Header(){
 
     const backToHome = () => {
       console.log("user", user)
-      if (user.User_authenticationLevel == 1)
+      if (user.User_authorizationLevel == 1)
         router.push("/homeReader?uid=" + user._id);
-      else (user.User_authenticationLevel == 2)
+      else (user.User_authorizationLevel == 2)
         router.push("/homeAuthor?uid=" + user._id);
     }
 

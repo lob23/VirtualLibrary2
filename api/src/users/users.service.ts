@@ -13,7 +13,9 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) {}
+  ) {
+    // !!!WARNING!!! The following code is for hasing the password one time only
+  }
 
   async findAll(): Promise<User[]> {
     return await this.userRepository.find();
@@ -43,7 +45,7 @@ export class UsersService {
     // If not then create user
     const newUser = this.userRepository.create({
       ...createUserDto,
-      User_authenticationLevel: 1,
+      User_authorizationLevel: 1,
     });
     return await this.userRepository.save(newUser);
   }

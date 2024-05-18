@@ -46,7 +46,7 @@ export class RequestService {
       where: { _id: new ObjectId(createRequestDto.Request_userId) },
     });
 
-    if (!referenceUser || referenceUser.User_authenticationLevel >= 2)
+    if (!referenceUser || referenceUser.User_authorizationLevel >= 2)
       throw new Error(
         'User id is not valid. Current user: ' + referenceUser._id,
       );
@@ -63,7 +63,7 @@ export class RequestService {
 
     // Update user
     await this.userRepository.update(request.Request_userId, {
-      User_authenticationLevel: 2,
+      User_authorizationLevel: 2,
     });
 
     const result = await this.getRequestInfo(id);

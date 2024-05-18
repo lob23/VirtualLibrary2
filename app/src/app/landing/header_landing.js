@@ -3,7 +3,7 @@ import React , { useState } from "react";
 import _dropDown from "@/app/wrapper/Dropdown"
 import _createOption from "@/app/wrapper/createOption"
 import { useSearchParams, useRouter } from "next/navigation";
-import landing from "./page";
+import landing from "../page";
 
 const Header_landing = () => {
   const [notiClick, setNotiClick] = useState(false);
