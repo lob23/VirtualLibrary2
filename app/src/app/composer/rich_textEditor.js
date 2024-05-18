@@ -70,7 +70,7 @@ export default function IndexPage() {
       }
     }
     
-    fetchBookContent();z
+    fetchBookContent();
   }, [quill]);
 
   // This code is used for test only.

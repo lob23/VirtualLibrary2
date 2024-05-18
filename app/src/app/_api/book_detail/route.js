@@ -26,13 +26,14 @@ export const fetchBookById = async (id) => {
   const apiUrl = config.BACKEND_URL +`/book/getBDetail/${id}`; // Dynamic URL with the book ID
 
   try {
-    const response = axios.get(apiUrl);
+    const response = await axios.get(apiUrl);
+    console.log("response: ", response);
 
-    if (!response.ok) {
+    if (response.status != 200) {
       throw new Error('Network response was not ok');
     }
 
-    const data = await response.json();
+    const data = await response.data;
     return data;
   } catch (error) {
     console.error('Error fetching book data:', error);
@@ -46,11 +47,11 @@ export const fetchAuthorById = async (id) => {
   try {
     const response = await axios.get(apiUrl);
 
-    if (!response.ok) {
+    if (response.status != 200) {
       throw new Error('Network response was not ok');
     }
 
-    const data = await response.json();
+    const data = await response.data;
     return data;
   } catch (error) {
     console.error('Error fetching book data:', error);
@@ -65,9 +66,9 @@ export const getCommentList = async (BDetail_id) => {
   try {
     const response = await axios.get(apiURL);
 
-    if (!response.ok) throw new Error('Network response was not ok');
+    if (response.status != 200) throw new Error('Network response was not ok');
 
-    const data = await response.json();
+    const data = await response.data;
     return data;
   } 
   catch (error) {
@@ -82,7 +83,7 @@ export const getNestedComment = async (Comment_id) => {
   try {
     const response = await axios.get(apiURL);
 
-    if (!response.ok) throw new Error('Network response was not ok');
+    if (response.status != 200) throw new Error('Network response was not ok');
 
     const data = await response.json();
     return data;
@@ -99,7 +100,7 @@ export const getUser = async (User_id) => {
   try {
     const response = await axios.get(apiURL);
 
-    if (!response.ok) throw new Error('Network response was not ok');
+    if (response.status != 200) throw new Error('Network response was not ok');
 
     const data = await response.json();
     return data;

@@ -3,14 +3,15 @@ import { useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import { postLogin } from "../_api/login/route";
+// import bcrypt from "bcrypt"
 
 export default function Login_form() {
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [notification, setNotification] = useState("");
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,15 +22,11 @@ export default function Login_form() {
         autoClose: 3000
       });
     } else {
-
-      const res = await postLogin({
+      const user = await postLogin({
           username,
           password
         }
       );
-
-      const user = await res.json().then(result => { return result })
-      console.log("user", user);
 
       if (user == null) {
         toast.error("Try Again !", {

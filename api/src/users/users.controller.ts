@@ -1,11 +1,13 @@
 import { FileInterceptor } from '@nestjs/platform-express';
 // eslint-disable-next-line prettier/prettier
-import { UploadedFile, UseInterceptors, ParseFilePipeBuilder } from '@nestjs/common';
+import { UploadedFile, UseInterceptors, ParseFilePipeBuilder, Query } from '@nestjs/common';
 // eslint-disable-next-line prettier/prettier
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import * as bcrypt from 'bcrypt';
+
 
 @Controller('users')
 export class UsersController {
@@ -30,6 +32,27 @@ export class UsersController {
   @Get('getUserByEmail/:email')
   getByEmail(@Param('email') email: string) {
     return this.usersService.getByEmail(email);
+  }
+
+  @Get('login/:email')
+  async userLogin(
+    @Param('email') email: string,
+    @Query('password') password: string,
+  ){
+
+    const user = await this.usersService.getByEmail(email);
+
+    if (user == undefined) return null;
+
+    console.log("user ser: ", user);
+
+    const compare = await bcrypt.compare(password, user.User_password);
+
+    if (compare) {
+      return user;
+    }
+
+    return null;
   }
 
   @Get('comment/:id')
