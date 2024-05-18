@@ -2,10 +2,9 @@ import {NextResponse} from "next/server"
 import config from '../../config'
 import axios from "axios";
 
-import {addUserAccount} from "@/app/model/QueryEngine/AccountQueryEngine"
-
-export async function POST(req) {
-    const user = await req.json();
+// POST
+export const postSignup = async(req) => {
+    const user = req;
 
     try {
         const queryString = config.BACKEND_URL + "/users/createUser";
@@ -16,17 +15,15 @@ export async function POST(req) {
                 if(response.data){
                     return response.data;
                 } else {
-                    return null
+                    return null;
                 }
             })
             .catch(error => {
                 console.error('Error creating user:', error.response ? error.response.data : error.message);
-                return null
+                return null;
             });   
         console.log(res)
-        return NextResponse.json(res)
-
-
+        return NextResponse.json(res);
 
     }catch (error){
         console.log("signup failed: ", error)

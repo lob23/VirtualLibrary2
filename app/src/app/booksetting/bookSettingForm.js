@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Audio } from 'react-loader-spinner'
+import { postComposing } from "../_api/composing/route";
 
 
 export default function BooksettingForm() {
@@ -24,19 +25,15 @@ export default function BooksettingForm() {
 
         if (!isLoading && bookTitle && bookGenre && bookLanguage) {
             const createdDate = await new Date().toLocaleDateString('en-GB');
-            const res = await fetch("api/composing", {
-                method: 'POST',
-                headers: {
-                    "Content-type": "application/json",
-                },
-                body: JSON.stringify({
+            const res = await postComposing(
+                {
                     BDetail_title: bookTitle,
                     BDetail_genre: bookGenre,
                     BDetail_authorID: uid,
                     BDetail_language: bookLanguage,
-                    BDetail_createdDay: createdDate,
-                }),
-            })
+                    BDetail_createdDay: createdDate
+                }
+            );
 
             const stat = await res.json().then(result => { return result })
             if (stat.stat == true) {

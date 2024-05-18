@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { fetchProfile } from "../api/profile/route";
+import { fetchProfile } from "../_api/profile/route";
 import { useSearchParams, useRouter } from "next/navigation";
 
 export default function _icon() {

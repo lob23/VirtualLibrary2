@@ -13,7 +13,9 @@ import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useQuill } from "react-quilljs";
-import { Description } from "@mui/icons-material";
+import { getBookContent } from "../_api/bookcontent/route";
+import { putComposingBook } from "../_api/composing/route";
+import { getBookDetail } from "../_api/book_detail/route";
 
 // import { useQuill } from "react-quilljs";
 // import Quill from 'quill';
@@ -52,9 +54,7 @@ export default function SubmissionForm({renderFunction}) {
     const [copyrightVerified, setCopyrightVerified] = useState(false);
 
     const getBContent = async () => {
-        const res = await fetch("api/bookcontent?bid=" + bid, {
-            method: "GET",
-        })
+        const res = await getBookContent(bid);
 
         const result = await res.json()
 
@@ -113,18 +113,14 @@ export default function SubmissionForm({renderFunction}) {
                         },
                     });
 
-                    const res = await fetch("api/composing", {
-                        method: "PUT",
-                        headers: {
-                            "Content-type": "application/json",
-                        },
-                        body: JSON.stringify({
+                    const res = await putComposingBook(
+                        {
                             _id: bid,
                             BDetail_contentId: bid,
                             BContent_content: bContent,
-                            BContent_pdf: blobData,
-                        }),
-                    });
+                            BContent_pdf: blobData
+                        }
+                    );
 
 
                     const formData = new FormData();
@@ -187,7 +183,7 @@ export default function SubmissionForm({renderFunction}) {
 
     useEffect(() => {
         const fetchBookDetail = async () => {
-            const res = await fetch("api/book_detail?bid=" + bid);
+            const res = await getBookDetail(bid);
             const res_json = await res.json();
 
             if (res_json.stat == true) {
@@ -211,25 +207,6 @@ export default function SubmissionForm({renderFunction}) {
                 <ToastContainer />
             </div>
             {!isLoading ?
-
-                // <form className='w-3/5 max-w-md grid grid-cols-none grid-rows-10' onSubmit={submit}>
-                //     <input className='row-span-1' type='text' value={bookTitle} placeholder="Book Title" onChange={(e) => {setBookTitle(e.target.value)}}/>
-
-
-                //     <input className='row-span-1' type='text' value={bookGenre} placeholder="Book Genre" onChange={(e) => {setBookGenre(e.target.value)}}/>
-
-                //     <select defaultValue={bookLanguage} onChange={(e) => {setBookLanguage(e.target.value)}} className="row-span-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                //             <option value="english">English</option>
-                //             <option value="vietnamese">Vietnamese</option>
-                //     </select>
-
-                //     <input className='row-span-1' type='text' value={bookDescription} placeholder="Book Description" onChange={(e) => {setBookDescription(e.target.value)}}/>
-
-                //     <input className='row-span-1' type='file' value={undefined} placeholder='Book Cover' onChange={(e) => {onImageUploadChange(e)}}
-                //     lang='en'/>
-                //     <button type='submit'>Submit</button>
-                // </form>
-
                 <div className='relative w-screen h-screen bg-registerbg bg-fixed overflow-hidden'>
                     <div className="absolute  -bottom-20 -right-20  w-[300px] h-[300px]">
                         <img

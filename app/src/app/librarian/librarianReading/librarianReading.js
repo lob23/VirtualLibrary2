@@ -7,7 +7,7 @@ import { Viewer } from '@react-pdf-viewer/core';
 import { useEffect, useState } from 'react';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { updateStatus } from '@/app/api/librarian/manageBook/route'
+import { updateStatus } from '@/app/_api/librarian/manageBook/route'
 
 // Import styles
 import '@react-pdf-viewer/core/lib/styles/index.css';
@@ -15,6 +15,7 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import "react-toastify/dist/ReactToastify.css";
 import { Audio } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
+import { getBookContent } from '@/app/_api/bookcontent/route';
 
 const base64toBlob = (data) => {
     const pdfContentType = 'application/pdf';
@@ -44,9 +45,7 @@ export default function _readingPage() {
 
     useEffect(() => {
         const fetchingBookContents = async () => {
-            const res = await fetch("/api/bookcontent?bid=" + bid, {
-                method: "GET",
-            });
+            const res = await getBookContent(bid);
             const result = await res.json();
             if ( result.stat && result.bookContent.BContent_pdf ) {
                 console.log("book content: ", result.bookContent.BContent_pdf);

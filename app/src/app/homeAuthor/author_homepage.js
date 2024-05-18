@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchData, fetchBookByAuthorId, fetchReadingList, fetchAuthorById } from "../api/home_author/route";
+import { fetchData, fetchBookByAuthorId, fetchReadingList, fetchAuthorById } from "../_api/home_author/route";
 import _footer from "@/app/wrapper/footer";
 import _readingComp from "@/app/wrapper/readingComp"
 import _updateComp from "@/app/wrapper/updateComp";

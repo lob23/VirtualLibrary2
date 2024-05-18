@@ -1,11 +1,12 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
 import config from '../../config'
-export const dynamic = 'force-dynamic'; // <- add this to force dynamic render
+export const dynamic = 'force-dynamic';
 
-export async function POST(req){
+// POST
+export const postReadingBook = async (req) => {
     try {
-        const obj = await req.json();
+        const obj = req;
 
         const queryString = config.BACKEND_URL + "/rlist/createRList";
 
@@ -35,9 +36,8 @@ export async function POST(req){
     }
 }
 
-export async function GET(req){
-    const uid = req.nextUrl.searchParams.get('uid')
-    const bid = req.nextUrl.searchParams.get('bid')
+// GET
+export const getReadingBook = async (uid, bid) => {
     try{
 
 
@@ -67,9 +67,10 @@ export async function GET(req){
     }
 }
 
-export async function PUT(req){
+// PUT
+export const putReadingBook = async (req) =>{
     try{
-        const obj = await req.json();
+        const obj = req;
         console.log("OBJ: ", obj)
 
         const queryString = config.BACKEND_URL + "/rlist?userId=" + obj.RList_userId + "&bookId=" + obj.RList_bookId;

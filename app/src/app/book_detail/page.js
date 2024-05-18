@@ -3,7 +3,7 @@ import React from "react";
 import _detail from '@/app/book_detail/detail'
 import _commentSection from "@/app/book_detail/comment_section"
 import { useRouter, useSearchParams } from "next/navigation";
-import { fetchAuthorById } from "../api/book_detail/route";
+import { fetchAuthorById } from "../_api/book_detail/route";
 
 export default function Book_detail_screen() {
 

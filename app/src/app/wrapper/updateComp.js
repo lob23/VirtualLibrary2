@@ -1,5 +1,5 @@
-import { fetchData } from "../api/wrapper/route";
-import { fetchAuthorById } from "../api/book_detail/route";
+import { fetchData } from "../_api/wrapper/route";
+import { fetchAuthorById } from "../_api/book_detail/route";
 import login_form from "../login/login_form";
 
 

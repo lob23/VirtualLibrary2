@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import { toast } from "react-toastify";
 import { useSearchParams, useRouter } from "next/navigation";
+import { postRequest } from '../_api/request/route';
 
 export default function Request_form() {
 
@@ -22,16 +23,12 @@ export default function Request_form() {
     console.log("Input Value:", inputValue);
 
     try {
-      const res = await fetch("api/request", {
-        method: 'POST',
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
+      const res = await postRequest(
+        {
           Request_userId: userId, // This should be replaced later
-          Request_motivation: inputValue,
-        }),
-      });
+          Request_motivation: inputValue
+        }
+      );
   
       const stat = await res.json();
   

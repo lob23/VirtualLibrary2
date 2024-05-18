@@ -2,9 +2,10 @@ import {NextResponse} from "next/server"
 import config from '../../config'
 import axios from "axios"
 
-export async function POST(req) {
+//POST
+export const postRequest = async(req) => {
 
-    const content = await req.json();
+    const content = req;
 
     try{
         const queryString = config.BACKEND_URL + "/request/createRequest/";
@@ -31,7 +32,8 @@ export async function POST(req) {
     }
 }
 
-export async function GET(req){
+// GET
+export const getRequest = async (req) => {
     try{
         const queryString = config.BACKEND_URL + "/request"
         const res = await axios.get(queryString)

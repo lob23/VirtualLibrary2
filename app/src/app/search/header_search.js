@@ -1,7 +1,7 @@
 
 import {useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { fetchAuthorById } from "../api/search/route";
+import { fetchAuthorById } from "../_api/search/route";
 
 export default function Header(){
     const router = useRouter();

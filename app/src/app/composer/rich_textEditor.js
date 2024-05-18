@@ -7,6 +7,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { useQuill } from "react-quilljs";
 import { Button } from "@material-tailwind/react";
 import { Audio } from "react-loader-spinner";
+import { putComposingBook } from "../_api/composing/route";
+import { getBookDetail } from "../_api/book_detail/route";
+import { getBookContent } from "../_api/bookcontent/route";
 
 
 export default function IndexPage() {
@@ -14,9 +17,9 @@ export default function IndexPage() {
 
   const { quill, quillRef } = useQuill();
 
-  const [buttonPosition, setButtonPosition] = useState(0);
-  const containerRef = useRef(null);
   const [isLoading, setLoading] = useState(true);
+
+  const [isVerified, setVerified] = useState(true);
 
   const searchParams = useSearchParams()
  
@@ -31,9 +34,12 @@ export default function IndexPage() {
   useEffect(() => {
 
     const fetchBookContent = async () => {
-      const res = await fetch("api/bookcontent?bid=" + bid,{
-        method: "GET",
-      })
+      const bDetail = await getBookDetail(bid);
+      const res_json = await bDetail.json();
+
+      setVerified(res_json.BDetail_status == "verified");
+
+      const res = await getBookContent(bid);
 
       const result = await res.json()
 
@@ -47,7 +53,6 @@ export default function IndexPage() {
               
               const delta = await quill.clipboard.dangerouslyPasteHTML(result.bookContent.BContent_content);
               console.log("Delta: ", delta)
-              //await quill.setContents(result.bookContent, 'silent');
             }
         } else {
           if (quill) {
@@ -65,7 +70,7 @@ export default function IndexPage() {
       }
     }
     
-    fetchBookContent();
+    fetchBookContent();z
   }, [quill]);
 
   // This code is used for test only.
@@ -82,18 +87,14 @@ export default function IndexPage() {
   }, [quill]);
 
   const saveContent = async (content) => {
-    const res = await fetch("api/composing", {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
+    const res = await putComposingBook(
+      {
         _id: bid,
         BContent_content: content,
         BContent_pdf: null,
         BDetail_image: null
-      }),
-    });
+      }
+    );
     return res;
   }
 
@@ -166,8 +167,13 @@ export default function IndexPage() {
               <div className='col-span-1'></div>
               <div className='col-span-1'></div>
               <div className='col-span-1'></div>
-              <Button className='col-span-1 text-black bg-green-500' onClick={submit}>Submit</Button>
-
+              {
+                isVerified ? (
+                  <Button className='col-span-1 text-black bg-green-500' onClick={submit}>Submit</Button>
+                ) : (
+                  <Button className='col-span-1 text-black bg-green-500 disabled' onClick={submit}>Submit</Button>
+                )
+              }
             </div>
 
             <div className = 'w-full h-4/5'>

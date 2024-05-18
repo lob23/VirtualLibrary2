@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getList, acceptRequest, rejectRequest } from '@/app/api/librarian/manageRequest/route'
+import { getList, acceptRequest, rejectRequest } from '@/app/_api/librarian/manageRequest/route'
 
 export default function ManageRequest() {
 

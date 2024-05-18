@@ -3,6 +3,8 @@ import { useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { postLogin } from "../_api/login/route";
 
 export default function Login_form() {
   const [username, setUsername] = useState("");
@@ -19,23 +21,16 @@ export default function Login_form() {
         autoClose: 3000
       });
     } else {
-      console.log("username: ", username);
-      console.log("password: ", password);
-      const res = await fetch("api/login", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
-      const user = await res.json().then(result => { return result })
-      // console.log("Userrr: ", user)
-      // console.log("Userrr: ", user.User_name)
 
-      // console.log("Userrr: ", user.User_email)
+      const res = await postLogin({
+          username,
+          password
+        }
+      );
+
+      const user = await res.json().then(result => { return result })
+      console.log("user", user);
+
       if (user == null) {
         toast.error("Try Again !", {
           position: toast.POSITION.TOP_CENTER,

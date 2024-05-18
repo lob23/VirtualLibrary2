@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { DatePicker } from "antd"
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
+import { postSignup } from "../_api/signup/route";
 
 export default function Signup_form() {
   const [username, setUsername] = useState("");
@@ -103,21 +104,18 @@ export default function Signup_form() {
       if (username && password && repeatpassword && userfirstname && userlastname && userphone && useraddress && date) {
         e.preventDefault();
 
-        const res = await fetch("api/signup", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
+        const res = await postSignup (
+          {
             User_email: username,
             User_password: password,
             User_firstname: userfirstname,
             User_lastname: userlastname,
             User_phone: userphone,
             User_address: useraddress,
-            User_dob: date,
-          }),
-        });
+            User_dob: date
+          }
+        );
+        
         const user = await res.json().then(result => { return result })
         console.log("res", user)
         if (user) router.push("/login")

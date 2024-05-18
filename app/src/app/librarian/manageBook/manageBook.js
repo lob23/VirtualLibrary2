@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getList } from '@/app/api/librarian/manageBook/route'
+import { getList } from '@/app/_api/librarian/manageBook/route'
 
 export default function ManageBook() {
 

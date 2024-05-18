@@ -1,6 +1,6 @@
 import _commentItem from './comment_item';
 import { useEffect, useState } from "react";
-import { getCommentList } from '@/app/api/book_detail/route';
+import { getCommentList, postBookDetail } from '@/app/_api/book_detail/route';
 import { useSearchParams, useRouter } from "next/navigation";
 
 export default function CommentSection() {
@@ -15,19 +15,16 @@ export default function CommentSection() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (content === "") return null;
-    console.log("Comment: ", content);
-    const res = await fetch("api/book_detail", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
+
+    const res = await postBookDetail(
+      {
         Comment_userId: uid,
         Comment_bookId: BDetail_id,
-        Comment_content: content,
-      }),
-    });
+        Comment_content: content
+      });
+
     setUp(up + 1);
     setContent("");
     const Com = await res.json().then(result => { return result })

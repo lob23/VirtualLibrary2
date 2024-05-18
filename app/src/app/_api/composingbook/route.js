@@ -3,10 +3,8 @@ import config from '../../config'
 import axios from "axios"
 export const dynamic = 'force-dynamic'; // <- add this to force dynamic render
 
-
-export async function GET(req){
-    const authorid = req.nextUrl.searchParams.get('author')
-
+//GET
+export async function getComposingBook(authorid){
     try{
         
         const queryStringBook = config.BACKEND_URL + "/book/getBDetailByAuthorID/" + authorid

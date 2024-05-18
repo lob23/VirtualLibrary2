@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getUser } from '@/app/api/book_detail/route'
+import { getUser } from '@/app/_api/book_detail/route'
 
 export default function CommentItem(comment) {
 

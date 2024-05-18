@@ -18,6 +18,8 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { Audio } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getReadingBook, postReadingBook, putReadingBook } from '../_api/readingBook/route';
+import { getBookContent } from '../_api/bookcontent/route';
 
 const base64toBlob = (data) => {
     const pdfContentType = 'application/pdf';
@@ -52,25 +54,21 @@ export default function _readingpage() {
     const bDetailID = searchParams.get("bid");
 
     const createRlist = async () => {
-        const res = await fetch("api/readingBook", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({
+        const res = await postReadingBook(
+            {
                 RList_userId: uid,
                 RList_bookId: bDetailID,
                 RList_currentPage: 0
-            })
-        })
+            }
+        );
     }
 
     useEffect(() => {
         const fetchingBookContents = async () => {
-            const res = await fetch("api/bookcontent?bid=" + bDetailID, {
-                method: "GET"
-            });
+            const res = await getBookContent(bDetailID);
+
             const result = await res.json();
+
             if (result.stat == true && result.bookContent.BContent_pdf) {
                 console.log("book content: ", result.bookContent.BContent_pdf)
                 setBase64String("data:application/pdf;base64," + result.bookContent.BContent_pdf);
@@ -93,9 +91,7 @@ export default function _readingpage() {
 
     useEffect(() => {
         const fetchCurrentPage = async () => {
-            const res = await fetch("api/readingBook?uid=" + uid + "&bid=" + bDetailID, {
-                method: "GET",
-            }).then((response) => { return response })
+            const res = await getReadingBook(uid, bDetailID).then((response) => { return response });
 
             const res_data = await res.json()
 
@@ -117,17 +113,13 @@ export default function _readingpage() {
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
     const onBackClick = async () => {
-        const res = await fetch("api/readingBook", {
-            method: "PUT",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({
+        const res = await putReadingBook (
+            {
                 RList_userId: uid,
                 RList_bookId: bDetailID,
                 RList_currentPage: currentpage
-            })
-        })
+            }
+        );
 
         const res_data = await res.json();
         if (res_data.stat == true || initPage == currentpage) {

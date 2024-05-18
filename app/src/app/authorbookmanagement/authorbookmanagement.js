@@ -28,6 +28,7 @@ import {
     MenuItem,
     lighten,
 } from '@mui/material';
+import { getComposingBook } from "../_api/composingbook/route";
 
 export default function AuthorBookManagement() {
     const table_headers = ["File upload", "Time", "Status"]
@@ -50,9 +51,7 @@ export default function AuthorBookManagement() {
     useEffect(() => {
         const getBooks = async () => {
             try {
-                const books = await fetch("api/composingbook?author=" + author_id, {
-                    method: "GET",
-                });
+                const books = await getComposingBook(author_id);
 
                 const book_list = await books.json()
                 if (book_list.stat == true) {

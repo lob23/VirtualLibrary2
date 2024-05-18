@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import _updateComp from "@/app/wrapper/updateComp"
-import { fetchData, fetchAuthorById } from "../api/search/route";
+import { fetchData, fetchAuthorById } from "../_api/search/route";
 import {Circles} from "react-loader-spinner";
 import { useRouter, useSearchParams} from "next/navigation";
 

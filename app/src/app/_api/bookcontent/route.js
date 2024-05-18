@@ -5,10 +5,8 @@ import axios from "axios"
 export const dynamic = 'force-dynamic'; // <- add this to force dynamic render
 
 
-
-export async function GET(req){
-    const bookID = req.nextUrl.searchParams.get('bid')
-
+//GET
+export const getBookContent = async (bookID) =>{
     try{
 
         const queryStringBookContent = config.BACKEND_URL + "/book/getBContent/" + bookID

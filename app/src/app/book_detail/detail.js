@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { fetchBookById, fetchAuthorById } from "../api/book_detail/route";
+import { fetchBookById, fetchAuthorById } from "../_api/book_detail/route";
 import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function Detail() {

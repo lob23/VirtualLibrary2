@@ -2,7 +2,7 @@
 
 import _dropDrownComp from "./dropDownComp.js";
 import React, { useEffect, useState } from "react";
-import { getNotifyList } from '@/app/api/wrapper/route.js'
+import { getNotifyList } from '@/app/_api/wrapper/route.js'
 import { useSearchParams } from "next/navigation";
 
 export default function Dropdown() {

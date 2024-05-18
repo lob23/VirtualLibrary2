@@ -32,6 +32,7 @@ import {
     MenuItem,
     lighten,
 } from '@mui/material';
+import { getRequest } from "../_api/request/route";
 
 
 export default function AuthorRequestList(){
@@ -47,9 +48,7 @@ export default function AuthorRequestList(){
     useEffect(() => {
         const getAuthorRequest = async () => {
             try {
-                const request = await fetch("api/request", {
-                    method: "GET",
-                }); 
+                const request = await getRequest();
         
                 const request_list = await request.json()
                 if (request_list.stat == true){

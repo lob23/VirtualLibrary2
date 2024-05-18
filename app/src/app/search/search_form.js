@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { fetchData, fetchAuthorById } from "../api/search/route";
+import { fetchData, fetchAuthorById } from "../_api/search/route";
 import { Link } from "react-scroll"
 import _footer from "@/app/wrapper/footer"
 import { useSearchParams, useRouter } from "next/navigation";

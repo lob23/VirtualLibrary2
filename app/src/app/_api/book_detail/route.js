@@ -3,10 +3,8 @@ import config from '../../config'
 import axios from "axios"
 export const dynamic = 'force-dynamic'; // <- add this to force dynamic render
 
-
-export async function GET(req){
-  const bid = req.nextUrl.searchParams.get('bid');
-
+//GET
+export const getBookDetail = async (bid) =>{
   try{
     const queryString = config.BACKEND_URL + "/book/getBDetail/" + bid;
 
@@ -25,13 +23,10 @@ export async function GET(req){
 }
 
 export const fetchBookById = async (id) => {
-  const apiUrl = `http://localhost:3030/book/getBDetail/${id}`; // Dynamic URL with the book ID
+  const apiUrl = config.BACKEND_URL +`/book/getBDetail/${id}`; // Dynamic URL with the book ID
 
   try {
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-
-    });
+    const response = axios.get(apiUrl);
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -46,13 +41,10 @@ export const fetchBookById = async (id) => {
 };
 
 export const fetchAuthorById = async (id) => {
-  const apiUrl = `http://localhost:3030/users/getUser/${id}`;
+  const apiUrl = config.BACKEND_URL + `/users/getUser/${id}`;
 
   try {
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-
-    });
+    const response = await axios.get(apiUrl);
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -67,11 +59,11 @@ export const fetchAuthorById = async (id) => {
 };
 
 export const getCommentList = async (BDetail_id) => {
-  const apiURL = `http://localhost:3030/comment/getComment/${BDetail_id}`;
+  const apiURL = config.BACKEND_URL + `/comment/getComment/${BDetail_id}`;
   // console.log(BDetail_id);
 
   try {
-    const response = await fetch( apiURL, { method: 'GET', } );
+    const response = await axios.get(apiURL);
 
     if (!response.ok) throw new Error('Network response was not ok');
 
@@ -85,10 +77,10 @@ export const getCommentList = async (BDetail_id) => {
 }
 
 export const getNestedComment = async (Comment_id) => {
-  const apiURL = `http://localhost:3030/comment/getNestedComment/${Comment_id}`;
+  const apiURL = config.BACKEND_URL + `/comment/getNestedComment/${Comment_id}`;
 
   try {
-    const response = await fetch( apiURL, { method: 'GET', } );
+    const response = await axios.get(apiURL);
 
     if (!response.ok) throw new Error('Network response was not ok');
 
@@ -102,10 +94,10 @@ export const getNestedComment = async (Comment_id) => {
 }
 
 export const getUser = async (User_id) => {
-  const apiURL = `http://localhost:3030/users/comment/${User_id}`;
+  const apiURL = config.BACKEND_URL + `/users/comment/${User_id}`;
 
   try {
-    const response = await fetch( apiURL, { method: 'GET', } );
+    const response = await axios.get(apiURL);
 
     if (!response.ok) throw new Error('Network response was not ok');
 
@@ -118,9 +110,10 @@ export const getUser = async (User_id) => {
   }
 }
 
-export async function POST(req) {
+//set book detail (POST)
+export const postBookDetail = async(req) => {
 
-  const content = await req.json()
+  const content = req;
 
   try{
       const queryString = config.BACKEND_URL + "/comment/createComment"
@@ -147,16 +140,3 @@ export async function POST(req) {
 
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

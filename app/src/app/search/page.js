@@ -6,7 +6,7 @@ import _header from "@/app/search/header_search"
 import _footer from "@/app/wrapper/footer"
 import booklist from './book_list';
 import latestUpdate from "./latest_update";
-import { fetchAuthorById } from "../api/book_detail/route";
+import { fetchAuthorById } from "../_api/book_detail/route";
 import { Audio } from "react-loader-spinner";
 
 

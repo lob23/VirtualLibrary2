@@ -2,9 +2,10 @@ import {NextResponse} from "next/server"
 import config from '../../config'
 import axios from "axios"
 
-export async function POST(req) {
+//POST
+export const postComposing = async (req) => {
 
-    const content = await req.json()
+    const content = req;
 
     try{
         const queryString = config.BACKEND_URL + "/book/createBook/"
@@ -32,8 +33,9 @@ export async function POST(req) {
     }
 }
 
-export async function PUT(req) {
-    const {_id, BContent_content, BContent_pdf} = await req.json()
+// PUT
+export const putComposingBook = async (req) => {
+    const {_id, BContent_content, BContent_pdf} = req;
     const put_obj = {
         BContent_content,
         ...(BContent_pdf !== null && { BContent_pdf }),
@@ -63,10 +65,6 @@ export async function PUT(req) {
         return NextResponse.json(error) 
 
     }
-}
-
-export async function GET(req){
-
 }
 
 export async function updateBookCover(id, filePath) {
