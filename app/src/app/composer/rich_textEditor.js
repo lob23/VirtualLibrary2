@@ -19,7 +19,7 @@ export default function IndexPage() {
 
   const [isLoading, setLoading] = useState(true);
 
-  const [isVerified, setVerified] = useState(true);
+  const [isEditing, setEditing] = useState(false);
 
   const searchParams = useSearchParams()
  
@@ -37,7 +37,7 @@ export default function IndexPage() {
       const bDetail = await getBookDetail(bid);
       const res_json = await bDetail.json();
 
-      setVerified(res_json.BDetail_status == "verified");
+      setEditing(res_json.BDetail_status == "editing");
 
       const res = await getBookContent(bid);
 
@@ -162,17 +162,21 @@ export default function IndexPage() {
                   className="object-contain row-span-1 col-span-5"
                   src="/image/logo.png">
               </img>
+
+              {
+                isEditing == true ? 
+                  (<Button className='col-span-1 text-white bg-black' onClick={save}>Save and Back</Button>)
+                 : (<></>)
+              }
               
-              <Button className='col-span-1 text-white bg-black' onClick={save}>Save and Back</Button>
+              
               <div className='col-span-1'></div>
               <div className='col-span-1'></div>
               <div className='col-span-1'></div>
               {
-                isVerified ? (
-                  <Button className='col-span-1 text-black bg-green-500' onClick={submit}>Submit</Button>
-                ) : (
-                  <Button className='col-span-1 text-black bg-green-500 disabled' onClick={submit}>Submit</Button>
-                )
+                isEditing == true ? 
+                  (<Button className='col-span-1 text-black bg-green-500' onClick={submit}>Submit</Button>)
+                 : (<></>)
               }
             </div>
 

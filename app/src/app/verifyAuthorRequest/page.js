@@ -5,7 +5,7 @@ export default function authorRequestVerifyPage(){
     return (
         <>
             <Suspense>
-                <_authorRequest />
+                <_authorRequest /> 
             </Suspense>
         </>
     )
