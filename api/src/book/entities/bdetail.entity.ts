@@ -52,6 +52,6 @@ export class BDetail {
     this.BDetail_averageRating = 0;
     this.BDetail_image = null;
     this.BDetail_publishedDay = null;
-    this.BDetail_description = 'Have a good day sir!';
+    this.BDetail_description = null;
   }
 }

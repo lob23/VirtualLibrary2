@@ -44,7 +44,7 @@ export default function _readingPage() {
 
     useEffect(() => {
         const fetchingBookContents = async () => {
-            const res = await fetch("/pages/api/bookcontent?bid=" + bid, {
+            const res = await fetch("/api/bookcontent?bid=" + bid, {
                 method: "GET",
             });
             const result = await res.json();

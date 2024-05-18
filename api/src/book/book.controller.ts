@@ -96,6 +96,15 @@ export class BookController {
     return await this.bookService.updateStatus(BDetail_id, status);
   }
 
+  @Patch('updateDescription')
+  async updateDescription(
+    @Query('BDetail_id') BDetail_id: string,
+    @Query('description') description: string,
+  ) {
+    return await this.bookService.updateDescription(BDetail_id, description);
+  }
+
+
   // Router for upload user avatar
   @UseInterceptors(FileInterceptor('file'))
   @Patch('updateBDetailImage/:id')

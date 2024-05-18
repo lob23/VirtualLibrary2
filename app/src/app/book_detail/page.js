@@ -49,7 +49,7 @@ export default function Book_detail_screen() {
                                     d="M8.707 3.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1-1.414 1.414L10 5.414 3.707 11.707a1 1 0 1 1-1.414-1.414l6-6z"
                                 />
                             </svg>
-                            <p className="font-Gilroy_sb text-blue font-[20px]">Back</p>
+                            <p className="font-Gilroy_sb text-blue font-[20px]">Back To Homepage</p>
                         </div>
                         <div className="w-full h-full mt-10">
                             <_detail />

@@ -146,6 +146,14 @@ export class BookService {
     
   }
 
+  async updateDescription(id: string, description: string): Promise<BDetail | null> {
+
+
+    await this.bDetailRepository.update(id, { BDetail_description: description });
+    return await this.findById(id);
+    
+  }
+
   async remove(id: string): Promise<void> {
     const bDetail = await this.findById( id );
     await this.bContentRepository.delete( bDetail.BDetail_contentId );

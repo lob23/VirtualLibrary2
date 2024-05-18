@@ -13,6 +13,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useQuill } from "react-quilljs";
+import { Description } from "@mui/icons-material";
 
 // import { useQuill } from "react-quilljs";
 // import Quill from 'quill';
@@ -104,6 +105,13 @@ export default function SubmissionForm({renderFunction}) {
                 const content_delta = await convertToPDF(quill, bContent);
                 if(content_delta != null){
                     const blobData = await blobToBase64(content_delta);
+
+                    await axios.patch(config.BACKEND_URL + '/book/updateDescription', null, {
+                        params: {
+                            BDetail_id: bid,
+                            description: bookDescription,
+                        },
+                    });
 
                     const res = await fetch("api/composing", {
                         method: "PUT",
@@ -299,11 +307,11 @@ export default function SubmissionForm({renderFunction}) {
                                 Description
                             </p>
                             <div className='relative w-full h-4/5 mt-3 border-b-2 border-solid border-blue border-opacity-40'>
-                                <input className='w-full h-full absolute outline-none border-none focus:border-0 focus:outline-0'
-                                    type='text'
+                                <textarea 
+                                    className='w-full h-4/5 absolute outline-none border-none focus:border-0 focus:outline-0 resize-none'
                                     value={bookDescription}
-                                    onChange={(e) => setBookDescription(e.target.value)}>
-                                </input>
+                                    onChange={(e) => setBookDescription(e.target.value)}
+                                />
                             </div>
                         </div>
                         <FormGroup>
