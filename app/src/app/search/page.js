@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 import _searchForm from "@/app/search/search_form"
 import _header from "@/app/search/header_search"
 import _footer from "@/app/wrapper/footer"
-import booklist from './book_list';
-import latestUpdate from "./latest_update";
+import _booklist from './book_list';
+import _latestUpdate from "./latest_update";
 import { fetchAuthorById } from "../_api/book_detail/route";
 import { Audio } from "react-loader-spinner";
 
@@ -17,22 +17,23 @@ export default function Search_screen() {
 
     return (
         <>
+        <Suspense>
             {!isSearchRendered?
                     <div className='flex flex-col w-full h-full overflow-hidden overflow-y-auto z-0'>
                         <div className="w-full h-fit z-30 bg-cream">
-                            {_header()}
+                            <_header />
                         </div>
                         <div className="w-full h-fit overflow-hidden z-30" >
-                            {_searchForm()}
+                            <_searchForm />
                         </div>
                         <div className=" w-full h-fit overflow-hidden z-20">
-                            {latestUpdate()}
+                            <latestUpdate />
                         </div>
                         <div className="w-9/10 gap-y-5  overflow-x-hidden px-10 mt-10 z-20">
-                            {booklist()}
+                            <_booklist />
                         </div>
                         <div className="w-full h-fit">
-                            {_footer()}
+                            <_footer />
                         </div>
                     </div>
                 :
@@ -44,6 +45,7 @@ export default function Search_screen() {
                     ariaLabel="loading"
                     />
             }
+        </Suspense>
         </>
     );
 }

@@ -53,6 +53,7 @@ export default function Search_form() {
 
   return (
     <>
+    
       <div className=" flex flex-col w-full h-auto items-center ">
         <div class="relative w-screen h-[300px] bg-cream ">
           <h1 className="static font-Gilroy_md text-blue text-4xl text-center pt-40 mb-30 pb-5 z-15">
