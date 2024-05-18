@@ -11,11 +11,14 @@ import { BContent } from './entities/bcontent.entity';
 export class BookController {
   constructor(private readonly bookService: BookService) {}
 
+  // SELF
+  // role: author
   @Post('createBook')
   async createBook(@Body() createBookDto: CreateBookDto) {
     return await this.bookService.create(createBookDto);
   }
 
+  // DEPRECATED
   @Get('dev')
   async getDev() {
     const response = await this.findAllBDetail();
@@ -40,6 +43,8 @@ export class BookController {
     return await this.bookService.findAll();
   }
 
+  // SELF
+  // role: author
   @Get('getComposingList/:id')
   async getComposingList(@Param('id') id: string) {
     const result = await this.bookService.getComposingList(id);
@@ -65,12 +70,16 @@ export class BookController {
     return result;
   }
 
+  // SPECIAL
+  // role: author (SELF) or admin (ALL)
   @Get('getListByStatus/:st')
   async getListByStatus(@Param('st') st: string) {
     const result = await this.bookService.getListByStatus(st.toLowerCase());
     return result;
   }
 
+  // SELF
+  // role: author
   @Patch('updateBDetail/:id')
   async update(
     @Param('id') id: string,
@@ -79,6 +88,8 @@ export class BookController {
     return await this.bookService.update(id, updateBDetailDto);
   }
 
+  // SELF
+  // role: author
   // Update by id of BDetail
   @Patch('updateBContent/:id')
   async updateBContent(
@@ -88,6 +99,8 @@ export class BookController {
     return await this.bookService.updateBContent(id, updateBContentDto);
   }
 
+  // SPECIAL
+  // role: author (SELF) or admin (ALL)
   @Patch('updateStatus')
   async updateStatus(
     @Query('BDetail_id') BDetail_id: string,
@@ -96,6 +109,8 @@ export class BookController {
     return await this.bookService.updateStatus(BDetail_id, status);
   }
 
+  // SELF
+  // role: author
   @Patch('updateDescription')
   async updateDescription(
     @Query('BDetail_id') BDetail_id: string,
@@ -104,8 +119,9 @@ export class BookController {
     return await this.bookService.updateDescription(BDetail_id, description);
   }
 
-
-  // Router for upload user avatar
+  // SELF
+  // role: author
+  // Router for  upload book detail image
   @UseInterceptors(FileInterceptor('file'))
   @Patch('updateBDetailImage/:id')
   updateAvatar(
@@ -126,7 +142,9 @@ export class BookController {
     return result;
   }
 
-  // Router for upload user avatar
+  // SELF
+  // role: author
+  // Router for upload PDF file
   @UseInterceptors(FileInterceptor('file'))
   @Patch('updatePDF/:id')
   updatePDF(
@@ -141,6 +159,7 @@ export class BookController {
     return this.bookService.updatePDF(id, file);
   }
 
+  // DEPRECATED
   @Delete('deleteBook/:id')
   async remove(@Param('id') id: string) {
     return await this.bookService.remove(id);

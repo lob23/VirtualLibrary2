@@ -1,30 +1,18 @@
-import {NextResponse} from "next/server"
 import config from '../../config'
-import axios from "axios";
+import api from '@/app/_api'
 //POST
 export const postLogin = async (req) => {
     const {username, password} = req;
-    try {
-        // const [user, status] = await getUserAccount(username, password)
-        // console.log("username: ", password);
-        const queryString = config.BACKEND_URL + "/users/login/" + username;
+    const queryString = config.BACKEND_URL + "/auth/login";
+    var token = await api.post(queryString, {
+        email: username,
+        password: password
+    });
+    localStorage.setItem('accessToken', token.data.accessToken);
+}
 
-        var user = await axios.get(queryString, {
-            params: {
-                password: password,
-            },
-        });
-
-        console.log("user: ", user);
-
-        if (user != null){
-        
-            return user.data;
-        } else 
-            return null;
-    }catch (error){
-        console.log("login failed: ", error)
-        return null;
-    }
-
+export const getRole = async () => {
+    const queryString = config.BACKEND_URL +"/role";
+    var role = await api.get(queryString);
+    return role.data;
 }

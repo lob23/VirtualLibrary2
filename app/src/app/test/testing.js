@@ -1,7 +1,7 @@
 "use client";
 // // download-pdf.js
 import { useEffect } from 'react';
-import axios from 'axios';
+import axios from '@/app/_api';
 
 const Testing = () => {
   const downloadPDF = async () => {

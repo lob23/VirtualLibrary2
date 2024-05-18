@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import axios from "axios";
+import axios from '@/app/_api';
 import config from '../../config'
 
 export const fetchData = async () => {

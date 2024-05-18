@@ -182,7 +182,7 @@ export default function AuthorHome() {
 
 // // download-pdf.js
 // import { useEffect } from 'react';
-// import axios from 'axios';
+// import axios from '@/app/_api';
 
 // const ReaderHome = () => {
 //   const downloadPDF = async () => {

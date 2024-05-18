@@ -1,6 +1,6 @@
 import {NextResponse} from "next/server"
 import config from '../../config'
-import axios from "axios"
+import axios from '@/app/_api'
 
 //POST
 export const postComposing = async (req) => {

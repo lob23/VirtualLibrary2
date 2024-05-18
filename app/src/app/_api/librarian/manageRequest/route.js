@@ -1,6 +1,6 @@
 import {NextResponse} from "next/server"
 import config from '@/app/config'
-import axios from "axios"
+import axios from '@/app/_api'
 
 export async function getList() {
 

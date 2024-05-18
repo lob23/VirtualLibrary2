@@ -8,6 +8,8 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
+  // SELF
+  // role: user or author
   @Post('createComment')
   create(@Body() createCommentDto: CreateCommentDto) {
     return this.commentService.createComment(createCommentDto);
@@ -19,16 +21,19 @@ export class CommentController {
     return result;
   }
 
+  // DEPRECATED
   @Get('getNestedComment/:id')
   getNestedComment(@Param('id') commentId: string) {
     return this.commentService.getNestedCommentOfComment(commentId);
   }
 
+  // DEPRECATED
   @Patch('updateComment/:id')
   update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {
     return this.commentService.updateContent(id, updateCommentDto);
   }
 
+  // DEPRECATED
   @Delete('deleteComment/:id')
   remove(@Param('id') id: string) {
     return this.commentService.deleteComment(id);

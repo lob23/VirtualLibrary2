@@ -13,27 +13,35 @@ import * as bcrypt from 'bcrypt';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  // INFO
+  // role: user (disable), writer (disable), admin (disable
   @Post('createUser')
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
+  // role: admin
   @Get()
   async findAll() {
     const result = await this.usersService.findAll();
     return result;
   }
 
+  // SPECIAL
+  // role: user (self), writer (self), admin (all)
   @Get('getUser/:id')
   findOne(@Param('id') id: string) {
     return this.usersService.findById(id);
   }
 
+  // SPECIAL
+  // role: user (self), writer (self), admin (all)
   @Get('getUserByEmail/:email')
   getByEmail(@Param('email') email: string) {
     return this.usersService.getByEmail(email);
   }
 
+  // DEPRECATED
   @Get('login/:email')
   async userLogin(
     @Param('email') email: string,
@@ -54,7 +62,9 @@ export class UsersController {
 
     return null;
   }
+  
 
+  // DEPRECATED
   @Get('comment/:id')
   async getDev(@Param('id') id: string) {
     const response = await this.findOne(id);
@@ -62,11 +72,13 @@ export class UsersController {
     return result;
   }
 
+  // DEPRECATED
   @Patch('updateUser/:id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
+  // DEPRECATED
   // Router for upload user avatar
   @UseInterceptors(FileInterceptor('file'))
   @Patch('updateAvatar/:id')
@@ -82,6 +94,7 @@ export class UsersController {
     return this.usersService.updateAvatar(id, file);
   }
 
+  // DEPRECATED
   @Delete('deleteUser/:id')
   remove(@Param('id') id: string) {
     this.usersService.remove(id);
