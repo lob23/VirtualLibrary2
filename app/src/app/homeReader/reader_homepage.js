@@ -20,19 +20,17 @@ export default function ReaderHome() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const uid = searchParams.get('uid');
-
   const [books, setBooks] = useState([]);
   const [rlistBook, setRList] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [authorList, setAuthorList] = useState([]);
 
   const handleReadingListClick = (_bid) => {
-    router.push("/book_detail?uid=" + uid + "&bid=" + _bid);
+    router.push("/book_detail?" + "bid=" + _bid);
   }
 
   const handleOngoingReadingClick = (_bid) => {
-    router.push("/reading?uid=" + uid + "&bid=" + _bid)
+    router.push("/reading?" + "bid=" + _bid)
   }
 
   useEffect(() => {
@@ -63,7 +61,7 @@ export default function ReaderHome() {
         }
 
         // Fetch reading list
-        const rlistData = await fetchReadingList(uid);
+        const rlistData = await fetchReadingList();
         const rbook = await rlistData.json();
 
         setBooks(bookData);
@@ -126,7 +124,7 @@ export default function ReaderHome() {
                 {
                   rlistBook.map((item)=>(
                     <li key={item._id} className="w-full h-full mr-10" onClick={() => handleOngoingReadingClick(item._id)}>
-                      {_readingComp(uid, item)}
+                      {_readingComp(item)}
                     </li>
                   ))
                 }

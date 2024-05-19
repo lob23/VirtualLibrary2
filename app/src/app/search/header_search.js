@@ -1,29 +1,30 @@
 
 import {useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { fetchAuthorById } from "../_api/search/route";
+import { getRole } from "../_api/login/route";
 
 export default function Header(){
     const router = useRouter();
     const searchParams = useSearchParams();
-    const [user, setUser] = useState(null)
+    const [role, setRole] = useState(null)
 
     const uid = searchParams.get("uid")
 
     useEffect(() => {
       const fetchUser = async () => {
-        const usr = await fetchAuthorById(uid);
-        setUser(usr);
+        const usr = await getRole();
+        setRole(usr);
       }
       fetchUser();
     })
 
     const backToHome = () => {
-      console.log("user", user)
-      if (user.User_authorizationLevel == 1)
-        router.push("/homeReader?uid=" + user._id);
-      else (user.User_authorizationLevel == 2)
-        router.push("/homeAuthor?uid=" + user._id);
+      if (role == 1)
+        router.push("/homeReader");
+      else if (role == 2)
+        router.push("/homeAuthor");
+      else if (role == 3)
+        router.push("/homeLibrarian");
     }
 
     return(

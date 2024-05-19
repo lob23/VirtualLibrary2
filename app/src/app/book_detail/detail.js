@@ -64,7 +64,7 @@ export default function Detail() {
           {/* <div className='w-20 h-10'>
              <p className='text-[40px] text-blue'>{book.BDetail_author}</p>
            </div> */}
-          <p className='w-full h-fit  ml-5 font-Gilroy_md text-blue text-[20px] text-wrap'>{author.User_firstname}</p>
+          <p className='w-full h-fit  ml-5 font-Gilroy_md text-blue text-[20px] text-wrap'>{author}</p>
           <p className='w-full h-fit  ml-5 font-Gilroy_sb text-blue text-[40px] text-wrap'>{book.BDetail_title}</p>
           <p className='w-fit h-fit ml-5 mr-5  font-Gilroy_md text-blue text-[12px] text-wrap'>{book.BDetail_description}</p>
           <div className='w-9/10 h-fit ml-5 mr-5 overflow-hidden'>

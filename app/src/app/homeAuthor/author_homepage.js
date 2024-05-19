@@ -13,7 +13,6 @@ export default function AuthorHome() {
   const router = useRouter()
   const searchParams = useSearchParams()
   //'658e859e6168987e9653af10'
-  const authorID = searchParams.get('uid');
   const [books, setBooks] = useState([]);
   const [authorBook, setAuthorBook] = useState([]); 
   const [rlistBook, setRList] = useState([]); 
@@ -25,11 +24,11 @@ export default function AuthorHome() {
   }
 
   const handleReadingListClick = (_bid) => {
-    router.push("/book_detail?uid=" + authorID + "&bid=" + _bid);
+    router.push("/book_detail?" + "bid=" + _bid);
   }
 
   const handleonGoingRead = (_bid) => {
-    router.push("/reading?uid=" + authorID + "&bid=" + _bid)
+    router.push("/reading?" + "bid=" + _bid)
   }
 
   useEffect(() => {
@@ -60,13 +59,13 @@ export default function AuthorHome() {
 
 
         // Fetch author details using the author ID from the book details
-        const authorBookList = await fetchBookByAuthorId(authorID);
+        const authorBookList = await fetchBookByAuthorId();
         
         console.log('Author details:', authorBookList);
 
 
          // Fetch reading list 
-         const rlistData = await fetchReadingList(authorID);
+         const rlistData = await fetchReadingList();
          const rbook = await rlistData.json();
          setBooks(bookData);
          setAuthorBook(authorBookList);
@@ -128,7 +127,7 @@ export default function AuthorHome() {
                   {
                     rlistBook.map((item)=>(
                       <li key={item._id} className="w-full h-full mr-[50px]" onClick={() => {handleonGoingRead(item._id)}}>
-                        {_readingComp(authorID, item)}
+                        {_readingComp(item)}
                       </li>
                     ))
                   }

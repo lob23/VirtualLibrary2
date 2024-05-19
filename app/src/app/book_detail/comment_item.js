@@ -15,7 +15,6 @@ export default function CommentItem(comment) {
         const response = await getUser(comment.Comment_userId);
         console.log(response);
         setUser(response.User_lastname);
-        console.log('Current user: ', user);
 
       } catch (error) {
         console.error('Error:', error);

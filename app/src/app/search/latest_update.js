@@ -1,9 +1,10 @@
 import { useEffect, useState, Suspense } from "react";
 
 import _updateComp from "@/app/wrapper/updateComp"
-import { fetchData, fetchAuthorById } from "../_api/search/route";
+import { fetchData } from "../_api/search/route";
 import {Circles} from "react-loader-spinner";
 import { useRouter, useSearchParams} from "next/navigation";
+import { fetchAuthorById } from "../_api/book_detail/route";
 
 export default function LatestUpdate() {
 
