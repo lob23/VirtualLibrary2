@@ -36,8 +36,8 @@ export const fetchBookByAuthorId = async (id) => {
   }
 }
 
-export const fetchReadingList = async (id) => {
-  const apiUrl = config.BACKEND_URL + `/rlist/getRList/${id}`; 
+export const fetchReadingList = async () => {
+  const apiUrl = config.BACKEND_URL + `/rlist/getRList`; 
   console.log("apiUrlRList: ", apiUrl);
   try{
     const response = await axios.get(apiUrl).then((res)=>{

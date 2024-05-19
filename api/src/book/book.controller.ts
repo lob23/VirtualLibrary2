@@ -85,8 +85,9 @@ export class BookController {
   // SPECIAL
   // role: author (SELF) or admin (ALL)
   @Get('getListByStatus/:st')
-  async getListByStatus(@Param('st') st: string) {
-    const result = await this.bookService.getListByStatus(st.toLowerCase());
+  async getListByStatus(@Req() req: Request, @Param('st') st: string) {
+    const userId = req['user'].sub;
+    const result = await this.bookService.getListByStatus(userId, st.toLowerCase());
     return result;
   }
 

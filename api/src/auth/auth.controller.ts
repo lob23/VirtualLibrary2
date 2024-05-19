@@ -8,12 +8,6 @@ import { Request } from 'express';
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService) {}
-
-    @HttpCode(HttpStatus.OK)
-    @Get()
-    async authenticate(@Req() req: Request) {
-        return;
-    }
     
     @Public()
     @HttpCode(HttpStatus.OK)

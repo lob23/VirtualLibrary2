@@ -63,7 +63,7 @@ export default function ReaderHome() {
         }
 
         // Fetch reading list
-        const rlistData = await fetchReadingList(uid);
+        const rlistData = await fetchReadingList();
         const rbook = await rlistData.json();
 
         setBooks(bookData);

@@ -11,7 +11,7 @@ export const getBookDetail = async (bid) =>{
 
     if (res.status != 200)
       throw new Error("Cannot fetch book detail.")
-    return res.data;
+    return res;
   }catch(error){
     return error;
   }

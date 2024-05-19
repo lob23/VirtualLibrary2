@@ -1,8 +1,10 @@
 // eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Req, BadRequestException } from '@nestjs/common';
 import { RListService } from './rlist.service';
 import { CreateRListDto } from './dto/create-rlist.dto';
 import { UpdateRListDto } from './dto/update-rlist.dto';
+import { plainToClass } from 'class-transformer';
+import { validate } from 'class-validator';
 
 @Controller('rlist')
 export class RListController {
@@ -10,8 +12,15 @@ export class RListController {
 
   // SELF
   @Post('createRList')
-  async create(@Body() createRListDto: CreateRListDto) {
-    return await this.rListService.create(createRListDto);
+  async create(@Req() createRListDto: Request) {
+    const createBookDtoTemp = await plainToClass(CreateRListDto, createRListDto.body);
+
+    const errors = await validate(createBookDtoTemp);
+    if (errors.length > 0) {
+      throw new BadRequestException('Validation failed');
+    }
+
+    return await this.rListService.create(createBookDtoTemp);
   }
 
   // DEPRECATED
@@ -21,9 +30,9 @@ export class RListController {
   }
 
   // SELF
-  @Get('getRList/:id')
-  async findOne(@Param('id') id: string) {
-    return await this.rListService.findByUserId(id);
+  @Get('getRList')
+  async findOne(@Req() id: Request) {
+    return await this.rListService.findByUserId(id['user'].sub);
   }
 
   // SELF

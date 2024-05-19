@@ -35,7 +35,8 @@ export default function Search_form() {
 
         //book in latest update 
         const result = await fetchData();
-        console.log(result);
+
+        console.log('xxx', result);
         setBooks(result);
       } catch (error) {
         // Handle error

@@ -66,7 +66,7 @@ export default function AuthorHome() {
 
 
          // Fetch reading list 
-         const rlistData = await fetchReadingList(authorID);
+         const rlistData = await fetchReadingList();
          const rbook = await rlistData.json();
          setBooks(bookData);
          setAuthorBook(authorBookList);

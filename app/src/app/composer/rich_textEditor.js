@@ -36,9 +36,9 @@ export default function IndexPage() {
     const fetchBookContent = async () => {
       const res_json = await getBookDetail(bid);
 
-      console.log("res_json: ", res_json);
+      // console.log("res_json: ", res_json);
 
-      setEditing(res_json.BDetail_status == "editing");
+      setEditing(res_json.data.BDetail_status == "editing");
 
       const res = await getBookContent(bid);
 

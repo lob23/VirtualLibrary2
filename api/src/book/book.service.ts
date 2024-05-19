@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
+import { MongoRepository, ObjectLiteral, Repository, UpdateResult } from 'typeorm';
 import { ObjectId } from 'mongodb';
 import { BDetail } from './entities/bdetail.entity';
 import { BContent } from './entities/bcontent.entity';
@@ -14,7 +14,7 @@ import { User } from 'src/users/entities/user.entity';
 export class BookService {
   constructor(
     @InjectRepository(BDetail)
-    private readonly bDetailRepository: Repository<BDetail>,
+    private readonly bDetailRepository: MongoRepository<BDetail>,
     @InjectRepository(BContent)
     private readonly bContentRepository: Repository<BContent>,
     @InjectRepository(User)
@@ -59,13 +59,66 @@ export class BookService {
     return bookList;
   }
 
-  async getListByStatus( status: string ): Promise<BDetail[]> {
+  async getListByStatus(userId: string, status: string ): Promise<BDetail[]> {
     const stList = ['verified', 'rejected', 'waiting'];
-    if(!stList.includes(status)) throw new Error('This status is not valid. Current status: ' + status)
-    const result = await this.bDetailRepository.find({
-      where: { BDetail_status: status }
+    if (!stList.includes(status)) throw new BadRequestException('This status is not valid. Current status: ' + status)
+    let pipeline: ObjectLiteral[] = [
+      {
+        $match: {
+          BDetail_status: status
+        }
+      },
+      {
+        $addFields: {
+          userId: { $toObjectId: '$BDetail_authorID' }
+        }
+      },
+      {
+        $lookup: {
+          from: 'user',
+          localField: 'userId',
+          foreignField: '_id',
+          as: 'BDetail_author'
+        }
+      },
+      {
+        $unwind: '$BDetail_author'
+      },
+      {
+        $addFields: {
+          BDetail_authorFullname: {
+            $concat: ['$BDetail_author.User_firstname', ' ', '$BDetail_author.User_lastname']
+          }
+        }
+      },
+      {
+        $project: {
+          userId: 0,
+          BDetail_author: 0
+        }
+      }
+    ];
+    if (status === 'verified') {
+      return await this.bDetailRepository.aggregate(pipeline).toArray();
+    }
+    const user = await this.userRepository.findOne({ 
+      where: { _id: new ObjectId(userId)},
+      select: ['User_authorizationLevel']
     });
-    return result
+    switch (user.User_authorizationLevel) {
+      case 3:
+        return await this.bDetailRepository.aggregate(pipeline).toArray();
+      case 2:
+        pipeline[0] = {
+          $match: {
+            BDetail_status: status,
+            BDetail_authorID: userId
+          }
+        };
+        return await this.bDetailRepository.aggregate(pipeline).toArray();
+      default:
+        throw new ForbiddenException('You do not have permission to access this resource');
+    }
   }
 
   async create(createBookDto: CreateBookDto): Promise<BDetail> {
@@ -84,6 +137,7 @@ export class BookService {
     where: {
       BDetail_title: createBookDto.BDetail_title,
     },
+    relations: []
   });
 
   if (existingBDetailWithSameTitle) {

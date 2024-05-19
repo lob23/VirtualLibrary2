@@ -180,12 +180,9 @@ export default function SubmissionForm({renderFunction}) {
         }
     }
 
-
     useEffect(() => {
         const fetchBookDetail = async () => {
-            const res = await getBookDetail(bid);
-            const res_json = await res.json();
-
+            const res_json = await getBookDetail(bid);
             if (res_json.stat == true) {
                 setBookTitle(res_json.data.BDetail_title);
                 setBookGenre(res_json.data.BDetail_genre);
