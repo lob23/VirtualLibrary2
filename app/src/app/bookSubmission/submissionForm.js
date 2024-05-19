@@ -16,31 +16,14 @@ import { useQuill } from "react-quilljs";
 import { getBookContent } from "../_api/bookcontent/route";
 import { putComposingBook } from "../_api/composing/route";
 import { getBookDetail } from "../_api/book_detail/route";
-
-// import { useQuill } from "react-quilljs";
-// import Quill from 'quill';
-
-
-// function HtmlToDelta(html) {
-//     const div = document.createElement('div');
-//     div.setAttribute('id', 'htmlToDelta');
-//     div.innerHTML = `<div id="quillEditor" style="display:none">${html}</div>`;
-//     document.body.appendChild(div);
-//     const quill = new Quill('#quillEditor', {
-//         theme: 'snow',
-//     });
-//     const delta = quill.getContents();
-//     document.getElementById('htmlToDelta').remove();
-//     return delta;
-// }
-
+import { Button } from "@mui/material";
+import { summaryText } from "../_api/gemini/gemini-model";
 
 export default function SubmissionForm({renderFunction}) {
 
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const uid = searchParams.get('uid');
     const bid = searchParams.get('bid');
 
     const { quill, quillRef } = useQuill();
@@ -102,6 +85,7 @@ export default function SubmissionForm({renderFunction}) {
         try {
             if (bookTitle && bookCover && bookDescription && bookLanguage && bookGenre) {
                 const bContent = await getBContent();
+                
                 const content_delta = await convertToPDF(quill, bContent);
                 if(content_delta != null){
                     const blobData = await blobToBase64(content_delta);
@@ -146,7 +130,7 @@ export default function SubmissionForm({renderFunction}) {
                                 position: toast.POSITION.TOP_CENTER,
                                 autoClose: 3000
                             });
-                        else router.push("/authorbookmanagement?uid=" + uid);
+                        else router.push("/authorbookmanagement");
 
                     } else {
                         toast.error("The system cannot save your progress", {
@@ -195,6 +179,7 @@ export default function SubmissionForm({renderFunction}) {
                 })
             }
         }
+
         fetchBookDetail();
     }, [bookTitle, bookGenre, bookLanguage])
 
@@ -287,7 +272,9 @@ export default function SubmissionForm({renderFunction}) {
                                     onChange={(e) => setBookDescription(e.target.value)}
                                 />
                             </div>
+   
                         </div>
+
                         <FormGroup>
                             <FormControlLabel required control={<Checkbox onChange={() => { setPrivacyVerified(!privacyVerified) }} />} label="I confirm that I wrote this book myself and take full legal responsibility. The content is entirely original and not copied from anywhere else." />
                             <FormControlLabel required control={<Checkbox onChange={() => { setCopyrightVerified(!copyrightVerified) }} />} label="I grant Literia the right to use my article and share the copyright" />
