@@ -8,21 +8,25 @@ import { UpdateRListDto } from './dto/update-rlist.dto';
 export class RListController {
   constructor(private readonly rListService: RListService) {}
 
+  // SELF
   @Post('createRList')
   async create(@Body() createRListDto: CreateRListDto) {
     return await this.rListService.create(createRListDto);
   }
 
+  // DEPRECATED
   @Get()
   async findAll() {
     return await this.rListService.findAll();
   }
 
+  // SELF
   @Get('getRList/:id')
   async findOne(@Param('id') id: string) {
     return await this.rListService.findByUserId(id);
   }
 
+  // SELF
   @Get('getPage')
   async getPage(
     @Query('userId') userId: string,
@@ -32,6 +36,7 @@ export class RListController {
     return result.RList_currentPage;
   }
 
+  // SELF
   @Patch()
   async update(
     @Query('userId') userId: string,
@@ -41,6 +46,7 @@ export class RListController {
     return await this.rListService.update(userId, bookId, updateRListDto);
   }
 
+  // DEPRECATED
   @Delete('deleteRList')
   async remove(
     @Query('userId') userId: string,
@@ -49,6 +55,7 @@ export class RListController {
     return await this.rListService.remove(userId, bookId);
   }
 
+  // DEPRECATED
   @Delete('deleteRListByUserId/:id')
   async removeByUserId(@Param('id') id: string) {
     return await this.rListService.removeByUserId(id);

@@ -3,14 +3,15 @@ import { useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-import { postLogin } from "../_api/login/route";
+import { getRole, postLogin } from "../_api/login/route";
+// import bcrypt from "bcrypt"
 
 export default function Login_form() {
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [notification, setNotification] = useState("");
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,33 +21,25 @@ export default function Login_form() {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000
       });
-    } else {
-
-      const res = await postLogin({
-          username,
-          password
-        }
-      );
-
-      const user = await res.json().then(result => { return result })
-      console.log("user", user);
-
-      if (user == null) {
+    } 
+    else {
+      try {
+        const token = await postLogin({ username, password });
+        const role = await getRole();
+        console.log("role te: ", role.User_authorizationLevel);
+        if (role.User_authorizationLevel == 1) router.push("/homeReader");
+        else if (role.User_authorizationLevel == 2) router.push("/homeAuthor");
+        else if (role.User_authorizationLevel == 3) router.push("/homeLiberian");
+      }
+      catch (error) {
+        console.log(error);
         toast.error("Try Again !", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000
         });
-
-      } else {
-        if (user) {
-          if (user.User_authorizationLevel == 1)
-            router.push("/homeReader?uid=" + user._id);
-          else if (user.User_authorizationLevel == 2)
-            router.push("/homeAuthor?uid=" + user._id);
-          else router.push("/homeLiberian?uid=" + user._id);
-        }
       }
-      setNotification("abc");
+      
+      // setNotification("abc");
     };
   }
 

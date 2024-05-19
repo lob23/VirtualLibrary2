@@ -1,9 +1,6 @@
 import {NextResponse} from "next/server"
 import config from '../../config'
-import axios from "axios"
-
-export const dynamic = 'force-dynamic'; // <- add this to force dynamic render
-
+import axios from '@/app/_api'
 
 //GET
 export const getBookContent = async (bookID) =>{

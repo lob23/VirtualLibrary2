@@ -1,4 +1,4 @@
-import React from "react"; 
+import React, { Suspense } from "react"; 
 import _footer from "@/app/wrapper/footer"
 import _reaingComp from "@/app/wrapper/readingComp";
 import _updateComp from "@/app/wrapper/updateComp";
@@ -20,6 +20,8 @@ import _createOption from "@/app/wrapper/createOption";
 
 export default function wrapper(){
     return (
+        <Suspense>
+
         <div>
             <_footer/>
             {/* <_reaingComp/> */}
@@ -34,6 +36,7 @@ export default function wrapper(){
             
            
         </div>
+         </Suspense>
         
     
     //    <div className="relative-w-full h-full">

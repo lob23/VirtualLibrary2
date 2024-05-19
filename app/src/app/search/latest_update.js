@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 import _updateComp from "@/app/wrapper/updateComp"
 import { fetchData, fetchAuthorById } from "../_api/search/route";
@@ -54,6 +54,7 @@ export default function LatestUpdate() {
 
     return (
         <>
+        <Suspense>
         {loading?
                 <div className="flex flex-wrap w-full h-full justify-center items-center mt-10">
                     <Circles
@@ -85,6 +86,7 @@ export default function LatestUpdate() {
                 */}
                 </div>
         }
+        </Suspense>
     </>
     );
 }
@@ -93,7 +95,7 @@ export default function LatestUpdate() {
 
 // // download-pdf.js
 // import { useEffect } from 'react';
-// import axios from 'axios';
+// import axios from '@/app/_api';
 
 // const ReaderHome = () => {
 //   const downloadPDF = async () => {

@@ -1,7 +1,6 @@
-import axios from "axios";
+import axios from '@/app/_api';
 import { NextResponse } from "next/server";
 import config from '../../config'
-export const dynamic = 'force-dynamic';
 
 // POST
 export const postReadingBook = async (req) => {

@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Audio } from 'react-loader-spinner'
-import axios from 'axios';
+import axios from '@/app/_api';
 import config from '@/app/config';
 import FormData from 'form-data';
 import Checkbox from '@mui/material/Checkbox';

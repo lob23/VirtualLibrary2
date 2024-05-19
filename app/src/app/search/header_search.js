@@ -1,5 +1,5 @@
 
-import {useState, useEffect } from "react";
+import {useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { fetchAuthorById } from "../_api/search/route";
 
@@ -28,6 +28,7 @@ export default function Header(){
 
     return(
     <>
+    <Suspense>
       <div className="row-span-3 flex flex-row relative w-screen h-[80px] pl-10 py-2 items-center bg-transparent cursor-pointer">
         <div className="absolute w-[50px] h-[50px]">
           <img
@@ -58,6 +59,7 @@ export default function Header(){
             </div>
         </div>
       </div>
+      </Suspense>
     </>
     );
 }

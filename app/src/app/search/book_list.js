@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import bookdetail from './book_list_item';
 import { fetchData, fetchAuthorById } from "../_api/search/route";
 import { useRouter, useNavigation, useSearchParams } from "next/navigation";
@@ -67,6 +67,7 @@ export default function Booklist() {
 
     return (
         <>
+        <Suspense>
             {loading?
                 <div className="flex flex-wrap w-full h-full justify-center items-center">
 
@@ -84,5 +85,6 @@ export default function Booklist() {
                         </ul>
                     </div>
             }
+        </Suspense>
     </>);
 }
