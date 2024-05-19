@@ -34,8 +34,9 @@ export default function IndexPage() {
   useEffect(() => {
 
     const fetchBookContent = async () => {
-      const bDetail = await getBookDetail(bid);
-      const res_json = await bDetail.json();
+      const res_json = await getBookDetail(bid);
+
+      console.log("res_json: ", res_json);
 
       setEditing(res_json.BDetail_status == "editing");
 

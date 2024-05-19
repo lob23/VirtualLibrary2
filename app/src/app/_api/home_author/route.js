@@ -4,25 +4,15 @@ import axios from '@/app/_api';
 import config from '../../config'
 
 export const fetchData = async () => {
-    const apiUrl = config.BACKEND_URL + '/book/getListByStatus/verified'; // replace with your actual API endpoint
-  
+    const apiUrl = config.BACKEND_URL + '/book/getListByStatus/verified'; 
     try {
-      const response = await fetch(apiUrl, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          // Add any additional headers if needed
-        },
-        
-        // You can add more options here, such as credentials, mode, etc.
-      });
+      const response = await axios.get(apiUrl);
   
-      if (!response.ok) {
+      if (response.status != 200) {
         throw new Error('Network response was not ok');
       }
   
-      const data = await response.json();
-      return data;
+      return response.data;
     } catch (error) {
       console.error('Error fetching data:', error);
       throw error;
@@ -30,22 +20,16 @@ export const fetchData = async () => {
   };
 
 export const fetchBookByAuthorId = async (id) => {
-  const apiUrl = `http://localhost:3030/book/getBDetailByAuthorID/${id}`; // Dynamic URL with the book ID
-  console.log("apiUrl: ", apiUrl);
+  const apiUrl = config.BACKEND_URL + '/book/getBDetailByAuthorID'; // Dynamic URL with the book ID
   try {
-    const response = await axios.get(apiUrl).then((res) => {
-      console.log("res: ", res.data);
+    const response = await axios.get(apiUrl);
+    console.log("response: ", response.data);
 
-      return res.data;
-    }).catch((error) => {
-      console.log("Fetch book by id error: ",error);
-    });
-
-    if (!response) {
+    if (response.status != 200) {
       throw new Error('Network response was not ok');
     }
 
-    return NextResponse.json(response);
+    return response.data;
   } catch (error) {
     console.error('Error fetching book data:', error);
     throw error;
@@ -53,7 +37,7 @@ export const fetchBookByAuthorId = async (id) => {
 }
 
 export const fetchReadingList = async (id) => {
-  const apiUrl = `http://localhost:3030/rlist/getRList/${id}`; 
+  const apiUrl = config.BACKEND_URL + `/rlist/getRList/${id}`; 
   console.log("apiUrlRList: ", apiUrl);
   try{
     const response = await axios.get(apiUrl).then((res)=>{
@@ -74,20 +58,15 @@ export const fetchReadingList = async (id) => {
 }
 
 export const fetchAuthorById = async (id) => {
-  const apiUrl = `http://localhost:3030/users/getUser/${id}`;
+  const apiUrl = config.BACKEND_URL + '/users/getUser';
 
   try {
-      const response = await fetch(apiUrl, {
-          method: 'GET',
-
-      });
-
-      if (!response.ok) {
+      const response = await axios.get(apiUrl);
+      if (response.status != 200) {
           throw new Error('Network response was not ok');
       }
 
-      const data = await response.json();
-      return data;
+      return response.data;
   } catch (error) {
       console.error('Error fetching book data:', error);
       throw error;

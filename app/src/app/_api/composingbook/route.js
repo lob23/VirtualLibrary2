@@ -6,7 +6,7 @@ import axios from '@/app/_api'
 export async function getComposingBook(authorid){
     try{
         
-        const queryStringBook = config.BACKEND_URL + "/book/getBDetailByAuthorID/" + authorid
+        const queryStringBook = config.BACKEND_URL + "/book/getBDetailByAuthorID"
         const books =  await axios.get(queryStringBook)
                                          .then(response => {
                                             if (response.data){

@@ -69,10 +69,10 @@ export class BookService {
   }
 
   async create(createBookDto: CreateBookDto): Promise<BDetail> {
-
     const existingUser = await this.userRepository.findOne({
       where: { _id: new ObjectId(createBookDto.BDetail_authorID) },
     });
+    
 
     if (!existingUser || existingUser.User_authorizationLevel != 2 ) throw new Error('This author does not exist');
 
@@ -105,7 +105,6 @@ export class BookService {
       BDetail_contentId: savedBContent._id.toString(),
       BDetail_status: 'editing',
     });
-
     return this.bDetailRepository.save(newBook);
   }
 

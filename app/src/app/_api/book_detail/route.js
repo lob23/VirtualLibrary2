@@ -7,17 +7,13 @@ export const getBookDetail = async (bid) =>{
   try{
     const queryString = config.BACKEND_URL + "/book/getBDetail/" + bid;
 
-    const res = await axios.get(queryString).then((response) => {
-      if(response.data){
-        return [true, response.data];
-      } else {
-        return [false, response.error];
-      }
-    })
+    const res = await axios.get(queryString);
 
-    return NextResponse.json({stat: res[0], data: res[1]});
+    if (res.status != 200)
+      throw new Error("Cannot fetch book detail.")
+    return res.data;
   }catch(error){
-    return NextResponse.json({stat: false, data: error});
+    return error;
   }
 }
 

@@ -1,6 +1,6 @@
 import { FileInterceptor } from '@nestjs/platform-express';
 // eslint-disable-next-line prettier/prettier
-import { UploadedFile, UseInterceptors, ParseFilePipeBuilder, Query } from '@nestjs/common';
+import { UploadedFile, UseInterceptors, ParseFilePipeBuilder, Query, Req } from '@nestjs/common';
 // eslint-disable-next-line prettier/prettier
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -27,11 +27,10 @@ export class UsersController {
     return result;
   }
 
-  // SPECIAL
-  // role: user (self), writer (self), admin (all)
-  @Get('getUser/:id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findById(id);
+  // role: user (self), writer (self)
+  @Get('getUser')
+  findOne(@Req() id: Request) {
+    return this.usersService.findById(id['user'].sub);
   }
 
   // SPECIAL
@@ -66,7 +65,7 @@ export class UsersController {
 
   // DEPRECATED
   @Get('comment/:id')
-  async getDev(@Param('id') id: string) {
+  async getDev(@Req() id: Request) {
     const response = await this.findOne(id);
     const result = { _id: response._id, User_lastname: response.User_lastname };
     return result;

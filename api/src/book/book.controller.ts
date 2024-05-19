@@ -1,11 +1,13 @@
 // eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipeBuilder, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipeBuilder, Query, Req, BadRequestException } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-Book.dto';
 import { UpdateBDetailDto } from './dto/update-bdetail.dto';
 import { UpdateBContentDto } from './dto/update-bcontent.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { BContent } from './entities/bcontent.entity';
+import { plainToClass } from 'class-transformer';
+import { validate } from 'class-validator';
 
 @Controller('book')
 export class BookController {
@@ -14,8 +16,17 @@ export class BookController {
   // SELF
   // role: author
   @Post('createBook')
-  async createBook(@Body() createBookDto: CreateBookDto) {
-    return await this.bookService.create(createBookDto);
+  async createBook(@Req() createBookDto: Request) {
+    const createBookDtoTemp = await plainToClass(CreateBookDto, createBookDto.body);
+
+    const errors = await validate(createBookDtoTemp);
+    if (errors.length > 0) {
+      throw new BadRequestException('Validation failed');
+    }
+
+    createBookDtoTemp.BDetail_authorID = createBookDto['user'].sub;
+
+    return await this.bookService.create(createBookDtoTemp);
   }
 
   // DEPRECATED
@@ -45,15 +56,16 @@ export class BookController {
 
   // SELF
   // role: author
-  @Get('getComposingList/:id')
-  async getComposingList(@Param('id') id: string) {
-    const result = await this.bookService.getComposingList(id);
+  @Get('getComposingList')
+  async getComposingList(@Req() id: Request) {
+    
+    const result = await this.bookService.getComposingList(id['user'].sub);
     return result;
   }
 
-  @Get('getBDetailByAuthorID/:id')
-  async getBDetailByAuthorID(@Param('id') id: string) {
-    const result = await this.bookService.findByAuthorId(id);
+  @Get('getBDetailByAuthorID')
+  async getBDetailByAuthorID(@Req() id: Request) {
+    const result = await this.bookService.findByAuthorId(id['user'].sub);
     return result;
   }
 
@@ -78,13 +90,13 @@ export class BookController {
     return result;
   }
 
-  // SELF
-  // role: author
+  // Deprecated
   @Patch('updateBDetail/:id')
   async update(
     @Param('id') id: string,
     @Body() updateBDetailDto: UpdateBDetailDto,
   ) {
+    
     return await this.bookService.update(id, updateBDetailDto);
   }
 
