@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProfile } from "../_api/profile/route";
 import { useSearchParams, useRouter } from "next/navigation";
-import { getRole } from '../_api/login/route';
 
 export default function _icon() {
 
@@ -11,13 +10,14 @@ export default function _icon() {
     
     const uid = searchParams.get('uid');
 
-    const [role, setRole] = useState()
+    const [user, setUser] = useState()
 
     useEffect(() => {
         const fetchDataFromApi = async () => {
             try {
-                const _role = await getRole(); 
-                setRole(_role);
+                const profileData = await fetchProfile(uid); 
+                setUser(profileData);
+                console.log("Profile: ", user); 
             } catch (error) {
                 console.error("Error fetching profile data: ", error);
             }
@@ -28,8 +28,8 @@ export default function _icon() {
     
     const handleClick = () => {
         console.log("Click me");
-        if( _role == 1 ) router.push("/homeReader");
-        if( _role == 2 ) router.push("/homeAuthor");        
+        if( user.User_authorizationLevel == 1 ) router.push("/homeReader?uid=" + uid );
+        if( user.User_authorizationLevel == 2 ) router.push("/homeAuthor?uid=" + uid );        
     }
 
     return (

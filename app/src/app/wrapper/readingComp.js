@@ -7,7 +7,7 @@ const Example = () => {
   return <ProgressBar completed={60} />;
 };
 
-export default function Reading_list_comp(rbook){
+export default function Reading_list_comp(uid, rbook){
 
     // const [book, setBook] = useState([]); 
     // useEffect(()=>{
@@ -28,7 +28,7 @@ export default function Reading_list_comp(rbook){
     const router = useRouter();
 
     const handleContinue = () => {
-        router.push("/reading?" + "bid=" + rbook._id);
+        router.push("/reading?uid=" + uid + "&bid=" + rbook._id);
     }
 
     return(

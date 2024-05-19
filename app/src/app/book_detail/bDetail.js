@@ -3,25 +3,23 @@ import React, { Suspense } from "react";
 import _detail from '@/app/book_detail/detail'
 import _commentSection from "@/app/book_detail/comment_section"
 import { useRouter, useSearchParams } from "next/navigation";
-import { fetchProfile } from "../_api/profile/route";
-import { getRole } from "../_api/login/route";
+import { fetchAuthorById } from "../_api/book_detail/route";
 
 export default function BookDetailComp() {
 
     const router = useRouter();
     const searchParams = useSearchParams();
 
+    const uid = searchParams.get('uid');
 
     const handleBackClick = async () => {
-
-        const role = await getRole();
-        console.log("ROLE: ", role);
-        if (role.User_authorizationLevel == 1){
-            router.push("/homeReader");
-        } else if (role.User_authorizationLevel == 2){
-            router.push("/homeAuthor");     
-        } else if (role.User_authorizationLevel == 3) {
-            router.push("/homeLiberian");     
+        const user = await fetchAuthorById(uid)
+        if (user.User_authorizationLevel == 1){
+            router.push("/homeReader?uid=" + uid);
+        } else if (user.User_authorizationLevel == 2){
+            router.push("/homeAuthor?uid=" + uid);     
+        } else {
+            router.push("/homeLiberian?uid=" + uid);     
         }
     }
 
@@ -40,7 +38,7 @@ export default function BookDetailComp() {
 
                 <div className="flex flex-row w-full h-full">
                     <div className="w-3/4 h-full">
-                        <div className="flex flex-wrap w-[100px] h-[60px] px-10 items-center" onClick={event => handleBackClick()}>
+                        <div className="flex flex-wrap w-[100px] h-[60px] px-10 items-center" onClick={handleBackClick}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5 mr-2 text-blue cursor-pointer transform -rotate-90"

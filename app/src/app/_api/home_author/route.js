@@ -19,7 +19,7 @@ export const fetchData = async () => {
     }
   };
 
-export const fetchBookByAuthorId = async () => {
+export const fetchBookByAuthorId = async (id) => {
   const apiUrl = config.BACKEND_URL + '/book/getBDetailByAuthorID'; // Dynamic URL with the book ID
   try {
     const response = await axios.get(apiUrl);
@@ -37,7 +37,7 @@ export const fetchBookByAuthorId = async () => {
 }
 
 export const fetchReadingList = async (id) => {
-  const apiUrl = config.BACKEND_URL + `/rlist/getRList`; 
+  const apiUrl = config.BACKEND_URL + `/rlist/getRList/${id}`; 
   console.log("apiUrlRList: ", apiUrl);
   try{
     const response = await axios.get(apiUrl).then((res)=>{

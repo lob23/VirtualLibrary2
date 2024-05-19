@@ -1,5 +1,5 @@
 // eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { RListService } from './rlist.service';
 import { CreateRListDto } from './dto/create-rlist.dto';
 import { UpdateRListDto } from './dto/update-rlist.dto';
@@ -21,9 +21,9 @@ export class RListController {
   }
 
   // SELF
-  @Get('getRList')
-  async findOne(@Req() id: Request) {
-    return await this.rListService.findByUserId(id['user'].sub);
+  @Get('getRList/:id')
+  async findOne(@Param('id') id: string) {
+    return await this.rListService.findByUserId(id);
   }
 
   // SELF

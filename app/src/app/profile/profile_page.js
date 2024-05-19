@@ -16,7 +16,7 @@ export default function ProfilePage(){
     useEffect(() => {
         const fetchDataFromApi = async () => {
           try {
-            const profileData = await fetchProfile(); 
+            const profileData = await fetchProfile(uid); 
             setProfile(profileData);
             console.log("Profile: ", profileData); 
             setLoading(false);

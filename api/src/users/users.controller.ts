@@ -33,13 +33,6 @@ export class UsersController {
     return this.usersService.findById(id['user'].sub);
   }
 
-  @Get('getAuthorName/:id')
-  async findAuthorName(@Param('id') id: string){
-    const user = await this.usersService.findById(id);
-    // console.log("username: ", user.User_firstname + user.User_lastname);
-    return user.User_firstname + " " + user.User_lastname;
-  }
-
   // SPECIAL
   // role: user (self), writer (self), admin (all)
   @Get('getUserByEmail/:email')

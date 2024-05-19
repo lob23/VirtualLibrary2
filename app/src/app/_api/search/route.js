@@ -6,13 +6,22 @@ export const fetchData = async () => {
     const apiUrl = config.BACKEND_URL + '/book/getListByStatus/verified'; // replace with your actual API endpoint
 
     try {
-        const response = await axios.get(apiUrl);
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // Add any additional headers if needed
+            },
 
-        if (response.status != 200) {
+            // You can add more options here, such as credentials, mode, etc.
+        });
+
+        if (!response.ok) {
             throw new Error('Network response was not ok');
         }
 
-        return response.data;
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error('Error fetching data:', error);
         throw error;
