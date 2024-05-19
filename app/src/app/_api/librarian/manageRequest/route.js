@@ -7,17 +7,12 @@ export async function getList() {
     const queryString = config.BACKEND_URL + "/request"
 
     try {
-        const response = await fetch(queryString, {
-            method: 'GET',
-  
-        });
-  
-        if (!response.ok) {
+        const response = await axios.get(queryString)
+        if (response.status != 200) {
             throw new Error('Network response was not ok');
         }
   
-        const data = await response.json();
-        return data;
+        return response.data;
     } catch (error) {
         console.error('Error fetching request data:', error);
         throw error;

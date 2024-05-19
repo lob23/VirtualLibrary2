@@ -1,8 +1,10 @@
 // eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, BadRequestException } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
+import { plainToClass } from 'class-transformer';
+import { validate } from 'class-validator';
 
 @Controller('comment')
 export class CommentController {
@@ -11,8 +13,18 @@ export class CommentController {
   // SELF
   // role: user or author
   @Post('createComment')
-  create(@Body() createCommentDto: CreateCommentDto) {
-    return this.commentService.createComment(createCommentDto);
+  async create(@Req() createCommentDto: Request) {
+
+    const createCommentDtoTemp = await plainToClass(CreateCommentDto, createCommentDto.body);
+
+    const errors = await validate(createCommentDtoTemp);
+    if (errors.length > 0) {
+      throw new BadRequestException('Validation failed');
+    }
+
+    createCommentDtoTemp.Comment_userId = createCommentDto['user'].sub;
+
+    return this.commentService.createComment(createCommentDtoTemp);
   }
 
   @Get('getComment/:id')

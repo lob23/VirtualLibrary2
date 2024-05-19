@@ -13,23 +13,21 @@ export default function AuthorHome() {
   const router = useRouter()
   const searchParams = useSearchParams()
   //'658e859e6168987e9653af10'
-  const authorID = searchParams.get('uid');
   const [books, setBooks] = useState([]);
   const [authorBook, setAuthorBook] = useState([]); 
   const [rlistBook, setRList] = useState([]); 
   const [loading, setLoading] = useState(true);
-  const [authorList, setAuthorList] = useState([]);
 
-  const handleAuthorStoryClick =  (_uid, _bid) => {
-    router.push("/authorbookmanagement?uid=" + _uid + "&bid=" + _bid);
+  const handleAuthorStoryClick =  (_bid) => {
+    router.push("/authorbookmanagement?" + "bid=" + _bid);
   }
 
   const handleReadingListClick = (_bid) => {
-    router.push("/book_detail?uid=" + authorID + "&bid=" + _bid);
+    router.push("/book_detail?" + "bid=" + _bid);
   }
 
   const handleonGoingRead = (_bid) => {
-    router.push("/reading?uid=" + authorID + "&bid=" + _bid)
+    router.push("/reading?" + "bid=" + _bid)
   }
 
   useEffect(() => {
@@ -40,27 +38,8 @@ export default function AuthorHome() {
         
         console.log('Book details:', bookData);
 
-
-        if(bookData.length > 0){
-          const authorPromises = bookData.map(async(book) => {
-            if('BDetail_authorID' in book){
-              return fetchAuthorById(book.BDetail_authorID);
-            } else{
-              console.error('Home BDetail_authorID is undefined in a book');
-              return null;
-            }
-          });
-
-          const authorData = await Promise.all(authorPromises);
-          setAuthorList(authorData);
-          console.log('Author details:', authorData);
-        } else{
-          console.error('No books found in the array');
-        }
-
-
         // Fetch author details using the author ID from the book details
-        const authorBookList = await fetchBookByAuthorId(authorID);
+        const authorBookList = await fetchBookByAuthorId();
         
         console.log('Author details:', authorBookList);
 
@@ -128,7 +107,7 @@ export default function AuthorHome() {
                   {
                     rlistBook.map((item)=>(
                       <li key={item._id} className="w-full h-full mr-[50px]" onClick={() => {handleonGoingRead(item._id)}}>
-                        {_readingComp(authorID, item)}
+                        {_readingComp(item)}
                       </li>
                     ))
                   }
@@ -145,7 +124,7 @@ export default function AuthorHome() {
                       authorBook.map((item)=>(
                         <li key={item._id} className="relative w-full h-full mr-[50px]" onClick={(i) => {
                           console.log("item: ", item)
-                          handleAuthorStoryClick(item.BDetail_authorID, item.BDetail_title.trim())
+                          handleAuthorStoryClick(item.BDetail_title.trim())
                         }}>
                           {_storyComp(item)}
                         </li>
@@ -165,7 +144,7 @@ export default function AuthorHome() {
                   books.map((book, index) => (
                     <li key={index} className="w-full h-full mr-[50px]" 
                     onClick={() => {handleReadingListClick(book._id)}}>
-                      {_updateComp(book, authorList[index])}
+                      {_updateComp(book, book.BDetail_authorFullname)}
                     </li>
                   ))
                 }

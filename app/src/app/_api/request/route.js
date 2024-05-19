@@ -23,11 +23,11 @@ export const postRequest = async(req) => {
                 console.error('Error creating request:', error.response ? error.response.data : error.message);
                 return  error.response ? error.response.data : error.message;
             });  
-        return NextResponse.json(res);
+        return true;
         
     } catch(error){
         console.log(error)
-        return NextResponse.json(error); 
+        return false;
 
     }
 }

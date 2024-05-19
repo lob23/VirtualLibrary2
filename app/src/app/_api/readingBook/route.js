@@ -36,33 +36,16 @@ export const postReadingBook = async (req) => {
 }
 
 // GET
-export const getReadingBook = async (uid, bid) => {
+export const getReadingBook = async (bid) => {
     try{
-
-
-        const queryString = config.BACKEND_URL + "/rlist/getPage?userId=" + uid + "&bookId=" + bid;
+        const queryString = config.BACKEND_URL + "/rlist/getPage?" + "bookId=" + bid;
         
-        const res = await axios.get(queryString)
-                         .then(response => {
-                            if (response.data){
-                                return [true, response.data];
-                            } else {
-                                return [true, null]
-                            }
-                         })
-                         .catch((error) => {
-                            return [false, error]
-                         })
-        
-        return NextResponse.json({
-            stat: res[0],
-            data: res[1]
-        });
+        const res = await axios.get(queryString);
+        if(res.status != 200)
+            throw new Error("Cannot fetch Reading books")
+        return res;
     }catch(error){
-        return NextResponse.json({
-            stat: false,
-            data: error
-        });
+        return null;
     }
 }
 
@@ -72,7 +55,7 @@ export const putReadingBook = async (req) =>{
         const obj = req;
         console.log("OBJ: ", obj)
 
-        const queryString = config.BACKEND_URL + "/rlist?userId=" + obj.RList_userId + "&bookId=" + obj.RList_bookId;
+        const queryString = config.BACKEND_URL + "/rlist?" +  "bookId=" + obj.RList_bookId;
 
         const res = await axios.patch(queryString, obj).then(response => {
             if (response.data){

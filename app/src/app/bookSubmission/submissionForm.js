@@ -113,7 +113,7 @@ export default function SubmissionForm({renderFunction}) {
                         },
                     });
 
-                    const res = await putComposingBook(
+                    const status = await putComposingBook(
                         {
                             _id: bid,
                             BDetail_contentId: bid,
@@ -134,8 +134,7 @@ export default function SubmissionForm({renderFunction}) {
                         maxBodyLength: 10000000
                     });
 
-                    const status = await res.json().then(result => { return result })
-                    if (status.stat == true) {
+                    if (status == true) {
 
                         if (!privacyVerified)
                             toast.warning("Please verify the privacy.", {
@@ -183,7 +182,8 @@ export default function SubmissionForm({renderFunction}) {
     useEffect(() => {
         const fetchBookDetail = async () => {
             const res_json = await getBookDetail(bid);
-            if (res_json.stat == true) {
+
+            if (res_json.status == 200) {
                 setBookTitle(res_json.data.BDetail_title);
                 setBookGenre(res_json.data.BDetail_genre);
                 setBookLanguage(res_json.data.BDetail_language)
@@ -239,7 +239,7 @@ export default function SubmissionForm({renderFunction}) {
                                     <p className='font-Gilroy_sb text-blue text-base'>
                                         Title
                                     </p>
-                                    <input className='w-full border-blue mt-3'
+                                    <input disabled className='w-full border-blue mt-3'
                                         type='text'
                                         value={bookTitle}
                                         placeholder="Book Title" onChange={(e) => { setBookTitle(e.target.value) }}>
@@ -249,7 +249,7 @@ export default function SubmissionForm({renderFunction}) {
                                     <p className='font-Gilroy_sb text-blue text-base'>
                                         Genre
                                     </p>
-                                    <input className='w-full border-blue mt-3'
+                                    <input disabled className='w-full border-blue mt-3'
                                         type='text'
                                         value={bookGenre}
                                         placeholder='Book Genre' onChange={(e) => { setBookGenre(e.target.value) }}>
@@ -261,7 +261,7 @@ export default function SubmissionForm({renderFunction}) {
                                     <p className='font-Gilroy_sb text-blue text-base'>
                                         Language
                                     </p>
-                                    <select defaultValue={bookLanguage} onChange={(e) => { setBookLanguage(e.target.value) }} className="w-full mt-3 h-5"
+                                    <select disabled defaultValue={bookLanguage} onChange={(e) => { setBookLanguage(e.target.value) }} className="w-full mt-3 h-5"
                                         placeholder={bookLanguage}>
                                         <option value="english">English</option>
                                         <option value="vietnamese">Vietnamese</option>
@@ -280,9 +280,9 @@ export default function SubmissionForm({renderFunction}) {
                             <p className='font-Gilroy_sb text-base text-blue'>
                                 Description
                             </p>
-                            <div className='relative w-full h-4/5 mt-3 border-b-2 border-solid border-blue border-opacity-40'>
+                            <div className='relative w-full h-4/5 mt-3 border-b-2 border-solid border-blue border-opacity-40 flex items-center justify-center'>
                                 <textarea 
-                                    className='w-full h-4/5 absolute outline-none border-none focus:border-0 focus:outline-0 resize-none'
+                                    className='w-4/5 h-4/5 absolute outline-none border-none focus:border-0 focus:outline-0 resize-none'
                                     value={bookDescription}
                                     onChange={(e) => setBookDescription(e.target.value)}
                                 />

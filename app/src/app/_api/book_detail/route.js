@@ -37,7 +37,7 @@ export const fetchBookById = async (id) => {
 };
 
 export const fetchAuthorById = async (id) => {
-  const apiUrl = config.BACKEND_URL + `/users/getUser/${id}`;
+  const apiUrl = config.BACKEND_URL + '/users/getAuthorName/' + id;
 
   try {
     const response = await axios.get(apiUrl);
@@ -80,8 +80,8 @@ export const getNestedComment = async (Comment_id) => {
 
     if (response.status != 200) throw new Error('Network response was not ok');
 
-    const data = await response.json();
-    return data;
+   
+    return response.data;
   } 
   catch (error) {
     console.error('Error fetching book data:', error);
@@ -97,8 +97,7 @@ export const getUser = async (User_id) => {
 
     if (response.status != 200) throw new Error('Network response was not ok');
 
-    const data = await response.json();
-    return data;
+    return response.data;
   } 
   catch (error) {
     console.error('Error fetching book data:', error);

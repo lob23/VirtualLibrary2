@@ -1,28 +1,25 @@
 "use client";
 import React, {useState} from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Header_reader(){
   const [notiClick, setNotiClick] = useState(false);
   const [createClick, setCreateClick] = useState(false);
   
   const router = useRouter(); 
-  const searchParams = useSearchParams();
-
-  const uid = searchParams.get('uid');
 
   const handleNotiClick = () => { 
     setNotiClick(!notiClick);
   }
   const handleCreatorClick = () => {
-    router.push("/request?uid=" + uid);
+    router.push("/request");
   }
   const handleLibraryClick = () =>{
-    router.push("/search?uid=" + uid);    
+    router.push("/search");    
   }
 
   const handleProfileClick = () => {
-    router.push("/profile?uid=" + uid); 
+    router.push("/profile"); 
   }
 
     return(

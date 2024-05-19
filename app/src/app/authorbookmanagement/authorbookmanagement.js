@@ -45,18 +45,17 @@ export default function AuthorBookManagement() {
     const bookDetailID = searchParams.get('bid')
     
     const handleHomeAuthorClick = () => {
-        router.push("/homeAuthor?uid=" + author_id)
+        router.push("/homeAuthor")
     }
 
     useEffect(() => {
         const getBooks = async () => {
             try {
-                const books = await getComposingBook(author_id);
+                const book_list = await getComposingBook();
 
-                const book_list = await books.json()
-                if (book_list.stat == true) {
+                if (book_list != null) {
                     const bookcard = []
-                    book_list.bookList.map((book) => (
+                    book_list.map((book) => (
                         bookcard.push({
                             _id: book._id,
                             File_upload: book.BDetail_title,
@@ -68,9 +67,7 @@ export default function AuthorBookManagement() {
                     ))
                     await setbookscard(bookcard)
                     setLoading(false)
-                } else {
-                    console.log(book_list.error)
-                }
+                } 
             } catch (error) {
                 console.log("Fetching error: ", error)
             }
@@ -78,7 +75,7 @@ export default function AuthorBookManagement() {
 
         getBooks()
 
-    }, [author_id])
+    }, [])
 
     const columns = useMemo(() => [
         {
@@ -122,7 +119,7 @@ export default function AuthorBookManagement() {
     const handleOpenEditor = async (e, i) => {
         e.preventDefault()
         try {
-            router.push("/composer?uid=" + author_id + "&bid=" + bookcards[i]._id)
+            router.push("/composer?" + "bid=" + bookcards[i]._id)
         } catch (error) {
 
         }
@@ -166,7 +163,7 @@ export default function AuthorBookManagement() {
                                         </Typography>
                                     </div>
                                     <div className="flex w-full shrink-0 gap-2 md:w-max">
-                                        <button className="flex items-center gap-3" onClick={() => { router.push("/booksetting?uid=" + author_id) }}>
+                                        <button className="flex items-center gap-3" onClick={() => { router.push("/booksetting") }}>
                                             New Book
                                         </button>
                                     </div>

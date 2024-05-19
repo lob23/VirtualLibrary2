@@ -2,17 +2,13 @@
 import React , { useState } from "react";
 import _dropDown from "@/app/wrapper/Dropdown"
 import _createOption from "@/app/wrapper/createOption"
-import { useSearchParams, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 
 const Header_author = () => {
   const [notiClick, setNotiClick] = useState(false);
   const [createClick, setCreateClick] = useState(false);
   
   const router = useRouter(); 
-  const searchParams = useSearchParams();
-
-  const uid = searchParams.get('uid');
-
   const handleNotiClick = () => { 
     setNotiClick(!notiClick);
   }
@@ -20,11 +16,11 @@ const Header_author = () => {
     setCreateClick(!createClick);
   }
   const handleLibraryClick = () =>{
-    router.push("/search?uid=" + uid);    
+    router.push("/search");    
   }
 
   const handleProfile = () => {
-    router.push("/profile?uid=" + uid);
+    router.push("/profile");
   }
 
     return(
@@ -51,7 +47,7 @@ const Header_author = () => {
           </p>
           {createClick &&(
               <div className="absolute w-fit h-fit top-[50px] left-[250px]">
-                {_createOption(uid)}
+                {_createOption()}
               </div>
           )}
         </div>

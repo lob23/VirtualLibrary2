@@ -1,16 +1,14 @@
 import { useEffect, useState, Suspense } from "react";
 
 import _updateComp from "@/app/wrapper/updateComp"
-import { fetchData, fetchAuthorById } from "../_api/search/route";
+import { fetchData } from "../_api/search/route";
 import {Circles} from "react-loader-spinner";
-import { useRouter, useSearchParams} from "next/navigation";
+import { useRouter} from "next/navigation";
+import { fetchAuthorById } from "../_api/book_detail/route";
 
 export default function LatestUpdate() {
 
     const router = useRouter();
-    const searchParams = useSearchParams();
-
-    const uid = searchParams.get('uid');
 
     const [books, setBooks] = useState([]);
 
@@ -75,7 +73,7 @@ export default function LatestUpdate() {
                         <ul className="relative flex flex-row gap-x-4 overflow-x-auto no-scrollbar w-full h-full list-none mt-10 ">
                             {
                                 books.map((item, index) => (
-                                    <li key={item._id} className="w-full h-full mr-10" onClick={() => {router.push("/book_detail?uid=" + uid + "&bid=" + item._id)}} >
+                                    <li key={item._id} className="w-full h-full mr-10" onClick={() => {router.push("/book_detail?"  + "bid=" + item._id)}} >
                                         {_updateComp(item, authorList[index])}
                                     </li>
                                 ))

@@ -58,11 +58,12 @@ export const putComposingBook = async (req) => {
                 console.error('Error update book:', error.response ? error.response.data : error.message);
                 return  error.response ? error.response.data : error.message
             });  
-        return NextResponse.json(res) 
+
+        return true;
         
     } catch(error){
         console.log(error)
-        return NextResponse.json(error) 
+        return false;
 
     }
 }

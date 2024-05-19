@@ -13,7 +13,6 @@ export default function LibrarianBDetail() {
   const [books, setBook] = useState([]);
   const [author, setAuthor] = useState([]);
 
-  const uid = searchParams.get('uid');
   const bid = searchParams.get('bid');
 
   useEffect(() => {
@@ -62,7 +61,7 @@ export default function LibrarianBDetail() {
 
       return (
         <div className='w-full h-full flex flex-col overflow-hidden mr-10'>
-          <p className='w-full h-fit  ml-5 font-Gilroy_md text-blue text-[20px] text-wrap'>{author.User_firstname}</p>
+          <p className='w-full h-fit  ml-5 font-Gilroy_md text-blue text-[20px] text-wrap'>{author}</p>
           <p className='w-fit h-fit  ml-5 font-Gilroy_sb text-blue text-[40px] text-wrap'>{book.BDetail_title}</p>
           <p className='w-fit h-fit ml-5 mr-5  font-Gilroy_md text-blue text-[12px] text-wrap'>{book.BDetail_description}</p>
           <div className='w-9/10 h-fit ml-5 mr-5 overflow-hidden'>
@@ -87,7 +86,7 @@ export default function LibrarianBDetail() {
   };
 
   const handleReadNow = () => {
-    router.push("/librarian/librarianReading?uid=" + uid + "&bid=" + bid );
+    router.push("/librarian/librarianReading?" + "bid=" + bid );
   }
 
 

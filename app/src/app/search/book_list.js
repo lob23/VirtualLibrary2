@@ -1,19 +1,18 @@
 import React, { Suspense, useEffect, useState } from "react";
 import bookdetail from './book_list_item';
-import { fetchData, fetchAuthorById } from "../_api/search/route";
-import { useRouter, useNavigation, useSearchParams } from "next/navigation";
+import { fetchData } from "../_api/search/route";
+import { useRouter } from "next/navigation";
 import { Audio,Circles } from "react-loader-spinner";
+import { fetchAuthorById } from "../_api/book_detail/route";
 
 export default function Booklist() {
 
     const router = useRouter();
-    const searchParams = useSearchParams();
 
     const [loading, setLoading] = useState(true);
     const [books, setBook] = useState([]);
     const [author, setAuthor] = useState([])
 
-    const uid = searchParams.get('uid');
     // useEffect(() => {
     //     const fetchBookData = async () => {
     //         try {
@@ -77,7 +76,7 @@ export default function Booklist() {
                         <p className="w-fit h-fit font-Gilroy_sb text-3xl text-blue ">Library</p>
                         <ul className="grid grid-cols-2 gap-x-0 gap-y-4 grid-flow list-none overflow-x-hidden mt-10 px-10 ">
                             {books.map((book, index) => (
-                                <li key={index} className="w-full h-full overflow-hidden" onClick={() => {router.push("/book_detail?uid=" + uid + "&bid=" + book._id)}}>
+                                <li key={index} className="w-full h-full overflow-hidden" onClick={() => {router.push("/book_detail?" + "bid=" + book._id)}}>
                                     {/* Pass both book and author to the bookdetail component */}
                                     {bookdetail(book, author[index])}
                                 </li>

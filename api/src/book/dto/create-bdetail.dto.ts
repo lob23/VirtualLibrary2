@@ -9,7 +9,6 @@ export class CreateBDetailDto {
   BDetail_genre: string;
 
   @IsString()
-  @IsNotEmpty()
   BDetail_authorID: string;
 
   BDetail_averageRating: number;

@@ -3,19 +3,16 @@ import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 export default function Librarian_homepage(){
 
-    const searchParams = useSearchParams();
     const router = useRouter(); 
 
-    const uid = searchParams.get('uid');
-
     const handleAuthorRequestClick = () =>(
-        router.push("/librarian/manageRequest?uid=" + uid)
+        router.push("/librarian/manageRequest")
     )
     const handleBookRequest = () => {
-        router.push("/librarian/manageBook?uid=" + uid)
+        router.push("/librarian/manageBook")
     }
     const handleUserManageRequest = () => {
-        router.push("/librarian/manageUser?uid=" + uid)
+        router.push("/librarian/manageUser")
     }
     return(
         <>

@@ -1,15 +1,13 @@
 "use client";
 import React, {useState} from 'react';
 import { toast } from "react-toastify";
-import { useSearchParams, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { postRequest } from '../_api/request/route';
 
 export default function Request_form() {
 
   const [inputValue, setInputValue] = useState("");
 
-  const searchParams = useSearchParams()
-  const userId = searchParams.get('uid')
 
   const router = useRouter();
 
@@ -23,17 +21,15 @@ export default function Request_form() {
     console.log("Input Value:", inputValue);
 
     try {
-      const res = await postRequest(
+      const stat = await postRequest(
         {
-          Request_userId: userId, // This should be replaced later
           Request_motivation: inputValue
         }
       );
   
-      const stat = await res.json();
   
-      if (stat.stat === true) {
-        router.push('/homeReader?uid=' + userId);
+      if (stat === true) {
+        router.push('/homeReader');
       } else {
         toast.error("Error: You are currently an author." + stat.message, {
           position: toast.POSITION.TOP_CENTER,

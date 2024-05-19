@@ -23,7 +23,7 @@ export default function bookdetail(book, author) {
         <p className='w-fit h-fit px-5 font-Gilroy_sb text-blue text-[30px]'>{book.BDetail_title}</p>
         {/* Check if author array is not empty and if the author at the index exists */}
         {author && (
-          <p className='w-fit h-fit px-5 font-Gilroy_md text-blue text-[20px]'>{author.User_firstname}</p>
+          <p className='w-fit h-fit px-5 font-Gilroy_md text-blue text-[20px]'>{author}</p>
         )}
         <p className='w-fit h-fit px-5  font-Gilroy_md text-blue text-[12px]'>{book.BDetail_description}</p>
 

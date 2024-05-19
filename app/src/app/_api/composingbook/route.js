@@ -7,34 +7,13 @@ export async function getComposingBook(authorid){
     try{
         
         const queryStringBook = config.BACKEND_URL + "/book/getBDetailByAuthorID"
-        const books =  await axios.get(queryStringBook)
-                                         .then(response => {
-                                            if (response.data){
-                                                return [true, response.data];
-                                            } else {
-                                                return [false, null]
-                                            }
-                                         })
-                                         .catch(error=>{
-                                            console.error('Error getting submited book:', error.response ? error.response.data : error.message);
-                                            return  error.response ? error.response.data : error.message
-                                         })
-                                         
-        return books[0] == true ? NextResponse.json({
-            stat: books[0],
-            bookList: books[1] 
-        }) : NextResponse.json({
-            stat: books[0],
-            error: books[1]
-        });
+        const books =  await axios.get(queryStringBook);
+                          
+        if(books.status != 200) throw new Error("Cannot get composing books")
+        return books.data;
     
     } catch(error){
         console.error('Error getting submited book:', error.response ? error.response.data : error.message);
-        return NextResponse.json({
-            stat: false,
-            error: error
-        });
+        return null;
     }
-
-    
 }

@@ -1,7 +1,9 @@
 // eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, BadRequestException } from '@nestjs/common';
 import { RequestService } from './request.service';
 import { CreateRequestDto } from './dto/create-request.dto';
+import { plainToClass } from 'class-transformer';
+import { validate } from 'class-validator';
 
 @Controller('request')
 export class RequestController {
@@ -28,8 +30,16 @@ export class RequestController {
   // SELF
   // role: user
   @Post('createRequest')
-  createRequest(@Body() createRequestDto: CreateRequestDto) {
-    return this.requestService.createRequest(createRequestDto);
+  async createRequest(@Req() createRequestDto: Request) {
+    const createRequestDtoTemp = await plainToClass(CreateRequestDto, createRequestDto.body);
+
+    const errors = await validate(createRequestDtoTemp);
+    if (errors.length > 0) {
+      throw new BadRequestException('Validation failed');
+
+    }
+    createRequestDtoTemp.Request_userId = createRequestDto['user'].sub;
+    return this.requestService.createRequest(createRequestDtoTemp);
   }
 
   // role: admin

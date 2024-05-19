@@ -6,7 +6,6 @@ import { useSearchParams, useRouter } from "next/navigation";
 export default function CommentSection() {
 
   const searchParams = useSearchParams();
-  const uid = searchParams.get('uid');
   const BDetail_id = searchParams.get('bid');
 
   const [commentList, setList] = useState();
@@ -20,14 +19,12 @@ export default function CommentSection() {
 
     const res = await postBookDetail(
       {
-        Comment_userId: uid,
         Comment_bookId: BDetail_id,
         Comment_content: content
       });
 
     setUp(up + 1);
     setContent("");
-    const Com = await res.json().then(result => { return result })
   };
 
   useEffect(() => {

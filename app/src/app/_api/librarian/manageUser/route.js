@@ -12,5 +12,4 @@ export async function getList() {
         console.error('Error fetching user data:', error);
         throw error;
     }
-
 }

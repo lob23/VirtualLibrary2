@@ -7,17 +7,13 @@ export async function getList() {
     const queryString = config.BACKEND_URL + "/book/getListByStatus/waiting"
 
     try {
-        const response = await fetch(queryString, {
-            method: 'GET',
+        const response = await axios.get(queryString);
   
-        });
-  
-        if (!response.ok) {
+        if (response.status != 200) {
             throw new Error('Network response was not ok');
         }
   
-        const data = await response.json();
-        return data;
+        return response.data;
     } catch (error) {
         console.error('Error fetching book data:', error);
         throw error;

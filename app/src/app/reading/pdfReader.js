@@ -50,13 +50,11 @@ export default function _readingpage() {
     const [initPage, setinitPage] = useState(0)
     const [isLoading, setLoading] = useState(true)
 
-    const uid = searchParams.get("uid");
     const bDetailID = searchParams.get("bid");
 
     const createRlist = async () => {
         const res = await postReadingBook(
             {
-                RList_userId: uid,
                 RList_bookId: bDetailID,
                 RList_currentPage: 0
             }
@@ -91,18 +89,16 @@ export default function _readingpage() {
 
     useEffect(() => {
         const fetchCurrentPage = async () => {
-            const res = await getReadingBook(uid, bDetailID).then((response) => { return response });
+            const res_data = await getReadingBook(bDetailID).then((response) => { return response });
+            console.log("res_data: ",res_data);
 
-            const res_data = await res.json()
-
-            if (res_data.stat == true) {
+            if (res_data != null) {
                 if (res_data.data) {
                     setinitPage(res_data.data);
                 } else {
                 }
                 setLoading(false)
             } else {
-                console.log("ERROR", res_data.data)
                 setLoading(false)
             }
         }
@@ -115,7 +111,6 @@ export default function _readingpage() {
     const onBackClick = async () => {
         const res = await putReadingBook (
             {
-                RList_userId: uid,
                 RList_bookId: bDetailID,
                 RList_currentPage: currentpage
             }
@@ -123,7 +118,7 @@ export default function _readingpage() {
 
         const res_data = await res.json();
         if (res_data.stat == true || initPage == currentpage) {
-            router.push("/book_detail?uid=" + uid + "&bid=" + bDetailID)
+            router.push("/book_detail?" + "bid=" + bDetailID)
         } else {
             toast.error("ERROR: " + res_data.data, {
                 position: toast.POSITION.TOP_CENTER,

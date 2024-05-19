@@ -1,5 +1,6 @@
 // eslint-disable-next-line prettier/prettier
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Req, BadRequestException } from '@nestjs/common';
+
 import { RListService } from './rlist.service';
 import { CreateRListDto } from './dto/create-rlist.dto';
 import { UpdateRListDto } from './dto/update-rlist.dto';
@@ -20,6 +21,8 @@ export class RListController {
       throw new BadRequestException('Validation failed');
     }
 
+    createBookDtoTemp.RList_userId = createRListDto['user'].sub;
+
     return await this.rListService.create(createBookDtoTemp);
   }
 
@@ -38,21 +41,21 @@ export class RListController {
   // SELF
   @Get('getPage')
   async getPage(
-    @Query('userId') userId: string,
+    @Req() userID: Request,
     @Query('bookId') bookId: string,
   ) {
-    const result = await this.rListService.findBoth(userId, bookId);
+    const result = await this.rListService.findBoth(userID['user'].sub, bookId);
     return result.RList_currentPage;
   }
 
   // SELF
   @Patch()
   async update(
-    @Query('userId') userId: string,
+    @Req() userId: Request,
     @Query('bookId') bookId: string,
     @Body() updateRListDto: UpdateRListDto,
   ) {
-    return await this.rListService.update(userId, bookId, updateRListDto);
+    return await this.rListService.update(userId['user'].sub, bookId, updateRListDto);
   }
 
   // DEPRECATED

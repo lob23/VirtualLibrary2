@@ -10,6 +10,7 @@ import { Audio } from "react-loader-spinner";
 import { putComposingBook } from "../_api/composing/route";
 import { getBookDetail } from "../_api/book_detail/route";
 import { getBookContent } from "../_api/bookcontent/route";
+import { getRole } from "../_api/login/route";
 
 
 export default function IndexPage() {
@@ -23,7 +24,6 @@ export default function IndexPage() {
 
   const searchParams = useSearchParams()
  
-  const uid = searchParams.get('uid') //user id
   const bid = searchParams.get('bid') // this is book detail's id.
   // const bDetailID = searchParams.get('bDetailID') //ignore this
   console.log("bid: ", bid);
@@ -105,11 +105,10 @@ export default function IndexPage() {
 
     const content = await quill.root.innerHTML.toString()
     console.log("content: ", content)
-    const res = await saveContent(content)
+    const status = await saveContent(content)
     
-    const status = await res.json().then(result => {return result})
-    if (status.stat == true){
-      router.push("/authorbookmanagement?uid=" + uid) 
+    if (status == true){
+      router.push("/authorbookmanagement") 
     } else {
       toast.error("The system cannot save your progress", {
         position: toast.POSITION.TOP_CENTER,
@@ -126,11 +125,10 @@ export default function IndexPage() {
 
     console.log("content: ", content)
 
-    const save = await saveContent(content);
-    const stat_save = await save.json().then(result => {return result});
+    const stat_save = await saveContent(content);
 
-    if(stat_save.stat == true){
-      router.push("/bookSubmission?uid=" + uid + "&bid=" + bid); 
+    if(stat_save == true){
+      router.push("/bookSubmission?" + "bid=" + bid); 
     } else {
       toast.error("Error", {
           position: toast.POSITION.TOP_CENTER,
@@ -138,6 +136,12 @@ export default function IndexPage() {
       });
     }
   }
+
+  const backToHome = async() => {
+    const _role = await getRole();
+    if( _role.User_authorizationLevel == 1 ) router.push("/homeReader");
+    if( _role.User_authorizationLevel == 2 ) router.push("/homeAuthor");        
+}
   
 
   return (
@@ -160,6 +164,7 @@ export default function IndexPage() {
           <div>
               <div className='w-full h-1/5 grid grid-cols-5 grid-rows-2 place-items-center'>
               <img
+              onClick={()=>{backToHome()}}
                   className="object-contain row-span-1 col-span-5"
                   src="/image/logo.png">
               </img>

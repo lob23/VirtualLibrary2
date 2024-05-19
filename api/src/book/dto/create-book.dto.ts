@@ -5,7 +5,7 @@ export class CreateBookDto {
   BDetail_title: string;
   @IsNotEmpty()
   BDetail_genre: string;
-  @IsNotEmpty()
+  
   BDetail_authorID: string;
   @IsString()
   @IsNotEmpty()

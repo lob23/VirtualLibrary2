@@ -8,6 +8,10 @@ export const fetchData = async () => {
     try {
         const response = await axios.get(apiUrl);
 
+        if (response.status != 200) {
+            throw new Error('Network response was not ok');
+        }
+
         return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);

@@ -40,7 +40,6 @@ export default function _readingPage() {
     const [_url, setURL] = useState("");
     const [base64String, setBase64String] = useState("");
 
-    const uid = searchParams.get("uid");
     const bid = searchParams.get("bid");
 
     useEffect(() => {
@@ -71,12 +70,12 @@ export default function _readingPage() {
 
     const handleAccept = async () => {
         await updateStatus(bid, 'verified');
-        router.push('/librarian/manageBook?uid=' + uid);
+        router.push('/librarian/manageBook');
     }
 
     const handleReject = async () => {
         await updateStatus(bid, 'rejected');
-        router.push('/librarian/manageBook?uid=' + uid);
+        router.push('/librarian/manageBook');
     }
 
     return (

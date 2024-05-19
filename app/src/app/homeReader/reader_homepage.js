@@ -7,7 +7,7 @@ import _readingComp from "@/app/wrapper/readingComp"
 import _updateComp from "@/app/wrapper/updateComp";
 import Carousel from "@/app/wrapper/Carousel";
 import _authorStoryComp from "@/app/wrapper/authorStoryComp";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {Circles} from "react-loader-spinner";
 
 const slides=[
@@ -18,9 +18,6 @@ const slides=[
 
 export default function ReaderHome() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const uid = searchParams.get('uid');
 
   const [books, setBooks] = useState([]);
   const [rlistBook, setRList] = useState([]); 
@@ -28,11 +25,11 @@ export default function ReaderHome() {
   const [authorList, setAuthorList] = useState([]);
 
   const handleReadingListClick = (_bid) => {
-    router.push("/book_detail?uid=" + uid + "&bid=" + _bid);
+    router.push("/book_detail?" + "bid=" + _bid);
   }
 
   const handleOngoingReadingClick = (_bid) => {
-    router.push("/reading?uid=" + uid + "&bid=" + _bid)
+    router.push("/reading?" + "bid=" + _bid)
   }
 
   useEffect(() => {
@@ -126,7 +123,7 @@ export default function ReaderHome() {
                 {
                   rlistBook.map((item)=>(
                     <li key={item._id} className="w-full h-full mr-10" onClick={() => handleOngoingReadingClick(item._id)}>
-                      {_readingComp(uid, item)}
+                      {_readingComp(item)}
                     </li>
                   ))
                 }

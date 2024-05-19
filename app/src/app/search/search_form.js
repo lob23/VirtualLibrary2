@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { fetchData, fetchAuthorById } from "../_api/search/route";
 import { Link } from "react-scroll"
 import _footer from "@/app/wrapper/footer"
-import { useSearchParams, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 
 
 
@@ -12,10 +12,7 @@ export default function Search_form() {
   const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const searchParams = useSearchParams();
   const router = useRouter();
-
-  const uid = searchParams.get('uid');
 
   useEffect(() => {
     // Filter books based on the search query
@@ -49,7 +46,7 @@ export default function Search_form() {
 
   const refBDtail = (_bid) => {
     console.log("RefBDTAIL")
-    router.push("/book_detail?uid=" + uid + "&bid=" + _bid);
+    router.push("/book_detail?" + "bid=" + _bid);
   }
 
   return (

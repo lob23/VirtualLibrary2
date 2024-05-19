@@ -1,7 +1,3 @@
-import { fetchData } from "../_api/wrapper/route";
-import { fetchAuthorById } from "../_api/book_detail/route";
-import login_form from "../login/login_form";
-
 
 export default function updateComp(book, author){
     console.log("check author home: ", author);
@@ -28,7 +24,7 @@ export default function updateComp(book, author){
                         </h1>
                         {author && (
                             <h2 className="text-lg font-Gilroy_md text-blue">
-                                {author.User_firstname}
+                                {author}
                             </h2>
                         )}
                         
