@@ -6,13 +6,11 @@ import _readingComp from "@/app/wrapper/readingComp"
 import _updateComp from "@/app/wrapper/updateComp";
 import _authorStoryComp from "@/app/wrapper/authorStoryComp";
 import _storyComp from "@/app/wrapper/storyComp";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {Circles} from "react-loader-spinner";
 
 export default function AuthorHome() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  //'658e859e6168987e9653af10'
   const [books, setBooks] = useState([]);
   const [authorBook, setAuthorBook] = useState([]); 
   const [rlistBook, setRList] = useState([]); 
@@ -36,12 +34,12 @@ export default function AuthorHome() {
         // Fetch book details
         const bookData = await fetchData();
         
-        console.log('Book details:', bookData);
+        
 
         // Fetch author details using the author ID from the book details
         const authorBookList = await fetchBookByAuthorId();
         
-        console.log('Author details:', authorBookList);
+        
 
 
          // Fetch reading list 
@@ -50,7 +48,7 @@ export default function AuthorHome() {
          setBooks(bookData);
          setAuthorBook(authorBookList);
          setRList(rbook);
-         console.log('Reading list:', rbook);
+         
          setLoading(false);
       } catch (error) {
         console.error('Error fetching details:', error);
@@ -123,7 +121,7 @@ export default function AuthorHome() {
                     {
                       authorBook.map((item)=>(
                         <li key={item._id} className="relative w-full h-full mr-[50px]" onClick={(i) => {
-                          console.log("item: ", item)
+                          
                           handleAuthorStoryClick(item.BDetail_title.trim())
                         }}>
                           {_storyComp(item)}

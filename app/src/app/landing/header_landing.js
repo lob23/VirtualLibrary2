@@ -10,9 +10,6 @@ const Header_landing = () => {
   const [createClick, setCreateClick] = useState(false);
   
   const router = useRouter(); 
-  const searchParams = useSearchParams();
-
-  const uid = searchParams.get('uid');
 
   const handleNotiClick = () => { 
     setNotiClick(!notiClick);
@@ -21,7 +18,7 @@ const Header_landing = () => {
     setCreateClick(!createClick);
   }
   const handleLibraryClick = () =>{
-    router.push("/search?uid=" + uid);    
+    router.push("/search");    
   }
 
   const handleSignInClick = () => {

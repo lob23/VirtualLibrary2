@@ -14,7 +14,7 @@ export default function footer() {
               <h1 className="font-Gilroy_sb text-white text-3xl ml-[70px]">
                 Literia
               </h1>
-              <p className="font-Gilroy_md w-2/3 h-fit text-white text-sm test-sp mt-5 leading-5">
+              <p className="font-Gilroy_md w-2/3 h-fit text-white text-sm test-sp mt-10 leading-5">
                 Explore a universe of literature and knowledge in the palm of your
                 hand with our library app – where stories and information await,
                 ready to inspire and educate.
