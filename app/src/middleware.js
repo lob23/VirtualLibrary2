@@ -7,7 +7,7 @@ export async function middleware(request) {
         headers: { Cookie: cookies().toString() }
     });
     if (res.status === 401) {
-        if (request.nextUrl.pathname === '/login') return NextResponse.next();
+        if (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/signup') return NextResponse.next();
         return NextResponse.redirect(new URL('/login', request.url));
     }
     const user = await res.json();
@@ -23,7 +23,6 @@ export async function middleware(request) {
                 case '/profile':
                 case '/bookSubmission':
                 case '/authorbookmanagement':
-                case '/signup':
                 case '/login':
                     return NextResponse.redirect(new URL('/homeLibrarian', request.url));
             }
@@ -41,7 +40,6 @@ export async function middleware(request) {
                 case '/librarian/librarianBDetail':
                 case '/librarian/librarianReading':
                 case '/verifyAuthorRequest':
-                case '/signup':
                 case '/login':
                     return NextResponse.redirect(new URL('/homeAuthor', request.url));
             }
@@ -62,7 +60,6 @@ export async function middleware(request) {
                 case '/verifyAuthorRequest':
                 case '/bookSubmission':
                 case '/authorbookmanagement':
-                case '/signup':
                 case '/login':
                     return NextResponse.redirect(new URL('/homeReader', request.url));
             }
