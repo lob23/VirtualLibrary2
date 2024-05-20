@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Audio } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import { getBookContent } from '@/app/_api/bookcontent/route';
+import { assessGrammar } from '@/app/_api/gemini/gemini-model';
 
 const base64toBlob = (data) => {
     const pdfContentType = 'application/pdf';
@@ -39,8 +40,19 @@ export default function _readingPage() {
     // `base64String` is the given base 64 data
     const [_url, setURL] = useState("");
     const [base64String, setBase64String] = useState("");
+    const [grammarCheck, setGrammarCheck] = useState("");
 
     const bid = searchParams.get("bid");
+
+    const convertHTMLtoText = async (bookContent) => {
+        const { convert } = require('html-to-text');
+
+        const options = {
+        wordwrap: 130,
+        };
+        const text = await convert(bookContent, options);
+        return text;
+    }
 
     useEffect(() => {
         const fetchingBookContents = async () => {
@@ -49,6 +61,11 @@ export default function _readingPage() {
             if ( result.stat && result.bookContent.BContent_pdf ) {
                 console.log("book content: ", result.bookContent.BContent_pdf);
                 setBase64String("data:application/pdf;base64," + result.bookContent.BContent_pdf);
+
+                const plainText = await convertHTMLtoText(result.bookContent.BContent_content);
+                const grammarAssessment = await assessGrammar(plainText);
+                console.log("Grammar: ", grammarAssessment);
+                setGrammarCheck(grammarAssessment);
             } else console.log("error", result.error)
         }
         fetchingBookContents()
@@ -84,7 +101,7 @@ export default function _readingPage() {
             {base64String ?
                 <div className='h-screen w-screen flex flex-col items-center overflow-y-hidden'>
                     <ToastContainer />
-                    <div className='h-fit my-2 flex flex-row'>
+                    <div className='h-fit my-2 flex flex-row items-center'>
                         <img
                             className="object-contain"
                             src="/image/logo.png">
@@ -100,7 +117,7 @@ export default function _readingPage() {
                             </div>
                             
                         </div>
-                        
+                        <p className='ml-10'><b>Grammar check by AI: </b> {grammarCheck}</p>
                     </div>
                     <div className='h-4/5 w-4/5'>
                         <Viewer fileUrl={_url} plugins={[

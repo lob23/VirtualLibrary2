@@ -22,12 +22,12 @@ export default function footer() {
             </div>
             <div className="w-1/3 h-full flex flex-col mt-5">
               <h1 className="font-Gilroy_sb text-white text-2xl w-full h-fit">
-                About
+                
               </h1>
               <div className="flex gap-y-5 flex-col w-fit h-fit mt-5">
-                <h2 className="font-Gilroy_md text-white text-base">Careers</h2>
-                <h2 className="font-Gilroy_md text-white text-base">Privacy</h2>
-                <h2 className="font-Gilroy_md text-white text-base">Help</h2>
+                <h2 className="font-Gilroy_md text-white text-base"></h2>
+                <h2 className="font-Gilroy_md text-white text-base"></h2>
+                <h2 className="font-Gilroy_md text-white text-base"></h2>
               </div>
             </div>
             <div className="w-1/3 h-full flex flex-col mt-5">

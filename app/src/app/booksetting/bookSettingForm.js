@@ -67,7 +67,6 @@ export default function BooksettingForm() {
 
                                 <select onChange={(e) => { setBookLanguage(e.target.value) }} className="row-span-1 border border-solid border-b-2 border-t-0 border-x-0 border-blue text-gray-500 text-sm bg-white font-Gilroy_md focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 m-5">
                                     <option value="english">English</option>
-                                    <option value="vietnamese">Vietnamese</option>
                                 </select>
 
 

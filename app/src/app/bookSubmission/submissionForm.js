@@ -16,7 +16,6 @@ import { useQuill } from "react-quilljs";
 import { getBookContent } from "../_api/bookcontent/route";
 import { putComposingBook } from "../_api/composing/route";
 import { getBookDetail } from "../_api/book_detail/route";
-import { Button } from "@mui/material";
 import { summaryText } from "../_api/gemini/gemini-model";
 
 export default function SubmissionForm({renderFunction}) {
@@ -48,9 +47,11 @@ export default function SubmissionForm({renderFunction}) {
                     return result.bookContent.BContent_content;
                 } else {
                     console.log("Error");
+                    return null;
                 }
             }
         }
+        return null;
     }
 
     const convertToPDF = async (quill, bContent) => {
@@ -85,6 +86,7 @@ export default function SubmissionForm({renderFunction}) {
         try {
             if (bookTitle && bookCover && bookDescription && bookLanguage && bookGenre) {
                 const bContent = await getBContent();
+                if(bContent == null) return;
                 
                 const content_delta = await convertToPDF(quill, bContent);
                 if(content_delta != null){
@@ -166,6 +168,18 @@ export default function SubmissionForm({renderFunction}) {
     useEffect(() => {
         const fetchBookDetail = async () => {
             const res_json = await getBookDetail(bid);
+            const bookContent = await getBContent();
+
+            if(bookContent != null){
+                const { convert } = require('html-to-text');
+
+                const options = {
+                wordwrap: 130,
+                };
+                const text = await convert(bookContent, options);
+                const aiGen = await summaryText(text);
+                setBookDescription(aiGen);
+            }
 
             if (res_json.status == 200) {
                 setBookTitle(res_json.data.BDetail_title);
