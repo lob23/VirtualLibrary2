@@ -281,11 +281,12 @@ export default function SubmissionForm({renderFunction}) {
                             </p>
                             <div className='relative w-full h-4/5 mt-3 border-b-2 border-solid border-blue border-opacity-40 flex items-center justify-center'>
                                 <textarea 
-                                    className='w-4/5 h-4/5 absolute outline-none border-none focus:border-0 focus:outline-0 resize-none'
+                                    className='w-4/5 h-4/5 outline-none border-none focus:border-0 focus:outline-0 resize-none p-2'
                                     value={bookDescription}
                                     onChange={(e) => setBookDescription(e.target.value)}
                                 />
                             </div>
+
    
                         </div>
 
