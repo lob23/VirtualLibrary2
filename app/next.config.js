@@ -2,6 +2,7 @@
 const nextConfig = {}
 
 module.exports = {
+    reactStrictMode: false,
     webpack: (config, options) => {
       config.module.rules.push({
         test: /\.node$/,

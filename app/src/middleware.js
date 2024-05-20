@@ -14,6 +14,7 @@ export async function middleware(request) {
     switch (user.User_authorizationLevel) {
         case 3:
             switch (request.nextUrl.pathname) {
+                case '/':
                 case '/homeReader':
                 case '/homeAuthor':
                 case '/composer':
@@ -22,11 +23,14 @@ export async function middleware(request) {
                 case '/profile':
                 case '/bookSubmission':
                 case '/authorbookmanagement':
+                case '/signup':
+                case '/login':
                     return NextResponse.redirect(new URL('/homeLibrarian', request.url));
             }
             break;
         case 2:
             switch (request.nextUrl.pathname) {
+                case '/':
                 case '/homeReader':
                 case '/homeLibrarian':
                 case '/request':
@@ -37,11 +41,14 @@ export async function middleware(request) {
                 case '/librarian/librarianBDetail':
                 case '/librarian/librarianReading':
                 case '/verifyAuthorRequest':
+                case '/signup':
+                case '/login':
                     return NextResponse.redirect(new URL('/homeAuthor', request.url));
             }
             break;
         case 1:
             switch (request.nextUrl.pathname) {
+                case '/':
                 case '/homeAuthor':
                 case '/homeLibrarian':
                 case '/librarian':
@@ -55,6 +62,8 @@ export async function middleware(request) {
                 case '/verifyAuthorRequest':
                 case '/bookSubmission':
                 case '/authorbookmanagement':
+                case '/signup':
+                case '/login':
                     return NextResponse.redirect(new URL('/homeReader', request.url));
             }
             break;

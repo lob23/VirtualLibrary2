@@ -1,6 +1,8 @@
 "use client"; 
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import ProfileMenu from "../profile_menu";
+import { logout } from "../_api/logout";
 export default function Librarian_homepage(){
 
     const router = useRouter(); 
@@ -61,6 +63,13 @@ export default function Librarian_homepage(){
             <button className="w-1/2 px-4 py-1 button_white text-blue text-2xl cursor-pointer"
                     onClick={handleUserManageRequest}>
                 User management
+            </button>
+            <button className="w-1/2 px-4 py-1 button_white text-blue text-2xl cursor-pointer"
+                    onClick={async () => {
+                      await logout();
+                      router.push("/login");
+                    }}>
+                Logout
             </button>
           </div>
         </div>
