@@ -74,14 +74,14 @@ export default function Request_form() {
               Author Submit form 
             </p>
             
-            <div className='relative w-full h-4/5 mt-3 border-b-1 border-solid border-blue border-opacity-40'>
-                <input className='w-full h-fit absolute outline-none border-none focus:border-0 focus:outline-0'  
-                type='text' 
-                value={inputValue}
-                onChange={handleInputChange}>
-                </input>
-            </div> 
-            
+            <div className='relative w-full h-4/5 mt-3 border-b border-solid border-blue border-opacity-40'>
+                <textarea 
+                    className='w-full h-full max-w-full max-h-full absolute top-0 left-0 outline-none border-none focus:border-0 focus:outline-0 p-2 resize-none'
+                    value={inputValue}
+                    onChange={handleInputChange}
+                />
+            </div>
+
             <button
             onClick={handleSubmit} 
             className='w-full h-auto button_yellow px-8 py-2 mt-10 text-blue text-xl'>
