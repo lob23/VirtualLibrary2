@@ -21,7 +21,7 @@ export class RListController {
       throw new BadRequestException('Validation failed');
     }
 
-    createBookDtoTemp.RList_userId = createRListDto['user'].sub;
+    createBookDtoTemp.RList_userId = await createRListDto['user'].sub;
 
     return await this.rListService.create(createBookDtoTemp);
   }

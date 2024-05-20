@@ -47,12 +47,14 @@ export default function _readingpage() {
     const [_url, seturl] = useState("");
     const [base64String, setBase64String] = useState("");
     const [currentpage, setCurrentPage] = useState(0);
-    const [initPage, setinitPage] = useState(0)
-    const [isLoading, setLoading] = useState(true)
+    const [initPage, setinitPage] = useState(0);
+    const [isLoading, setLoading] = useState(true);
+    const [isCreated, setCreated] = useState(false);
 
     const bDetailID = searchParams.get("bid");
 
     const createRlist = async () => {
+        setCreated(true);
         const res = await postReadingBook(
             {
                 RList_bookId: bDetailID,
@@ -89,6 +91,7 @@ export default function _readingpage() {
 
     useEffect(() => {
         const fetchCurrentPage = async () => {
+            if(isCreated == false) await createRlist();
             const res_data = await getReadingBook(bDetailID).then((response) => { return response });
             console.log("res_data: ",res_data);
 
@@ -102,9 +105,9 @@ export default function _readingpage() {
                 setLoading(false)
             }
         }
-        createRlist()
+        
         fetchCurrentPage()
-    })
+    }, [])
 
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
 

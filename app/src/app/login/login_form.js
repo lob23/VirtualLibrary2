@@ -114,9 +114,6 @@ export default function Login_form() {
                         placeholder="Password"
                         className="row-span-1 w-[380px] h-[38px] my-2 "
                       />
-                      <p className="items-end ml-auto font-Gilroy_md text-red text-sm">
-                        Forgot password?
-                      </p>
                       <p onClick={() => {routingToSignup()}} className="items-end ml-auto font-Gilroy_md text-red text-sm">
                         You don&apos;t have an account? Sign up now
                       </p>
