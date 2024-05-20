@@ -17,7 +17,8 @@ const Header_landing = () => {
   const handleCreateClick = () => {
     setCreateClick(!createClick);
   }
-  const handleLibraryClick = () =>{
+  const handleLibraryClick = () => {
+    console.log("Library Clicked");
     router.push("/search");    
   }
 

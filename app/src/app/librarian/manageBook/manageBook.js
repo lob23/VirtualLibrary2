@@ -35,7 +35,7 @@ export default function ManageBook() {
         <>
     <div className="relative w-screen h-screen bg-white overflow-hidden flex flex-wrap items-center justify-center">
         <h2 className="absolute font-Gilroy_sb text-3xl text-blue top-6 left-[120px] cursor-pointer hover:opacity-50"
-            onClick={() => {router.push("/homeLiberian?")}}>
+            onClick={() => {router.push("/homeLibrarian")}}>
             Waiting List
         </h2>
         <div className="flex flex-col w-4/5 h-fit rounded-2xl  overflow-hidden border-b-1 border-blue border-solid border-opacity-60 mx-auto mt-5">

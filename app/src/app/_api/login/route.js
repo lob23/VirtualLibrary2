@@ -1,18 +1,22 @@
+"use server";
 import config from '../../config'
-import api from '@/app/_api'
+import { cookies } from 'next/headers'
 //POST
 export const postLogin = async (req) => {
-    const {username, password} = req;
     const queryString = config.BACKEND_URL + "/auth/login";
-    var token = await api.post(queryString, {
-        email: username,
-        password: password
-    });
-    localStorage.setItem('accessToken', token.data.accessToken);
-}
-
-export const getRole = async () => {
-    const queryString = config.BACKEND_URL +"/role";
-    var role = await api.get(queryString);
-    return role.data;
+    var token = await fetch(queryString,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: req.email,
+                password: req.password
+            })
+        }
+    );
+    token = await token.json();
+    token = token.accessToken;
+    cookies().set('accessToken', token);
 }

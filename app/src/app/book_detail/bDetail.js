@@ -4,7 +4,7 @@ import _detail from '@/app/book_detail/detail'
 import _commentSection from "@/app/book_detail/comment_section"
 import { useRouter, useSearchParams } from "next/navigation";
 import { fetchProfile } from "../_api/profile/route";
-import { getRole } from "../_api/login/route";
+import { getRole } from "../_api/role";
 
 export default function BookDetailComp() {
 
@@ -21,7 +21,7 @@ export default function BookDetailComp() {
         } else if (role.User_authorizationLevel == 2){
             router.push("/homeAuthor");     
         } else if (role.User_authorizationLevel == 3) {
-            router.push("/homeLiberian");     
+            router.push("/homeLibrarian");     
         }
     }
 

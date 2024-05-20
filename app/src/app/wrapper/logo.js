@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProfile } from "../_api/profile/route";
 import { useSearchParams, useRouter } from "next/navigation";
-import { getRole } from '../_api/login/route';
+import { getRole } from "../_api/role";
 
 export default function _icon() {
 

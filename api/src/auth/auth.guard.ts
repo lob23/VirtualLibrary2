@@ -4,9 +4,9 @@ import {
     Injectable,
     UnauthorizedException,
   } from '@nestjs/common';
-  import { JwtService } from '@nestjs/jwt';
-  import { JWT_SECRET } from './secret';
-  import { Request } from 'express';
+import { JwtService } from '@nestjs/jwt';
+import { JWT_SECRET } from './secret';
+import { Request } from 'express';
 import em from 'src/error-message';
 import { IS_PUBLIC_KEY } from './public.decorator';
 import { Reflector } from '@nestjs/core';
@@ -45,8 +45,10 @@ export class AuthGuard implements CanActivate {
     }
 
     private extractTokenFromHeader(request: Request): string | undefined {
-        const [type, token] = request.headers.authorization?.split(' ') ?? [];
-        return type === 'Bearer' ? token : undefined;
+        const token = request.cookies['accessToken'];
+        if (token) {
+            return token;
+        }
     }
 }
   

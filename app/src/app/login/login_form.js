@@ -3,7 +3,8 @@ import { useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getRole, postLogin } from "../_api/login/route";
+import { getRole } from "../_api/role";
+import { postLogin } from "../_api/login/route";
 // import bcrypt from "bcrypt"
 
 export default function Login_form() {
@@ -24,12 +25,12 @@ export default function Login_form() {
     } 
     else {
       try {
-        const token = await postLogin({ username, password });
+        const token = await postLogin({ email: username, password });
         const role = await getRole();
         console.log("role te: ", role.User_authorizationLevel);
         if (role.User_authorizationLevel == 1) router.push("/homeReader");
         else if (role.User_authorizationLevel == 2) router.push("/homeAuthor");
-        else if (role.User_authorizationLevel == 3) router.push("/homeLiberian");
+        else if (role.User_authorizationLevel == 3) router.push("/homeLibrarian");
       }
       catch (error) {
         console.log(error);

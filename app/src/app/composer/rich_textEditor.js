@@ -10,7 +10,7 @@ import { Audio } from "react-loader-spinner";
 import { putComposingBook } from "../_api/composing/route";
 import { getBookDetail } from "../_api/book_detail/route";
 import { getBookContent } from "../_api/bookcontent/route";
-import { getRole } from "../_api/login/route";
+import { getRole } from "../_api/role";
 
 
 export default function IndexPage() {

@@ -1,4 +1,5 @@
 import api from "..";
+import config from "../../config";
 
 export const getRole = async () => {
     const queryString = config.BACKEND_URL +"/role";
