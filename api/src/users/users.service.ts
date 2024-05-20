@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { ObjectId } from 'mongodb';
+import * as bcrypt from 'bcrypt';
 // import * as argon from 'argon2';
 
 @Injectable()
@@ -39,8 +40,10 @@ export class UsersService {
     });
 
     if (existingUser) {
-      throw new Error('This email is already existed');
+      throw new UnauthorizedException('This email is already existed');
     }
+    
+    createUserDto.User_password = await bcrypt.hash(createUserDto.User_password, 10);
 
     // If not then create user
     const newUser = this.userRepository.create({
